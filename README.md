@@ -7,3 +7,4 @@ To run this repo:
 - open the file directory and run the following
    * npm install
    * npm run dev
+   * open localhost:3000 on your browser
