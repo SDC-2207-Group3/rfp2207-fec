@@ -34,7 +34,7 @@ var RelatedItems = (props) => {
       })
       setData(newData);
     });
-  }, [mainProductId])
+  }, [related])
 
     console.log('--this.state.data--', data, '--this.state.related--', related);
 
