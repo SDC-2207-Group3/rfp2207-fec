@@ -3,7 +3,14 @@ import React from "react";
 class RatingsBreakDown extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      reviewData: this.props.meta,
+    };
   }
+
+  ////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////
 
   render() {
     return (

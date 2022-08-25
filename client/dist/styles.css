@@ -86,9 +86,10 @@ html body {
 }
 
 .RR_list-item {
-  width: 90%;
+  width: 100%;
   min-height: 2em;
   display: flex;
   flex-direction: column;
+  margin: 5px 0px;
   background: rgb(220, 220, 220);
 }
