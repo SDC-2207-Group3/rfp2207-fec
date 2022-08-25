@@ -14,9 +14,7 @@ class App extends React.Component {
         <h1> hello world </h1>
         <Overview />
         <RelatedItems />
-        <div>
-          <RatingsAndReviews />
-        </div>
+        <RatingsAndReviews />
       </div>
     );
   }
