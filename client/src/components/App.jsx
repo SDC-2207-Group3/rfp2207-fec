@@ -1,5 +1,6 @@
 import React from "react";
 import RelatedItems from './RelatedItems/RelatedItems.jsx'
+import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
 
 class App extends React.Component {
   constructor(props) {
