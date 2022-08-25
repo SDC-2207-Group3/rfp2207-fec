@@ -1,3 +1,5 @@
+import React from 'react';
+
 var RelatedItems = (props) => {
   return (
     <div>
