@@ -1,4 +1,5 @@
 import React from "react";
+import RelatedItems from './RelatedItems/RelatedItems.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,8 @@ class App extends React.Component {
     return (
       <div>
         <h1> hello world </h1>
+        <h2> test test </h2>
+
       </div>
     )
   }
