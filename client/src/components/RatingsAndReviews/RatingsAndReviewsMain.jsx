@@ -1,4 +1,9 @@
 import React from "react";
+import Sort from "./SubComponents/Sort.jsx";
+import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
+import ReviewsList from "./SubComponents/ReviewsList.jsx";
+
+import ATELIER_API from "./utilities/utilities.js";
 
 class RatingsAndReviewsMain extends React.Component {
   constructor(props) {
@@ -6,7 +11,16 @@ class RatingsAndReviewsMain extends React.Component {
   }
 
   render() {
-    return <div>HELLO RATINGS... AND REVIEWS!</div>;
+    return (
+      <section id="section_rr">
+        <h2>Ratings and Reviews</h2>
+        <Sort id={this.props.id} />
+        <div id="RR_Bd-List-container">
+          <RatingsBreakDown id={this.props.id} />
+          <ReviewsList id={this.props.id} />
+        </div>
+      </section>
+    );
   }
 }
 
