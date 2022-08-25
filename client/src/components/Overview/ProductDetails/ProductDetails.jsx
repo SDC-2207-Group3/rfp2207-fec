@@ -1,6 +1,6 @@
 import React from 'react';
 
-let ProductDetails = () => {
+let ProductDetails = (props) => {
   return (
     <div>
       Product Details

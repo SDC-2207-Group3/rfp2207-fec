@@ -1,6 +1,6 @@
 import React from 'react';
 
-let ImageGallery = () => {
+let ImageGallery = (props) => {
   return (
     <div>
       Image Gallery
