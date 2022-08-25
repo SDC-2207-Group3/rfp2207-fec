@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import key from './../../../../config.js';
 
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductDetails from './ProductDetails/ProductDetails.jsx';
@@ -24,7 +23,7 @@ class Overview extends React.Component {
     return axios({
       url: this._AtelierAPI + endpoint,
       method: 'get',
-      headers: {"Authorization": key}
+      headers: {"Authorization": process.env.KEY}
     })
   }
 
