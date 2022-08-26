@@ -59,7 +59,7 @@ const Overview = (props) => {
   }
 
   useEffect(() => {
-    GetProductData('65635')
+    GetProductData(props.id)
   }, [])
 
   return (

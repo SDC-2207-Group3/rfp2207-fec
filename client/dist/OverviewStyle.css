@@ -1,0 +1,57 @@
+.overview-thumbnailList {
+  position: absolute;
+  top: 50%;
+  left: 3.5%;
+  transform: translateY(-50%);
+  margin: auto;
+  width: 7%;
+}
+
+.overview-imageGallery {
+  position: relative;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.overview-displayImage {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.overview-thumbnail-gallery {
+}
+
+.overview-thumbnail-container {
+  width: 100%;
+  display: flex;
+  border: 1px solid black;
+  margin: 5px 0;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+}
+
+.overview-thumbnail {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.overview-scroll-up {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  font-size: calc();
+}
+
+.overview-scroll-down {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  font-size: calc();
+}
+
+i {
+  transform: translateY(22%);
+}
