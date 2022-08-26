@@ -1,13 +1,12 @@
 import React from 'react';
-import YourOutfitsEntry from './YourOutfitsEntry.jsx'
+import ProductCard from './ProductCard.jsx'
 
 var YourOutfits = (props) => {
 
   return (
     <div>
       <p>your outfits here</p>
-      <YourOutfitsEntry />
-      <YourOutfitsEntry />
+      <ProductCard />
     </div>
   )
 }

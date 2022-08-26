@@ -43,7 +43,7 @@ var RelatedItems = (props) => {
   return (
     <div>
       <h4>Related Items and Comparison Here =D</h4>
-      <DataContext.Provider data={data}>
+      <DataContext.Provider value={data}>
         <RelatedProducts />
         <YourOutfits />
       </DataContext.Provider>

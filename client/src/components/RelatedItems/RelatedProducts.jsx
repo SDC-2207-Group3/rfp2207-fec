@@ -1,13 +1,12 @@
 import React from 'react';
-import RelatedProductsEntry from './RelatedProductsEntry.jsx'
+import ProductCard from './ProductCard.jsx';
 
 var RelatedProducts = (props) => {
 
   return (
     <div>
       <p>related products here</p>
-      <RelatedProductsEntry />
-      <RelatedProductsEntry />
+      <ProductCard />
     </div>
   )
 }
