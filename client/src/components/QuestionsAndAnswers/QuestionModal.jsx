@@ -13,9 +13,8 @@ function QuestionModal({closeModal}) {
           <h1>Ask Your Question</h1>
         </div>
         <div className="qa-modalBody"></div>
-          <p>Random text in the modal body!</p>
-          <label>
-            <input type="text"></input>
+          <label className="required">Your question
+            <br></br><input type="text" required></input>
           </label>
         <div className="qa-modalFooter">
           <button className="qa-modalFooterBtn" id="qa-modalFooterCancelBtn"
