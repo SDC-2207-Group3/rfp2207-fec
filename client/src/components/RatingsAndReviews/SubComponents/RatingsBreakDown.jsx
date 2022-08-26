@@ -14,25 +14,25 @@ class RatingsBreakDown extends React.Component {
   ////////////////////////////////////////////////////////////
 
   // getAvgReviewValue() {
-  //   console.log("GET AVG STARS");
+  // if (Object.keys(this.props.meta).length) {
   //   for (let [star, count] of Object.entries(this.props.meta.ratings)) {
   //     console.log(star, count);
   //   }
   // }
+  // }
 
+  //unsure if this is going to work when new props are passed down
   componentDidUpdate() {
-    console.log("GET AVG STARS");
-    console.log(this.state.meta);
-    console.log(this.props.meta.ratings);
-    // for (let [star, count] of Object.entries(this.props.meta.ratings)) {
-    //   console.log(star, count);
-    // }
+    if (Object.keys(this.props.meta).length) {
+      for (let [star, count] of Object.entries(this.props.meta.ratings)) {
+        console.log(star, count);
+      }
+    }
   }
 
   ////////////////////////////////////////////////////////////
 
   render() {
-    // this.getAvgReviewValue();
     return (
       <div id="RR_break-down-container">
         <p>Ratings BreakDown</p>
