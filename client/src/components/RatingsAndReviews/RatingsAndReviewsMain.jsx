@@ -22,6 +22,7 @@ class RatingsAndReviewsMain extends React.Component {
 
   componentDidMount() {
     //params = page, count, sort, product_id
+    //get reviews for current product
     axios
       .get(`${ATELIER_API}/reviews`, {
         params: {
@@ -33,18 +34,21 @@ class RatingsAndReviewsMain extends React.Component {
       })
       //res.data.results = arr of reviews
       .then((res) => {
+        //update state
         console.log("review response", res);
         let stateCopy = this.state;
         stateCopy.reviews = res.data.results;
         this.setState(stateCopy);
       })
       .then(() => {
+        // get meta data for current product
         return axios.get(`${ATELIER_API}/reviews/meta`, {
           params: { product_id: `${this.state.id}` },
           headers: { Authorization: process.env.KEY },
         });
       })
       .then((res) => {
+        //update state once more
         console.log("meta response", res);
         let stateCopy = this.state;
         stateCopy.meta = res.data;
@@ -59,10 +63,12 @@ class RatingsAndReviewsMain extends React.Component {
     return (
       <section id="section_rr">
         <h2>Ratings and Reviews</h2>
-        <Sort id={this.props.id} />
-        <div id="RR_Bd-List-container">
+        <div id="RR_bd-sort-list-container">
           <RatingsBreakDown meta={this.state.meta} id={this.props.id} />
-          <ReviewsList reviews={this.state.reviews} id={this.props.id} />
+          <div id="RR_sort-list-container">
+            <Sort id={this.props.id} />
+            <ReviewsList reviews={this.state.reviews} id={this.props.id} />
+          </div>
         </div>
       </section>
     );
