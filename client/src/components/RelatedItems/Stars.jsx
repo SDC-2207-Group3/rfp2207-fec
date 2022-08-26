@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Star } from 'react-feather';
-import { useState, useEffect, useContext } from 'react';
 import { DataContext } from './RelatedItems.jsx'
 
 var Stars = (props) => {
-  const [rating, setRating] = useState(2.2);
+  const [rating, setRating] = useState(0);
+  const [width, setWidth] = useState(100);
+  let data = useContext(DataContext);
 
-  var percent = Math.round(rating / 5 * 100);
+  useEffect(() => {
+    if (data.length) {
+      setRating(data[3].ratings)
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data.length) {
+      setWidth(100 - Math.round(rating / 5 * 100));
+    }
+  }, [rating]);
+
   return (
     <div className="RIC-stars-container">
       {[1, 2, 3, 4, 5].map(i => <Star key={i} className="RIC-star" />)}
-      <div className="RIC-star-cover" style={{ width: `${100 - percent}%`}}></div>
+      <div className="RIC-star-cover" style={{ width: `${width}%`}}></div>
     </div>
   )
 }

@@ -1,0 +1,46 @@
+#RIC-section {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 30em;
+}
+
+.RIC-stars-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.RIC-star {
+  display: flex;
+  width: 18px;
+  margin-right: 2px;
+  color: orange;
+  fill: orange
+}
+
+.RIC-star:last-of-type {
+  margin-right: 0;
+}
+
+.RIC-star-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgb(254, 254, 254);
+  opacity: 0.6;
+  @supports (mix-blend-mode: color) {
+    mix-blend-mode: color;
+    opacity: unset;
+  }
+}
+
+.RIC-product-card-div {
+  border: 2px solid gray;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 1.5fr 0.5fr;
+}
+

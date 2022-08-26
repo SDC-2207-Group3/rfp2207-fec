@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Stars from './Stars.jsx';
+import { DataContext } from './RelatedItems.jsx';
+import { Star } from 'react-feather';
+
 
 var ProductCard = (props) => {
-  // const rating = React.useContext(DataContext);
-  // console.log('--use context--', rating);
+  const [data, setData] = useState({});
+
   return (
-    <div>
-      <p>this is a product card</p>
-      <Stars />
+    <div className="RIC-product-card-div">
+      <div className="RIC-product-card-img">
+        <Star size={20}/>
+        <img></img>
+      </div>
+      <div className="RIC-product-card-detail">
+        <p>category</p>
+        <p>name</p>
+        <p>price</p>
+        <Stars />
+      </div>
+
     </div>
   )
 }
