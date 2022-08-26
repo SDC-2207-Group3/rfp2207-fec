@@ -8,7 +8,7 @@ class Sort extends React.Component {
   render() {
     return (
       <div id="RR_sort">
-        <p>Sort</p>
+        <p>Currently Sorted By {this.props.sortMethod}</p>
       </div>
     );
   }

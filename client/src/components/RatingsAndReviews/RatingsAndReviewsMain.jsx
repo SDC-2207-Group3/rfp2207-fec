@@ -15,10 +15,26 @@ class RatingsAndReviewsMain extends React.Component {
       displayedReviews: 2,
       reviews: [],
       meta: {},
+      reviewStats: {},
     };
+
+    this.getAvgReviewValue = this.getAvgReviewValue.bind(this);
   }
 
   ////////////////////////////////////////////////////////////
+
+  getAvgReviewValue(meta) {
+    // if (Object.keys(this.props.meta).length) {
+    let statsObj = {};
+    statsObj.starTotal = 0;
+    statsObj.voteTotal = 0;
+    for (let [star, count] of Object.entries(meta.ratings)) {
+      statsObj.starTotal += star * count;
+      statsObj.voteTotal += Number(count);
+    }
+    console.log("statsobj made", statsObj);
+    return statsObj;
+  }
 
   componentDidMount() {
     //params = page, count, sort, product_id
@@ -48,10 +64,15 @@ class RatingsAndReviewsMain extends React.Component {
         });
       })
       .then((res) => {
-        //update state once more
         console.log("meta response", res);
         let stateCopy = this.state;
+
+        //create meta info to pass to sub component
+        let reviewStatsObj = this.getAvgReviewValue(res.data);
         stateCopy.meta = res.data;
+        stateCopy.reviewStats = reviewStatsObj;
+
+        //update state once more
         this.setState(stateCopy);
       })
       .catch((err) => console.log("failed to fetch", err));
@@ -64,9 +85,13 @@ class RatingsAndReviewsMain extends React.Component {
       <section id="section_rr">
         <h2>Ratings and Reviews</h2>
         <div id="RR_bd-sort-list-container">
-          <RatingsBreakDown meta={this.state.meta} id={this.props.id} />
+          <RatingsBreakDown
+            reviewStats={this.state.reviewStats}
+            meta={this.state.meta}
+            id={this.props.id}
+          />
           <div id="RR_sort-list-container">
-            <Sort id={this.props.id} />
+            <Sort sortMethod={this.state.sortBy} id={this.props.id} />
             <ReviewsList reviews={this.state.reviews} id={this.props.id} />
           </div>
         </div>

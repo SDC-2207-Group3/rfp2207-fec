@@ -78,6 +78,7 @@ html body {
   height: auto;
   display: flex;
   background: rgb(150, 230, 200);
+  justify-content: right;
 }
 
 #RR_reviews-list {
