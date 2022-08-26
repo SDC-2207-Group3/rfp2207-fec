@@ -1,11 +1,14 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import http from './HttpReqs.js';
 import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfits from './YourOutfits.jsx'
+import Stars from './Stars.jsx'
 
-var RelatedItems = (props) => {
+export const DataContext = createContext();
+
+export const RelatedItems = (props) => {
   const [mainProductId, setId] = useState(props.id || 65631);
   const [data, setData] = useState([]);
   const [related, setRelated] = useState([]);
@@ -38,18 +41,12 @@ var RelatedItems = (props) => {
 
     console.log('--this.state.data--', data, '--this.state.related--', related);
 
-    const DataContext = React.createContext(data);
-
   return (
-    <div>
+    <DataContext.Provider value={data}>
       <h4>Related Items and Comparison Here =D</h4>
-      <DataContext.Provider value={data}>
-        <RelatedProducts />
-        <YourOutfits />
-      </DataContext.Provider>
-
-    </div>
+      <RelatedProducts />
+      <YourOutfits />
+    </DataContext.Provider>
   )
 }
 
-export default RelatedItems;
