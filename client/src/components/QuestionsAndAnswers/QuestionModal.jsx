@@ -1,9 +1,9 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-// import {ErrorMessage} from '@hookform/error-message';
+import {ErrorMessage} from '@hookform/error-message';
 
 function QuestionModal({closeModal}) {
-  const {register, handleSubmit, formState: {errors} } = useForm();
+  const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
   const onSubmit = (data) => console.log(data);
   // const onError = (errors) => {};
 
@@ -34,8 +34,12 @@ function QuestionModal({closeModal}) {
               })
             }
             />
-            <small className="text-danger">
-              {errors.yourQuestion && errors.yourQuestion.message}
+            <small>
+              <ErrorMessage
+              errors={errors}
+              name="yourQuestion"
+              render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+              />
             </small>
             <br></br>
             </label>
@@ -54,8 +58,12 @@ function QuestionModal({closeModal}) {
                   })
                 }
               />
-              <small className="text-danger">
-                {errors.yourNickname && errors.yourNickname}
+              <small>
+                <ErrorMessage
+                errors={errors}
+                name="yourNickname"
+                render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+                />
               </small>
               <small className="modalSubtext">For privacy reasons, do not use your full name or email address</small>
               <br></br>
@@ -79,8 +87,15 @@ function QuestionModal({closeModal}) {
                   })
                 }
               />
-              <small className="text-danger">
+              {/* <small className="text-danger">
                 {errors.yourEmail && errors.yourEmail.message}
+              </small> */}
+              <small>
+                <ErrorMessage
+                errors={errors}
+                name="yourEmail"
+                render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+                />
               </small>
               <p className="modalSubtext">For authentication reasons, you will not be emailed</p>
               <br></br>
