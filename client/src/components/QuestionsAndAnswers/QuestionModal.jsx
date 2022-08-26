@@ -7,13 +7,16 @@ function QuestionModal({closeModal}) {
           <button className="qa-modalTitleCloseBtn"
             onClick={() => closeModal(false)}
           >
-            X
+            x
           </button>
         <div className="qa-modalTitle">
           <h1>Ask Your Question</h1>
         </div>
         <div className="qa-modalBody"></div>
           <p>Random text in the modal body!</p>
+          <label>
+            <input type="text"></input>
+          </label>
         <div className="qa-modalFooter">
           <button className="qa-modalFooterBtn" id="qa-modalFooterCancelBtn"
               onClick={() => closeModal(false)}
