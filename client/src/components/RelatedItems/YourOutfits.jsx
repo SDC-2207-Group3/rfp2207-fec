@@ -6,7 +6,6 @@ var YourOutfits = (props) => {
   return (
     <div>
       <p>your outfits here</p>
-      <ProductCard />
     </div>
   )
 }

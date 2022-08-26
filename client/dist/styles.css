@@ -1,9 +1,3 @@
-#app {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-template-rows: 2fr 0.7fr 0.8fr 0.7fr;
-}
-
 .overview-thumbnailList {
   position: absolute;
 }
