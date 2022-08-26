@@ -1,13 +1,3 @@
-/* css variables for re-use (colors, gradients, shadows, etc.)*/
-:root {
-  --color-primary: rgb(255, 255, 255);
-  --color-secondary: rgb(255, 255, 255);
-  --color-accent: rgb(255, 255, 255);
-  --color-primary-dark: rgb(255, 255, 255);
-  --color-secondary-dark: rgb(255, 255, 255);
-  --color-accent-dark: rgb(255, 255, 255);
-}
-
 /* root is the id of the html elmnt we put our react into */
 #root {
   width: 100vw;
