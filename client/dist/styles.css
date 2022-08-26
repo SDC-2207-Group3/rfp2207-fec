@@ -1,3 +1,16 @@
+
+.overview-thumbnailList {
+  position: absolute;
+}
+
+.overview-imageGallery {
+  width: 50%
+}
+
+.overview-displayImage {
+  max-height: 100%;
+  max-width: 100%;
+
 .RIC_stars_container {
   position: relative;
   display: inline-flex;
@@ -28,6 +41,7 @@
     mix-blend-mode: color;
     opacity: unset;
   }
+
 }
 
 .qa-modalBackground {

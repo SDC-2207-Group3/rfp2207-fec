@@ -6,16 +6,19 @@ import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx"
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      id: '65631'
+    }
   }
 
   render() {
     return (
       <div>
         <h1> hello world </h1>
-        <Overview />
+        <Overview id={this.state.id}/>
+        <RelatedItems id={this.state.id}/>
         <QuestionsAndAnswers />
-        <RelatedItems />
-        <RatingsAndReviews />
+        <RatingsAndReviews id={this.state.id}/>
       </div>
     );
   }
