@@ -1,3 +1,4 @@
+
 .overview-thumbnailList {
   position: absolute;
 }
@@ -9,6 +10,38 @@
 .overview-displayImage {
   max-height: 100%;
   max-width: 100%;
+
+.RIC_stars_container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.RIC_star {
+  display: flex;
+  width: 18px;
+  margin-right: 2px;
+  color: orange;
+  fill: orange
+}
+
+.RIC_star:last-of-type {
+  margin-right: 0;
+}
+
+.RIC_star_cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgb(254, 254, 254);
+  opacity: 0.6;
+  @supports (mix-blend-mode: color) {
+    mix-blend-mode: color;
+    opacity: unset;
+  }
+
 }
 
 .qa-modalBackground {
