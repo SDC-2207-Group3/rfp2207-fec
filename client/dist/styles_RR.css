@@ -1,0 +1,65 @@
+/* ~~~~~~~~~~~ RATINGS AND REVIEWS CSS ~~~~~~~~~~~~~ */
+
+#section_rr {
+  width: 80vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  justify-content: center;
+  padding: 10px;
+}
+
+#RR_bd-sort-list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  background: rgb(200, 200, 200);
+}
+
+/* rb-container & reviews-list share width ( <= 100)*/
+#RR_break-down-container {
+  width: 30%;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 200);
+}
+
+#RR_sort-list-container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+#RR_sort {
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: rgb(150, 230, 200);
+  justify-content: right;
+}
+
+#RR_reviews-list {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgb(220, 150, 150);
+}
+
+.RR_list-item {
+  width: 100%;
+  min-height: 2em;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
+  padding: 0.5em;
+  background: rgb(220, 220, 220);
+}
