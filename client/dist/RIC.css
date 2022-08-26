@@ -13,8 +13,8 @@
 
 .RIC-star {
   display: flex;
-  width: 18px;
-  margin-right: 2px;
+  width: 1.5em;
+  margin-right: 0.5px;
   color: rgb(255, 221, 100);
   fill: rgb(255, 221, 100)
 }
