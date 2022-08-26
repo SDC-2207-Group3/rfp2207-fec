@@ -9,9 +9,9 @@ var RelatedProducts = (props) => {
     <div id="RIC-related-items">
       <p>related products here</p>
       <div id="RIC-ri-card-container">
-        {/* {data.map((product) => {
+        {data.map((product) => {
           return <ProductCard product={product} mode={'related item'}/>
-        })} */}
+        })}
       </div>
     </div>
   )
