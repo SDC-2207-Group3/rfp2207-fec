@@ -1,59 +1,76 @@
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
 import axios from 'axios';
 
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductDetails from './ProductDetails/ProductDetails.jsx';
 
-class Overview extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      prodStyles: {},
-      prodID: '65631',
-      prodDetails: {},
-      selectedStyle: {},
-    }
-    this.GetProductData = this.GetProductData.bind(this);
-    this.AtelierGetEndpoint = this.AtelierGetEndpoint.bind(this);
-    this._AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/';
-  }
+const _AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/';
+const initialeState = { productStyles: [], productDetails: {}, selectedStyle: {} }
 
-  AtelierGetEndpoint(endpoint = '') {
-    // console.log(process.env.REACT_APP_KEY)
-    return axios({
-      url: this._AtelierAPI + endpoint,
-      method: 'get',
-      headers: {"Authorization": process.env.KEY}
-    })
-  }
+const AtelierGetEndpoint = (endpoint = '') => {
+  return axios({
+    url: _AtelierAPI + endpoint,
+    method: 'get',
+    headers: {"Authorization": process.env.KEY}
+  })
+}
 
-  GetProductData(productID) {
+function FindDefaultStyle (styles) {
+  let defaultStyle = styles.filter((style) => style['default?'] === true);
+  return defaultStyle.length === 1 ? defaultStyle[0] : styles[0];
+}
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'setStyles':
+      return { ...state, productStyles: action.setStyles }
+    case 'setDetails':
+      return { ...state, productDetails: action.setDetails }
+    case 'selectStyle':
+      return { ...state, selectedStyle: action.selectStyle }
+    case 'setAll':
+      return {
+        selectedStyle: action.selectedStyle,
+        productDetails: action.setDetails,
+        productStyles: action.setStyles }
+    default:
+      return { state }
+  }
+}
+
+const Overview = (props) => {
+
+  const [state, dispatch] = useReducer(reducer, initialeState)
+
+  const GetProductData = (productID) => {
     return axios.all([
-      this.AtelierGetEndpoint(productID),
-      this.AtelierGetEndpoint(productID + '/styles')
+      AtelierGetEndpoint(productID),
+      AtelierGetEndpoint(productID + '/styles')
     ])
-    .then(axios.spread((...responses) => {
-      this.setState({
-        prodDetails: responses[0].data,
-        prodStyles: responses[1].data
+    .then((responses) => {
+      dispatch({
+        type: 'setAll',
+        setDetails: responses[0].data,
+        setStyles: responses[1].data,
+        selectedStyle: FindDefaultStyle(responses[1].data.results)
       })
-    }))
+    })
     .catch((err) => console.log(err));
   }
 
-  componentDidMount () {
-    this.GetProductData(this.state.prodID)
-  }
+  useEffect(() => {
+    GetProductData('65635')
+  }, [])
 
-  render () {
-    return(
-      <div>
-        Overview
-        <ImageGallery />
-        <ProductDetails />
-      </div>
-    )
-  }
+  return (
+    <div>
+      Overview
+      <ImageGallery productStyle = {state.selectedStyle}/>
+      {state.productDetails.name}
+      {state.selectedStyle.name}
+      <ProductDetails productDetails = {state.productDetails}/>
+    </div>
+  )
 }
 
 export default Overview

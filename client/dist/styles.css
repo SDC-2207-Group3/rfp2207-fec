@@ -1,3 +1,17 @@
+
+.overview-thumbnailList {
+  position: absolute;
+}
+
+.overview-imageGallery {
+  width: 50%
+}
+
+.overview-displayImage {
+  max-height: 100%;
+  max-width: 100%;
+}
+
 .RIC_stars_container {
   position: relative;
   display: inline-flex;
@@ -28,4 +42,76 @@
     mix-blend-mode: color;
     opacity: unset;
   }
+
+}
+
+.qa-modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qa-modalContainer {
+  width: 500px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.qa-modalContainer .qa-modalTitle {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.qa-modalTitleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button.qa-modalTitleCloseBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.qa-modalContainer .body {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  text-align: center;
+}
+
+.qa-modalContainer .qa-modalFooter {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.qa-modalFooterBtn {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#qa-modalFooterCancelBtn {
+  background-color: crimson
 }
