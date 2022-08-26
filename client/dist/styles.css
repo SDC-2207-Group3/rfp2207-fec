@@ -1,1 +1,34 @@
 
+
+
+/* css variables for re-use (colors, gradients, shadows, etc.)*/
+:root {
+  --color-primary: rgb(255, 255, 255);
+  --color-secondary: rgb(255, 255, 255);
+  --color-accent: rgb(255, 255, 255);
+  --color-primary-dark: rgb(255, 255, 255);
+  --color-secondary-dark: rgb(255, 255, 255);
+  --color-accent-dark: rgb(255, 255, 255);
+}
+
+/* root is the id of the html elmnt we put our react into */
+#root {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+html body {
+  background: var(--color-primary);
+  font-size: 16px; /* calling 2em = 32px now */
+  margin: 0px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* this is just commong boiler plate */
+/* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+} */
