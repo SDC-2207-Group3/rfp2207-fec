@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import http from './HttpReqs.js';
 import RelatedProducts from './RelatedProducts.jsx';
@@ -17,7 +16,7 @@ export const RelatedItems = (props) => {
     http.relatedReq(mainProductId)
     .then(res => setRelated(res.data))
     .catch(err => console.error(err));
-  }, [mainProductId])
+  }, [])
 
   useEffect(() => {
     var reqArr = [];
@@ -42,11 +41,12 @@ export const RelatedItems = (props) => {
     console.log('--this.state.data--', data, '--this.state.related--', related);
 
   return (
-    <DataContext.Provider value={data}>
-      <h4>Related Items and Comparison Here =D</h4>
-      <RelatedProducts />
-      <YourOutfits />
-    </DataContext.Provider>
+    <section id="RIC-section">
+      <DataContext.Provider value={data}>
+        <RelatedProducts />
+        <YourOutfits />
+      </DataContext.Provider>
+    </section>
   )
 }
 

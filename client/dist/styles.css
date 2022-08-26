@@ -19,7 +19,7 @@ html body {
   background: var(--color-primary);
   font-size: 16px; /* calling 2em = 32px now */
   margin: 0px;
-  width: 100%;
+  width: 80%;
   overflow-x: hidden;
 }
 

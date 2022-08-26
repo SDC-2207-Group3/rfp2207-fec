@@ -14,8 +14,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1> hello world </h1>
+      <div id="app">
+        {/* <h1> hello world </h1> */}
         <Overview id={this.state.id}/>
         <RelatedItems id={this.state.id}/>
         <QuestionsAndAnswers />
