@@ -1,0 +1,12 @@
+.thumbnailList {
+  position: absolute;
+}
+
+.imageGallery {
+  width: 50%
+}
+
+.displayImage {
+  max-height: 100%;
+  max-width: 100%;
+}
