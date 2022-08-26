@@ -13,13 +13,13 @@ let ImageGallery = (props) => {
   const displayURL = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null
 
   return (
-    <div className="imageGallery" style={imageGalleryStyle}>
+    <div className="overview-imageGallery" style={imageGalleryStyle}>
       <ThumbnailList
         name = {props.productStyle.name}
         photos={photos}
       />
-      <div className="displayImage">
-        <img className="displayImage" src={displayURL}/>
+      <div className="overview-displayImage">
+        <img className="overview-displayImage" src={displayURL}/>
 
       </div>
     </div>

@@ -51,7 +51,7 @@ const ThumbnailList = (props) => {
   }
 
   return (
-    <div className="thumbnailList">
+    <div className="overview-thumbnailList">
         {displayIndex === 0 ? <div style={displayScroll}></div> : <div><button onClick={scrollUp} style={displayScroll}>up</button></div>}
         {displayList.map((photo, index) => (
             <div key={index} style={TNContainer}>
