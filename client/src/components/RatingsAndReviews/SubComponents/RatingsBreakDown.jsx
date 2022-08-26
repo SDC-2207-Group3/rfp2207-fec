@@ -23,9 +23,12 @@ class RatingsBreakDown extends React.Component {
       <div id="RR_break-down-container">
         <p>Ratings BreakDown</p>
         <h2 id="RR_star-avg">
-          {(
-            this.props.reviewStats.starTotal / this.props.reviewStats.voteTotal
-          ).toFixed(1)}{" "}
+          {this.props.reviewStats.starTotal
+            ? (
+                this.props.reviewStats.starTotal /
+                this.props.reviewStats.voteTotal
+              ).toFixed(1)
+            : null}{" "}
           stars
         </h2>
         <div className="RR_ratings-bd-list">
@@ -38,7 +41,7 @@ class RatingsBreakDown extends React.Component {
                   </div>
                 );
               })
-            : 0}
+            : null}
         </div>
       </div>
     );

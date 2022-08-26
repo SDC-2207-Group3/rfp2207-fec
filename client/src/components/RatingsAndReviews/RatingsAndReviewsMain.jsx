@@ -32,7 +32,6 @@ class RatingsAndReviewsMain extends React.Component {
       statsObj.starTotal += star * count;
       statsObj.voteTotal += Number(count);
     }
-    console.log("statsobj made", statsObj);
     return statsObj;
   }
 
@@ -51,7 +50,6 @@ class RatingsAndReviewsMain extends React.Component {
       //res.data.results = arr of reviews
       .then((res) => {
         //update state
-        console.log("review response", res);
         this.setState({ reviews: res.data.results });
       })
       .then(() => {
@@ -62,8 +60,6 @@ class RatingsAndReviewsMain extends React.Component {
         });
       })
       .then((res) => {
-        console.log("meta response", res);
-
         //create meta info to pass to sub component
         let reviewStatsObj = this.getAvgReviewValue(res.data);
 

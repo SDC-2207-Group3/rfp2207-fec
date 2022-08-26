@@ -13,10 +13,9 @@ class ReviewsList extends React.Component {
     return (
       <div id="RR_reviews-list">
         <p>Reviews List</p>
-        {/* <div>{reviewArr}</div> */}
         <div>
-          {this.props.reviews.map((el) => {
-            return <ReviewItem review={el} />;
+          {this.props.reviews.map((el, i) => {
+            return <ReviewItem key={i} review={el} />;
           })}
         </div>
       </div>
