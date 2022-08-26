@@ -19,7 +19,7 @@ html body {
   background: var(--color-primary);
   font-size: 16px; /* calling 2em = 32px now */
   margin: 0px;
-  width: 100%;
+  width: 80%;
   overflow-x: hidden;
 }
 
@@ -29,3 +29,11 @@ html body {
   padding: 0;
   box-sizing: inherit;
 }
+
+/* #app {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 2fr 0.7fr 0.8fr 0.7fr;
+  gap: 4em 0em;
+} */
+

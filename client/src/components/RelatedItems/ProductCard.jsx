@@ -19,7 +19,6 @@ var ProductCard = (props) => {
         <p>price</p>
         <Stars />
       </div>
-
     </div>
   )
 }
