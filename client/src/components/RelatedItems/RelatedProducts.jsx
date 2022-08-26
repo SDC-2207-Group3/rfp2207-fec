@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ProductCard from './ProductCard.jsx';
+import { DataContext } from './RelatedItems.jsx';
 
 var RelatedProducts = (props) => {
+  let data = useContext(DataContext);
 
   return (
-    <div>
+    <div id="RIC-related-items">
       <p>related products here</p>
-      <ProductCard />
+      <div id="RIC-ri-card-container">
+        {data.map((product) => {
+          return <ProductCard product={product} mode={'related item'}/>
+        })}
+      </div>
     </div>
   )
 }

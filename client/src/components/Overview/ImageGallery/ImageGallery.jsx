@@ -3,7 +3,7 @@ import ThumbnailList from './ThumbnailList.jsx';
 
 let ImageGallery = (props) => {
   const [photoIndex, setPhotoIndex] = useState(0);
-  console.log(props.productStyle, 'a')
+  // console.log(props.productStyle, 'a')
   let photos = props.productStyle.photos ? props.productStyle.photos : []
 
   const imageGalleryStyle = {
