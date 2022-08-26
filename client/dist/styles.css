@@ -12,13 +12,13 @@
   max-width: 100%;
 }
 
-.RIC_stars_container {
+.RIC-stars-container {
   position: relative;
   display: inline-flex;
   align-items: center;
 }
 
-.RIC_star {
+.RIC-star {
   display: flex;
   width: 18px;
   margin-right: 2px;
@@ -26,11 +26,11 @@
   fill: orange
 }
 
-.RIC_star:last-of-type {
+.RIC-star:last-of-type {
   margin-right: 0;
 }
 
-.RIC_star_cover {
+.RIC-star-cover {
   position: absolute;
   top: 0;
   right: 0;
@@ -42,7 +42,13 @@
     mix-blend-mode: color;
     opacity: unset;
   }
+}
 
+.RIC-star-cover{
+  display: flex;
+  width: 18px;
+  margin-right: 2px;
+  color: black;
 }
 
 .qa-modalBackground {

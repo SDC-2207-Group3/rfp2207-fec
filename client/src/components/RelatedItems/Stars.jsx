@@ -8,9 +8,9 @@ var Stars = (props) => {
 
   var percent = Math.round(rating / 5 * 100);
   return (
-    <div className="RIC_stars_container">
-      {[1, 2, 3, 4, 5].map(i => <Star key={i} className="RIC_star" />)}
-      <div className="RIC_star_cover" style={{ width: `${100 - percent}%`}}></div>
+    <div className="RIC-stars-container">
+      {[1, 2, 3, 4, 5].map(i => <Star key={i} className="RIC-star" />)}
+      <div className="RIC-star-cover" style={{ width: `${100 - percent}%`}}></div>
     </div>
   )
 }
