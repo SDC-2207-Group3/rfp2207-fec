@@ -3,8 +3,10 @@ import {useForm} from "react-hook-form";
 // import {ErrorMessage} from '@hookform/error-message';
 
 function QuestionModal({closeModal}) {
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, formState: {errors} } = useForm();
   const onSubmit = (data) => console.log(data);
+  // const onError = (errors) => {};
+
   return (
 
     <div className="qa-modalBackground">
@@ -19,18 +21,43 @@ function QuestionModal({closeModal}) {
             <h1>Ask Your Question</h1>
           </div>
           <div className="qa-modalBody"></div>
-              <label className="modalLabel">
-                Your question
-              <input className="modalInput" type="text" {...register("yourQuestion", {required: true, maxLength: 1000})} />
-              <br></br>
-              </label>
+            <label className="modalLabel">
+              Your Question
+            <input className="modalInput" type="text"
+            {...register("yourQuestion",
+              {
+                  required: "Question is required",
+                  maxLength: {
+                    value: 1000,
+                    message: "Question is limited to 1000 characters"
+                  }
+              })
+            }
+            />
+            <small className="text-danger">
+              {errors.yourQuestion && errors.yourQuestion.message}
+            </small>
+            <br></br>
+            </label>
             <label className="modalLabel">
                 Your Nickname
               <input className="modalInput"
                 type="text"
                 placeholder="Example: jackson11!"
-                {...register("yourNickname", {required: true, maxLength: 60})} />
-              <p className="modalSubtext">For privacy reasons, do not use your full name or email address</p>
+                {...register("yourNickname",
+                  {
+                    required: "Nickname is required",
+                    maxLength: {
+                      value: 60,
+                      message: "Nickname is limited to 60 characters"
+                    }
+                  })
+                }
+              />
+              <small className="text-danger">
+                {errors.yourNickname && errors.yourNickname}
+              </small>
+              <small className="modalSubtext">For privacy reasons, do not use your full name or email address</small>
               <br></br>
             </label>
             <label className="modalLabel">
@@ -38,7 +65,23 @@ function QuestionModal({closeModal}) {
               <input className="modalInput"
                 type="text"
                 placeholder="Example: jack@email.com"
-                {...register("yourEmail", {required: true, maxLength: 60, pattern:"*@*"})} />
+                {...register("yourEmail",
+                  {
+                    required: "Email is required",
+                    maxLength: {
+                      value: 60,
+                      message: "Email is limited to 60 characters"
+                    },
+                    pattern: {
+                      value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                      message: "Email needs to follow username@email.com format"
+                    }
+                  })
+                }
+              />
+              <small className="text-danger">
+                {errors.yourEmail && errors.yourEmail.message}
+              </small>
               <p className="modalSubtext">For authentication reasons, you will not be emailed</p>
               <br></br>
             </label>
