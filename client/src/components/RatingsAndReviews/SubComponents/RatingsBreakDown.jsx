@@ -27,13 +27,13 @@ class RatingsBreakDown extends React.Component {
           <div>
             5 stars:{" "}
             {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[0]
+              ? Object.values(this.props.meta.ratings)[4]
               : 0}
           </div>
           <div>
             4 stars:{" "}
             {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[1]
+              ? Object.values(this.props.meta.ratings)[3]
               : 0}
           </div>{" "}
           <div>
@@ -45,13 +45,13 @@ class RatingsBreakDown extends React.Component {
           <div>
             2 stars:{" "}
             {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[3]
+              ? Object.values(this.props.meta.ratings)[1]
               : 0}
           </div>{" "}
           <div>
             1 stars:{" "}
             {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[4]
+              ? Object.values(this.props.meta.ratings)[0]
               : 0}
           </div>
         </div>
