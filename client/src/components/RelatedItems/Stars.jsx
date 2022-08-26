@@ -3,21 +3,7 @@ import { Star } from 'react-feather';
 import { DataContext } from './RelatedItems.jsx'
 
 var Stars = (props) => {
-  const [rating, setRating] = useState(0);
-  const [width, setWidth] = useState(100);
-  let data = useContext(DataContext);
-
-  useEffect(() => {
-    if (data.length) {
-      setRating(data[3].ratings)
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (data.length) {
-      setWidth(100 - Math.round(rating / 5 * 100));
-    }
-  }, [rating]);
+  let width = 100 - Math.round(props.rating / 5 * 100);
 
   return (
     <div className="RIC-stars-container">

@@ -2,7 +2,7 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 1fr 1fr;
-  height: 30em;
+  height: auto;
 }
 
 .RIC-stars-container {
@@ -13,10 +13,10 @@
 
 .RIC-star {
   display: flex;
-  width: 18px;
-  margin-right: 2px;
-  color: orange;
-  fill: orange
+  width: 1.5em;
+  margin-right: 0.5px;
+  color: rgb(255, 221, 100);
+  fill: rgb(255, 221, 100)
 }
 
 .RIC-star:last-of-type {
@@ -42,5 +42,19 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 1.5fr 0.5fr;
+}
+
+#RIC-ri-card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 2em;
+  grid-row-gap: 0px;
+}
+
+.RIC-conditional-icon {
+  display: flex;
+  justify-content: flex-end;
+
 }
 
