@@ -1,15 +1,6 @@
-
-.overview-thumbnailList {
-  position: absolute;
-}
-
-.overview-imageGallery {
-  width: 50%
-}
-
-.overview-displayImage {
-  max-height: 100%;
-  max-width: 100%;
+body {
+  width: 65%;
+  margin: auto;
 }
 
 .RIC_stars_container {
