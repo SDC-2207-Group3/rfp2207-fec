@@ -9,6 +9,11 @@ class RatingsBreakDown extends React.Component {
     };
   }
 
+  // let RatingsBreakDown = (props) => {
+  //   // state, fn to edit state = hook (initial val)
+  //   const [state, setState] = useState(0)
+  // }
+
   ////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////////////////////////
@@ -17,43 +22,23 @@ class RatingsBreakDown extends React.Component {
     return (
       <div id="RR_break-down-container">
         <p>Ratings BreakDown</p>
-        <h2>
+        <h2 id="RR_star-avg">
           {(
             this.props.reviewStats.starTotal / this.props.reviewStats.voteTotal
           ).toFixed(1)}{" "}
           stars
         </h2>
-        <div>
-          <div>
-            5 stars:{" "}
-            {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[4]
-              : 0}
-          </div>
-          <div>
-            4 stars:{" "}
-            {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[3]
-              : 0}
-          </div>{" "}
-          <div>
-            3 stars:{" "}
-            {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[2]
-              : 0}
-          </div>{" "}
-          <div>
-            2 stars:{" "}
-            {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[1]
-              : 0}
-          </div>{" "}
-          <div>
-            1 stars:{" "}
-            {this.props.meta.ratings
-              ? Object.values(this.props.meta.ratings)[0]
-              : 0}
-          </div>
+        <div className="RR_ratings-bd-list">
+          {this.props.meta.ratings
+            ? [5, 4, 3, 2, 1].map((starNum, i) => {
+                return (
+                  <div id="RR_ratings-bd-count" key={starNum}>
+                    {starNum}:{" "}
+                    {Object.values(this.props.meta.ratings)[starNum - 1]}
+                  </div>
+                );
+              })
+            : 0}
         </div>
       </div>
     );

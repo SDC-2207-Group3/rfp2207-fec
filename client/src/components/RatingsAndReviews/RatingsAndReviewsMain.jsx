@@ -52,9 +52,7 @@ class RatingsAndReviewsMain extends React.Component {
       .then((res) => {
         //update state
         console.log("review response", res);
-        let stateCopy = this.state;
-        stateCopy.reviews = res.data.results;
-        this.setState(stateCopy);
+        this.setState({ reviews: res.data.results });
       })
       .then(() => {
         // get meta data for current product
@@ -65,15 +63,15 @@ class RatingsAndReviewsMain extends React.Component {
       })
       .then((res) => {
         console.log("meta response", res);
-        let stateCopy = this.state;
 
         //create meta info to pass to sub component
         let reviewStatsObj = this.getAvgReviewValue(res.data);
-        stateCopy.meta = res.data;
-        stateCopy.reviewStats = reviewStatsObj;
 
         //update state once more
-        this.setState(stateCopy);
+        this.setState({
+          meta: res.data,
+          reviewStats: reviewStatsObj,
+        });
       })
       .catch((err) => console.log("failed to fetch", err));
   }
