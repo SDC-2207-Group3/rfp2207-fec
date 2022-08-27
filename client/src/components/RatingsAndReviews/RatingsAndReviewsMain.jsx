@@ -5,93 +5,151 @@ import Sort from "./SubComponents/Sort.jsx";
 import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
 
-class RatingsAndReviewsMain extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: this.props.id || "65631",
-      selectedItem: {},
-      sortBy: "newest",
-      displayedReviews: 2,
-      reviews: [],
-      meta: {},
-      reviewStats: {},
-    };
+import { useState, useEffect, useReducer } from "react";
 
-    this.getAvgReviewValue = this.getAvgReviewValue.bind(this);
+// class RatingsAndReviewsMain extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       id: this.props.id || "65631",
+//       selectedItem: {},
+//       sortBy: "newest",
+//       displayedReviews: 2,
+//       reviews: [],
+//       meta: {},
+//       reviewStats: {},
+//     };
+
+//     this.getAvgReviewValue = this.getAvgReviewValue.bind(this);
+//   }
+
+//   ////////////////////////////////////////////////////////////
+
+//   getAvgReviewValue(meta) {
+//     // if (Object.keys(this.props.meta).length) {
+//     let statsObj = {};
+//     statsObj.starTotal = 0;
+//     statsObj.voteTotal = 0;
+//     for (let [star, count] of Object.entries(meta.ratings)) {
+//       statsObj.starTotal += star * count;
+//       statsObj.voteTotal += Number(count);
+//     }
+//     return statsObj;
+//   }
+
+//   componentDidMount() {
+//     //params = page, count, sort, product_id
+//     //get reviews for current product
+//     axios
+//       .get(`${ATELIER_API}/reviews`, {
+//         params: {
+//           product_id: `${this.state.id}`,
+//           sort: `${this.state.sortBy}`,
+//           count: `${this.state.displayedReviews}`,
+//         },
+//         headers: { Authorization: process.env.KEY },
+//       })
+//       //res.data.results = arr of reviews
+//       .then((res) => {
+//         //update state
+//         this.setState({ reviews: res.data.results });
+//       })
+//       .then(() => {
+//         // get meta data for current product
+//         return axios.get(`${ATELIER_API}/reviews/meta`, {
+//           params: { product_id: `${this.state.id}` },
+//           headers: { Authorization: process.env.KEY },
+//         });
+//       })
+//       .then((res) => {
+//         //create meta info to pass to sub component
+//         let reviewStatsObj = this.getAvgReviewValue(res.data);
+
+//         //update state once more
+//         this.setState({
+//           meta: res.data,
+//           reviewStats: reviewStatsObj,
+//         });
+//       })
+//       .catch((err) => console.log("failed to fetch", err));
+//   }
+
+//   ////////////////////////////////////////////////////////////
+
+//   render() {
+//     return (
+//       <section id="section_rr">
+//         <h2>Ratings and Reviews</h2>
+//         <div id="RR_bd-sort-list-container">
+//           <RatingsBreakDown
+//             reviewStats={this.state.reviewStats}
+//             meta={this.state.meta}
+//             id={this.props.id}
+//           />
+//           <div id="RR_sort-list-container">
+//             <Sort sortMethod={this.state.sortBy} id={this.props.id} />
+//             <ReviewsList reviews={this.state.reviews} id={this.props.id} />
+//           </div>
+//         </div>
+//       </section>
+//     );
+//   }
+// }
+/////////////////////  HOOKS  //////////////////////
+
+let initialState = {
+  id: "65631",
+  selectedItem: {},
+  sortBy: "newest",
+  displayedReviews: 2,
+  reviews: [],
+  meta: {},
+  reviewStats: {},
+};
+
+let reducer = (state, action) => {
+  switch (action.type) {
+    case "setId":
+      return { state };
+    case "setSort":
+      return { state };
+    case "setDisplayedReviews":
+      return { state };
+    case "setReviews":
+      return { state };
+    case "setMeta":
+      return { state };
+    case "setReviewStats":
+      return { state };
+    case "setAll":
+      return { state };
+    default:
+      return state;
   }
+};
 
-  ////////////////////////////////////////////////////////////
+//should make axios request, then instead of setting state
+//call reducer to set state for us
 
-  getAvgReviewValue(meta) {
-    // if (Object.keys(this.props.meta).length) {
-    let statsObj = {};
-    statsObj.starTotal = 0;
-    statsObj.voteTotal = 0;
-    for (let [star, count] of Object.entries(meta.ratings)) {
-      statsObj.starTotal += star * count;
-      statsObj.voteTotal += Number(count);
-    }
-    return statsObj;
-  }
+let RatingsAndReviewsMain = (props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  componentDidMount() {
-    //params = page, count, sort, product_id
-    //get reviews for current product
-    axios
-      .get(`${ATELIER_API}/reviews`, {
-        params: {
-          product_id: `${this.state.id}`,
-          sort: `${this.state.sortBy}`,
-          count: `${this.state.displayedReviews}`,
-        },
-        headers: { Authorization: process.env.KEY },
-      })
-      //res.data.results = arr of reviews
-      .then((res) => {
-        //update state
-        this.setState({ reviews: res.data.results });
-      })
-      .then(() => {
-        // get meta data for current product
-        return axios.get(`${ATELIER_API}/reviews/meta`, {
-          params: { product_id: `${this.state.id}` },
-          headers: { Authorization: process.env.KEY },
-        });
-      })
-      .then((res) => {
-        //create meta info to pass to sub component
-        let reviewStatsObj = this.getAvgReviewValue(res.data);
-
-        //update state once more
-        this.setState({
-          meta: res.data,
-          reviewStats: reviewStatsObj,
-        });
-      })
-      .catch((err) => console.log("failed to fetch", err));
-  }
-
-  ////////////////////////////////////////////////////////////
-
-  render() {
-    return (
-      <section id="section_rr">
-        <h2>Ratings and Reviews</h2>
-        <div id="RR_bd-sort-list-container">
-          <RatingsBreakDown
-            reviewStats={this.state.reviewStats}
-            meta={this.state.meta}
-            id={this.props.id}
-          />
-          <div id="RR_sort-list-container">
-            <Sort sortMethod={this.state.sortBy} id={this.props.id} />
-            <ReviewsList reviews={this.state.reviews} id={this.props.id} />
-          </div>
+  return (
+    <section id="section_rr">
+      <h2>Ratings and Reviews</h2>
+      <div id="RR_bd-sort-list-container">
+        <RatingsBreakDown
+          reviewStats={state.reviewStats}
+          meta={state.meta}
+          id={props.id}
+        />
+        <div id="RR_sort-list-container">
+          <Sort sortMethod={state.sortBy} id={props.id} />
+          <ReviewsList reviews={state.reviews} id={props.id} />
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+    </section>
+  );
+};
 
 export default RatingsAndReviewsMain;
