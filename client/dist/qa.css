@@ -16,10 +16,15 @@ body {
 } */
 
 .qa-accordion {
+  /* box-sizing: border-box; */
   max-width: 600px;
   margin: 6rem auto 4rem;
   padding: 0 10px;
-  list-style:none
+  list-style: none;
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.4;
+  background: #fff;
+  color: #444;
 }
 
 .heading {

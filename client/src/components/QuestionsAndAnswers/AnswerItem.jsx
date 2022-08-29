@@ -14,6 +14,7 @@ function AnswerItem({answer}) {
       <p>{answer.body}</p>
       <p>{answer.date}</p>
       <p>{answer.answerer_name}</p>
+      <p>------------------------</p>
     </div>
   )
 }

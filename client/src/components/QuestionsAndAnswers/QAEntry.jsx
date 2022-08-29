@@ -17,9 +17,9 @@ function QAEntry({key, product_id, question}) {
       <div className="answer-wrapper">
         <div className="answer-item">
           {
-            Object.keys(question.answers).forEach((question_id, index) => {
+            Object.keys(question.answers).map((question_id, index) =>
               <AnswerItem answer={question.answers[question_id]} />
-            })
+            )
           }
         </div>
       </div>
