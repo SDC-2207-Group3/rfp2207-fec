@@ -3,7 +3,7 @@
   width: 80vw;
   position: relative;
   --overview-div: 60vw;
-  background-color:yellow;
+  background-color:rgb(250, 255, 212);
 }
 
 .overview-imageGallery {
