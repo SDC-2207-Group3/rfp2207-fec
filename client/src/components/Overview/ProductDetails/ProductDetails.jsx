@@ -38,6 +38,7 @@ const styleName = stateSS.name ? stateSS.name : "No style"
       {Details.map((detail) =>
         <div>{detail}</div>
       )}
+
     </div>
   )
 }
