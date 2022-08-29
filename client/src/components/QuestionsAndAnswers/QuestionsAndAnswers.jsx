@@ -7,6 +7,8 @@ import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"
 
 function QuestionsAndAnswers(props) {
+  // hook for toggling question modal
+  const [openModal, setOpenModal] = useState(false);
 
   // hook for toggling accordion
   const [clicked, setClicked] = useState("0")
@@ -42,8 +44,14 @@ function QuestionsAndAnswers(props) {
       >
         More Answered Questions
       </button>
-
       }
+      <button
+      className="qa-newQuestionBtn"
+      onClick= {() => {setOpenModal(true)}}
+      >
+      Add a question
+      </button>
+      {openModal && <QuestionModal closeModal={setOpenModal} />}
       {/* {qaDummyData.slice(2).length > 0
         && <button className="qa-moreQuestions"
         >

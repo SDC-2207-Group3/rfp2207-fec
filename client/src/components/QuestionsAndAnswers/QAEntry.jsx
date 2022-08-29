@@ -5,8 +5,8 @@ import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
 
 function QAEntry({question, onToggle, active}) {
-  // initializing state for question and answer modals
-  const [openModal, setOpenModal] = useState(false);
+  // // initializing state for question and answer modals
+  // const [openModal, setOpenModal] = useState(false);
 
   return(
     <li className={`qa-accordion-item ${active ? "active" : ""}`}>
@@ -22,13 +22,7 @@ function QAEntry({question, onToggle, active}) {
             )
           }
         </div>
-        <button
-        className="qa-newQuestionBtn"
-        onClick= {() => {setOpenModal(true)}}
-        >
-          Add a question
-        </button>
-        {openModal && <QuestionModal closeModal={setOpenModal} />}
+
       </div>
 
     </li>

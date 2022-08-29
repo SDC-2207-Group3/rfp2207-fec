@@ -69,7 +69,7 @@
   height: auto;
 }
 
-.qa-moreQuestions {
+.qa-moreQuestions, .qa-newQuestionBtn {
   padding: 20px;
   border-color: #930040;
   background-color: #fff;
