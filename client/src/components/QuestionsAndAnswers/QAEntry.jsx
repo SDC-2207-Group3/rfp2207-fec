@@ -22,14 +22,15 @@ function QAEntry({question, onToggle, active}) {
             )
           }
         </div>
-      </div>
-      <button
+        <button
         className="qa-newQuestionBtn"
         onClick= {() => {setOpenModal(true)}}
-      >
-        Add a question
-      </button>
-      {openModal && <QuestionModal closeModal={setOpenModal} />}
+        >
+          Add a question
+        </button>
+        {openModal && <QuestionModal closeModal={setOpenModal} />}
+      </div>
+
     </li>
 
 
