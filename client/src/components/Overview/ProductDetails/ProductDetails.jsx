@@ -7,9 +7,9 @@ const ProductDetails = (props) => {
 
   const statePD = state.productDetails;
   const statePS = state.productStyles;
-  const stateSS = state.selelctedStyles;
+  const stateSS = state.selectedStyle;
 
-// Product Details
+  // Product Details
 
 // const category, description, features, name, slogan
 
@@ -19,20 +19,25 @@ const features = statePD.features ? statePD.features : [];
 const name = statePD.name ? statePD.name : "Product name unavailable";
 const slogan = statePD.slogan ? statePD.slogan : "Product slogan Unavailable"
 
+const Details = [category, name, slogan, description];
+
 // Product Styles
 
-
+const styles = statePS.results ? statePS.results : [];
 
 // Selected Styles
 
-
+const styleName = stateSS.name ? stateSS.name : "No style"
 
 // Rating
 
   return (
-    <div id='test' className="overview-productDetails">
+    <div className="overview-productDetails">
       {console.log(state)}
       Product Details
+      {Details.map((detail) =>
+        <div>{detail}</div>
+      )}
     </div>
   )
 }

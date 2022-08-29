@@ -26,9 +26,7 @@ const ThumbnailList = (props) => {
   }
 
   const thumbnailScroll = {
-    position: 'absolute',
     top: scrollFn(),
-    transition: '0.5s'
   }
 
   const selectedThumbnail = {
@@ -44,10 +42,10 @@ const ThumbnailList = (props) => {
       </div>
 
       <div className="thumbnail-viewport">
-        <div classname="thumbnail-list" style={thumbnailScroll}>
+        <div className="thumbnail-list" style={thumbnailScroll}>
           {
             props.photos.map((photo, index) =>
-              <div className="photo-section" onClick={() => setPhotoIndex(GetThumbnailIndex(photo))}>
+              <div key={index} className="photo-section" onClick={() => setPhotoIndex(GetThumbnailIndex(photo))}>
                 <div className="thumbnail-container" style={index === photoIndex ? selectedThumbnail : null}>
                   <img
                     className="overview-thumbnail"
