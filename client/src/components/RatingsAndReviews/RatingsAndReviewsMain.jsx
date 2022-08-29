@@ -99,7 +99,6 @@ let RatingsAndReviewsMain = (props) => {
         }
       })
       .catch((err) => console.log(err));
-    console.log(state);
   };
 
   let fetchData = (state) => {
@@ -114,7 +113,6 @@ let RatingsAndReviewsMain = (props) => {
       })
       //res.data.results = arr of reviews
       .then((res) => {
-        console.warn(res);
         //update state
         dispatch({
           type: "setReviews",
@@ -122,7 +120,6 @@ let RatingsAndReviewsMain = (props) => {
         });
       })
       .then(() => {
-        console.warn("meta call");
         // get meta data for current product
         return axios.get(`${ATELIER_API}/reviews/meta`, {
           params: { product_id: `${state.id}` },
