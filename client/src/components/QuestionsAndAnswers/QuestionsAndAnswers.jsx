@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Header from "./QAHeader.jsx";
 import {qaDummyData} from "./qaDummyData.js";
 import QAEntry from "./QAEntry.jsx";
@@ -10,7 +10,6 @@ function QuestionsAndAnswers(props) {
 
   // hook for toggling accordion
   const [clicked, setClicked] = useState("0")
-
   // update state if a particular question is clicked
   const handleToggle = (index) => {
     if (clicked === index) {
@@ -20,10 +19,15 @@ function QuestionsAndAnswers(props) {
   }
 
 
-  return(
+  // state hook for showing more questions
+  const [questionsCount, incrementQuestions] = useState(2)
+  // increment by 2 every time you click the "more answered questions" button
+
+
+  return (
     <ul className="qa-accordion">
       <Header />
-      {qaDummyData.map((question, index) => (
+      {qaDummyData.slice(0, questionsCount).map((question, index) => (
         <QAEntry
           product_id={props.id}
           question={question}
@@ -31,6 +35,20 @@ function QuestionsAndAnswers(props) {
           active={clicked === index}
           />
       ))}
+      {qaDummyData.slice(questionsCount).length > 0
+      &&
+      <button className="qa-moreQuestions"
+        onClick={() => incrementQuestions(questionsCount + 2)}
+      >
+        More Answered Questions
+      </button>
+
+      }
+      {/* {qaDummyData.slice(2).length > 0
+        && <button className="qa-moreQuestions"
+        >
+          More Answered Questions
+        </button>} */}
     </ul>
 
 

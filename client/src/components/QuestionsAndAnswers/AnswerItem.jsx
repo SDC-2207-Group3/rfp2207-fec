@@ -8,14 +8,24 @@ import React from 'react';
 // "photos": []
 
 function AnswerItem({answer}) {
+  const options = {year: 'numeric', month: 'long', day: 'numeric' };
+  const date = new Date(answer.date).toLocaleDateString('en-US', options);
 
   return (
     <div>
-      <p>{answer.body}</p>
-      <p>{answer.date}</p>
-      <p>{answer.answerer_name}</p>
+      A: {answer.body}
+      <br></br>
+      <small>
+        by {answer.answerer_name} on {date}
+      </small>
       <p>------------------------</p>
     </div>
+    // <div>
+    //   <p>{answer.body}</p>
+    //   <p>{answer.date}</p>
+    //   <p>{answer.answerer_name}</p>
+    //   <p>------------------------</p>
+    // </div>
   )
 }
 

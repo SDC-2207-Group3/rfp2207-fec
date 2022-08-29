@@ -18,7 +18,7 @@
 .qa-accordion {
   /* box-sizing: border-box; */
   max-width: 800px;
-  margin: 6rem auto 4rem;
+  /* margin: 6rem auto 4rem; */
   padding: 0 10px;
   list-style: none;
   font-family: "Segoe UI", Arial, sans-serif;
@@ -69,6 +69,14 @@
   height: auto;
 }
 
+.qa-moreQuestions {
+  padding: 20px;
+  border-color: #930040;
+  background-color: #fff;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
 
 
 /* QuestionModal CSS */

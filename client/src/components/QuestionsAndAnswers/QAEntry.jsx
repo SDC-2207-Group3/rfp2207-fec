@@ -11,13 +11,13 @@ function QAEntry({question, onToggle, active}) {
   return(
     <li className={`qa-accordion-item ${active ? "active" : ""}`}>
       <button className="question-item-button" onClick={onToggle}>
-        {question.question_body}
+        Q: {question.question_body}
         <span className="question-item-control">{active ? "-" : "+"} </span>
       </button>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
         <div className="answer-item">
           {
-            Object.keys(question.answers).map((answer_id, index) =>
+            Object.keys(question.answers).slice(0,2).map((answer_id, index) =>
               <AnswerItem answer={question.answers[answer_id]} />
             )
           }
