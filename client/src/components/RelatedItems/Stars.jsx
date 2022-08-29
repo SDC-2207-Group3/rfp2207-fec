@@ -6,7 +6,7 @@ var Stars = (props) => {
 
   return (
     <div className="RIC-stars-container">
-      {[...Array(5)].map(i => <Star key={i} className="RIC-star" />)}
+      {[...Array(5)].map((_, i) => <Star key={i} className="RIC-star" />)}
       <div className="RIC-star-cover" style={{ width: `${width}%`}}></div>
     </div>
   )

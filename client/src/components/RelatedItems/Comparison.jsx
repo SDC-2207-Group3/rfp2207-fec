@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import * as _ from 'underscore';
-import { Check } from 'react-feather';
+import { Check, XCircle } from 'react-feather';
 
 var Comparison = (props) => {
   const main = props.main.features;
@@ -14,6 +14,10 @@ var Comparison = (props) => {
 
   return (
     <div>
+      <div className="RIC-comparison-header">
+        <p>Comparing</p>
+        <span onClick={() => props.close()}><XCircle /></span>
+      </div>
       <div className="RIC-product-names">
         <p>{props.main.name}</p>
         <p>{props.product.name}</p>

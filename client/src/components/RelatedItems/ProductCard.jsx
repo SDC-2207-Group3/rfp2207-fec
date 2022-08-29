@@ -7,13 +7,17 @@ var ProductCard = (props) => {
   const [data, setData] = useState({});
   const [modal, setModal] = useState(false);
   const openModal = () => {
-
-  }
+    setModal(true);
+  };
+  const closeModal = () => {
+    setModal(false);
+  };
 
   return (
     <div className="RIC-product-card-div">
+      {modal ? <Comparison close={closeModal} main={props.main} product={props.product}/> : null}
       <div className="RIC-product-card-img">
-        <div className="RIC-conditional-icon">{props.mode === 'related-item' ? <Star size={20}/> :  <XCircle size={20} />}</div>
+        <span onClick={() => openModal()} className="RIC-conditional-icon">{props.mode === 'related-item' ? <Star size={20}/> :  <XCircle size={20} />}</span>
         <img src={props.product.img} alt="product img"></img>
       </div>
       <div className="RIC-product-card-detail">
@@ -25,7 +29,7 @@ var ProductCard = (props) => {
         </p>
         <Stars rating={props.product.ratings}/>
       </div>
-      <Comparison main={props.main} product={props.product}/>
+
     </div>
   )
 }
