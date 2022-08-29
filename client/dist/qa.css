@@ -67,7 +67,7 @@ body {
 
 .qa-modalBackground {
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   background-color: white;
   justify-content: center;
   align-items: center;
