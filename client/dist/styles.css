@@ -7,7 +7,7 @@
 
 html body {
   background: var(--color-primary);
-  font-size: 16px; /* calling 2em = 32px now */
+  font-size: 16px;
   margin: 0px;
   width: 80%;
   overflow-x: hidden;

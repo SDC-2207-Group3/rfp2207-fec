@@ -15,7 +15,7 @@ body {
   color: #444;
 } */
 
-/* .qa-accordion {
+.qa-accordion {
   max-width: 600px;
   margin: 6rem auto 4rem;
   padding: 0 10px;
@@ -59,7 +59,7 @@ body {
 .answer-item {
   background-color: #f7f7f7;
   padding: 20px;
-} */
+}
 
 
 
@@ -69,8 +69,6 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: white;
-  position: fixed;
-  /* display: flex; */
   justify-content: center;
   align-items: center;
 }
