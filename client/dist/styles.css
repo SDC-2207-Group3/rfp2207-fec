@@ -1,6 +1,5 @@
 /* root is the id of the html elmnt we put our react into */
 #root {
-  width: 100vw;
   display: flex;
   justify-content: center;
 }
@@ -8,7 +7,7 @@
 html body {
   background: var(--color-primary);
   font-size: 16px; /* calling 2em = 32px now */
-  margin: 0px;
+  margin: auto;
   width: 80%;
   overflow-x: hidden;
 }

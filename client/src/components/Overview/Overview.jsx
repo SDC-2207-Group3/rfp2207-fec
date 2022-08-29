@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, createContext, useState } from 'react';
 import axios from 'axios';
 
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
@@ -38,6 +38,8 @@ const reducer = (state, action) => {
   }
 }
 
+export const ProductContext = createContext();
+
 const Overview = (props) => {
 
   const [state, dispatch] = useReducer(reducer, initialeState)
@@ -62,14 +64,15 @@ const Overview = (props) => {
     GetProductData(props.id)
   }, [])
 
+
+
   return (
-    <div>
-      Overview
-      <ImageGallery productStyle = {state.selectedStyle}/>
-      {state.productDetails.name}
-      {state.selectedStyle.name}
-      <ProductDetails productDetails = {state.productDetails}/>
-    </div>
+    <ProductContext.Provider value={{state}}>
+      <div className = "overview">
+        <ImageGallery productStyle = {state.selectedStyle}/>
+        <ProductDetails productDetails = {state.productDetails}/>
+      </div>
+    </ProductContext.Provider>
   )
 }
 

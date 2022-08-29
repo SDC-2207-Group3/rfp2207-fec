@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import { ImageGalleryContext } from './ImageGallery.jsx';
+import { ProductContext } from './../Overview.jsx';
 
 const ThumbnailList = (props) => {
+  const { setPhotoIndex } = useContext(ImageGalleryContext);
+   const { productName } = useContext(ImageGalleryContext);
+  const { state } = useContext(ProductContext)
+
   const displayLimit = 7
   const [displayIndex, setDisplayIndex] = useState(0);
   const displayList = props.photos.slice(displayIndex, displayIndex + displayLimit)
 
+  function GetThumbnailIndex (photo) {
+    return props.photos.indexOf(photo);
+  }
 
   function scrollUp () {
     setDisplayIndex(displayIndex - 1);
@@ -16,13 +25,14 @@ const ThumbnailList = (props) => {
 
   return (
     <div className="overview-thumbnailList">
+      {console.log(state, 'STATE')}
       <div className="overview-container">
-        <div className="overview-scroll-up">
+        <div className="overview-scroll">
           {displayIndex === 0 ? null : <i className="fa-solid fa-angle-up" onClick={scrollUp} ></i>}
         </div>
         <div className="overview-thumbnail-gallery">
           {displayList.map((photo, index) => (
-              <div key={index} className="overview-thumbnail-container">
+              <div key={index} className="overview-thumbnail-container" onClick={() => setPhotoIndex(GetThumbnailIndex(photo))}>
                 <img
 
                   className="overview-thumbnail"
@@ -32,7 +42,7 @@ const ThumbnailList = (props) => {
               </div>
             ))}
         </div>
-        <div className="overview-scroll-down">
+        <div className="overview-scroll">
           {displayIndex + displayLimit >= props.photos.length ? null : <i className="fa-solid fa-angle-down" onClick={scrollDown} ></i>}
         </div>
       </div>

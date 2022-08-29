@@ -32,7 +32,7 @@
 }
 
 .overview-productDetails {
-  /* position: absolute; */
+  position: absolute;
   top: 0;
   left: 60%;
 }
@@ -80,26 +80,4 @@
 
 i {
   transform: translateY(22%);
-}
-
-.overview-test {
-  height: 50vh;
-  background-color: antiquewhite;
-  position: relative;
-}
-
-.overview-test1 {
-  position: absolute;
-  top: 0%;
-
-  width: 50%;
-  transition: .5s;
-}
-
-.overview-test2 {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  transition: .5s;
 }

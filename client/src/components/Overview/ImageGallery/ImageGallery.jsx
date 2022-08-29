@@ -1,10 +1,18 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useContext, createContext } from 'react';
+import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 
-let ImageGallery = (props) => {
+export const ImageGalleryContext = createContext(null);
+
+const ImageGallery = (props) => {
   const [photoIndex, setPhotoIndex] = useState(0);
-  // console.log(props.productStyle, 'a')
+  const [defaultView, setDefaultView] = useState(true);
+  const productName = props.productStyle.name;
+
+  const { state } = useContext(ProductContext);
+
   let photos = props.productStyle.photos ? props.productStyle.photos : []
+  const displayImageView = defaultView ? "overview-defaultView" : "overview-expandedView"
 
   const imageGalleryStyle = {
     backgroundColor: 'lightBlue',
@@ -13,16 +21,16 @@ let ImageGallery = (props) => {
   const displayURL = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null
 
   return (
-    <div className="overview-imageGallery" style={imageGalleryStyle}>
-      <ThumbnailList
-        name = {props.productStyle.name}
-        photos={photos}
-      />
-      <div className="overview-displayImage">
-        <img className="overview-displayImage" src={displayURL}/>
-
+    <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName}}>
+      <div className={"overview-imageGallery " + displayImageView}>
+        <ThumbnailList
+          photos={photos}
+        />
+        <div className="overview-displayImage" onClick={() => setDefaultView(!defaultView)}>
+          <img className="overview-displayImage" src={displayURL}/>
+        </div>
       </div>
-    </div>
+    </ImageGalleryContext.Provider>
   )
 }
 
