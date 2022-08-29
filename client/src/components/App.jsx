@@ -18,7 +18,7 @@ class App extends React.Component {
         {/* <h1> hello world </h1> */}
         <Overview id={this.state.id}/>
         <RelatedItems id={this.state.id}/>
-        <QuestionsAndAnswers />
+        <QuestionsAndAnswers id={this.state.id} />
         <RatingsAndReviews id={this.state.id}/>
       </div>
     );
