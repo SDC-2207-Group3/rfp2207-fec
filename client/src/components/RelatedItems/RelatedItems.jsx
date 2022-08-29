@@ -1,20 +1,20 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import http from './HttpReqs.js';
 import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfits from './YourOutfits.jsx'
-import Stars from './Stars.jsx'
+import Stars from './Stars.jsx';
+import * as _ from 'underscore';
+import { IdContext } from '../App.jsx'
 
-export const DataContext = createContext();
-
-export const RelatedItems = (props) => {
-  const [mainProductId, setId] = useState(props.id || 65631);
+const RelatedItems = (props) => {
+  const id = useContext(IdContext);
   const [data, setData] = useState([]);
   const [related, setRelated] = useState([]);
 
   useEffect(() => {
-    http.relatedReq(mainProductId)
-    .then(res => setRelated(res.data))
+    http.relatedReq(id)
+    .then(res => setRelated(_.uniq(res.data)))
     .catch(err => console.error(err));
   }, [])
 
@@ -42,11 +42,10 @@ export const RelatedItems = (props) => {
 
   return (
     <section id="RIC-section">
-      <DataContext.Provider value={data}>
-        <RelatedProducts />
-        <YourOutfits />
-      </DataContext.Provider>
+      <RelatedProducts data={data}/>
+      <YourOutfits data={data}/>
     </section>
   )
 }
 
+export default RelatedItems;

@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Stars from './Stars.jsx';
-import { DataContext } from './RelatedItems.jsx';
 import { Star, XCircle } from 'react-feather';
-
+import Comparison from './Comparison.jsx'
 
 var ProductCard = (props) => {
   const [data, setData] = useState({});
+  const [modal, setModal] = useState(false);
+  const openModal = () => {
+
+  }
 
   return (
     <div className="RIC-product-card-div">
@@ -22,6 +25,7 @@ var ProductCard = (props) => {
         </p>
         <Stars rating={props.product.ratings}/>
       </div>
+      <Comparison main={props.main} product={props.product}/>
     </div>
   )
 }
