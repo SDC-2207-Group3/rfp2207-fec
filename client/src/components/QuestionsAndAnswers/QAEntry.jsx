@@ -4,21 +4,21 @@ import QuestionModal from "./QuestionModal.jsx";
 import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
 
-function QAEntry({key, product_id, question}) {
+function QAEntry({question, onToggle, active}) {
   // initializing state for question and answer modals
   const [openModal, setOpenModal] = useState(false);
 
   return(
-    <li className="qa-accordion-item">
-      <button className="question-item-button">
+    <li className={`qa-accordion-item ${active ? "active" : ""}`}>
+      <button className="question-item-button" onClick={onToggle}>
         {question.question_body}
-        <span className="question-item-control">-</span>
+        <span className="question-item-control">{active ? "-" : "+"} </span>
       </button>
-      <div className="answer-wrapper">
+      <div className={`answer-wrapper ${active ? "open" : ""}`}>
         <div className="answer-item">
           {
-            Object.keys(question.answers).map((question_id, index) =>
-              <AnswerItem answer={question.answers[question_id]} />
+            Object.keys(question.answers).map((answer_id, index) =>
+              <AnswerItem answer={question.answers[answer_id]} />
             )
           }
         </div>

@@ -7,13 +7,13 @@
   margin: 0;
   padding: 0;
 }
+*/
 
-body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  line-height: 1.4;
-  background: #fff;
-  color: #444;
-} */
+.qa-heading {
+  font-size: 23px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
 
 .qa-accordion {
   /* box-sizing: border-box; */
@@ -25,16 +25,6 @@ body {
   line-height: 1.4;
   background: #fff;
   color: #444;
-}
-
-.heading {
-  font-size: 23px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.accordion {
-  list-style: none;
 }
 
 .qa-accordion-item {
@@ -57,13 +47,26 @@ body {
   border: none;
 }
 
-.control {
+.question-item-control {
   font-size: 20px;
 }
 
 .answer-item {
   background-color: #f7f7f7;
   padding: 20px;
+}
+
+.qa-accordion-item .active .question-item-button {
+  background-color: red;
+}
+
+.answer-wrapper {
+  height: 0;
+  overflow: hidden;
+}
+
+.answer-wrapper.open {
+  height: auto;
 }
 
 
