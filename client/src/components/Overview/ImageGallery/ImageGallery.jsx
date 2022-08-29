@@ -1,6 +1,7 @@
 import React, { useState, useContext, createContext } from 'react';
 import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
+import DisplayImage from './DisplayImage.jsx'
 
 export const ImageGalleryContext = createContext(null);
 
@@ -22,13 +23,17 @@ const ImageGallery = (props) => {
 
   return (
     <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName}}>
-      <div className={"overview-imageGallery " + displayImageView}>
+      <div className={"overview-imageGallery "}>
+      <div className={displayImageView}>
+
         <ThumbnailList
           photos={photos}
         />
+
         <div className="overview-displayImage" onClick={() => setDefaultView(!defaultView)}>
           <img className="overview-displayImage" src={displayURL}/>
         </div>
+      </div>
       </div>
     </ImageGalleryContext.Provider>
   )

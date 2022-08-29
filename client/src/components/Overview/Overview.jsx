@@ -5,7 +5,7 @@ import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductDetails from './ProductDetails/ProductDetails.jsx';
 
 const _AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/';
-const initialeState = { productStyles: [], productDetails: {}, selectedStyle: {} }
+const initialeState = { productStyles: [], productDetails: {}, selectedStyle: {}, productRating: {} }
 
 const AtelierGetEndpoint = (endpoint = '') => {
   return axios({
@@ -47,7 +47,8 @@ const Overview = (props) => {
   const GetProductData = (productID) => {
     return axios.all([
       AtelierGetEndpoint(productID),
-      AtelierGetEndpoint(productID + '/styles')
+      AtelierGetEndpoint(productID + '/styles'),
+
     ])
     .then((responses) => {
       dispatch({

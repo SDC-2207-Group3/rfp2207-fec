@@ -1,19 +1,24 @@
 .overview {
   height: 60vh;
-  display: flex;
+  width: 80vw;
   position: relative;
-  --overview-div: 60%;
+  --overview-div: 60vw;
+  background-color:yellow;
 }
 
 .overview-imageGallery {
-  position: absolute;
+
+  top:0;
+  left: 0;
   height: 100%;
-  background-color: orange;
+  width: 60%;
+  z-index: 1;
 }
 
 .overview-defaultView {
+  background-color: rgb(210, 210, 210);
   height: 100%;
-  width: var(--overview-div);
+  width: 100%;
   display: flex;
   justify-content: center;
   transition: 0.5s;
@@ -22,8 +27,9 @@
 }
 
 .overview-expandedView {
+  background-color: rgb(210, 210, 210);
   height: 100%;
-  width: 100%;
+  width: 80vw;
   display: flex;
   justify-content: center;
   transition: 1s;
@@ -32,19 +38,13 @@
 }
 
 .overview-productDetails {
-  /* position: absolute; */
+  position: absolute;
   top: 0;
   left: 60%;
+  width: 40%;
 }
 
-.overview-thumbnailList {
-  left: 3.5%;
-  margin: auto;
-  width: 7vh;
-  height: 100%;
-  object-fit: contain;
-  background-color: aquamarine;
-}
+
 
 
 .overview-displayImage {
@@ -53,7 +53,17 @@
   background-color: bisque;
 }
 
+.overview-container {
+  height: 100%;
+}
+
 .overview-thumbnail-gallery {
+  height: 100%;
+}
+
+.overview-thumbnail-viewport {
+  height: 100%;
+  overflow: hidden;
 }
 
 .overview-thumbnail-container {
@@ -66,6 +76,59 @@
   justify-content: center;
 }
 
+
+
+
+
+i {
+  transform: translateY(22%);
+}
+
+/* Image Gallery CSS */
+
+.overview-thumbnailList {
+  position: absolute;
+  left: 1%;
+  margin: auto;
+  width: 7.71vh;
+  height: 100%;
+  object-fit: contain;
+}
+
+.thumbnail-viewport {
+  overflow: hidden;
+  height: 90%;
+  width: 100%;
+  position: relative;
+}
+
+.thumbnail-list {
+  position: absolute;
+  left: 0
+}
+
+.photo-section {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  object-fit: contain;
+  padding: 10%;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.thumbnail-container {
+  background-color: rgb(196, 196, 196);
+  border: 1px solid black;
+  border-radius: 10%;
+  display: flex;
+  align-content: center;
+  object-fit: scale-down;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  transition: 0.1s;
+}
+
 .overview-thumbnail {
   max-width: 100%;
   max-height: 100%;
@@ -73,33 +136,10 @@
 }
 
 .overview-scroll {
-  height: 25px;
+  height: 5%;
   display: flex;
   justify-content: center;
 }
 
-i {
-  transform: translateY(22%);
-}
+/* Product Details CSS */
 
-.overview-test {
-  height: 50vh;
-  background-color: antiquewhite;
-  position: relative;
-}
-
-.overview-test1 {
-  position: absolute;
-  top: 0%;
-
-  width: 50%;
-  transition: .5s;
-}
-
-.overview-test2 {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%;
-  transition: .5s;
-}

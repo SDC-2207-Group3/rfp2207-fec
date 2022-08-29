@@ -81,3 +81,22 @@
 i {
   transform: translateY(22%);
 }
+
+.overview-test {
+  height: 50vh;
+  background-color: antiquewhite;
+}
+
+.overview-test1 {
+  top: 0;
+  left: 0;
+  background-color: aquamarine;
+  width: 50%;
+  transition: 2s;
+}
+
+.overview-test2 {
+  width: 100%;
+  background-color: blue;
+  transition: 2s;
+}
