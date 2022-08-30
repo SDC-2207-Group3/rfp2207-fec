@@ -5,8 +5,6 @@ import {ErrorMessage} from '@hookform/error-message';
 function QuestionModal({closeModal}) {
   const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
   const onSubmit = (data) => console.log(data);
-  // const onError = (errors) => {};
-  console.log('in question modaL!')
   return (
 
     <div className="qa-modalBackground">

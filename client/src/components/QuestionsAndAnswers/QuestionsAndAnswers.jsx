@@ -5,8 +5,22 @@ import {qaDummyData} from "./qaDummyData.js";
 import QAEntry from "./QAEntry.jsx";
 import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"
+import http from "./httpReqsForQA.js";
 
-function QuestionsAndAnswers(props) {
+function QuestionsAndAnswers({id}) {
+  const [mainQA, setQA] = useState([]); // stores the data that currently is dummyData
+
+  // initial get request to get all questions for a specified product id
+  useEffect(() => {
+    http.getQuestions(id)
+      .then((res) => {setQA(res.data.results)})
+      .catch((err) => {console.error(err)})
+  }, [])
+
+
+
+
+
   // hook for toggling question modal
   const [openModal, setOpenModal] = useState(false);
 
@@ -20,20 +34,19 @@ function QuestionsAndAnswers(props) {
     setClicked(index);
   }
 
-
   // state hook for showing more questions
-  const [questionsCount, incrementQuestions] = useState(2)
   // increment by 2 every time you click the "more answered questions" button
-
+  const [questionsCount, incrementQuestions] = useState(2)
 
   return (
     <div>
 
       <ul className="qa-accordion">
         <Header />
-        {qaDummyData.slice(0, questionsCount).map((question, index) => (
+        <div>{console.log('in div with results: ', mainQA)}</div>
+        {mainQA.slice(0, questionsCount).map((question, index) => (
           <QAEntry
-            product_id={props.id}
+            product_id={id}
             question={question}
             onToggle={() => handleToggle(index)}
             active={clicked === index}
