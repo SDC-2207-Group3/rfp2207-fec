@@ -74,3 +74,38 @@
   width: auto;
   cursor: pointer;
 }
+
+.RR_modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.RR_modal-image {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 85vh;
+  z-index: 3;
+}
+
+.RR_display-none {
+  display: none;
+}
+
+/* .RR_modal-toggle::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vw;
+  background-color: red;
+  background: red;
+} */

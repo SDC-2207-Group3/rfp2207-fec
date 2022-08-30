@@ -1,7 +1,15 @@
 import React from "react";
 import { useState } from "react";
 
-var ReviewItem = (props) => {
+//under each image is an invisible element which does not take up space on the dom. when the thumbnail for that image is clicked the respective modal version of that thumbnail has the class that hides it, removed.
+
+const toggleModal = (e, id) => {
+  e.preventDefault();
+  let reviewImgModal = document.getElementById(`RR_modal-container-${id}`);
+  reviewImgModal.classList.toggle("RR_display-none");
+};
+
+const ReviewItem = (props) => {
   const [renderBody, setRenderBody] = useState({ render: false });
 
   return (
@@ -30,12 +38,21 @@ var ReviewItem = (props) => {
         {props.review.photos.length
           ? props.review.photos.map((photo) => {
               return (
-                <img
-                  key={`${photo.id}`}
-                  className="RR_review-thumbnail"
-                  alt="user submitted image"
-                  src={`${photo.url}`}
-                />
+                <div key={`${photo.id}`}>
+                  <img
+                    onClick={(e) => toggleModal(e, photo.id)}
+                    className="RR_review-thumbnail"
+                    alt="user submitted image"
+                    src={`${photo.url}`}
+                  />
+                  <div
+                    id={`RR_modal-container-${photo.id}`}
+                    className="RR_display-none RR_modal-container"
+                    onClick={(e) => toggleModal(e, photo.id)}
+                  >
+                    <img className="RR_modal-image" src={`${photo.url}`} />
+                  </div>
+                </div>
               );
             })
           : null}
