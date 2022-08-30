@@ -29,12 +29,15 @@
   border-top: 1px solid #9f9f9f;
 }
 
-.question-item-button {
+.question-item-button, .answer-prefix {
   font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.question-item-button {
   background-color: #930040;
   color: #fff;
-  text-align: left;
-  font-weight: 700;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -44,6 +47,7 @@
   cursor: pointer;
   border: none;
 }
+
 
 .question-item-control {
   font-size: 20px;

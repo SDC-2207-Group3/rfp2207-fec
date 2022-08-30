@@ -97,7 +97,7 @@ function QuestionModal({closeModal}) {
                 render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
                 />
               </small>
-              <p className="modalSubtext">For authentication reasons, you will not be emailed</p>
+              <small className="modalSubtext">For authentication reasons, you will not be emailed</small>
               <br></br>
             </label>
 
