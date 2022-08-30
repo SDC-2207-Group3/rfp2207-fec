@@ -1,10 +1,24 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
+import http from "./httpReqsForQA.js";
 
-function QuestionModal({closeModal}) {
+function QuestionModal({product_id, closeModal}) {
   const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data)
+    const modalData = {
+      'body': data.yourQuestion,
+      'name': data.yourNickname,
+      'email': data.yourEmail,
+      'product_id': Number(product_id)
+    }
+    console.log('feeding into post request: ', modalData)
+    http.postQuestion(product_id, modalData)
+      .then((res) => {console.log('Success. Created new Question')})
+      .catch((err) => {console.error(err)})
+
+  }
   return (
 
     <div className="qa-modalBackground">
@@ -85,9 +99,6 @@ function QuestionModal({closeModal}) {
                   })
                 }
               />
-              {/* <small className="text-danger">
-                {errors.yourEmail && errors.yourEmail.message}
-              </small> */}
               <small>
                 <ErrorMessage
                 errors={errors}

@@ -85,14 +85,15 @@
 
 /* QuestionModal CSS */
 
-.qa-modalBackground {
+/* .qa-modalBackground {
   width: 100vw;
   height: 50vh;
-  background-color: white;
+  background-color: yellow;
   justify-content: center;
   align-items: center;
 
-}
+
+} */
 
 .qa-modalContainer {
   width: 500px;

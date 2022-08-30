@@ -15,11 +15,7 @@ function QuestionsAndAnswers({id}) {
     http.getQuestions(id)
       .then((res) => {setQA(res.data.results)})
       .catch((err) => {console.error(err)})
-  }, [])
-
-
-
-
+  }, [id])
 
   // hook for toggling question modal
   const [openModal, setOpenModal] = useState(false);
@@ -43,7 +39,6 @@ function QuestionsAndAnswers({id}) {
 
       <ul className="qa-accordion">
         <Header />
-        <div>{console.log('in div with results: ', mainQA)}</div>
         {mainQA.slice(0, questionsCount).map((question, index) => (
           <QAEntry
             product_id={id}
@@ -68,7 +63,7 @@ function QuestionsAndAnswers({id}) {
         >
         Add a question
         </button>
-        {openModal && <QuestionModal closeModal={setOpenModal} />}
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} />}
     </div>
   )
 
