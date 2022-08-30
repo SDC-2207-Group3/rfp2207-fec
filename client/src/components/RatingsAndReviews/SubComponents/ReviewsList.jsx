@@ -1,26 +1,28 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import ReviewItem from "./ReviewItem.jsx";
 
-class ReviewsList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    // let reviewArr = [];
-    // this.props.reviews.forEach((el) => {
-    //   reviewArr.push(<ReviewItem review={el} />);
-    // });
-    return (
-      <div id="RR_reviews-list">
-        <p>Reviews List</p>
-        <div>
-          {this.props.reviews.map((el, i) => {
-            return <ReviewItem key={i} review={el} />;
-          })}
-        </div>
+//props boolean, arr, str, fn
+let ReviewsList = ({ showMoreBtn, reviews, id, showMoreReviews }) => {
+  const [reviewsList, setReviewsList] = useState(reviews);
+
+  useEffect(() => {
+    setReviewsList(reviews);
+  }, [reviews]);
+
+  return (
+    <div id="RR_reviews-list">
+      <p>Reviews List</p>
+      <div>
+        {reviewsList.map((el, i) => {
+          return <ReviewItem key={i} review={el} />;
+        })}
       </div>
-    );
-  }
-}
+      {showMoreBtn ? (
+        <button onClick={() => showMoreReviews()}>show more</button>
+      ) : null}
+    </div>
+  );
+};
 
 export default ReviewsList;

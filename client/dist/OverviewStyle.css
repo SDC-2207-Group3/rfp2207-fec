@@ -1,35 +1,93 @@
-.overview-thumbnailList {
-  position: absolute;
-  top: 50%;
-  left: 3.5%;
-  transform: translateY(-50%);
-  margin: auto;
-  width: 7%;
+.overview {
+  height: 60vh;
+  width: 80vw;
+  position: relative;
+  --overview-div: 60vw;
+  background-color:rgb(250, 255, 212);
 }
 
 .overview-imageGallery {
-  position: relative;
-  width: 50%;
+
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 60%;
+  z-index: 1;
+}
+
+.overview-defaultView {
+  background-color: rgb(210, 210, 210);
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
+  transition: 0.5s;
+  position: relative;
+  z-index: 1;
 }
+
+.overview-expandedView {
+  background-color: rgb(210, 210, 210);
+  height: 100%;
+  width: 80vw;
+  display: flex;
+  justify-content: center;
+  transition: 1s;
+  position: relative;
+  z-index: 1;
+}
+
 
 .overview-displayImage {
   max-height: 100%;
   max-width: 100%;
+  background-color: bisque;
 }
 
-.overview-thumbnail-gallery {
+/* Thumbnail list CSS */
+
+.overview-thumbnailList {
+  position: absolute;
+  left: 1%;
+  margin: auto;
+  width: 7.71vh;
+  height: 100%;
+  object-fit: contain;
 }
 
-.overview-thumbnail-container {
+.thumbnail-viewport {
+  overflow: hidden;
+  height: 90%;
   width: 100%;
-  display: flex;
-  border: 1px solid black;
-  margin: 5px 0;
-  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.thumbnail-list {
+  position: absolute;
+  left: 0;
+  transition: 0.5s;
+}
+
+.photo-section {
   display: flex;
   justify-content: center;
+  align-content: center;
+  object-fit: contain;
+  padding: 10%;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.thumbnail-container {
+  background-color: rgb(196, 196, 196);
+  border: 1px solid black;
+  border-radius: 10%;
+  display: flex;
+  align-content: center;
+  object-fit: scale-down;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  transition: 0.1s;
 }
 
 .overview-thumbnail {
@@ -38,20 +96,21 @@
   margin: auto;
 }
 
-.overview-scroll-up {
-  height: 25px;
+.overview-scroll {
+  height: 5%;
   display: flex;
   justify-content: center;
-  font-size: calc();
-}
-
-.overview-scroll-down {
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  font-size: calc();
 }
 
 i {
   transform: translateY(22%);
+}
+
+/* Product Details CSS */
+
+.overview-productDetails {
+  position: absolute;
+  top: 0;
+  left: 60%;
+  width: 40%;
 }

@@ -1,11 +1,11 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, createContext, useState } from 'react';
 import axios from 'axios';
 
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductDetails from './ProductDetails/ProductDetails.jsx';
 
 const _AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/';
-const initialeState = { productStyles: [], productDetails: {}, selectedStyle: {} }
+const initialeState = { productStyles: [], productDetails: {}, selectedStyle: {}, productRating: {} }
 
 const AtelierGetEndpoint = (endpoint = '') => {
   return axios({
@@ -38,6 +38,8 @@ const reducer = (state, action) => {
   }
 }
 
+export const ProductContext = createContext();
+
 const Overview = (props) => {
 
   const [state, dispatch] = useReducer(reducer, initialeState)
@@ -45,7 +47,8 @@ const Overview = (props) => {
   const GetProductData = (productID) => {
     return axios.all([
       AtelierGetEndpoint(productID),
-      AtelierGetEndpoint(productID + '/styles')
+      AtelierGetEndpoint(productID + '/styles'),
+
     ])
     .then((responses) => {
       dispatch({
@@ -62,14 +65,15 @@ const Overview = (props) => {
     GetProductData(props.id)
   }, [])
 
+
+
   return (
-    <div>
-      Overview
-      <ImageGallery productStyle = {state.selectedStyle}/>
-      {state.productDetails.name}
-      {state.selectedStyle.name}
-      <ProductDetails productDetails = {state.productDetails}/>
-    </div>
+    <ProductContext.Provider value={{state}}>
+      <div className = "overview">
+        <ImageGallery productStyle = {state.selectedStyle}/>
+        <ProductDetails productDetails = {state.productDetails}/>
+      </div>
+    </ProductContext.Provider>
   )
 }
 
