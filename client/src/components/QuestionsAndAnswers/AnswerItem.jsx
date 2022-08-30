@@ -23,5 +23,4 @@ function AnswerItem({answer}) {
 }
 
 
-
 export default AnswerItem;
