@@ -1,9 +1,88 @@
+/* QuestionAndAnswers Accordion CSS */
+
+/* * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*/
+
+.qa-heading {
+  font-size: 23px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.qa-accordion {
+  /* box-sizing: border-box; */
+  max-width: 800px;
+  /* margin: 6rem auto 4rem; */
+  padding: 0 10px;
+  list-style: none;
+  font-family: "Segoe UI", Arial, sans-serif;
+  line-height: 1.4;
+  background: #fff;
+  color: #444;
+}
+
+.qa-accordion-item {
+  border-top: 1px solid #9f9f9f;
+}
+
+.question-item-button {
+  font-size: 16px;
+  background-color: #930040;
+  color: #fff;
+  text-align: left;
+  font-weight: 700;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.question-item-control {
+  font-size: 20px;
+}
+
+.answer-item {
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+.qa-accordion-item.active .question-item-button {
+  background-color: #930040e1;
+}
+
+.answer-wrapper {
+  height: 0;
+  overflow: hidden;
+}
+
+.answer-wrapper.open {
+  height: auto;
+}
+
+.qa-moreQuestions, .qa-newQuestionBtn {
+  padding: 20px;
+  border-color: #930040;
+  background-color: #fff;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+}
+
+
+/* QuestionModal CSS */
+
 .qa-modalBackground {
   width: 100vw;
-  height: 100vh;
+  height: 50vh;
   background-color: white;
-  /* position: fixed;
-  display: flex; */
   justify-content: center;
   align-items: center;
 }
@@ -73,4 +152,4 @@ button.qa-modalFooterBtn {
 
 #qa-modalFooterCancelBtn {
   background-color: crimson
-}
+}`
