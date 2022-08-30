@@ -69,3 +69,8 @@
 .RR_review-body {
   color: navy;
 }
+.RR_review-thumbnail {
+  height: 100px;
+  width: auto;
+  cursor: pointer;
+}

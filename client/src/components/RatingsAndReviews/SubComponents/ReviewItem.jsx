@@ -4,8 +4,6 @@ import { useState } from "react";
 var ReviewItem = (props) => {
   const [renderBody, setRenderBody] = useState({ render: false });
 
-  console.log(props.review);
-
   return (
     <li className="RR_list-item">
       <p>username: {props.review.reviewer_name}</p>
@@ -31,7 +29,14 @@ var ReviewItem = (props) => {
       <div>
         {props.review.photos.length
           ? props.review.photos.map((photo) => {
-              return <image alt="user submitted image" src={`${photo.url}`} />;
+              return (
+                <img
+                  key={`${photo.id}`}
+                  className="RR_review-thumbnail"
+                  alt="user submitted image"
+                  src={`${photo.url}`}
+                />
+              );
             })
           : null}
       </div>
