@@ -27,44 +27,36 @@ function QuestionsAndAnswers(props) {
 
 
   return (
-    <ul className="qa-accordion">
-      <Header />
-      {qaDummyData.slice(0, questionsCount).map((question, index) => (
-        <QAEntry
-          product_id={props.id}
-          question={question}
-          onToggle={() => handleToggle(index)}
-          active={clicked === index}
-          />
-      ))}
+    <div>
+
+      <ul className="qa-accordion">
+        <Header />
+        {qaDummyData.slice(0, questionsCount).map((question, index) => (
+          <QAEntry
+            product_id={props.id}
+            question={question}
+            onToggle={() => handleToggle(index)}
+            active={clicked === index}
+            />
+        ))}
+
+      </ul>
       {qaDummyData.slice(questionsCount).length > 0
-      &&
-      <button className="qa-moreQuestions"
-        onClick={() => incrementQuestions(questionsCount + 2)}
-      >
-        More Answered Questions
-      </button>
-      }
-      <button
-      className="qa-newQuestionBtn"
-      onClick= {() => {setOpenModal(true)}}
-      >
-      Add a question
-      </button>
-      {openModal && <QuestionModal closeModal={setOpenModal} />}
-      {/* {qaDummyData.slice(2).length > 0
-        && <button className="qa-moreQuestions"
+        &&
+        <button className="qa-moreQuestions"
+          onClick={() => incrementQuestions(questionsCount + 2)}
         >
           More Answered Questions
-        </button>} */}
-    </ul>
-
-
-    // <div className="qa-container">
-    //   <Header />
-    //   <h2>To put in as accordion</h2>
-    //   <QAEntry id={props.id}/>
-    // </div>
+        </button>
+        }
+        <button
+        className="qa-newQuestionBtn"
+        onClick= {() => {setOpenModal(true)}}
+        >
+        Add a question
+        </button>
+        {openModal && <QuestionModal closeModal={setOpenModal} />}
+    </div>
   )
 
 }
