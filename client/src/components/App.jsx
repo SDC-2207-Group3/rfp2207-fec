@@ -1,28 +1,24 @@
-import React from "react";
+import React, {createContext} from "react";
 import Overview from "./Overview/Overview.jsx";
-import { RelatedItems } from './RelatedItems/RelatedItems.jsx'
-
+import RelatedItems from './RelatedItems/RelatedItems.jsx'
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
-import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx"
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: '65635'
-    }
-  }
+import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
 
-  render() {
-    return (
-      <div id="app">
-        {/* <h1> hello world </h1> */}
-        <Overview id={this.state.id}/>
-        <RelatedItems id={this.state.id}/>
-        <QuestionsAndAnswers id={this.state.id} />
-        <RatingsAndReviews id={this.state.id}/>
-      </div>
-    );
-  }
+export const IdContext = createContext();
+
+const App = (props) => {
+  let id = '65635';
+
+  return (
+    <div id="app">
+      <IdContext.Provider value={id}>
+        <Overview id={id}/>
+        <RelatedItems id={id}/>
+        <QuestionsAndAnswers id={id}/>
+        <RatingsAndReviews/>
+      </IdContext.Provider>
+    </div>
+  );
 }
 
 export default App;

@@ -15,8 +15,8 @@
   display: flex;
   width: 1.5em;
   margin-right: 0.5px;
-  color: rgb(255, 221, 100);
-  fill: rgb(255, 221, 100)
+  color: rgb(34, 42, 82);
+  fill: rgb(34, 42, 82);
 }
 
 .RIC-star:last-of-type {
@@ -31,10 +31,6 @@
   z-index: 1;
   background-color: rgb(254, 254, 254);
   opacity: 0.6;
-  @supports (mix-blend-mode: color) {
-    mix-blend-mode: color;
-    opacity: unset;
-  }
 }
 
 .RIC-product-card-div {
