@@ -16,7 +16,7 @@
 }
 
 .overview-defaultView {
-  background-color: rgb(162, 147, 147);
+  background-color: rgba(162, 147, 147, 0.698);
   height: 100%;
   width: 100%;
   display: flex;
