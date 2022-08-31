@@ -27,7 +27,11 @@ const styles = statePS.results ? statePS.results : [];
 // Selected Styles
 
 const styleName = stateSS.name ? stateSS.name : "No style"
-const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable"
+const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable";
+
+
+const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size) : null;
+const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : null;
 
 // Rating
 
@@ -37,14 +41,14 @@ const Details = [category, name, slogan, description, stylePrice];
 
   return (
     <div className="overview-productDetails">
-      {/* {console.log(state)} */}
-      Product Details
-      {Details.map((detail, index) =>
-        <p key={index}>
-          {detail}
-        </p>
-      )}
-      <p>Styles:</p>
+      {console.log(state)}
+
+      <h3>{category}</h3>
+      <h2>{name}</h2>
+      <h4>{stylePrice}</h4>
+      <h5>
+        Styles > {styleName}
+      </h5>
       <div className="styles-container">
         {styles.map((style, index) =>
           <div key={index} className="style-thumbnail">
@@ -58,10 +62,30 @@ const Details = [category, name, slogan, description, stylePrice];
         )}
       </div>
 
-      <p>Features: </p>
+      <h5>Features: </h5>
       {features.map((feature, index) =>
         <p key={index}>{feature.feature}: {feature.value}</p>
       )}
+
+      {styleSizes ?
+        <div>
+          <p>
+            Size: {" "}
+            <select className="overview-size-select">
+              <option default value="select-size">Select Size</option>
+              {styleSizes.map((size, index) => <option key={index} value={size}>{size}</option>)}
+            </select>
+          </p>
+          <p>
+            Qty: {" "}
+            <select className="overview-qty-select">
+              <option default value="no-size">-</option>
+              {styleSizes.map((size, index) => <option key={index} value={size}>{size}</option>)}
+            </select>
+          </p>
+        </div> :
+        null}
+        <div className="CartButton">Add to Cart</div>
     </div>
   )
 }

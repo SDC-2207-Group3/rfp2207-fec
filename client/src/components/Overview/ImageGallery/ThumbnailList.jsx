@@ -3,7 +3,7 @@ import { ImageGalleryContext } from './ImageGallery.jsx';
 import { ProductContext } from './../Overview.jsx';
 
 const ThumbnailList = (props) => {
-  const { setPhotoIndex, productName, photoIndex } = useContext(ImageGalleryContext);
+  const { setPhotoIndex, productName, photoIndex, defaultView } = useContext(ImageGalleryContext);
   const { state } = useContext(ProductContext);
 
   const displayLimit = 7
@@ -14,15 +14,15 @@ const ThumbnailList = (props) => {
   }
 
   function scrollUp () {
-    setDisplayIndex(displayIndex + 1);
-  }
-
-  function scrollDown () {
     setDisplayIndex(displayIndex - 1);
   }
 
+  function scrollDown () {
+    setDisplayIndex(displayIndex + 1);
+  }
+
   function scrollFn () {
-    return displayIndex * (100/displayLimit) + '%'
+    return - displayIndex * (99.9/displayLimit) + '%'
   }
 
   const thumbnailScroll = {
@@ -35,13 +35,20 @@ const ThumbnailList = (props) => {
     transition: '0.25s'
   }
 
+   useEffect(() => {
+    console.log(photoIndex, 'photoIndex')
+    console.log(displayIndex, 'displayIndex')
+    console.log(photoIndex - displayLimit)
+    photoIndex - displayLimit >= displayIndex ? setDisplayIndex(photoIndex - displayLimit + 1) : null;
+   })
+
   return (
-    <div className="overview-thumbnailList">
+    <div className="overview-thumbnailList" style={defaultView ? { opacity: '100', transition: '0.5s ease 1s' } : { opacity: '0', transition: '0.25s' }}>
       <div className={"overview-scroll"}>
         {displayIndex === 0 ?
         null :
         <div className="overview-scroll-button">
-          <i className="fa-solid fa-angle-up" onClick={scrollUp} />
+          <i className="fa-solid fa-angle-up thumbnail-scroll" onClick={scrollUp} />
         </div>
         }
       </div>
@@ -65,10 +72,10 @@ const ThumbnailList = (props) => {
       </div>
 
       <div className={"overview-scroll"}>
-        {displayIndex <= (displayLimit - props.photos.length) ?
+        {props.photos.length - displayLimit <= displayIndex?
         null :
         <div className="overview-scroll-button">
-          <i className="fa-solid fa-angle-down" onClick={scrollDown} />
+          <i className="fa-solid fa-angle-down thumbnail-scroll" onClick={scrollDown} />
         </div>
         }
       </div>

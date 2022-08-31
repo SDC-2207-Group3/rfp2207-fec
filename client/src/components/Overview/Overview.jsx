@@ -22,10 +22,6 @@ function FindDefaultStyle (styles) {
 
 const reducer = (state, action) => {
   switch(action.type) {
-    case 'setStyles':
-      return { ...state, productStyles: action.setStyles }
-    case 'setDetails':
-      return { ...state, productDetails: action.setDetails }
     case 'selectStyle':
       return { ...state, selectedStyle: action.selectStyle }
     case 'setAll':

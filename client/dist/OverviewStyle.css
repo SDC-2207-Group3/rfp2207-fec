@@ -16,46 +16,70 @@
 }
 
 .overview-defaultView {
-  background-color: rgba(162, 147, 147, 0.698);
+  background-color: rgba(195, 195, 195, 0.698);
   height: 100%;
   width: 100%;
+  min-width: 726px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.5s;
   position: relative;
   z-index: 1;
+  border-radius: 0.5rem;
+  transition:
+    box-shadow 1s ease 1s,
+    border-radius 1s ease 1s,
+    background-color 1s ease 1s,
+    width 0.5s ease 0.5s,
+    height 0.5s ease;
 }
 
 .overview-expandedView {
   background-color: rgb(185, 185, 185);
-  height: 100%;
+  box-shadow: -3rem 3rem 4rem rgb(69, 68, 68);
+  height: 150%;
   width: 80vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 1s;
   position: relative;
   z-index: 1;
-  /* border-radius: 4%/10%; */
+  border-radius: 1rem;
+  transition:
+    box-shadow 0.5s ease,
+    border-radius 0.5s ease,
+    background-color 0.5s ease,
+    width 0.5s ease 0.5s,
+    height 0.5s ease 1s;
+}
+
+.image-arrows {
+  width: 5%;
+  display: flex;
+  justify-content: center;
 }
 
 .toggleExpandedView {
-  background-color: rgb(147, 149, 227);
+  /* background-color: rgb(147, 149, 227); */
   height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.displayImage-container {
-  background-color: aqua;
-  height: 80%;
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.displayImage-container {
+  background-color: rgb(209, 209, 209);
+  width: 90%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 .overview-displayImage {
+  border-radius: 0.25rem;
   max-height: 100%;
   max-width: 100%;
   background-color: bisque;
@@ -63,6 +87,7 @@
   justify-content: center;
   align-items: center;
   object-fit: scale-down;
+  transition: 1s;
 }
 
 /* Thumbnail list CSS */
@@ -71,36 +96,41 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 2%;
+  left: 1%;
   margin: auto;
-  width: 4.3rem;
+  width: 5rem;
   height: 95%;
+  max-height: 35rem;
   object-fit: contain;
 }
 
 .thumbnail-viewport {
-  overflow: hidden;
+  margin: auto;
+  overflow-y: hidden;
   height: 90%;
-  width: 100%;
+  aspect-ratio: 1/7;
   position: relative;
-
-  border-radius: 30%/5%;
 }
 
 .thumbnail-list {
   position: absolute;
   left: 0;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 .photo-section {
   display: flex;
   justify-content: center;
   align-content: center;
-
   padding: 10%;
   width: 100%;
   aspect-ratio: 1/1;
+  transition: 0.5s;
+}
+
+.photo-section:hover {
+  padding: 5%;
+  transition: 0.5s
 }
 
 .thumbnail-container {
@@ -122,6 +152,7 @@
   margin: auto;
 }
 
+
 .overview-scroll {
   height: 5%;
   display: flex;
@@ -130,6 +161,8 @@
 
 .overview-scroll-button {
   aspect-ratio: 1/1;
+  /* height: 2rem;
+  width: 2rem; */
   display: flex;
   justify-content: center;
   border: 1px solid rgb(85, 85, 85);
@@ -144,7 +177,7 @@
   box-shadow: -3px 3px 4px rgb(69, 68, 68);
 }
 
-i {
+.thumbnail-scroll {
   transform: translateY(22%);
 }
 
@@ -156,6 +189,11 @@ i {
   left: 60%;
   width: 40%;
   padding: 1.5rem;
+}
+
+.overview-productDetails-expanded {
+  opacity: 0;
+  transition: all 1s ease-in-out;
 }
 
 .styles-container {
@@ -184,13 +222,39 @@ i {
   overflow: hidden;
   border-radius: 50%;
   border: 3px solid white;
+  transition: 0.25s;
 }
 
 .style-selected {
   border: 3px solid rgb(0, 195, 255);
+  transition: 0.5s;
 }
 
 .style-image {
-  max-width: 150%;
-  max-height: 150%;
+  max-width: 160%;
+  max-height: 160%;
+}
+
+.overview-size-select option{
+  outline: 0;
+  background-color: aqua;
+}
+
+.CartButton {
+  margin: 5% 2%;
+  background-color: rgb(126, 156, 183);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 7rem;
+  height: 2rem;
+  border-radius: 10rem;
+}
+
+.CartButton:hover {
+  background-color: rgb(144, 182, 215);
+}
+
+.CartButton:active {
+  background-color: rgb(140, 176, 208);
 }

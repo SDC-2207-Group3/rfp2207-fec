@@ -1,7 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
-import DisplayImage from './DisplayImage.jsx'
 
 export const ImageGalleryContext = createContext(null);
 
@@ -17,16 +16,33 @@ const ImageGallery = (props) => {
 
   const displayURL = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null;
 
+  function leftPhoto () {
+    setPhotoIndex(photoIndex - 1)
+  }
+
+  function rightPhoto () {
+    setPhotoIndex(photoIndex + 1)
+  }
+
   return (
-    <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName}}>
+    <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName, defaultView}}>
       <div className={"overview-imageGallery "}>
       <div className={displayImageView}>
         <ThumbnailList
           photos={photos}
         />
-        <div className="toggleExpandedView" onClick={() => setDefaultView(!defaultView)}>
-          <div className="displayImage-container">
+        <div className="toggleExpandedView">
+
+          <div className="image-arrows">
+            {photoIndex === 0 ? null : <i class="fa-solid fa-angle-left" onClick={leftPhoto}/>}
+          </div>
+
+          <div className="displayImage-container" onClick={() => setDefaultView(!defaultView)}>
             <img className="overview-displayImage" src={displayURL}/>
+          </div>
+
+          <div className="image-arrows">
+            {photoIndex === photos.length - 1 ? null : <i class="fa-solid fa-angle-right" onClick={rightPhoto}/>}
           </div>
         </div>
       </div>
