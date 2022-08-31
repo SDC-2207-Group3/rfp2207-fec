@@ -63,7 +63,7 @@ function QuestionsAndAnswers({id}) {
         >
         Add a question
         </button>
-        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} />}
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA}/>}
     </div>
   )
 

@@ -1,11 +1,7 @@
-/* QuestionAndAnswers Accordion CSS */
 
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-*/
+
+
+/* QuestionAndAnswers Accordion CSS */
 
 .qa-heading {
   font-size: 23px;
@@ -82,6 +78,13 @@
   cursor: pointer;
 }
 
+.qa-push {
+  margin-left: auto;
+}
+
+.qa-ref-link {
+  padding: 5px;
+}
 
 /* QuestionModal CSS */
 

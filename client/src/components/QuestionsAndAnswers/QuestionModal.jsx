@@ -3,19 +3,18 @@ import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
 
-function QuestionModal({product_id, closeModal}) {
+function QuestionModal({product_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
-    console.log(data)
     const modalData = {
       'body': data.yourQuestion,
       'name': data.yourNickname,
       'email': data.yourEmail,
       'product_id': Number(product_id)
     }
-    console.log('feeding into post request: ', modalData)
     http.postQuestion(product_id, modalData)
-      .then((res) => {console.log('Success. Created new Question')})
+      .then((res) => http.getQuestions(product_id))
+      .then((res) => {setQA(res.data.results)})
       .catch((err) => {console.error(err)})
 
   }

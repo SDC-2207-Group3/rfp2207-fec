@@ -15,6 +15,9 @@ function QAEntry({question, onToggle, active}) {
     <li className={`qa-accordion-item ${active ? "active" : ""}`}>
       <button className="question-item-button" onClick={onToggle}>
         Q: {question.question_body}
+        <small className="qa-ref-link qa-push">Helpful?</small>
+        <small className="qa-ref-link">Yes(#)</small>
+        <small className="qa-ref-link">Add Answer</small>
         <span className="question-item-control">{active ? "-" : "+"} </span>
       </button>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
@@ -40,24 +43,6 @@ function QAEntry({question, onToggle, active}) {
 
     </li>
 
-
-
-
-    // <div>
-    //   <h3>Q: Question text here</h3>
-    //   <span>
-    //     <p>Helpful?</p>
-    //     <p>Replace with link for Yes(#)</p>
-    //     <p>Replace with link for Add An Answer</p>
-    //   </span>
-    //   <button
-    //     className="qa-newQuestionBtn"
-    //     onClick= {() => {setOpenModal(true)}}
-    //   >
-    //     New Question
-    //   </button>
-    //   {openModal && <QuestionModal closeModal={setOpenModal} />}
-    // </div>
   )
 
 }
