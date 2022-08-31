@@ -41,6 +41,7 @@ function QuestionsAndAnswers({id}) {
         <Header />
         {mainQA.slice(0, questionsCount).map((question, index) => (
           <QAEntry
+            key = {question.question_id}
             product_id={id}
             question={question}
             onToggle={() => handleToggle(index)}

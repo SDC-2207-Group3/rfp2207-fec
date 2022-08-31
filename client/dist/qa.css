@@ -89,15 +89,13 @@
 
 /* QuestionModal CSS */
 
-.qa-modalBackground {
+/* .qa-modalBackground {
   width: 100vw;
-  height: 50vh;
-  background-color: yellow;
+  height: 100vh;
+  background-color: rgba(255, 192, 203, 0.236);
   justify-content: center;
   align-items: center;
-
-
-}
+} */
 
 .qa-modalContainer {
   width: 500px;
@@ -108,12 +106,24 @@
   display: flex;
   flex-direction: column;
   padding: 25px;
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 40vh;
+  z-index: 3;
+
+  color: black;
+  font-weight: 300;
 }
 
 .qa-modalContainer .qa-modalTitle {
   display: inline-block;
   text-align: center;
   margin-top: 10px;
+
+
 }
 
 .qa-modalTitleCloseBtn {
