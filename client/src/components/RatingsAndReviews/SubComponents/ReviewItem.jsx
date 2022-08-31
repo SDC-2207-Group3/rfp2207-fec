@@ -1,8 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import HelpfulnessAndReport from "./helpfulnessAndReport.jsx";
 
 //under each image is an invisible element which does not take up space on the dom. when the thumbnail for that image is clicked the respective modal version of that thumbnail has the class that hides it, removed.
 
+//this one module is handling the entire rendering of everything on each review list element. im not sure if i should break this up into further sub components but that would likely be a good idea for refactoring...
+
+//maybe i could have done modal rendering with state?
 const toggleModal = (e, id) => {
   e.preventDefault();
   let reviewImgModal = document.getElementById(`RR_modal-container-${id}`);
@@ -34,7 +38,7 @@ const ReviewItem = (props) => {
           <button>show more</button>
         ) : null}
       </span>
-      <div>
+      <div className="RR_review-photo-container">
         {props.review.photos.length
           ? props.review.photos.map((photo) => {
               return (
@@ -57,6 +61,12 @@ const ReviewItem = (props) => {
             })
           : null}
       </div>
+      <div className="RR_response-from-seller">
+        {props.review.response !== null ? (
+          <span>{`response from seller: ${props.review.response}`}</span>
+        ) : null}
+      </div>
+      <HelpfulnessAndReport review={props.review} />
     </li>
   );
 };

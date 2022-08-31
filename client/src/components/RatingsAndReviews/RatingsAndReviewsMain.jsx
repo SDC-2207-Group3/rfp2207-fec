@@ -22,15 +22,6 @@ let reducer = (state, action) => {
       return { ...state, reviewStats: action.setReviewStats };
     case "setShowMoreBtn":
       return { ...state, showMoreBtn: action.setShowMoreBtn };
-    // case "setAll":
-    //   return {
-    //     id: action.setId,
-    //     sortBy: action.sortBy,
-    //     displayedReviews: action.displayedReviews,
-    //     reviews: action.setReviews,
-    //     meta: action.setMeta,
-    //     reviewStats: action.setReviewStats,
-    //   };
     default:
       return state;
   }
@@ -61,13 +52,6 @@ let RatingsAndReviewsMain = (props) => {
     reviewStats: {},
     showMoreBtn: true,
   };
-
-  //may want to pass dispatch down as props or something?
-
-  //display with x reviews
-  //each time "show more is clicked"
-  //display x+2 reviews
-  //if x+2 reviews count = reviews count remove show more btn
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -169,3 +153,14 @@ let RatingsAndReviewsMain = (props) => {
 };
 
 export default RatingsAndReviewsMain;
+
+/* KNOWN BUGS / TODO
+
+  when rendering 2 or fewer reviews, do not render the show more button
+
+  unsure if the data im getting from the api is sorted properly, ill know more once i fix the dates, for now things seem to be placing into the reviews list rather than on the top or bottom of the review list -- sometimes?
+
+  unhappy with the complexity of the review item component. should look at breaking that down into simpler components during a refactor
+
+
+*/
