@@ -38,8 +38,6 @@ const RelatedItems = (props) => {
     });
   }, [related])
 
-    console.log('--this.state.data--', data, '--this.state.related--', related);
-
   return (
     <section id="RIC-section">
       <RelatedProducts data={data}/>
