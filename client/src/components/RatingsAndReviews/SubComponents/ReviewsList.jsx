@@ -14,8 +14,8 @@ let ReviewsList = ({ showMoreBtn, reviews, id, showMoreReviews }) => {
     <div id="RR_reviews-list">
       <p>Reviews List</p>
       <div>
-        {reviewsList.map((el, i) => {
-          return <ReviewItem key={i} review={el} />;
+        {reviewsList.map((review, i) => {
+          return <ReviewItem key={i} review={review} />;
         })}
       </div>
       {showMoreBtn ? (

@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background: rgb(200, 200, 200);
+  background: red;
 }
 
 /* rb-container & reviews-list share width ( <= 100)*/
@@ -29,14 +29,14 @@
 }
 
 #RR_sort-list-container {
-  width: 80%;
+  width: 60vw;
   display: flex;
   flex-direction: column;
 }
 
 #RR_sort {
   width: 100%;
-  height: auto;
+  height: 2em;
   display: flex;
   background: rgb(150, 230, 200);
   justify-content: right;
@@ -46,21 +46,75 @@
   width: 100%;
   height: auto;
   max-height: 90vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* flex start was super importnat here */
+  justify-content: flex-start;
   align-items: center;
 
   background: rgb(220, 150, 150);
 }
 
 .RR_list-item {
-  width: 100%;
+  width: 50vw;
   min-height: 2em;
   display: flex;
   flex-direction: column;
   margin: 5px 0px;
   padding: 0.5em;
   background: rgb(220, 220, 220);
+}
+
+.RR_review-body {
+  color: navy;
+}
+
+.RR_review-photo-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.RR_review-thumbnail {
+  height: 100px;
+  width: auto;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.RR_modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.RR_modal-image {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 85vh;
+  z-index: 3;
+}
+
+.RR_response-from-seller {
+  background: lightblue;
+  font-style: italic;
+}
+
+.RR_helpfulness-q {
+  cursor: pointer;
+}
+
+.RR_report-review {
+  cursor: pointer;
+}
+
+.RR_display-none {
+  display: none;
 }
