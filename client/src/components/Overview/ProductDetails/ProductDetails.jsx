@@ -48,7 +48,10 @@ const Details = [category, name, slogan, description, stylePrice];
       <div className="styles-container">
         {styles.map((style, index) =>
           <div key={index} className="style-thumbnail">
-            <div className="style-image-container" onClick={() => {dispatch({ type: 'selectStyle', selectStyle: style})}}>
+            <div
+              className={"style-image-container" + (style === state.selectedStyle ? " style-selected" : "")}
+              onClick={() => {dispatch({ type: 'selectStyle', selectStyle: style })}}
+            >
               <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
             </div>
           </div>

@@ -183,6 +183,11 @@ i {
   align-items: center;
   overflow: hidden;
   border-radius: 50%;
+  border: 3px solid white;
+}
+
+.style-selected {
+  border: 3px solid rgb(0, 195, 255);
 }
 
 .style-image {
