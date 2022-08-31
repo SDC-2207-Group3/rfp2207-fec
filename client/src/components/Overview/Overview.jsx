@@ -48,7 +48,6 @@ const Overview = (props) => {
     return axios.all([
       AtelierGetEndpoint(productID),
       AtelierGetEndpoint(productID + '/styles'),
-
     ])
     .then((responses) => {
       dispatch({
@@ -68,7 +67,7 @@ const Overview = (props) => {
 
 
   return (
-    <ProductContext.Provider value={{state}}>
+    <ProductContext.Provider value={{state, dispatch}}>
       <div className = "overview">
         <ImageGallery productStyle = {state.selectedStyle}/>
         <ProductDetails productDetails = {state.productDetails}/>

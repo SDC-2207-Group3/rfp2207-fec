@@ -12,26 +12,22 @@ const ImageGallery = (props) => {
 
   const { state } = useContext(ProductContext);
 
-  let photos = props.productStyle.photos ? props.productStyle.photos : []
-  const displayImageView = defaultView ? "overview-defaultView" : "overview-expandedView"
+  let photos = props.productStyle.photos ? props.productStyle.photos : [];
+  const displayImageView = defaultView ? "overview-defaultView" : "overview-expandedView";
 
-  const imageGalleryStyle = {
-    backgroundColor: 'lightBlue',
-  }
-
-  const displayURL = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null
+  const displayURL = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null;
 
   return (
     <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName}}>
       <div className={"overview-imageGallery "}>
       <div className={displayImageView}>
-
         <ThumbnailList
           photos={photos}
         />
-
-        <div className="overview-displayImage" onClick={() => setDefaultView(!defaultView)}>
-          <img className="overview-displayImage" src={displayURL}/>
+        <div className="toggleExpandedView" onClick={() => setDefaultView(!defaultView)}>
+          <div className="displayImage-container">
+            <img className="overview-displayImage" src={displayURL}/>
+          </div>
         </div>
       </div>
       </div>
