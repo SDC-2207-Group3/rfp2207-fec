@@ -34,7 +34,7 @@ const ImageGallery = (props) => {
         <div className="toggleExpandedView">
 
           <div className="image-arrows">
-            {photoIndex === 0 ? null : <i class="fa-solid fa-angle-left" onClick={leftPhoto}/>}
+            {photoIndex === 0 ? null : <i className="fa-solid fa-angle-left" onClick={leftPhoto}/>}
           </div>
 
           <div className="displayImage-container" onClick={() => setDefaultView(!defaultView)}>
@@ -42,7 +42,7 @@ const ImageGallery = (props) => {
           </div>
 
           <div className="image-arrows">
-            {photoIndex === photos.length - 1 ? null : <i class="fa-solid fa-angle-right" onClick={rightPhoto}/>}
+            {photoIndex === photos.length - 1 ? null : <i className="fa-solid fa-angle-right" onClick={rightPhoto}/>}
           </div>
         </div>
       </div>

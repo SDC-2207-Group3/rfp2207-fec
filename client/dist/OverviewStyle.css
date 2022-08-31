@@ -24,13 +24,13 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 5;
   border-radius: 0.5rem;
   transition:
-    box-shadow 1s ease 1s,
-    border-radius 1s ease 1s,
-    background-color 1s ease 1s,
-    width 0.5s ease 0.5s,
+    box-shadow 1s ease 0.5s,
+    border-radius 1s ease 0.5s,
+    background-color 1s ease 0.5s,
+    width 0.5s ease,
     height 0.5s ease;
 }
 
@@ -43,7 +43,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 5;
   border-radius: 1rem;
   transition:
     box-shadow 0.5s ease,
@@ -189,6 +189,38 @@
   left: 60%;
   width: 40%;
   padding: 1.5rem;
+}
+
+.overview-rating {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 1rem;
+  width: 5rem;
+}
+
+
+.rating-slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 1rem;
+  z-index: 2;
+  background-color: white;
+}
+
+.star-container {
+  position: relative;
+}
+
+.star-fill {
+  position: absolute;
+  z-index: 1;
+}
+
+.star-empty {
+  position: absolute;
+  z-index: 3;
 }
 
 .overview-productDetails-expanded {

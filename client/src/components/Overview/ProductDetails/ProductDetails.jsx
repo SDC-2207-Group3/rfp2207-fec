@@ -8,41 +8,69 @@ const ProductDetails = (props) => {
   const statePD = state.productDetails;
   const statePS = state.productStyles;
   const stateSS = state.selectedStyle;
+  const statePR = state.productRating;
 
   // Product Details
 
 // const category, description, features, name, slogan
 
-const category = statePD.category ? statePD.category : "Product Category Unavailable";
-const description = statePD.description ? statePD.description : "Product Description Unavailable";
-const features = statePD.features ? statePD.features : [];
-const name = statePD.name ? statePD.name : "Product name unavailable";
-const slogan = statePD.slogan ? statePD.slogan : "Product slogan Unavailable"
+  const name        = statePD.name        ? statePD.name        : "Product name unavailable";
+  const slogan      = statePD.slogan      ? statePD.slogan      : "Product slogan Unavailable"
+  const category    = statePD.category    ? statePD.category    : "Product Category Unavailable";
+  const features    = statePD.features    ? statePD.features    : [];
+  const description = statePD.description ? statePD.description : "Product Description Unavailable";
 
+  // Product Styles
 
-// Product Styles
+  const styles = statePS.results ? statePS.results : [];
 
-const styles = statePS.results ? statePS.results : [];
+  // Selected Style
 
-// Selected Styles
+  const styleName  = stateSS.name           ? stateSS.name                  : "No style"
+  const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable";
 
-const styleName = stateSS.name ? stateSS.name : "No style"
-const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable";
+  const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size) : null;
+  const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : null;
 
+  // Rating
 
-const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size) : null;
-const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : null;
+  function calcProductRating(productRating) {
+    if (typeof productRating !== 'object') { return }
+    const ratings = Object.keys(productRating);
+    const counts  = Object.values(productRating);
+    const totalCount = counts.reduce((memo, count) => memo += parseInt(count), 0);
+    const totalReviews = ratings.map((rating, index) => parseInt(rating) * parseInt(counts[index])).reduce((memo, rating) => memo += rating, 0);
+    return (totalReviews/totalCount).toFixed(2);
+  }
 
-// Rating
+  const productRating = calcProductRating(statePR);
 
+  let ratingStars = [0, 0, 0, 0, 0]
+  console.log(ratingStars, 'premap')
+  ratingStars = ratingStars.map((star, index) => {
+      const pos = (index * 19.5) + '%';
+      const starPosition = { left: pos }
+      return (
+        <div className="star-container" style={starPosition}>
+          <i className="fa-solid fa-star star-fill"></i>
+          <i className="fa-regular fa-star star-empty"></i>
+        </div>
+      )
+    }
+  )
 
-
-const Details = [category, name, slogan, description, stylePrice];
+  const percentageFill = (1 - (productRating/5)) * 100 + '%';
+  const fill = { width: percentageFill };
 
   return (
     <div className="overview-productDetails">
       {console.log(state)}
 
+      <div className="overview-rating">
+        {ratingStars}
+        <div className="rating-slider" style={fill}></div>
+      </div>
+      <h6>{productRating}</h6>
       <h3>{category}</h3>
       <h2>{name}</h2>
       <h4>{stylePrice}</h4>

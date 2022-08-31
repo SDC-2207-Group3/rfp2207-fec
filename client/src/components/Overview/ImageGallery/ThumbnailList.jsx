@@ -43,7 +43,7 @@ const ThumbnailList = (props) => {
    })
 
   return (
-    <div className="overview-thumbnailList" style={defaultView ? { opacity: '100', transition: '0.5s ease 1s' } : { opacity: '0', transition: '0.25s' }}>
+    <div className="overview-thumbnailList" style={defaultView ? { opacity: '100', transition: '1s ease 0.5s' } : { opacity: '0', transition: '0.25s' }}>
       <div className={"overview-scroll"}>
         {displayIndex === 0 ?
         null :
