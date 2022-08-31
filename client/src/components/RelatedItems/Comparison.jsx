@@ -13,17 +13,18 @@ var Comparison = (props) => {
   let mainValue, relatedValue;
 
   return (
-    <div>
+    <div className="RIC-comparison-modal">
       <div className="RIC-comparison-header">
         <p>Comparing</p>
         <span onClick={() => props.close()}><XCircle /></span>
       </div>
-      <div className="RIC-product-names">
-        <p>{props.main.name}</p>
-        <p>{props.product.name}</p>
-      </div>
       <table className="RIC-comparison-table">
         <tbody>
+          <tr>
+            <th>{props.main.name}</th>
+            <th></th>
+            <th>{props.product.name}</th>
+           </tr>
         {Array.from(combinedFeatures).map((target) => {
           mainValue = main.find(({feature}) => feature === target) ? main.find(({feature}) => feature === target).value : null;
           relatedValue = related.find(({feature}) => feature === target) ? related.find(({feature}) => feature === target).value : null;

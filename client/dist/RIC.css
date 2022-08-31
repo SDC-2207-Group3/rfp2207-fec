@@ -1,10 +1,11 @@
+/* SECTION */
 #RIC-section {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
+  width: 80vw;
+  overflow-x: hidden;
   height: auto;
 }
 
+/* STARS */
 .RIC-stars-container {
   position: relative;
   display: inline-flex;
@@ -33,24 +34,150 @@
   opacity: 0.6;
 }
 
-.RIC-product-card-div {
-  border: 2px solid gray;
+/* RELATED ITEMS */
+#RIC-related-items {
   display: grid;
   grid-auto-columns: 1fr;
-  grid-template-rows: 1.5fr 0.5fr;
+  grid-template-rows: 0.2fr 1.8fr;
+}
+
+#RIC-related-header {
+  padding: 0.5em;
+  font-size: x-large;
+  font-family: 'Courier New', Courier, monospace;
+  border: 0.1em solid pink;
+  border-radius: 1em;
+  width: 35%;
+  margin: 0.5em 0;
+  text-align: center;
 }
 
 #RIC-ri-card-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 2em;
-  grid-row-gap: 0px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 75%;
+}
+
+#RIC-fade-div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  background-color: rgb(91, 23, 23);
+  /* opacity: 0.6; */
+}
+
+
+
+/* PRODUCT CARD */
+.RIC-product-card-div {
+  border: 1px solid gray;
+  height: 100%;
+  width: 20%;
+  margin: 0.5em;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.RIC-product-card-img-div {
+  margin: 3% 0;
+  height: 70%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.RIC-product-card-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+}
+
+
+.RIC-product-card-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 0.3em;
 }
 
 .RIC-conditional-icon {
   display: flex;
   justify-content: flex-end;
+}
 
+#RIC-category {
+  font-style: italic;
+}
+
+#RIC-name {
+  font-weight: bold;
+}
+
+p.RIC {
+  padding: 0.1em 0;
+}
+
+#RIC-sale-price {
+  color: red;
+}
+
+#RIC-original-price-sale {
+  text-decoration: line-through;
+}
+
+/* MODAL */
+.RIC-comparison-modal {
+  margin: 20% 40%;
+  display: block;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 30%;
+  height: 40%;
+  overflow: auto;
+  background-color: white;
+  position: fixed;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border: 1px solid gray;
+  padding: 1em;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.RIC-comparison-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.RIC-product-names {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+table .RIC-comparison-table {
+  border-collapse: collapse;
+}
+
+tbody {
+  display:block;
+  overflow:auto;
+  height:200px;
+  width:100%;
+}
+
+th {
+  margin: 0.3em 0;
+}
+
+td {
+  text-align: center;
+  padding: 0.5em 0;
 }
 

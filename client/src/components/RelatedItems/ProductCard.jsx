@@ -16,20 +16,19 @@ var ProductCard = (props) => {
   return (
     <div className="RIC-product-card-div">
       {modal ? <Comparison close={closeModal} main={props.main} product={props.product}/> : null}
-      <div className="RIC-product-card-img">
-        <span onClick={() => openModal()} className="RIC-conditional-icon">{props.mode === 'related-item' ? <Star size={20}/> :  <XCircle size={20} />}</span>
-        <img src={props.product.img} alt="product img"></img>
+      <span onClick={() => openModal()} className="RIC-conditional-icon">{props.mode === 'related-item' ? <Star size={20}/> :  <XCircle size={20} />}</span>
+      <div className="RIC-product-card-img-div">
+        <img className="RIC-product-card-img" src={props.product.img} alt="product img"></img>
       </div>
       <div className="RIC-product-card-detail">
-        <p>{props.product.category}</p>
-        <h4>{props.product.name}</h4>
-        <p>
-          <span>$ {props.product.original_price}</span>
-          <span>{props.product.sale_price ? props.product.sale_price : null }</span>
+        <p className="RIC" id="RIC-category">{props.product.category}</p>
+        <p className="RIC" id="RIC-name">{props.product.name}</p>
+        <p className="RIC">
+          <span id={`RIC-original-price ${props.product.sale_price ? '-sale' : ''}`}>$ {props.product.original_price}</span>
+          <span id="RIC-sale-price">{props.product.sale_price ? props.product.sale_price : null }</span>
         </p>
         <Stars rating={props.product.ratings}/>
       </div>
-
     </div>
   )
 }
