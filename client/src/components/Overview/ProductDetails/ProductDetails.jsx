@@ -3,7 +3,7 @@ import { ProductContext } from './../Overview.jsx';
 
 const ProductDetails = (props) => {
 
-  const { state } = useContext(ProductContext);
+  const { state, dispatch } = useContext(ProductContext);
 
   const statePD = state.productDetails;
   const statePS = state.productStyles;
@@ -37,17 +37,18 @@ const Details = [category, name, slogan, description, stylePrice];
 
   return (
     <div className="overview-productDetails">
-      {console.log(state)}
+      {/* {console.log(state)} */}
       Product Details
       {Details.map((detail, index) =>
         <p key={index}>
           {detail}
         </p>
       )}
+      <p>Styles:</p>
       <div className="styles-container">
         {styles.map((style, index) =>
           <div key={index} className="style-thumbnail">
-            <div className="">
+            <div className="style-image-container" onClick={() => {dispatch({ type: 'selectStyle', selectStyle: style})}}>
               <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
             </div>
           </div>
