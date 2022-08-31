@@ -84,11 +84,12 @@
 
 .qa-ref-link {
   padding: 5px;
+  font-weight: 500;
 }
 
 /* QuestionModal CSS */
 
-/* .qa-modalBackground {
+.qa-modalBackground {
   width: 100vw;
   height: 50vh;
   background-color: yellow;
@@ -96,7 +97,7 @@
   align-items: center;
 
 
-} */
+}
 
 .qa-modalContainer {
   width: 500px;

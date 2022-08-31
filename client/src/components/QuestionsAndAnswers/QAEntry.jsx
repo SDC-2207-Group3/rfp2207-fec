@@ -17,7 +17,7 @@ function QAEntry({question, onToggle, active}) {
         Q: {question.question_body}
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small className="qa-ref-link">Yes(#)</small>
-        <small className="qa-ref-link">Add Answer</small>
+        <button className="qa-ref-link add-answer-button">Add Answer</button>
         <span className="question-item-control">{active ? "-" : "+"} </span>
       </button>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
