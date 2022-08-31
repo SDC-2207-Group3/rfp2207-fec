@@ -8,7 +8,8 @@ import AnswerModal from "./AnswerModal.jsx"
 import http from "./httpReqsForQA.js";
 
 function QuestionsAndAnswers({id}) {
-  const [mainQA, setQA] = useState([]); // stores the data that currently is dummyData
+  // state hook for displaying question data from server get request
+  const [mainQA, setQA] = useState([]);
 
   // initial get request to get all questions for a specified product id
   useEffect(() => {
@@ -46,6 +47,8 @@ function QuestionsAndAnswers({id}) {
             question={question}
             onToggle={() => handleToggle(index)}
             active={clicked === index}
+            mainQA={mainQA}
+            setQA={setQA}
             />
         ))}
 

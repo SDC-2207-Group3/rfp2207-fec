@@ -3,20 +3,20 @@ import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
 
-function AnswerModal({question_id, closeModal}) {
+function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
     console.log(data)
-    // const modalData = {
-    //   'body': data.yourQuestion,
-    //   'name': data.yourNickname,
-    //   'email': data.yourEmail,
-    //   'product_id': Number(product_id)
-    // }
-    // http.postQuestion(product_id, modalData)
-    //   .then((res) => http.getQuestions(product_id))
-    //   .then((res) => {setQA(res.data.results)})
-    //   .catch((err) => {console.error(err)})
+    const modalData = {
+      'body': data.yourAnswer,
+      'name': data.yourNickname,
+      'email': data.yourEmail,
+      'photos': ["https://source.unsplash.com/random/200x200?sig=1"] // TODO FIX THIS SO IT CAN UPLOAD OTHER IMGS
+    }
+    http.postAnswer(product_id, question_id, modalData)
+      .then((res) => http.getQuestions(product_id))
+      .then((res) => {setQA(res.data.results)})
+      .catch((err) => {console.error(err)})
 
   }
   return (
@@ -53,7 +53,6 @@ function AnswerModal({question_id, closeModal}) {
                 render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
                 />
               </small>
-              <br></br>
             </label>
             <label className="modalLabel">
               Your Images

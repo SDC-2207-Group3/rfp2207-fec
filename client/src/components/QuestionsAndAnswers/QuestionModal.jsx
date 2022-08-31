@@ -52,7 +52,6 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
                 render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
                 />
               </small>
-              <br></br>
             </label>
             <label className="modalLabel">
                 Your Nickname

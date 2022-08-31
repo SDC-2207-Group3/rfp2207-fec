@@ -5,7 +5,10 @@ import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
 
 
-function QAEntry({question, onToggle, active}) {
+function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
+  // // state hook for displaying answer data from server get request
+  // const [mainAnswer, setAnswer] = useState([]);
+
   // initializing state for  answer modals
   const [openAnswerModal, setOpenAnswerModal] = useState(false);
 
@@ -25,7 +28,17 @@ function QAEntry({question, onToggle, active}) {
         >
           Add Answer
         </button>
-        {openAnswerModal && <AnswerModal question_id={question.question_id} closeModal={setOpenAnswerModal} />}
+        {
+          openAnswerModal
+            &&
+          <AnswerModal
+            product_id={product_id}
+            question_id={question.question_id}
+            closeModal={setOpenAnswerModal}
+            mainQA={mainQA}
+            setQA={setQA}
+            />
+        }
         <span className="qa-ref-link question-item-control">{active ? "-" : "+"} </span>
       </div>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>

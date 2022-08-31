@@ -15,4 +15,8 @@ module.exports.postQuestion = (product_id, modalData) => axios.post(
   modalData,
   {headers: {'Authorization': process.env.KEY}}
 )
-
+module.exports.postAnswer = (product_id, question_id, modalData) => axios.post(
+  `${API}/qa/questions/${question_id}/answers`,
+  modalData,
+  {headers: {'Authorization': process.env.KEY}}
+)
