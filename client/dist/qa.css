@@ -52,8 +52,34 @@
 }
 
 .answer-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
   background-color: #f7f7f7;
   padding: 20px;
+}
+
+.answer-item-single-container {
+  padding: 2px;
+}
+
+.answer-item-single {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.answer-prefix {
+  margin-right: 5px;
+  /* text-align: center; */
+
+}
+
+.answer-prefix, .answer-body {
+  transform: translateY(3.5px);
 }
 
 .qa-accordion-item.active .question-item-button {
@@ -80,11 +106,16 @@
 
 .qa-push {
   margin-left: auto;
+  cursor: default;
 }
 
 .qa-ref-link {
   padding: 5px;
   font-weight: 500;
+}
+
+.qa-mark {
+  cursor: pointer;
 }
 
 /* QuestionModal CSS */

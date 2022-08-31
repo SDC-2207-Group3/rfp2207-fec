@@ -1,4 +1,6 @@
 import React from 'react';
+import {useState} from 'react';
+import http from "./httpReqsForQA.js";
 
 // "id": 5539374,
 // "body": "jackky",
@@ -7,14 +9,39 @@ import React from 'react';
 // "helpfulness": 0,
 // "photos": []
 
-function AnswerItem({answer}) {
+function AnswerItem({answer, question_id}) {
+  const [yesCount, setYesCount] = useState(answer.id);
+
+  const markAnswerAsHelpful = (answer_id, question_id) => {
+    console.log('this is answer: ', answer)
+    console.log('this is answer_id: ', answer_id)
+    console.log('this is question_id: ', question_id)
+    http.markAnswerAsHelpful(answer_id)
+      .then((res) => http.getAnswer(question_id))
+      .then((res) => {setYesCount(res.data.results.filter(i => i.answer_id === answer_id).helpfulness)})
+      .catch((err) => {console.error(err)})
+  }
+
+  // converting answer date stamp into Month DD, YYYY
   const options = {year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date(answer.date).toLocaleDateString('en-US', options);
+  // console.log('this is answer: ', answer)
+  // console.log('this is question_id: ', question_id)
 
   return (
-    <div>
-      <span className="answer-prefix">A:</span> {answer.body}
-      <br></br>
+    <div className="answer-item-single-container">
+      <div className="answer-item-single">
+        <span className="answer-prefix">A: </span>
+        <span className="answer-body">{answer.body}</span>
+        <small className="qa-ref-link qa-push">Helpful?</small>
+        <small
+          className="qa-ref-link qa-mark"
+          onClick={() => markAnswerAsHelpful(answer.id)}
+        >
+          Yes({answer.helpfulness})
+        </small>
+        <small className="qa-ref-link qa-mark">| Report</small>
+      </div>
       <small>
         by {answer.answerer_name} on {date}
       </small>

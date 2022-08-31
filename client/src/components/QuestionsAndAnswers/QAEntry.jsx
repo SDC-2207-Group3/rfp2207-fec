@@ -29,13 +29,18 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
       <div className="question-item-button" onClick={onToggle}>
         Q: {question.question_body}
         <small className="qa-ref-link qa-push">Helpful?</small>
-        <small className="qa-ref-link" onClick={() => markQuestionAsHelpful(question.question_id, product_id)}>Yes({question.question_helpfulness})</small>
-        <button
+        <small
+          className="qa-ref-link qa-mark"
+          onClick={() => markQuestionAsHelpful(question.question_id, product_id)}
+        >
+          Yes({question.question_helpfulness})
+        </small>
+        <small
           className="qa-ref-link add-answer-button"
           onClick={() => {setOpenAnswerModal(true)}}
         >
           Add Answer
-        </button>
+        </small>
         {
           openAnswerModal
             &&
@@ -53,7 +58,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         <div className="answer-item">
           {
             Object.keys(question.answers).slice(0, answersCount).map((answer_id, index) =>
-              <AnswerItem key={index} answer={question.answers[answer_id]} />
+              <AnswerItem key={index} answer={question.answers[answer_id]} /> // TODO: Figure out how to access question.question_id here!!
             )
           }
           {

@@ -25,3 +25,13 @@ module.exports.markQuestionAsHelpful = (question_id, product_id) => axios.put(
   {question_id: question_id},
   {headers: {'Authorization': process.env.KEY}}
 )
+module.exports.markAnswerAsHelpful = (answer_id) => axios.put(
+  `${API}/qa/answers/${answer_id}/helpful`,
+  {answer_id: answer_id},
+  {headers: {'Authorization': process.env.KEY}}
+)
+module.exports.getAnswer = (question_id) => axios.get(
+  `${API}/qa/questions/${question_id}/answers`,
+  {headers: {'Authorization': process.env.KEY}}
+)
+
