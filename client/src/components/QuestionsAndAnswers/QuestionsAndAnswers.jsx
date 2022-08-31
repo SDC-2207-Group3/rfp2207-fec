@@ -33,7 +33,7 @@ function QuestionsAndAnswers({id}) {
 
   // state hook for showing more questions
   // increment by 2 every time you click the "more answered questions" button
-  const [questionsCount, incrementQuestions] = useState(2)
+  const [questionsCount, incrementQuestions] = useState(4)
 
   return (
     <div>

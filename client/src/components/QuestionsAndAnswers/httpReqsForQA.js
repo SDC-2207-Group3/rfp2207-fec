@@ -20,3 +20,8 @@ module.exports.postAnswer = (product_id, question_id, modalData) => axios.post(
   modalData,
   {headers: {'Authorization': process.env.KEY}}
 )
+module.exports.markQuestionAsHelpful = (question_id, product_id) => axios.put(
+  `${API}/qa/questions/${question_id}/helpful`,
+  {question_id: question_id},
+  {headers: {'Authorization': process.env.KEY}}
+)

@@ -3,6 +3,7 @@ import {useState} from "react";
 import AnswerModal from "./AnswerModal.jsx";
 import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
+import http from "./httpReqsForQA.js";
 
 
 function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
@@ -16,12 +17,19 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
   const [answersCount, incrementAnswers] = useState(2)
 
 
+  const markQuestionAsHelpful = (question_id, product_id) => {
+    http.markQuestionAsHelpful(question_id, product_id)
+      .then((res) => http.getQuestions(product_id))
+      .then((res) => {setQA(res.data.results)})
+      .catch((err) => {console.error(err)})
+  }
+
   return(
     <li key={question.question_id} className={`qa-accordion-item ${active ? "active" : ""}`}>
       <div className="question-item-button" onClick={onToggle}>
         Q: {question.question_body}
         <small className="qa-ref-link qa-push">Helpful?</small>
-        <small className="qa-ref-link">Yes(#)</small>
+        <small className="qa-ref-link" onClick={() => markQuestionAsHelpful(question.question_id, product_id)}>Yes({question.question_helpfulness})</small>
         <button
           className="qa-ref-link add-answer-button"
           onClick={() => {setOpenAnswerModal(true)}}
