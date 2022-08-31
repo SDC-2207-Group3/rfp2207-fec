@@ -34,25 +34,25 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
               Your Question
-            <input className="modalInput" type="text"
-            {...register("yourQuestion",
-              {
-                  required: "Question is required",
-                  maxLength: {
-                    value: 1000,
-                    message: "Question is limited to 1000 characters"
-                  }
-              })
-            }
-            />
-            <small>
-              <ErrorMessage
-              errors={errors}
-              name="yourQuestion"
-              render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+              <input className="modalInput" type="text"
+              {...register("yourQuestion",
+                {
+                    required: "Question is required",
+                    maxLength: {
+                      value: 1000,
+                      message: "Question is limited to 1000 characters"
+                    }
+                })
+              }
               />
-            </small>
-            <br></br>
+              <small>
+                <ErrorMessage
+                errors={errors}
+                name="yourQuestion"
+                render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+                />
+              </small>
+              <br></br>
             </label>
             <label className="modalLabel">
                 Your Nickname

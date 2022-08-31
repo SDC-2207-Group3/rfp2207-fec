@@ -35,25 +35,34 @@ function AnswerModal({question_id, closeModal}) {
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
               Your Answer
-            <input className="modalInput" type="text"
-            {...register("yourAnswer",
-              {
-                  required: "Answer is required",
-                  maxLength: {
-                    value: 1000,
-                    message: "Question is limited to 1000 characters"
-                  }
-              })
-            }
-            />
-            <small>
-              <ErrorMessage
-              errors={errors}
-              name="yourAnswer"
-              render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+              <input className="modalInput" type="text"
+              {...register("yourAnswer",
+                {
+                    required: "Answer is required",
+                    maxLength: {
+                      value: 1000,
+                      message: "Question is limited to 1000 characters"
+                    }
+                })
+              }
               />
-            </small>
-            <br></br>
+              <small>
+                <ErrorMessage
+                errors={errors}
+                name="yourAnswer"
+                render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+                />
+              </small>
+              <br></br>
+            </label>
+            <label className="modalLabel">
+              Your Images
+              <input className="modalInput"
+                type="file"
+                accept="image/png, image/jpeg"
+                {...register("yourImages")}
+                // TODO: HANDLE ERRORS FOR FILE UPLOADS
+              />
             </label>
             <label className="modalLabel">
                 Your Nickname

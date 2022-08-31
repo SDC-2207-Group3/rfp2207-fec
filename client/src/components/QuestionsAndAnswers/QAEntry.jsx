@@ -26,7 +26,7 @@ function QAEntry({question, onToggle, active}) {
           Add Answer
         </button>
         {openAnswerModal && <AnswerModal question_id={question.question_id} closeModal={setOpenAnswerModal} />}
-        <span className="question-item-control">{active ? "-" : "+"} </span>
+        <span className="qa-ref-link question-item-control">{active ? "-" : "+"} </span>
       </div>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
         <div className="answer-item">
