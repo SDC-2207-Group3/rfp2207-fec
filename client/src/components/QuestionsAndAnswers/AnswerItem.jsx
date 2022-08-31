@@ -1,6 +1,6 @@
-import React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import http from "./httpReqsForQA.js";
+// import {QuestionIDContext} from './QAEntry.jsx'
 
 // "id": 5539374,
 // "body": "jackky",
@@ -10,15 +10,11 @@ import http from "./httpReqsForQA.js";
 // "photos": []
 
 function AnswerItem({answer, question_id}) {
-  const [yesCount, setYesCount] = useState(answer.id);
-
+  const [yesCount, setYesCount] = useState(answer.helpfulness);
   const markAnswerAsHelpful = (answer_id, question_id) => {
-    console.log('this is answer: ', answer)
-    console.log('this is answer_id: ', answer_id)
-    console.log('this is question_id: ', question_id)
     http.markAnswerAsHelpful(answer_id)
       .then((res) => http.getAnswer(question_id))
-      .then((res) => {setYesCount(res.data.results.filter(i => i.answer_id === answer_id).helpfulness)})
+      .then((res) => {setYesCount(res.data.results.filter(i => i.answer_id === answer_id)[0].helpfulness)})
       .catch((err) => {console.error(err)})
   }
 
@@ -36,9 +32,9 @@ function AnswerItem({answer, question_id}) {
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
           className="qa-ref-link qa-mark"
-          onClick={() => markAnswerAsHelpful(answer.id)}
+          onClick={() => markAnswerAsHelpful(answer.id, question_id)}
         >
-          Yes({answer.helpfulness})
+          Yes({yesCount})
         </small>
         <small className="qa-ref-link qa-mark">| Report</small>
       </div>

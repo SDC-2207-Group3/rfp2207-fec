@@ -1,9 +1,9 @@
-import React from 'react';
-import {useState} from "react";
+import React, {useState} from 'react';
 import AnswerModal from "./AnswerModal.jsx";
 import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
 import http from "./httpReqsForQA.js";
+
 
 
 function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
@@ -58,7 +58,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         <div className="answer-item">
           {
             Object.keys(question.answers).slice(0, answersCount).map((answer_id, index) =>
-              <AnswerItem key={index} answer={question.answers[answer_id]} /> // TODO: Figure out how to access question.question_id here!!
+              <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/> // TODO: Figure out how to access question.question_id here!!
             )
           }
           {
@@ -70,15 +70,10 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
               Load More Answers
             </button>
           }
-
         </div>
-
       </div>
-
     </li>
-
   )
-
 }
 
 export default QAEntry;
