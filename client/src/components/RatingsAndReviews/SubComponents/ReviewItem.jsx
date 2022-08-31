@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import HelpfulnessAndReport from "./helpfulnessAndReport.jsx";
+import utilities from "../utilities/utilities.js";
 
 //under each image is an invisible element which does not take up space on the dom. when the thumbnail for that image is clicked the respective modal version of that thumbnail has the class that hides it, removed.
-
 //this one module is handling the entire rendering of everything on each review list element. im not sure if i should break this up into further sub components but that would likely be a good idea for refactoring...
 
 //maybe i could have done modal rendering with state?
@@ -19,7 +19,7 @@ const ReviewItem = (props) => {
   return (
     <li className="RR_list-item">
       <p>username: {props.review.reviewer_name}</p>
-      <span>posted: {props.review.date}</span>
+      <span>posted: {utilities.getFormattedDate(props.review.date)}</span>
       <h4>
         {props.review.summary.length <= 60
           ? props.review.summary

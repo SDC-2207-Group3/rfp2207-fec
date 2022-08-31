@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import ATELIER_API from "../utilities/utilities.js";
+import utilities from "../utilities/utilities.js";
 
 const HelpfulnessAndReport = ({ review }) => {
   const [canVote, setCanVote] = useState(true);
@@ -13,7 +13,7 @@ const HelpfulnessAndReport = ({ review }) => {
 
     if (canVote) {
       axios
-        .put(`${ATELIER_API}/reviews/${id}/helpful`, body, {
+        .put(`${utilities.ATELIER_API}/reviews/${id}/helpful`, body, {
           headers: { Authorization: process.env.KEY },
         })
         .then((res) => {
@@ -29,7 +29,7 @@ const HelpfulnessAndReport = ({ review }) => {
   let handleReport = (e, id) => {
     let body = { params: { review_id: id } };
     axios
-      .put(`${ATELIER_API}/reviews/${id}/report`, body, {
+      .put(`${utilities.ATELIER_API}/reviews/${id}/report`, body, {
         headers: { Authorization: process.env.KEY },
       })
       .then((res) => {

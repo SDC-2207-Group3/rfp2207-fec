@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import ATELIER_API from "./utilities/utilities.js";
+import utilities from "./utilities/utilities.js";
 import Sort from "./SubComponents/Sort.jsx";
 import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
@@ -57,7 +57,7 @@ let RatingsAndReviewsMain = (props) => {
 
   let showMoreReviews = () => {
     return axios
-      .get(`${ATELIER_API}/reviews`, {
+      .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
           product_id: `${state.id}`,
           sort: `${state.sortBy}`,
@@ -87,7 +87,7 @@ let RatingsAndReviewsMain = (props) => {
 
   let fetchData = (state) => {
     axios
-      .get(`${ATELIER_API}/reviews`, {
+      .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
           product_id: `${state.id}`,
           sort: `${state.sortBy}`,
@@ -105,7 +105,7 @@ let RatingsAndReviewsMain = (props) => {
       })
       .then(() => {
         // get meta data for current product
-        return axios.get(`${ATELIER_API}/reviews/meta`, {
+        return axios.get(`${utilities.ATELIER_API}/reviews/meta`, {
           params: { product_id: `${state.id}` },
           headers: { Authorization: process.env.KEY },
         });
