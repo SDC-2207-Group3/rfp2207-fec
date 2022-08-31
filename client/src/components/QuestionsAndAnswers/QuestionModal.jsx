@@ -1,12 +1,23 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
+import http from "./httpReqsForQA.js";
 
-function QuestionModal({closeModal}) {
+function QuestionModal({product_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
-  const onSubmit = (data) => console.log(data);
-  // const onError = (errors) => {};
-  console.log('in question modaL!')
+  const onSubmit = (data) => {
+    const modalData = {
+      'body': data.yourQuestion,
+      'name': data.yourNickname,
+      'email': data.yourEmail,
+      'product_id': Number(product_id)
+    }
+    http.postQuestion(product_id, modalData)
+      .then((res) => http.getQuestions(product_id))
+      .then((res) => {setQA(res.data.results)})
+      .catch((err) => {console.error(err)})
+
+  }
   return (
 
     <div className="qa-modalBackground">
@@ -87,9 +98,6 @@ function QuestionModal({closeModal}) {
                   })
                 }
               />
-              {/* <small className="text-danger">
-                {errors.yourEmail && errors.yourEmail.message}
-              </small> */}
               <small>
                 <ErrorMessage
                 errors={errors}
@@ -97,7 +105,7 @@ function QuestionModal({closeModal}) {
                 render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
                 />
               </small>
-              <p className="modalSubtext">For authentication reasons, you will not be emailed</p>
+              <small className="modalSubtext">For authentication reasons, you will not be emailed</small>
               <br></br>
             </label>
 

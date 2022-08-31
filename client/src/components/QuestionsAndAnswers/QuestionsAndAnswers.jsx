@@ -5,8 +5,18 @@ import {qaDummyData} from "./qaDummyData.js";
 import QAEntry from "./QAEntry.jsx";
 import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"
+import http from "./httpReqsForQA.js";
 
-function QuestionsAndAnswers(props) {
+function QuestionsAndAnswers({id}) {
+  const [mainQA, setQA] = useState([]); // stores the data that currently is dummyData
+
+  // initial get request to get all questions for a specified product id
+  useEffect(() => {
+    http.getQuestions(id)
+      .then((res) => {setQA(res.data.results)})
+      .catch((err) => {console.error(err)})
+  }, [id])
+
   // hook for toggling question modal
   const [openModal, setOpenModal] = useState(false);
 
@@ -20,51 +30,41 @@ function QuestionsAndAnswers(props) {
     setClicked(index);
   }
 
-
   // state hook for showing more questions
-  const [questionsCount, incrementQuestions] = useState(2)
   // increment by 2 every time you click the "more answered questions" button
-
+  const [questionsCount, incrementQuestions] = useState(2)
 
   return (
-    <ul className="qa-accordion">
-      <Header />
-      {qaDummyData.slice(0, questionsCount).map((question, index) => (
-        <QAEntry
-          product_id={props.id}
-          question={question}
-          onToggle={() => handleToggle(index)}
-          active={clicked === index}
-          />
-      ))}
+    <div>
+
+      <ul className="qa-accordion">
+        <Header />
+        {mainQA.slice(0, questionsCount).map((question, index) => (
+          <QAEntry
+            product_id={id}
+            question={question}
+            onToggle={() => handleToggle(index)}
+            active={clicked === index}
+            />
+        ))}
+
+      </ul>
       {qaDummyData.slice(questionsCount).length > 0
-      &&
-      <button className="qa-moreQuestions"
-        onClick={() => incrementQuestions(questionsCount + 2)}
-      >
-        More Answered Questions
-      </button>
-      }
-      <button
-      className="qa-newQuestionBtn"
-      onClick= {() => {setOpenModal(true)}}
-      >
-      Add a question
-      </button>
-      {openModal && <QuestionModal closeModal={setOpenModal} />}
-      {/* {qaDummyData.slice(2).length > 0
-        && <button className="qa-moreQuestions"
+        &&
+        <button className="qa-moreQuestions"
+          onClick={() => incrementQuestions(questionsCount + 2)}
         >
           More Answered Questions
-        </button>} */}
-    </ul>
-
-
-    // <div className="qa-container">
-    //   <Header />
-    //   <h2>To put in as accordion</h2>
-    //   <QAEntry id={props.id}/>
-    // </div>
+        </button>
+        }
+        <button
+        className="qa-newQuestionBtn"
+        onClick= {() => {setOpenModal(true)}}
+        >
+        Add a question
+        </button>
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA}/>}
+    </div>
   )
 
 }

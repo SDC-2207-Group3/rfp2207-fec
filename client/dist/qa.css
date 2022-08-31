@@ -1,11 +1,7 @@
-/* QuestionAndAnswers Accordion CSS */
 
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-*/
+
+
+/* QuestionAndAnswers Accordion CSS */
 
 .qa-heading {
   font-size: 23px;
@@ -15,26 +11,31 @@
 
 .qa-accordion {
   /* box-sizing: border-box; */
+  max-height: 300px;
   max-width: 800px;
   /* margin: 6rem auto 4rem; */
-  padding: 0 10px;
+  padding: 0 0px;
   list-style: none;
   font-family: "Segoe UI", Arial, sans-serif;
   line-height: 1.4;
   background: #fff;
   color: #444;
+  overflow: scroll;
 }
 
 .qa-accordion-item {
   border-top: 1px solid #9f9f9f;
 }
 
-.question-item-button {
+.question-item-button, .answer-prefix {
   font-size: 16px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.question-item-button {
   background-color: #930040;
   color: #fff;
-  text-align: left;
-  font-weight: 700;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -44,6 +45,7 @@
   cursor: pointer;
   border: none;
 }
+
 
 .question-item-control {
   font-size: 20px;
@@ -76,15 +78,25 @@
   cursor: pointer;
 }
 
+.qa-push {
+  margin-left: auto;
+}
+
+.qa-ref-link {
+  padding: 5px;
+  font-weight: 500;
+}
 
 /* QuestionModal CSS */
 
 .qa-modalBackground {
   width: 100vw;
   height: 50vh;
-  background-color: white;
+  background-color: yellow;
   justify-content: center;
   align-items: center;
+
+
 }
 
 .qa-modalContainer {
@@ -152,4 +164,4 @@ button.qa-modalFooterBtn {
 
 #qa-modalFooterCancelBtn {
   background-color: crimson
-}`
+}

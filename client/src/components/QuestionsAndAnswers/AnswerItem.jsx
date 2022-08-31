@@ -13,22 +13,14 @@ function AnswerItem({answer}) {
 
   return (
     <div>
-      A: {answer.body}
+      <span className="answer-prefix">A:</span> {answer.body}
       <br></br>
       <small>
         by {answer.answerer_name} on {date}
       </small>
-      <p>------------------------</p>
     </div>
-    // <div>
-    //   <p>{answer.body}</p>
-    //   <p>{answer.date}</p>
-    //   <p>{answer.answerer_name}</p>
-    //   <p>------------------------</p>
-    // </div>
   )
 }
-
 
 
 export default AnswerItem;
