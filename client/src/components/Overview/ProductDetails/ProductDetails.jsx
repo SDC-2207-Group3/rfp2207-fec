@@ -19,7 +19,6 @@ const features = statePD.features ? statePD.features : [];
 const name = statePD.name ? statePD.name : "Product name unavailable";
 const slogan = statePD.slogan ? statePD.slogan : "Product slogan Unavailable"
 
-const Details = [category, name, slogan, description];
 
 // Product Styles
 
@@ -28,17 +27,37 @@ const styles = statePS.results ? statePS.results : [];
 // Selected Styles
 
 const styleName = stateSS.name ? stateSS.name : "No style"
+const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable"
 
 // Rating
+
+
+
+const Details = [category, name, slogan, description, stylePrice];
 
   return (
     <div className="overview-productDetails">
       {console.log(state)}
       Product Details
-      {Details.map((detail) =>
-        <div>{detail}</div>
+      {Details.map((detail, index) =>
+        <p key={index}>
+          {detail}
+        </p>
       )}
+      <div className="styles-container">
+        {styles.map((style, index) =>
+          <div key={index} className="style-thumbnail">
+            <div className="">
+              <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
+            </div>
+          </div>
+        )}
+      </div>
 
+      <p>Features: </p>
+      {features.map((feature, index) =>
+        <p key={index}>{feature.feature}: {feature.value}</p>
+      )}
     </div>
   )
 }

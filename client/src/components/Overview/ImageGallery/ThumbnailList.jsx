@@ -37,8 +37,13 @@ const ThumbnailList = (props) => {
 
   return (
     <div className="overview-thumbnailList">
-      <div className="overview-scroll">
-        {displayIndex === 0 ? null : <i className="fa-solid fa-angle-up" onClick={scrollUp} ></i>}
+      <div className={"overview-scroll"}>
+        {displayIndex === 0 ?
+        null :
+        <div className="overview-scroll-button">
+          <i className="fa-solid fa-angle-up" onClick={scrollUp} />
+        </div>
+        }
       </div>
 
       <div className="thumbnail-viewport">
@@ -59,8 +64,13 @@ const ThumbnailList = (props) => {
         </div>
       </div>
 
-      <div className="overview-scroll">
-        {displayIndex <= (displayLimit - props.photos.length) ? null : <i className="fa-solid fa-angle-down" onClick={scrollDown} ></i>}
+      <div className={"overview-scroll"}>
+        {displayIndex <= (displayLimit - props.photos.length) ?
+        null :
+        <div className="overview-scroll-button">
+          <i className="fa-solid fa-angle-down" onClick={scrollDown} />
+        </div>
+        }
       </div>
     </div>
   );
