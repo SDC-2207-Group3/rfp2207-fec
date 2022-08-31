@@ -21,10 +21,11 @@
   background: #fff;
   color: #444;
   overflow: scroll;
+  margin-bottom: 20px;
 }
 
 .qa-accordion-item {
-  border-top: 1px solid #9f9f9f;
+  border-top: 1px solid #d8d8d8;
 }
 
 .question-item-button, .answer-prefix {
@@ -34,8 +35,9 @@
 }
 
 .question-item-button {
-  background-color: #930040;
-  color: #fff;
+  background-color: #f1f1f1;
+  /* color: #fff; */
+  color: black;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -83,7 +85,7 @@
 }
 
 .qa-accordion-item.active .question-item-button {
-  background-color: #930040e1;
+  background-color: #f1f1f187;
 }
 
 .answer-wrapper {
@@ -97,11 +99,12 @@
 
 .qa-moreQuestions, .qa-newQuestionBtn {
   padding: 20px;
-  border-color: #930040;
-  background-color: #fff;
+  border-color: 1px solid #d8d8d8;
+  background-color: #f1f1f1;
   font-size: 16px;
   color: black;
   cursor: pointer;
+
 }
 
 .qa-push {

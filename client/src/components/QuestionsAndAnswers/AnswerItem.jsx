@@ -21,8 +21,6 @@ function AnswerItem({answer, question_id}) {
   // converting answer date stamp into Month DD, YYYY
   const options = {year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date(answer.date).toLocaleDateString('en-US', options);
-  // console.log('this is answer: ', answer)
-  // console.log('this is question_id: ', question_id)
 
   return (
     <div className="answer-item-single-container">
