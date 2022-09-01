@@ -40,18 +40,31 @@ let RatingsAndReviewsMain = (props) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // let swapSort = (sort) => {
+  //   const swapSortPromise = new Promise((resolve, reject) => {
+  //     resolve(
+  //       dispatch({
+  //         type: "setSort",
+  //         setSort: sort,
+  //       })
+  //     );
+  //   });
+  //   swapSortPromise
+  //     .then((data) => console.log(data))
+  //     .catch((err) => console.log("///////", err));
+  // };
+
   let swapSort = (sort) => {
     dispatch({
       type: "setSort",
       setSort: sort,
     });
-    //state is getting updated, but not before fetchData calls on the previous state... with the previous sort method....
-    // fetchData(state);
   };
+  //state is getting updated, but not before fetchData calls on the previous state... with the previous sort method
 
   //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
-    return axios
+    axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
           product_id: `${state.id}`,
