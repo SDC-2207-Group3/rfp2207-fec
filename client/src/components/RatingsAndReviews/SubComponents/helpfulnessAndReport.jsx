@@ -17,6 +17,7 @@ const HelpfulnessAndReport = ({ review }) => {
           headers: { Authorization: process.env.KEY },
         })
         .then((res) => {
+          console.log(res);
           setCanVote(false);
           setHelpfulness(helpfulness + 1);
         })

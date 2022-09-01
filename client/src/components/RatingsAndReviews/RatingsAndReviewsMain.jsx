@@ -27,26 +27,11 @@ let reducer = (state, action) => {
   }
 };
 
-let getAvgReviewValue = (meta) => {
-  let statsObj = {};
-  statsObj.starTotal = 0;
-  statsObj.voteTotal = 0;
-  for (let [star, count] of Object.entries(meta.ratings)) {
-    statsObj.starTotal += star * count;
-    statsObj.voteTotal += Number(count);
-  }
-  return statsObj;
-};
-
-//should make axios request, then instead of setting state
-//call reducer to set state for us
-
 let RatingsAndReviewsMain = (props) => {
   let initialState = {
     id: props.id,
-    // selectedItem: {},
-    sortBy: "newest",
-    displayedReviews: 2,
+    sortBy: "relevant",
+    displayedReviews: 5,
     reviews: [],
     meta: {},
     reviewStats: {},
@@ -55,6 +40,16 @@ let RatingsAndReviewsMain = (props) => {
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  let swapSort = (sort) => {
+    dispatch({
+      type: "setSort",
+      setSort: sort,
+    });
+    //state is getting updated, but not before fetchData calls on the previous state... with the previous sort method....
+    // fetchData(state);
+  };
+
+  //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
     return axios
       .get(`${utilities.ATELIER_API}/reviews`, {
@@ -86,6 +81,8 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let fetchData = (state) => {
+    console.log("FETCH DATA");
+    console.log(state);
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
@@ -111,7 +108,7 @@ let RatingsAndReviewsMain = (props) => {
         });
       })
       .then((res) => {
-        let reviewStatsObj = getAvgReviewValue(res.data);
+        let reviewStatsObj = utilities.getAvgReviewValue(res.data);
 
         dispatch({
           type: "setMeta",
@@ -125,6 +122,7 @@ let RatingsAndReviewsMain = (props) => {
       .catch((err) => console.log("failed to fetch", err));
   };
 
+  //when props update, call fetchData
   useEffect(() => {
     fetchData(state);
   }, []);
@@ -139,7 +137,7 @@ let RatingsAndReviewsMain = (props) => {
           id={props.id}
         />
         <div id="RR_sort-list-container">
-          <Sort sortMethod={state.sortBy} id={props.id} />
+          <Sort sortMethod={state.sortBy} swapSort={swapSort} id={props.id} />
           <ReviewsList
             showMoreBtn={state.showMoreBtn}
             reviews={state.reviews}
@@ -158,9 +156,7 @@ export default RatingsAndReviewsMain;
 
   when rendering 2 or fewer reviews, do not render the show more button
 
-  unsure if the data im getting from the api is sorted properly, ill know more once i fix the dates, for now things seem to be placing into the reviews list rather than on the top or bottom of the review list -- sometimes?
+  some kind of discrepancy in helpfulness value, likely caused by state vs db value... values on page seem to modify when re rendered.
 
-  unhappy with the complexity of the review item component. should look at breaking that down into simpler components during a refactor
-
-
+  break down review item subcomponent into more componenents
 */

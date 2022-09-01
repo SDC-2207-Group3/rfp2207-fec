@@ -40,6 +40,39 @@
   display: flex;
   background: rgb(150, 230, 200);
   justify-content: right;
+  cursor: pointer;
+}
+
+.RR_drop-down {
+  position: relative;
+  display: inline-block;
+}
+
+.RR_drop-down-btn {
+  text-decoration: underline;
+}
+
+.RR_drop-down-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  min-width: 100px;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.RR_drop-choice {
+  padding: 5px;
+}
+
+.RR_drop-choice:hover {
+  background-color: #c6c6c6;
+}
+
+.RR_drop-down:hover .RR_drop-down-content {
+  display: block;
 }
 
 #RR_reviews-list {

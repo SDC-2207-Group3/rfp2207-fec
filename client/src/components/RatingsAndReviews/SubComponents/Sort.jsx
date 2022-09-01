@@ -2,12 +2,37 @@ import React from "react";
 import { useState } from "react";
 
 //props = sortMethod, id
-let Sort = ({ sortMethod }) => {
+let Sort = ({ sortMethod, swapSort }) => {
   const [sortBy, setSortBy] = useState("newest");
 
   return (
     <div id="RR_sort">
-      <p>Currently Sorted By {sortMethod}</p>
+      <div className="RR_drop-down">
+        <p>
+          Currently Sorted By{" "}
+          <span className="RR_drop-down-btn">{sortMethod}</span>
+        </p>
+        <div className="RR_drop-down-content">
+          <div
+            className="RR_drop-choice"
+            onClick={(e) => swapSort(e.target.innerHTML)}
+          >
+            relevant
+          </div>
+          <div
+            className="RR_drop-choice"
+            onClick={(e) => swapSort(e.target.innerHTML)}
+          >
+            helpful
+          </div>
+          <div
+            className="RR_drop-choice"
+            onClick={(e) => swapSort(e.target.innerHTML)}
+          >
+            newest
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
