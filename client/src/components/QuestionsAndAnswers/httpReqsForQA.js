@@ -34,4 +34,13 @@ module.exports.getAnswer = (question_id) => axios.get(
   `${API}/qa/questions/${question_id}/answers`,
   {headers: {'Authorization': process.env.KEY}}
 )
-
+module.exports.reportAnswer = (answer_id) => axios.put(
+  `${API}/qa/answers/${answer_id}/report`,
+  {answer_id: answer_id},
+  {headers: {'Authorization': process.env.KEY}}
+)
+module.exports.reportQuestion = (question_id) => axios.put(
+  `${API}/qa/questions/${question_id}/report`,
+  {question_id: question_id},
+  {headers: {'Authorization': process.env.KEY}}
+)

@@ -16,13 +16,23 @@ function AnswerItem({answer, question_id}) {
   // hook for tracking answer helpfulness
   const [yesCount, setYesCount] = useState(answer.helpfulness);
 
-  const markAnswerAsHelpful = (event, answer_id, question_id) => {
+  const markAnswerAsHelpful = (answer_id, question_id) => {
     // disable additional clicks
     setHelpfulClicked(true);
     // make http requests and update helpfulness count
     http.markAnswerAsHelpful(answer_id)
       .then((res) => http.getAnswer(question_id))
       .then((res) => {setYesCount(res.data.results.filter(i => i.answer_id === answer_id)[0].helpfulness)})
+      .catch((err) => {console.error(err)})
+  }
+
+  // hook for tracking whether an answer is reported
+  const [reportClicked, setReportClicked] = useState(false);
+
+  const reportAnswer = (answer_id) => {
+    setReportClicked(true);
+    http.reportAnswer(answer_id)
+      .then((res) => {return;})
       .catch((err) => {console.error(err)})
   }
 
@@ -38,13 +48,15 @@ function AnswerItem({answer, question_id}) {
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
           className={`qa-ref-link qa-mark ${helpfulClicked ? "noClick" : ""}`}
-          onClick={() => markAnswerAsHelpful(event, answer.id, question_id)}
+          onClick={() => markAnswerAsHelpful(answer.id, question_id)}
         >
-          Yes({yesCount})
+          Yes({yesCount}) |
         </small>
-        <small className="qa-ref-link qa-mark"
+        <small
+          className={`qa-ref-link qa-mark ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
+          onClick={() => reportAnswer(answer.id)}
         >
-          | Report
+          {`${reportClicked ? "Reported" : "Report"}`}
         </small>
       </div>
       <small>

@@ -6,6 +6,7 @@ import QAEntry from "./QAEntry.jsx";
 import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"
 import http from "./httpReqsForQA.js";
+import Search from "./QASearch.jsx";
 
 function QuestionsAndAnswers({id}) {
   // state hook for displaying question data from server get request
@@ -37,9 +38,9 @@ function QuestionsAndAnswers({id}) {
 
   return (
     <div>
-
+      <Search mainQA={mainQA} setQA={setQA}/>
+      <Header />
       <ul className="qa-accordion">
-        <Header />
         {mainQA.slice(0, questionsCount).map((question, index) => (
           <QAEntry
             key = {question.question_id}
