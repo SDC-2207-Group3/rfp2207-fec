@@ -34,7 +34,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
               Your Question
-              <input className="modalInput" type="text"
+              <input className="modalInput" type="text" placeholder="Why did you like the product or not?"
               {...register("yourQuestion",
                 {
                     required: "Question is required",

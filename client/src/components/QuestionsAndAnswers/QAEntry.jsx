@@ -80,10 +80,12 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
             )
           }
           {
-            Object.keys(question.answers).slice(answersCount).length > 0
+            // Object.keys(question.answers).slice(answersCount).length > 0
+            // &&
+            answersCount
             &&
             <button className="qa-moreAnswers"
-            onClick={() => incrementAnswers(answersCount + 2)}
+            onClick={() => incrementAnswers(undefined)}
             >
               Load More Answers
             </button>
