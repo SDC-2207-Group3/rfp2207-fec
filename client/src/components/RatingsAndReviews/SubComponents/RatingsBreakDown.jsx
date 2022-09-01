@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Star } from "react-feather";
 
 //props = reviewStats, meta, id
 let RatingsBreakDown = (props) => {
@@ -13,7 +14,10 @@ let RatingsBreakDown = (props) => {
     );
     setMeta(props.meta);
   }, [props]);
-  //this last argument sets useEffet to call when props change
+
+  let width = (avg / 5) * 100; // percent rating
+  //display full stars in one color
+  //display filled in stars to specified width (%) in darger color
 
   return (
     <div id="RR_break-down-container">

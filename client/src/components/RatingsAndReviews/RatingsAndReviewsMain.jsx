@@ -6,154 +6,96 @@ import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
 import { useState, useEffect, useReducer } from "react";
 
-let reducer = (state, action) => {
-  switch (action.type) {
-    case "setId":
-      return { ...state, id: action.setId };
-    case "setSort":
-      return { ...state, sortBy: action.setSort };
-    case "setDisplayedReviews":
-      return { ...state, displayedReviews: action.setDisplayedReviews };
-    case "setReviews":
-      return { ...state, reviews: action.setReviews };
-    case "setMeta":
-      return { ...state, meta: action.setMeta };
-    case "setReviewStats":
-      return { ...state, reviewStats: action.setReviewStats };
-    case "setShowMoreBtn":
-      return { ...state, showMoreBtn: action.setShowMoreBtn };
-    default:
-      return state;
-  }
-};
-
 let RatingsAndReviewsMain = (props) => {
-  let initialState = {
-    id: props.id,
-    sortBy: "relevant",
-    displayedReviews: 5,
-    reviews: [],
-    meta: {},
-    reviewStats: {},
-    showMoreBtn: true,
-  };
+  // const [state, dispatch] = useReducer(reducer, initialState);
+  const [id, setId] = useState(props.id);
+  const [sortBy, setSortBy] = useState("relevant");
+  const [displayedReviews, setDisplayedReviews] = useState(10);
+  const [reviews, setReviews] = useState([]);
+  const [meta, setMeta] = useState({});
+  const [reviewStats, setReviewStats] = useState({});
+  const [showMoreBtn, setShowMoreBtn] = useState(true);
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  // let swapSort = (sort) => {
-  //   const swapSortPromise = new Promise((resolve, reject) => {
-  //     resolve(
-  //       dispatch({
-  //         type: "setSort",
-  //         setSort: sort,
-  //       })
-  //     );
-  //   });
-  //   swapSortPromise
-  //     .then((data) => console.log(data))
-  //     .catch((err) => console.log("///////", err));
-  // };
-
+  //this could be a context hook...
   let swapSort = (sort) => {
-    dispatch({
-      type: "setSort",
-      setSort: sort,
-    });
+    setSortBy(sort);
   };
-  //state is getting updated, but not before fetchData calls on the previous state... with the previous sort method
 
   //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
-          product_id: `${state.id}`,
-          sort: `${state.sortBy}`,
-          count: `${state.displayedReviews + 2}`,
+          product_id: `${id}`,
+          sort: `${sortBy}`,
+          count: `${displayedReviews + 2}`,
         },
         headers: { Authorization: process.env.KEY },
       })
       .then((res) => {
         if (res.data.count > res.data.results.length) {
-          dispatch({
-            type: "setShowMoreBtn",
-            setShowMoreBtn: false,
-          });
+          setShowMoreBtn(false);
         } else {
-          dispatch({
-            type: "setReviews",
-            setReviews: res.data.results,
-          });
-          dispatch({
-            type: "setDisplayedReviews",
-            setDisplayedReviews: state.displayedReviews + 2,
-          });
+          setReviews(res.data.results);
+          setDisplayedReviews(displayedReviews + 2);
         }
       })
       .catch((err) => console.log(err));
   };
 
-  let fetchData = (state) => {
+  let fetchData = () => {
     console.log("FETCH DATA");
-    console.log(state);
+
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
-          product_id: `${state.id}`,
-          sort: `${state.sortBy}`,
-          count: `${state.displayedReviews}`,
+          product_id: `${id}`,
+          sort: `${sortBy}`,
+          count: `${displayedReviews}`,
         },
         headers: { Authorization: process.env.KEY },
       })
       //res.data.results = arr of reviews
       .then((res) => {
         //update state
-        dispatch({
-          type: "setReviews",
-          setReviews: res.data.results,
-        });
+        setReviews(res.data.results);
       })
       .then(() => {
         // get meta data for current product
         return axios.get(`${utilities.ATELIER_API}/reviews/meta`, {
-          params: { product_id: `${state.id}` },
+          params: { product_id: `${id}` },
           headers: { Authorization: process.env.KEY },
         });
       })
       .then((res) => {
         let reviewStatsObj = utilities.getAvgReviewValue(res.data);
 
-        dispatch({
-          type: "setMeta",
-          setMeta: res.data,
-        });
-        dispatch({
-          type: "setReviewStats",
-          setReviewStats: reviewStatsObj,
-        });
+        setMeta(res.data);
+        setReviewStats(reviewStatsObj);
       })
       .catch((err) => console.log("failed to fetch", err));
   };
 
   //when props update, call fetchData
   useEffect(() => {
-    fetchData(state);
+    fetchData();
   }, []);
+
+  //when sort method changes, re-render reviews
+  useEffect(() => {
+    fetchData();
+  }, [sortBy]);
 
   return (
     <section id="section_rr">
       <h2>Ratings and Reviews</h2>
       <div id="RR_bd-sort-list-container">
-        <RatingsBreakDown
-          reviewStats={state.reviewStats}
-          meta={state.meta}
-          id={props.id}
-        />
+        <RatingsBreakDown reviewStats={reviewStats} meta={meta} id={id} />
         <div id="RR_sort-list-container">
-          <Sort sortMethod={state.sortBy} swapSort={swapSort} id={props.id} />
+          <Sort sortMethod={sortBy} swapSort={swapSort} id={props.id} />
           <ReviewsList
-            showMoreBtn={state.showMoreBtn}
-            reviews={state.reviews}
+            showMoreBtn={showMoreBtn}
+            reviews={reviews}
             id={props.id}
             showMoreReviews={showMoreReviews}
           />
@@ -170,6 +112,8 @@ export default RatingsAndReviewsMain;
   when rendering 2 or fewer reviews, do not render the show more button
 
   some kind of discrepancy in helpfulness value, likely caused by state vs db value... values on page seem to modify when re rendered.
+
+  relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
 
   break down review item subcomponent into more componenents
 */
