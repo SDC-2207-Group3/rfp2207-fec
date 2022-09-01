@@ -24,13 +24,14 @@ let RatingsBreakDown = (props) => {
 
   return (
     <div id="RR_break-down-container">
-      <p>Ratings BreakDown</p>
       <div id="RR_star-avg">
-        {props.reviewStats.starTotal
-          ? (props.reviewStats.starTotal / props.reviewStats.voteTotal).toFixed(
-              1
-            )
-          : null}{" "}
+        <h2>
+          {props.reviewStats.starTotal
+            ? (
+                props.reviewStats.starTotal / props.reviewStats.voteTotal
+              ).toFixed(1)
+            : null}{" "}
+        </h2>
         <StarsContainer
           meta={props.meta}
           starTotal={starTotal}

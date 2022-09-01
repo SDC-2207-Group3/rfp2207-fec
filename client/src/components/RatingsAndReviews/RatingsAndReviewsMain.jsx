@@ -115,5 +115,7 @@ export default RatingsAndReviewsMain;
 
   relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
 
+  no way of knowing if response from seller functionality works? background still red btw
+
   break down review item subcomponent into more componenents
 */
