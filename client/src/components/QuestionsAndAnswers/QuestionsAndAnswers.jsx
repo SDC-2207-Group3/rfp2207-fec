@@ -38,7 +38,7 @@ function QuestionsAndAnswers({id}) {
 
   return (
     <div>
-      <Search mainQA={mainQA} setQA={setQA}/>
+      <Search mainQA={mainQA} setQA={setQA} id={id}/>
       <Header />
       <ul className="qa-accordion">
         {mainQA.slice(0, questionsCount).map((question, index) => (
