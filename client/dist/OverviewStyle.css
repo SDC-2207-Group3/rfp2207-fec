@@ -5,6 +5,8 @@
   --overview-div: 60vw;
   /* background-color:rgb(250, 255, 212); */
   margin: 2rem 0;
+  display: flex;
+  flex-direction: row;
 }
 
 .overview-imageGallery {
@@ -43,7 +45,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 5;
+  z-index: 10;
   border-radius: 1rem;
   transition:
     box-shadow 0.5s ease,
@@ -69,7 +71,8 @@
 }
 
 .displayImage-container {
-  background-color: rgb(209, 209, 209);
+  position: relative;
+  /* background-color: rgb(197, 161, 161); */
   width: 90%;
   height: 80%;
   display: flex;
@@ -83,11 +86,22 @@
   max-height: 100%;
   max-width: 100%;
   background-color: bisque;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
   object-fit: scale-down;
   transition: 1s;
+}
+
+.overview-minimize {
+  background-color: rgb(185, 185, 185);
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 2rem;
+}
+
+.overview-zoom-image {
+  position: absolute;
+  width: 250%;
 }
 
 /* Thumbnail list CSS */
@@ -184,11 +198,8 @@
 /* Product Details CSS */
 
 .overview-productDetails {
-  position: absolute;
-  top: 0;
-  left: 60%;
   width: 40%;
-  padding: 1.5rem;
+  padding: 3rem;
 }
 
 .overview-rating {
@@ -205,7 +216,7 @@
   top: 0;
   right: 0;
   height: 1rem;
-  z-index: 2;
+  z-index: -1;
   background-color: white;
 }
 
@@ -215,12 +226,12 @@
 
 .star-fill {
   position: absolute;
-  z-index: 1;
+  z-index: -2;
 }
 
 .star-empty {
   position: absolute;
-  z-index: 3;
+  z-index: 0;
 }
 
 .overview-productDetails-expanded {

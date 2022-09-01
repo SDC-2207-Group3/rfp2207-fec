@@ -22,11 +22,6 @@ const AtelierGetReviewEndpoint = (productID = 0) => {
     headers: { "Authorization": process.env.KEY },
     params: { product_id: Number(productID) }
   })
-  // return axios.get(_AtelierAPI + 'reviews/meta', {
-  //   params: { product_id: productID }
-  // },
-  //   headers: {"Authorization": process.env.KEY}
-  // )
 }
 
 function FindDefaultStyle (styles) {
@@ -77,13 +72,20 @@ const Overview = (props) => {
     GetProductData(props.id)
   }, [])
 
-
+  const slogan = state.productDetails.slogan ? state.productDetails.slogan : "Product Slogan Unavailable";
+  const description = state.productDetails.description ? state.productDetails.description : "Product Description Unavailable"
 
   return (
     <ProductContext.Provider value={{state, dispatch}}>
-      <div className = "overview">
-        <ImageGallery productStyle = {state.selectedStyle}/>
-        <ProductDetails productDetails = {state.productDetails}/>
+      <div>
+        <div className = "overview">
+          <ImageGallery productStyle = {state.selectedStyle}/>
+          <ProductDetails productDetails = {state.productDetails}/>
+        </div>
+        <div>
+          <h4>{slogan}</h4>
+          <p>{description}</p>
+        </div>
       </div>
     </ProductContext.Provider>
   )

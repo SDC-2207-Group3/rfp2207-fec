@@ -3,11 +3,12 @@ import { ImageGalleryContext } from './ImageGallery.jsx';
 import { ProductContext } from './../Overview.jsx';
 
 const ThumbnailList = (props) => {
-  const { setPhotoIndex, productName, photoIndex, defaultView } = useContext(ImageGalleryContext);
+  const [displayIndex, setDisplayIndex] = useState(0);
+
   const { state } = useContext(ProductContext);
+  const { setPhotoIndex, productName, photoIndex, defaultView } = useContext(ImageGalleryContext);
 
   const displayLimit = 7
-  const [displayIndex, setDisplayIndex] = useState(0);
 
   function GetThumbnailIndex (photo) {
     return props.photos.indexOf(photo);

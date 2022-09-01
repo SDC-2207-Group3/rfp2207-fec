@@ -1,7 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ProductContext } from './../Overview.jsx';
 
 const ProductDetails = (props) => {
+
+  const [size, setSize] = useState("select-size");
+
+  const qtyRef = useRef(null);
+  const sizeRef = useRef(null);
 
   const { state, dispatch } = useContext(ProductContext);
 
@@ -29,8 +34,20 @@ const ProductDetails = (props) => {
   const styleName  = stateSS.name           ? stateSS.name                  : "No style"
   const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable";
 
-  const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size) : null;
-  const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : null;
+  const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size)     : [];
+  const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : [];
+
+  let sizeDisplay = styleSizes.filter((size, index) => styleSizeQty[index] > 0)
+
+  let qtyDisplay;
+
+  if (size === 'select-size') { qtyDisplay = [] } else {
+    let sizeIndex = styleSizes.indexOf(size);
+    let quantity = styleSizeQty[sizeIndex] <= 15 ? styleSizeQty[sizeIndex] : 15;
+    let quantities = []
+    for (let i = 0; i < quantity; i++) { quantities.push(i + 1) }
+    qtyDisplay = quantities;
+  }
 
   // Rating
 
@@ -46,21 +63,24 @@ const ProductDetails = (props) => {
   const productRating = calcProductRating(statePR);
 
   let ratingStars = [0, 0, 0, 0, 0]
-  console.log(ratingStars, 'premap')
   ratingStars = ratingStars.map((star, index) => {
-      const pos = (index * 19.5) + '%';
-      const starPosition = { left: pos }
-      return (
-        <div className="star-container" style={starPosition}>
-          <i className="fa-solid fa-star star-fill"></i>
-          <i className="fa-regular fa-star star-empty"></i>
-        </div>
-      )
-    }
-  )
+    const pos = (index * 19.5) + '%';
+    const starPosition = { left: pos }
+    return (
+      <div key={index} className="star-container" style={starPosition}>
+        <i className="fa-solid fa-star star-fill"></i>
+        <i className="fa-regular fa-star star-empty"></i>
+      </div>
+  )})
 
   const percentageFill = (1 - (productRating/5)) * 100 + '%';
   const fill = { width: percentageFill };
+
+  // Size Select
+
+  function changeSize (e) {
+    setSize(sizeRef.current.value)
+  }
 
   return (
     <div className="overview-productDetails">
@@ -71,6 +91,7 @@ const ProductDetails = (props) => {
         <div className="rating-slider" style={fill}></div>
       </div>
       <h6>{productRating}</h6>
+      <p><span>Read all reviews</span></p>
       <h3>{category}</h3>
       <h2>{name}</h2>
       <h4>{stylePrice}</h4>
@@ -95,24 +116,28 @@ const ProductDetails = (props) => {
         <p key={index}>{feature.feature}: {feature.value}</p>
       )}
 
-      {styleSizes ?
+      {sizeDisplay.length > 0 ?
         <div>
           <p>
             Size: {" "}
-            <select className="overview-size-select">
+            <select className="overview-size-select" ref={sizeRef} onChange={changeSize}>
               <option default value="select-size">Select Size</option>
-              {styleSizes.map((size, index) => <option key={index} value={size}>{size}</option>)}
+              {sizeDisplay.map((size, index) =>
+                <option key={index} value={size}>{size}</option>
+              )}
             </select>
           </p>
           <p>
             Qty: {" "}
-            <select className="overview-qty-select">
+            <select className="overview-qty-select" ref={qtyRef}>
               <option default value="no-size">-</option>
-              {styleSizes.map((size, index) => <option key={index} value={size}>{size}</option>)}
+              {qtyDisplay.map((qty, index) => <option key={index} value={qty}>{qty}</option>)}
             </select>
           </p>
         </div> :
-        null}
+        <section>
+          <span>OUT OF STOCK</span>
+        </section>}
         <div className="CartButton">Add to Cart</div>
     </div>
   )
