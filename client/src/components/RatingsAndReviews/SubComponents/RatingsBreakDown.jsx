@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Star } from "react-feather";
+import StarsContainer from "./StarsContainer.jsx";
+import SingleBreakDown from "./SingleBreakDown.jsx";
 
 //props = reviewStats, meta, id
 let RatingsBreakDown = (props) => {
@@ -8,35 +9,45 @@ let RatingsBreakDown = (props) => {
   const [avg, setAvg] = useState(0);
   const [meta, setMeta] = useState({});
 
+  const starTotal = props.reviewStats.starTotal;
+  const voteTotal = props.reviewStats.voteTotal;
+
   useEffect(() => {
-    setAvg(
-      (props.reviewStats.starTotal / props.reviewStats.voteTotal).toFixed(1)
-    );
+    setAvg((starTotal / voteTotal).toFixed(1));
     setMeta(props.meta);
   }, [props]);
 
-  let width = (avg / 5) * 100; // percent rating
+  let avgWidth = (avg / 5) * 100; // percent rating
   //display full stars in one color
   //display filled in stars to specified width (%) in darger color
+  //2 divs, one rendering 5 stars and one rendering over those with a width
 
   return (
     <div id="RR_break-down-container">
       <p>Ratings BreakDown</p>
-      <h2 id="RR_star-avg">
+      <div id="RR_star-avg">
         {props.reviewStats.starTotal
           ? (props.reviewStats.starTotal / props.reviewStats.voteTotal).toFixed(
               1
             )
           : null}{" "}
-        stars
-      </h2>
+        <StarsContainer
+          meta={props.meta}
+          starTotal={starTotal}
+          voteTotal={voteTotal}
+        />
+      </div>
       <div className="RR_ratings-bd-list">
         {props.meta.ratings
           ? [5, 4, 3, 2, 1].map((starNum, i) => {
               return (
-                <div id="RR_ratings-bd-count" key={starNum}>
-                  {starNum}: {Object.values(props.meta.ratings)[starNum - 1]}
-                </div>
+                <SingleBreakDown
+                  meta={props.meta}
+                  starNum={starNum}
+                  starTotal={starTotal}
+                  voteTotal={voteTotal}
+                  key={i}
+                />
               );
             })
           : null}

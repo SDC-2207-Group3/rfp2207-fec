@@ -28,6 +28,83 @@
   background: rgb(255, 255, 200);
 }
 
+.RR_star-container {
+  background: orange;
+}
+.RR_stars {
+  background: lightblue;
+}
+
+.RR_star {
+}
+
+/* .RR_star-c {
+  background: yellow;
+} */
+
+.RR_star-cover {
+  background: turquoise;
+}
+
+#RR_ratings-bd-count {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  padding: 5px;
+  width: 100%;
+  height: auto;
+  background: orange;
+}
+
+#RR_ratings-bars-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: auto;
+  height: 100%;
+  background: red;
+}
+
+.RR_ratings-bar-full {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 5px;
+  margin-left: 5px;
+  height: 10px;
+  width: 200px;
+  background: rgb(235, 235, 235);
+}
+
+.RR_ratings-bar {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 10px;
+  background: rgb(35, 160, 35);
+  z-index: 2;
+}
+
+.RR_star-total-count {
+  display: block;
+  /* using width to set location of count */
+  width: 75%;
+  height: auto;
+  text-align: right;
+}
+/* .RR_ratings-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 10px;
+  width: 200px;
+  background: gray;
+  z-index: -1;
+  vertical-align: sub;
+} */
+
 #RR_sort-list-container {
   width: 60vw;
   display: flex;
