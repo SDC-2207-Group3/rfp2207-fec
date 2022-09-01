@@ -121,6 +121,10 @@
   cursor: pointer;
 }
 
+.noClick {
+  pointer-events: none;
+}
+
 /* QuestionModal CSS */
 
 /* .qa-modalBackground {

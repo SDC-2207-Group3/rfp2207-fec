@@ -10,8 +10,16 @@ import http from "./httpReqsForQA.js";
 // "photos": []
 
 function AnswerItem({answer, question_id}) {
+  // hook for tracking whether or not an answer is marked helpful
+  const [helpfulClicked, setHelpfulClicked] = useState(false);
+
+  // hook for tracking answer helpfulness
   const [yesCount, setYesCount] = useState(answer.helpfulness);
-  const markAnswerAsHelpful = (answer_id, question_id) => {
+
+  const markAnswerAsHelpful = (event, answer_id, question_id) => {
+    // disable additional clicks
+    setHelpfulClicked(true);
+    // make http requests and update helpfulness count
     http.markAnswerAsHelpful(answer_id)
       .then((res) => http.getAnswer(question_id))
       .then((res) => {setYesCount(res.data.results.filter(i => i.answer_id === answer_id)[0].helpfulness)})
@@ -29,12 +37,15 @@ function AnswerItem({answer, question_id}) {
         <span className="answer-body">{answer.body}</span>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
-          className="qa-ref-link qa-mark"
-          onClick={() => markAnswerAsHelpful(answer.id, question_id)}
+          className={`qa-ref-link qa-mark ${helpfulClicked ? "noClick" : ""}`}
+          onClick={() => markAnswerAsHelpful(event, answer.id, question_id)}
         >
           Yes({yesCount})
         </small>
-        <small className="qa-ref-link qa-mark">| Report</small>
+        <small className="qa-ref-link qa-mark"
+        >
+          | Report
+        </small>
       </div>
       <small>
         by {answer.answerer_name} on {date}

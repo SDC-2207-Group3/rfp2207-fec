@@ -58,7 +58,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         <div className="answer-item">
           {
             Object.keys(question.answers).slice(0, answersCount).map((answer_id, index) =>
-              <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/> // TODO: Figure out how to access question.question_id here!!
+              <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/> 
             )
           }
           {
