@@ -6,9 +6,11 @@ import QAEntry from "./QAEntry.jsx";
 import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"
 import http from "./httpReqsForQA.js";
+import Search from "./QASearch.jsx";
 
 function QuestionsAndAnswers({id}) {
-  const [mainQA, setQA] = useState([]); // stores the data that currently is dummyData
+  // state hook for displaying question data from server get request
+  const [mainQA, setQA] = useState([]);
 
   // initial get request to get all questions for a specified product id
   useEffect(() => {
@@ -32,19 +34,22 @@ function QuestionsAndAnswers({id}) {
 
   // state hook for showing more questions
   // increment by 2 every time you click the "more answered questions" button
-  const [questionsCount, incrementQuestions] = useState(2)
+  const [questionsCount, incrementQuestions] = useState(4)
 
   return (
     <div>
-
+      <Search mainQA={mainQA} setQA={setQA} id={id}/>
+      <Header />
       <ul className="qa-accordion">
-        <Header />
         {mainQA.slice(0, questionsCount).map((question, index) => (
           <QAEntry
+            key = {question.question_id}
             product_id={id}
             question={question}
             onToggle={() => handleToggle(index)}
             active={clicked === index}
+            mainQA={mainQA}
+            setQA={setQA}
             />
         ))}
 
