@@ -49,15 +49,9 @@
 }
 
 #RIC-related-header {
-<<<<<<< HEAD
   padding: 0.2em;
   font-size: large;
   font-family: 'Courier New', Courier, monospace;
-=======
-  padding: 0.5em;
-  font-size: x-large;
-  font-family: "Courier New", Courier, monospace;
->>>>>>> 14ac29a47fe330299428fb570d7e6dc8e53a6434
   border: 0.1em solid pink;
   border-radius: 1em;
   width: 35%;
@@ -86,7 +80,6 @@
   box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
 }
 
-<<<<<<< HEAD
 #RIC-ri-cards {
   position: absolute;
   display: flex;
@@ -102,8 +95,6 @@
   color: white;
 }
 
-=======
->>>>>>> 14ac29a47fe330299428fb570d7e6dc8e53a6434
 /* PRODUCT CARD */
 .RIC-product-card-div {
   border: 1px solid gray;

@@ -122,14 +122,9 @@
   transform: translateY(-50%);
   left: 1%;
   margin: auto;
-<<<<<<< HEAD
-  height: 90%;
-  aspect-ratio: 1/7.75;
-=======
   width: 5rem;
   height: 95%;
   max-height: 35rem;
->>>>>>> 14ac29a47fe330299428fb570d7e6dc8e53a6434
   object-fit: contain;
 }
 

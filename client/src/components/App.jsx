@@ -17,7 +17,7 @@ const App = (props) => {
       <IdContext.Provider value={{id, changeId}}>
         <Overview id={id} />
         <RelatedItems id={id} />
-        {/* <QuestionsAndAnswers id={id} /> */}
+        <QuestionsAndAnswers id={id} />
         <RatingsAndReviews id={id} />
       </IdContext.Provider>
     </div>
