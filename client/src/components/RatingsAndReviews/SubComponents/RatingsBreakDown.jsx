@@ -61,6 +61,7 @@ let RatingsBreakDown = (props) => {
           ? Object.keys(props.meta.characteristics).map((factor, i) => {
               return (
                 <ProductFactor
+                  key={i}
                   factor={factor}
                   factorVal={props.meta.characteristics[factor]}
                 />

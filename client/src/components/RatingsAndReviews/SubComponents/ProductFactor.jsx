@@ -1,18 +1,9 @@
 import React from "react";
 
 const ProductFactor = ({ factor, factorVal }) => {
-  console.log("/////", factor, factorVal.value);
-  //size width comfort quality length fit
+  // console.log("/////", factor, factorVal.value);
   //5 point scale for each
 
-  //size: too small perfect too big
-  //width: too small perfect too big
-  //comfort: not comfortable comfortable
-  //quality: poor excellent
-  //length: too short perfect too long
-  //fit: too small, perfect, too big
-
-  //assume width of this element is the same 200px as above el
   let width = (Number(factorVal.value) / 5) * 100;
   return (
     <div className="RR_factor-bar-container">
