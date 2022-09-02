@@ -112,9 +112,11 @@ const ProductDetails = (props) => {
       </div>
 
       <h5>Features: </h5>
-      {features.map((feature, index) =>
-        <p key={index}>{feature.feature}: {feature.value}</p>
-      )}
+      <ul>
+        {features.map((feature, index) =>
+          <li key={index}>{feature.feature}: {feature.value}</li>
+        )}
+      </ul>
 
       {sizeDisplay.length > 0 ?
         <div>

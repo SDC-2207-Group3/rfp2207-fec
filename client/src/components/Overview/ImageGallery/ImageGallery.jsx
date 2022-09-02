@@ -10,6 +10,7 @@ const ImageGallery = (props) => {
   const [toggleZoom, setToggleZoom] = useState(false);
   const [defaultView, setDefaultView] = useState(true);
   const [offset, setOffset] = useState({ top: 0, left: 0 });
+  const [zoomAmount, setZoomAmount] = useState(250);
 
   const zoomImageRef = useRef(null);
   const containerRef = useRef(null);
@@ -34,6 +35,7 @@ const ImageGallery = (props) => {
   function minimize () {
     setDefaultView(true);
     setToggleZoom(false);
+    setZoomAmount(250);
   }
 
   function ExpandandZoom () {
@@ -44,9 +46,7 @@ const ImageGallery = (props) => {
     if (zoomImageRef.current) {
       const zoomRef = zoomImageRef.current.getBoundingClientRect();
       const imageRef = targetImageRef.current.getBoundingClientRect();
-      // const containerRef = containerRef.current.getBoundingClientRect();
       const containerRef = document.getElementsByClassName('displayImage-container')[0].getBoundingClientRect()
-      // console.log(containerRef.current)
       const xRatio = (zoomRef.width - containerRef.width)/imageRef.width;
       const yRatio = (zoomRef.height - containerRef.height)/imageRef.height;
 
@@ -63,6 +63,11 @@ const ImageGallery = (props) => {
         left: left * -xRatio,
       });
     }
+  }
+
+  function handleSlider(e) {
+    console.log(e.target.value);
+    setZoomAmount(e.target.value)
   }
 
   return (
@@ -83,9 +88,7 @@ const ImageGallery = (props) => {
             <img className="overview-displayImage" src={displayURL} ref={targetImageRef} onMouseMove={handleMouseMove}/>
             {defaultView ? null :
             toggleZoom ?
-              // <div className="overview-zoom-container" style={offset}  onMouseMove={handleMouseMove}>
-                <img className="overview-zoom-image" src={displayURL} ref={zoomImageRef} style={offset} onMouseMove={handleMouseMove}/>
-              //</div> : null
+                <img className="overview-zoom-image" src={displayURL} ref={zoomImageRef} style={{...offset, width: zoomAmount + '%'}} onMouseMove={handleMouseMove}/>
             : null}
           </div>
 
@@ -93,6 +96,14 @@ const ImageGallery = (props) => {
             {photoIndex === photos.length - 1 || toggleZoom ? null : <i className="fa-solid fa-angle-right" onClick={rightPhoto}/>}
           </div>
         </div>
+        {defaultView ? null :
+          toggleZoom ? null :
+           <input
+            type="range"
+            min="100" max="400"
+            value={zoomAmount}
+            className="overview-zoom-slider"
+            onChange={handleSlider}/>}
         {defaultView ? null :
         <button onClick={minimize} className="overview-minimize">-</button>}
       </div>
