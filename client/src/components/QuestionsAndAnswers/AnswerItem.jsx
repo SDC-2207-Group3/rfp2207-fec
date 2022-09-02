@@ -10,6 +10,9 @@ import http from "./httpReqsForQA.js";
 // "photos": []
 
 function AnswerItem({answer, question_id}) {
+  // console.log('in answer item here is answer object: ', answer)
+  // console.log('this is type of photo: ', typeof answer.photos[0])
+  // console.log('i wanna convert to blob: ', URL.createObjectURL(new Blob([answer.photos[0].slice(5)])))
   // hook for tracking whether or not an answer is marked helpful
   const [helpfulClicked, setHelpfulClicked] = useState(false);
 
@@ -45,6 +48,7 @@ function AnswerItem({answer, question_id}) {
       <div className="answer-item-single">
         <span className="answer-prefix">A: </span>
         <span className="answer-body">{answer.body}</span>
+
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
           className={`qa-ref-link qa-mark ${helpfulClicked ? "noClick" : ""}`}

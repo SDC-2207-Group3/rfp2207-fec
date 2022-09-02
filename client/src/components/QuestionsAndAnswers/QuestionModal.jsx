@@ -13,6 +13,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
       'product_id': Number(product_id)
     }
     reset()
+    closeModal(false)
     http.postQuestion(product_id, modalData)
       .then((res) => http.getQuestions(product_id))
       .then((res) => {setQA(res.data.results)})
