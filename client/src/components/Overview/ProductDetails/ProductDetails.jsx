@@ -73,7 +73,7 @@ const ProductDetails = (props) => {
   return (
     <div className="overview-productDetails">
 
-      <RatingStars statePR={statePR} />
+      <RatingStars rating={productRating} />
 
       <h6>{productRating} <span>Read all reviews</span></h6>
       <p></p>

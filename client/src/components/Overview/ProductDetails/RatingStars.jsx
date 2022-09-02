@@ -2,18 +2,7 @@ import React from 'react';
 
 const RatingStars = (props) => {
 
-  const statePR = props.statePR;
-  const productRating = calcProductRating(statePR);
-
-  function calcProductRating(productRating) {
-    if (typeof productRating !== 'object') { return }
-    const ratings = Object.keys(productRating);
-    const counts  = Object.values(productRating);
-    const totalCount = counts.reduce((memo, count) => memo += parseInt(count), 0);
-    const totalReviews = ratings.map((rating, index) => parseInt(rating) * parseInt(counts[index])).reduce((memo, rating) => memo += rating, 0);
-    return (totalReviews/totalCount).toFixed(2);
-  }
-
+  const productRating = props.rating
 
   let ratingStars = [0, 0, 0, 0, 0]
   ratingStars = ratingStars.map((star, index) => {
