@@ -81,12 +81,20 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
           {
             Object.keys(question.answers).slice(answersCount).length > 0
             &&
-            answersCount
-            &&
+            // answersCount
+            // &&
             <button className="qa-moreAnswers"
-            onClick={() => incrementAnswers(undefined)}
+            onClick={
+              () => {
+                if (answersCount) {
+                  incrementAnswers(undefined)
+                } else {
+                  incrementAnswers(2)
+                }
+              }
+            }
             >
-              Load More Answers
+              {`${answersCount ? "Load More Answers" : "Collapse Answers"}`}
             </button>
           }
         </div>
