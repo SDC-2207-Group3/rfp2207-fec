@@ -37,9 +37,9 @@ const ThumbnailList = (props) => {
   }
 
    useEffect(() => {
-    console.log(photoIndex, 'photoIndex')
-    console.log(displayIndex, 'displayIndex')
-    console.log(photoIndex - displayLimit)
+    // console.log(photoIndex, 'photoIndex')
+    // console.log(displayIndex, 'displayIndex')
+    // console.log(photoIndex - displayLimit)
     photoIndex - displayLimit >= displayIndex ? setDisplayIndex(photoIndex - displayLimit + 1) : null;
    })
 
