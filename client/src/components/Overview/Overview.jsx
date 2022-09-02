@@ -4,14 +4,23 @@ import axios from 'axios';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import ProductDetails from './ProductDetails/ProductDetails.jsx';
 
-const _AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/products/';
+const _AtelierAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp/';
 const initialeState = { productStyles: [], productDetails: {}, selectedStyle: {}, productRating: {} }
 
-const AtelierGetEndpoint = (endpoint = '') => {
+const AtelierGetProductEndpoint = (endpoint = '') => {
   return axios({
-    url: _AtelierAPI + endpoint,
+    url: _AtelierAPI + "products/" + endpoint,
     method: 'get',
     headers: {"Authorization": process.env.KEY}
+  })
+}
+
+const AtelierGetReviewEndpoint = (productID = 0) => {
+  return axios({
+    url: _AtelierAPI + 'reviews/meta',
+    method: 'get',
+    headers: { "Authorization": process.env.KEY },
+    params: { product_id: Number(productID) }
   })
 }
 
@@ -22,17 +31,14 @@ function FindDefaultStyle (styles) {
 
 const reducer = (state, action) => {
   switch(action.type) {
-    case 'setStyles':
-      return { ...state, productStyles: action.setStyles }
-    case 'setDetails':
-      return { ...state, productDetails: action.setDetails }
     case 'selectStyle':
       return { ...state, selectedStyle: action.selectStyle }
     case 'setAll':
       return {
         selectedStyle: action.selectedStyle,
         productDetails: action.setDetails,
-        productStyles: action.setStyles }
+        productStyles: action.setStyles,
+        productRating: action.setRating }
     default:
       return { state }
   }
@@ -46,15 +52,17 @@ const Overview = (props) => {
 
   const GetProductData = (productID) => {
     return axios.all([
-      AtelierGetEndpoint(productID),
-      AtelierGetEndpoint(productID + '/styles'),
+      AtelierGetProductEndpoint(productID),
+      AtelierGetProductEndpoint(productID + '/styles'),
+      AtelierGetReviewEndpoint(productID)
     ])
     .then((responses) => {
       dispatch({
         type: 'setAll',
         setDetails: responses[0].data,
         setStyles: responses[1].data,
-        selectedStyle: FindDefaultStyle(responses[1].data.results)
+        selectedStyle: FindDefaultStyle(responses[1].data.results),
+        setRating: responses[2].data.ratings
       })
     })
     .catch((err) => console.log(err));
@@ -64,13 +72,20 @@ const Overview = (props) => {
     GetProductData(props.id)
   }, [])
 
-
+  const slogan = state.productDetails.slogan ? state.productDetails.slogan : "Product Slogan Unavailable";
+  const description = state.productDetails.description ? state.productDetails.description : "Product Description Unavailable"
 
   return (
     <ProductContext.Provider value={{state, dispatch}}>
-      <div className = "overview">
-        <ImageGallery productStyle = {state.selectedStyle}/>
-        <ProductDetails productDetails = {state.productDetails}/>
+      <div>
+        <div className = "overview">
+          <ImageGallery productStyle = {state.selectedStyle}/>
+          <ProductDetails productDetails = {state.productDetails}/>
+        </div>
+        <div>
+          <h4>{slogan}</h4>
+          <p>{description}</p>
+        </div>
       </div>
     </ProductContext.Provider>
   )

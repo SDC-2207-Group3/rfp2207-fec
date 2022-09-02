@@ -34,25 +34,24 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
               Your Question
-            <input className="modalInput" type="text"
-            {...register("yourQuestion",
-              {
-                  required: "Question is required",
-                  maxLength: {
-                    value: 1000,
-                    message: "Question is limited to 1000 characters"
-                  }
-              })
-            }
-            />
-            <small>
-              <ErrorMessage
-              errors={errors}
-              name="yourQuestion"
-              render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+              <input className="modalInput" type="text" placeholder="Why did you like the product or not?"
+              {...register("yourQuestion",
+                {
+                    required: "Question is required",
+                    maxLength: {
+                      value: 1000,
+                      message: "Question is limited to 1000 characters"
+                    }
+                })
+              }
               />
-            </small>
-            <br></br>
+              <small>
+                <ErrorMessage
+                errors={errors}
+                name="yourQuestion"
+                render={({ messages }) => messages && Object.entries(messages).map(([type, message]) => (<p key={type}>{message}</p>))}
+                />
+              </small>
             </label>
             <label className="modalLabel">
                 Your Nickname
@@ -126,40 +125,5 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
   )
 
 }
-
-// function QuestionModal({closeModal}) {
-
-//   return(
-//     <div className="qa-modalBackground">
-//       <div className="qa-modalContainer">
-//           <button className="qa-modalTitleCloseBtn"
-//             onClick={() => closeModal(false)}
-//           >
-//             x
-//           </button>
-//         <div className="qa-modalTitle">
-//           <h1>Ask Your Question</h1>
-//         </div>
-//         <div className="qa-modalBody"></div>
-//           <label className="required">Your question
-//             <br></br><input type="text" required></input>
-//           </label>
-//         <div className="qa-modalFooter">
-//           <button className="qa-modalFooterBtn" id="qa-modalFooterCancelBtn"
-//               onClick={() => closeModal(false)}
-//           >
-//             Cancel
-//           </button>
-//           <button className="qa-modalFooterBtn"
-//           >
-//             Submit
-//           </button>
-//         </div>
-
-//       </div>
-//     </div>
-//   )
-
-// }
 
 export default QuestionModal

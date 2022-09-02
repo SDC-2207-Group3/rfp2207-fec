@@ -15,6 +15,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  background: white;
 }
 
 .RIC-star {
@@ -48,9 +49,15 @@
 }
 
 #RIC-related-header {
+<<<<<<< HEAD
   padding: 0.2em;
   font-size: large;
   font-family: 'Courier New', Courier, monospace;
+=======
+  padding: 0.5em;
+  font-size: x-large;
+  font-family: "Courier New", Courier, monospace;
+>>>>>>> 14ac29a47fe330299428fb570d7e6dc8e53a6434
   border: 0.1em solid pink;
   border-radius: 1em;
   width: 35%;
@@ -79,6 +86,7 @@
   box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
 }
 
+<<<<<<< HEAD
 #RIC-ri-cards {
   position: absolute;
   display: flex;
@@ -94,6 +102,8 @@
   color: white;
 }
 
+=======
+>>>>>>> 14ac29a47fe330299428fb570d7e6dc8e53a6434
 /* PRODUCT CARD */
 .RIC-product-card-div {
   border: 1px solid gray;
@@ -173,7 +183,8 @@ p.RIC {
   overflow: auto;
   background-color: white;
   position: fixed;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border: 1px solid gray;
   padding: 1em;
   border-radius: 2px;
@@ -196,10 +207,10 @@ table .RIC-comparison-table {
 }
 
 tbody {
-  display:block;
-  overflow:auto;
-  height:200px;
-  width:100%;
+  display: block;
+  overflow: auto;
+  height: 200px;
+  width: 100%;
 }
 
 th {
@@ -210,4 +221,3 @@ td {
   text-align: center;
   padding: 0.5em 0;
 }
-

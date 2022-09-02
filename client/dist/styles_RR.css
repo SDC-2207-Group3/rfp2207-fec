@@ -9,6 +9,7 @@
   border-bottom: 1px solid gray;
   justify-content: center;
   padding: 10px;
+  font-family: sans-serif;
 }
 
 #RR_bd-sort-list-container {
@@ -16,17 +17,104 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  background: red;
 }
 
 /* rb-container & reviews-list share width ( <= 100)*/
 #RR_break-down-container {
   width: 30%;
+  height: auto;
   min-height: 20vh;
   display: flex;
   flex-direction: column;
-  background: rgb(255, 255, 200);
+  /* background: rgb(240, 240, 240); */
 }
+
+#RR_star-avg {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 8px;
+}
+
+.RR_star-container {
+  /* background: orange; */
+}
+.RR_stars {
+  /* background: rgb(206, 228, 235); */
+}
+
+.RR_star {
+}
+
+/* .RR_star-c {
+  background: yellow;
+} */
+
+.RR_star-cover {
+  background: turquoise;
+}
+
+#RR_ratings-bd-count {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  position: relative;
+  padding: 5px;
+  width: 100%;
+  height: auto;
+  /* border: 1px solid red; */
+  /* background: rgba(230, 230, 230); */
+}
+
+#RR_ratings-bars-container {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  width: auto;
+  height: 100%;
+  /* background: red; */
+}
+
+.RR_ratings-bar-full {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 5px;
+  margin-left: 5px;
+  height: 10px;
+  width: 200px;
+  background: rgb(220, 220, 220);
+}
+
+.RR_ratings-bar {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  height: 10px;
+  background: rgb(35, 160, 35);
+  z-index: 2;
+}
+
+.RR_star-total-count {
+  position: absolute;
+  right: 0;
+  margin-right: 2em;
+  /* using width to set location of count */
+}
+/* .RR_ratings-bar::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 10px;
+  width: 200px;
+  background: gray;
+  z-index: -1;
+  vertical-align: sub;
+} */
 
 #RR_sort-list-container {
   width: 60vw;
@@ -38,8 +126,41 @@
   width: 100%;
   height: 2em;
   display: flex;
-  background: rgb(150, 230, 200);
-  justify-content: right;
+  /* background: rgb(240, 240, 240); */
+  cursor: pointer;
+}
+
+.RR_drop-down {
+  position: relative;
+  left: 0;
+  display: inline-block;
+}
+
+.RR_drop-down-btn {
+  text-decoration: underline;
+}
+
+.RR_drop-down-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  min-width: 100px;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.RR_drop-choice {
+  padding: 5px;
+}
+
+.RR_drop-choice:hover {
+  background-color: #c6c6c6;
+}
+
+.RR_drop-down:hover .RR_drop-down-content {
+  display: block;
 }
 
 #RR_reviews-list {
@@ -53,7 +174,7 @@
   justify-content: flex-start;
   align-items: center;
 
-  background: rgb(220, 150, 150);
+  /* background: rgb(240, 240, 240); */
 }
 
 .RR_list-item {
@@ -61,13 +182,23 @@
   min-height: 2em;
   display: flex;
   flex-direction: column;
-  margin: 5px 0px;
-  padding: 0.5em;
-  background: rgb(220, 220, 220);
+  margin: 8px 0px;
+  padding: 1em;
+  /* background: rgb(230, 230, 230); */
+  border-bottom: 1px solid gray;
+  margin-bottom: 1em;
+}
+
+.RR_name-date {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  color: rgb(150, 150, 150);
 }
 
 .RR_review-body {
   color: navy;
+  margin: 8px;
 }
 
 .RR_review-photo-container {

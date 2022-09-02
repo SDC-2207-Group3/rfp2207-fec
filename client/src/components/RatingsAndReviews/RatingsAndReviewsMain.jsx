@@ -1,148 +1,99 @@
 import React from "react";
 import axios from "axios";
-import ATELIER_API from "./utilities/utilities.js";
+import utilities from "./utilities/utilities.js";
 import Sort from "./SubComponents/Sort.jsx";
 import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
 import { useState, useEffect, useReducer } from "react";
 
-let reducer = (state, action) => {
-  switch (action.type) {
-    case "setId":
-      return { ...state, id: action.setId };
-    case "setSort":
-      return { ...state, sortBy: action.setSort };
-    case "setDisplayedReviews":
-      return { ...state, displayedReviews: action.setDisplayedReviews };
-    case "setReviews":
-      return { ...state, reviews: action.setReviews };
-    case "setMeta":
-      return { ...state, meta: action.setMeta };
-    case "setReviewStats":
-      return { ...state, reviewStats: action.setReviewStats };
-    case "setShowMoreBtn":
-      return { ...state, showMoreBtn: action.setShowMoreBtn };
-    default:
-      return state;
-  }
-};
-
-let getAvgReviewValue = (meta) => {
-  let statsObj = {};
-  statsObj.starTotal = 0;
-  statsObj.voteTotal = 0;
-  for (let [star, count] of Object.entries(meta.ratings)) {
-    statsObj.starTotal += star * count;
-    statsObj.voteTotal += Number(count);
-  }
-  return statsObj;
-};
-
-//should make axios request, then instead of setting state
-//call reducer to set state for us
-
 let RatingsAndReviewsMain = (props) => {
-  let initialState = {
-    id: props.id,
-    // selectedItem: {},
-    sortBy: "newest",
-    displayedReviews: 2,
-    reviews: [],
-    meta: {},
-    reviewStats: {},
-    showMoreBtn: true,
+  // const [state, dispatch] = useReducer(reducer, initialState);
+  const [id, setId] = useState(props.id);
+  const [sortBy, setSortBy] = useState("relevant");
+  const [displayedReviews, setDisplayedReviews] = useState(3);
+  const [reviews, setReviews] = useState([]);
+  const [meta, setMeta] = useState({});
+  const [reviewStats, setReviewStats] = useState({});
+  const [showMoreBtn, setShowMoreBtn] = useState(true);
+
+  //this could be a context hook...
+  let swapSort = (sort) => {
+    setSortBy(sort);
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
+  //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
-    return axios
-      .get(`${ATELIER_API}/reviews`, {
+    axios
+      .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
-          product_id: `${state.id}`,
-          sort: `${state.sortBy}`,
-          count: `${state.displayedReviews + 2}`,
+          product_id: `${id}`,
+          sort: `${sortBy}`,
+          count: `${displayedReviews + 2}`,
         },
         headers: { Authorization: process.env.KEY },
       })
       .then((res) => {
         if (res.data.count > res.data.results.length) {
-          dispatch({
-            type: "setShowMoreBtn",
-            setShowMoreBtn: false,
-          });
+          setShowMoreBtn(false);
         } else {
-          dispatch({
-            type: "setReviews",
-            setReviews: res.data.results,
-          });
-          dispatch({
-            type: "setDisplayedReviews",
-            setDisplayedReviews: state.displayedReviews + 2,
-          });
+          setReviews(res.data.results);
+          setDisplayedReviews(displayedReviews + 2);
         }
       })
       .catch((err) => console.log(err));
   };
 
-  let fetchData = (state) => {
+  let fetchData = () => {
     axios
-      .get(`${ATELIER_API}/reviews`, {
+      .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
-          product_id: `${state.id}`,
-          sort: `${state.sortBy}`,
-          count: `${state.displayedReviews}`,
+          product_id: `${id}`,
+          sort: `${sortBy}`,
+          count: `${displayedReviews}`,
         },
         headers: { Authorization: process.env.KEY },
       })
       //res.data.results = arr of reviews
       .then((res) => {
         //update state
-        dispatch({
-          type: "setReviews",
-          setReviews: res.data.results,
-        });
+        setReviews(res.data.results);
       })
       .then(() => {
         // get meta data for current product
-        return axios.get(`${ATELIER_API}/reviews/meta`, {
-          params: { product_id: `${state.id}` },
+        return axios.get(`${utilities.ATELIER_API}/reviews/meta`, {
+          params: { product_id: `${id}` },
           headers: { Authorization: process.env.KEY },
         });
       })
       .then((res) => {
-        let reviewStatsObj = getAvgReviewValue(res.data);
+        let reviewStatsObj = utilities.getAvgReviewValue(res.data);
 
-        dispatch({
-          type: "setMeta",
-          setMeta: res.data,
-        });
-        dispatch({
-          type: "setReviewStats",
-          setReviewStats: reviewStatsObj,
-        });
+        setMeta(res.data);
+        setReviewStats(reviewStatsObj);
       })
       .catch((err) => console.log("failed to fetch", err));
   };
 
+  //when props update, call fetchData
   useEffect(() => {
-    fetchData(state);
+    fetchData();
   }, []);
+
+  //when sort method changes, re-render reviews
+  useEffect(() => {
+    fetchData();
+  }, [sortBy]);
 
   return (
     <section id="section_rr">
       <h2>Ratings and Reviews</h2>
       <div id="RR_bd-sort-list-container">
-        <RatingsBreakDown
-          reviewStats={state.reviewStats}
-          meta={state.meta}
-          id={props.id}
-        />
+        <RatingsBreakDown reviewStats={reviewStats} meta={meta} id={id} />
         <div id="RR_sort-list-container">
-          <Sort sortMethod={state.sortBy} id={props.id} />
+          <Sort sortMethod={sortBy} swapSort={swapSort} id={props.id} />
           <ReviewsList
-            showMoreBtn={state.showMoreBtn}
-            reviews={state.reviews}
+            showMoreBtn={showMoreBtn}
+            reviews={reviews}
             id={props.id}
             showMoreReviews={showMoreReviews}
           />
@@ -158,9 +109,11 @@ export default RatingsAndReviewsMain;
 
   when rendering 2 or fewer reviews, do not render the show more button
 
-  unsure if the data im getting from the api is sorted properly, ill know more once i fix the dates, for now things seem to be placing into the reviews list rather than on the top or bottom of the review list -- sometimes?
+  some kind of discrepancy in helpfulness value, likely caused by state vs db value... values on page seem to modify when re rendered.
 
-  unhappy with the complexity of the review item component. should look at breaking that down into simpler components during a refactor
+  relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
 
+  no way of knowing if response from seller functionality works? background still red btw
 
+  break down review item subcomponent into more componenents
 */
