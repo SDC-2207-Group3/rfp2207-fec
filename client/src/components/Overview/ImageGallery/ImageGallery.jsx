@@ -35,9 +35,17 @@ const ImageGallery = (props) => {
     setPhotoIndex(photoIndex + 1)
   }
 
-  useEffect(() => {
+  useEffect(() => { // Automatically scrolls thumbnail bar on L/R change
     photoIndex - displayLimit >= displayIndex ? setDisplayIndex(photoIndex - displayLimit + 1) : null;
+    photoIndex - displayIndex === -1 ? setDisplayIndex(photoIndex) : null;
    }, [photoIndex])
+
+   useEffect(() => {
+    console.log(displayIndex, 'displayIndex');
+    console.log(photoIndex, 'photoIndex');
+    photoIndex - displayIndex === -1 ? setPhotoIndex (displayIndex) : null;
+    photoIndex - displayIndex === displayLimit ? setPhotoIndex(photoIndex - 1) : null;
+   }, [displayIndex])
 
   function minimize () {
     setDefaultView(true);

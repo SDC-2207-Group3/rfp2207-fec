@@ -24,7 +24,7 @@ const ProductDetails = (props) => {
   const name        = statePD.name        ? statePD.name        : "Product name unavailable";
   const slogan      = statePD.slogan      ? statePD.slogan      : "Product slogan Unavailable"
   const category    = statePD.category    ? statePD.category    : "Product Category Unavailable";
-  const features    = statePD.features    ? statePD.features    : [];
+  // const features    = statePD.features    ? statePD.features    : [];
   const description = statePD.description ? statePD.description : "Product Description Unavailable";
 
   // Product Styles
