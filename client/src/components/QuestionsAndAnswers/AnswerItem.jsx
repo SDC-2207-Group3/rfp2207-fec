@@ -51,9 +51,9 @@ function AnswerItem({answer, question_id}) {
       <div className="answer-item-single">
         <span className="answer-prefix">A: </span>
         <span className="answer-body">{answer.body}</span>
-        <span className="answer-image">
+        <div className="answer-image">
           {answer.photos.length > 0 && <img src={answer.photos[0]}/>}
-        </span>
+        </div>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
           className={`qa-ref-link qa-mark ${helpfulClicked ? "noClick" : ""}`}

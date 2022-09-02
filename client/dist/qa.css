@@ -116,8 +116,9 @@
 }
 
 .answer-image {
-  border: yellow;
-  background-color: yellow;
+  display: flex;
+  margin-top: 2%;
+  margin-left: -5%;
 }
 
 .qa-moreQuestions, .qa-newQuestionBtn {
