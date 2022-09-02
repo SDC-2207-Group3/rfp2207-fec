@@ -89,16 +89,17 @@
 }
 
 #RIC-right:hover {
-  color: white;
+  color: lightgray
 }
 #RIC-left:hover {
-  color: white;
+  color: lightgray
 }
 
 /* PRODUCT CARD */
 .RIC-product-card-div {
   border: 1px solid gray;
-  aspect-ratio: 0.5;
+  width: 13.5vw;
+  /* aspect-ratio: 0.5; */
   margin: 0.5%;
   display: flex;
   justify-content: center;

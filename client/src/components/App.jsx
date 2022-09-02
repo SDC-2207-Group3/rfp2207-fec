@@ -7,10 +7,18 @@ import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
 export const IdContext = createContext();
 
 const App = (props) => {
-  const [id, setId] = useState(65652)
+  const [id, setId] = useState(65652);
+
+  // useEffect(() => {
+  //   setId(65652);
+  // }, []);
+
   const changeId = (newId) => {
+    console.log('change id click', newId);
     setId(newId);
   }
+
+  console.log('main app.jsx id', id);
 
   return (
     <div id="app">

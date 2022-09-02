@@ -22,24 +22,27 @@ var RelatedProducts = (props) => {
 
   const leftClick = () => {
     setIndex(index - 1);
-    if (index === 1) {
-      setScroll(0);
-    } else {
-      setScroll(scrollAmount + 100/props.data.length);
-    }
+    // if (index === 1) {
+    //   setScroll(0);
+    // } else {
+    //   setScroll(scrollAmount + 100/props.data.length);
+    // }
+    setScroll(scrollAmount + (13.5 * window.innerWidth / 100))
   }
 
   const rightClick = () => {
     setIndex(index + 1);
-    if (index === (props.data.length - displayLimit)) {
-      setScroll(scrollAmount - (100/props.data.length/2) - 2);
-    } else {
-      setScroll(scrollAmount - 100/props.data.length);
-    }
+    // if (index === (props.data.length - displayLimit)) {
+    //   setScroll(scrollAmount - (100/props.data.length/2) - 2);
+    // } else {
+    //   setScroll(scrollAmount - 100/props.data.length);
+    // }
+
+    setScroll(scrollAmount - (13.5 * window.innerWidth / 100))
   }
 
   const scrollCSS = {
-    transform: `translateX(${scrollAmount}%)`
+    transform: `translateX(${scrollAmount}px)`
   }
 
   return (

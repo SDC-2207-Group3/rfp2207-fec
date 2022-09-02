@@ -16,7 +16,7 @@ const RelatedItems = (props) => {
     http.relatedReq(id)
     .then(res => setRelated(_.uniq(res.data)))
     .catch(err => console.error(err));
-  }, [])
+  }, [id])
 
   useEffect(() => {
     var reqArr = [];

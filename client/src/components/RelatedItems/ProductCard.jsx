@@ -15,15 +15,14 @@ var ProductCard = (props) => {
   };
 
   const { changeId } = useContext(IdContext);
-
   return (
     <div className="RIC-product-card-div">
-      {modal ? <Comparison close={closeModal} main={props.main} product={props.product}/> : null}
+      {modal ? <Comparison key={props.product.id} close={closeModal} main={props.main} product={props.product}/> : null}
       <div className="RIC-card-icon-div"><span onClick={() => openModal()} className="RIC-conditional-icon">{props.mode === 'related-item' ? <Star size={20}/> :  <XCircle size={20} />}</span></div>
-      <div className="RIC-product-card-img-div">
+      <div onClick={() => changeId(props.product.id)} className="RIC-product-card-img-div">
         <img className="RIC-product-card-img" src={props.product.img} alt="product img"></img>
       </div>
-      <div className="RIC-product-card-detail">
+      <div onClick={() => changeId(props.product.id)} className="RIC-product-card-detail">
         <p className="RIC" id="RIC-category">{props.product.category}</p>
         <p className="RIC" id="RIC-name">{props.product.name}</p>
         <p className="RIC">
