@@ -115,5 +115,7 @@ export default RatingsAndReviewsMain;
 
   no way of knowing if response from seller functionality works? background still red btw
 
+  need to pull the entire reviews list for a product, that way i can filter based on review ratings.
+
   break down review item subcomponent into more componenents
 */

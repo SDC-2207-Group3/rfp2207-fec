@@ -116,6 +116,28 @@
   vertical-align: sub;
 } */
 
+.RR_factor-bar-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.RR_factor-bar {
+  height: 10px;
+  background-color: rgb(220, 220, 220);
+}
+.RR_factor-bar-icon {
+  height: 5px;
+  width: 5px;
+  background-color: black;
+}
+.RR_factor-phrases {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 #RR_sort-list-container {
   width: 60vw;
   display: flex;
