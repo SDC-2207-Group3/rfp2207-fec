@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useRef } from 'react';
+import React, { useState, useContext, createContext, useRef, useEffect } from 'react';
 import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 
@@ -6,8 +6,11 @@ export const ImageGalleryContext = createContext(null);
 
 const ImageGallery = (props) => {
 
+  const displayLimit = 7;
+
   const [photoIndex, setPhotoIndex] = useState(0);
   const [toggleZoom, setToggleZoom] = useState(false);
+  const [displayIndex, setDisplayIndex] = useState(0);
   const [defaultView, setDefaultView] = useState(true);
   const [offset, setOffset] = useState({ top: 0, left: 0 });
   const [zoomAmount, setZoomAmount] = useState(250);
@@ -31,6 +34,10 @@ const ImageGallery = (props) => {
   function rightPhoto () {
     setPhotoIndex(photoIndex + 1)
   }
+
+  useEffect(() => {
+    photoIndex - displayLimit >= displayIndex ? setDisplayIndex(photoIndex - displayLimit + 1) : null;
+   }, [photoIndex])
 
   function minimize () {
     setDefaultView(true);
@@ -71,7 +78,14 @@ const ImageGallery = (props) => {
   }
 
   return (
-    <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName, defaultView}}>
+    <ImageGalleryContext.Provider value={{
+      photoIndex,
+      productName,
+      defaultView,
+      displayIndex,
+      setPhotoIndex,
+      setDisplayIndex
+    }}>
       <div className={"overview-imageGallery "}>
       <div className={displayImageView}>
         {defaultView ? <ThumbnailList

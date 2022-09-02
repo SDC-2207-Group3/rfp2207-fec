@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ProductContext } from './../Overview.jsx';
 
+import RatingStars from './RatingStars.jsx';
+
 const ProductDetails = (props) => {
 
   const [size, setSize] = useState("select-size");
@@ -62,20 +64,6 @@ const ProductDetails = (props) => {
 
   const productRating = calcProductRating(statePR);
 
-  let ratingStars = [0, 0, 0, 0, 0]
-  ratingStars = ratingStars.map((star, index) => {
-    const pos = (index * 19.5) + '%';
-    const starPosition = { left: pos }
-    return (
-      <div key={index} className="star-container" style={starPosition}>
-        <i className="fa-solid fa-star star-fill"></i>
-        <i className="fa-regular fa-star star-empty"></i>
-      </div>
-  )})
-
-  const percentageFill = (1 - (productRating/5)) * 100 + '%';
-  const fill = { width: percentageFill };
-
   // Size Select
 
   function changeSize (e) {
@@ -84,14 +72,11 @@ const ProductDetails = (props) => {
 
   return (
     <div className="overview-productDetails">
-      {console.log(state)}
 
-      <div className="overview-rating">
-        {ratingStars}
-        <div className="rating-slider" style={fill}></div>
-      </div>
-      <h6>{productRating}</h6>
-      <p><span>Read all reviews</span></p>
+      <RatingStars statePR={statePR} />
+
+      <h6>{productRating} <span>Read all reviews</span></h6>
+      <p></p>
       <h3>{category}</h3>
       <h2>{name}</h2>
       <h4>{stylePrice}</h4>
@@ -111,12 +96,12 @@ const ProductDetails = (props) => {
         )}
       </div>
 
-      <h5>Features: </h5>
+      {/* <h5>Features: </h5>
       <ul>
         {features.map((feature, index) =>
           <li key={index}>{feature.feature}: {feature.value}</li>
         )}
-      </ul>
+      </ul> */}
 
       {sizeDisplay.length > 0 ?
         <div>
