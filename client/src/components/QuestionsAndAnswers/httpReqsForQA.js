@@ -44,3 +44,7 @@ module.exports.reportQuestion = (question_id) => axios.put(
   {question_id: question_id},
   {headers: {'Authorization': process.env.KEY}}
 )
+module.exports.getProductName = (product_id) => axios.get(
+  `${API}/products/${product_id}`,
+  {headers: {'Authorization': process.env.KEY}}
+)

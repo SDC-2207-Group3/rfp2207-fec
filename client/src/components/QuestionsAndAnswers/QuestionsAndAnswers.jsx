@@ -12,14 +12,6 @@ function QuestionsAndAnswers({id}) {
   // state hook for displaying question data from server get request
   const [mainQA, setQA] = useState([]);
 
-//   answers: {5539310: {…}, 5987605: {…}}
-// asker_name: "percyjackson"
-// question_body: "Do the Heir Force Ones slap?"
-// question_date: "2022-04-15T00:00:00.000Z"
-// question_helpfulness: 18
-// question_id: 593315
-// reported: false
-
   // initial get request to get all questions for a specified product id
   useEffect(() => {
     http.getQuestions(id)
@@ -28,6 +20,17 @@ function QuestionsAndAnswers({id}) {
       })
       .catch((err) => {console.error(err)})
   }, [id])
+
+  // state hook for getting current product name
+  const [currentProduct, setCurrentProduct] = useState([]);
+  useEffect(() => {
+    http.getProductName(id)
+      .then((res) => {
+        console.log('here is name: ', res.data.name)
+        setCurrentProduct(res.data.name)})
+      .catch((err) => {console.error(err)})
+  }, [id])
+
 
   // hook for toggling question modal
   const [openModal, setOpenModal] = useState(false);
@@ -78,7 +81,7 @@ function QuestionsAndAnswers({id}) {
         >
         Add a question
         </button>
-        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA}/>}
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA} currentProduct={currentProduct}/>}
     </div>
   )
 
