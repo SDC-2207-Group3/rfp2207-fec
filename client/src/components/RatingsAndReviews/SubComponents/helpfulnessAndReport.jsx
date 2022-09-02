@@ -1,36 +1,44 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import ATELIER_API from "../utilities/utilities.js";
+import utilities from "../utilities/utilities.js";
 
 const HelpfulnessAndReport = ({ review }) => {
-  const [canVote, setCanVote] = useState({ voted: false });
+  const [canVote, setCanVote] = useState(true);
+  const [helpfulness, setHelpfulness] = useState(review.helpfulness);
 
   //going to need to make put/post req for these...
   let handleHelpful = (e, id) => {
-    console.log(process.env.KEY);
-    // console.log(id);
-    axios
-      .put(`${ATELIER_API}/reviews/:review_id/helpful`, {
-        params: {
-          review_id: id,
-        },
-        headers: { Authorization: process.env.KEY },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    let body = { params: { review_id: id } };
+
+    if (canVote) {
+      axios
+        .put(`${utilities.ATELIER_API}/reviews/${id}/helpful`, body, {
+          headers: { Authorization: process.env.KEY },
+        })
+        .then((res) => {
+          console.log(res);
+          setCanVote(false);
+          setHelpfulness(helpfulness + 1);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      alert("already voted for that review");
+    }
   };
 
   let handleReport = (e, id) => {
-    // console.log(id);
+    let body = { params: { review_id: id } };
     axios
-      .put(`${ATELIER_API}/reviews/:review_id/report`, {
-        params: {
-          review_id: id,
-        },
+      .put(`${utilities.ATELIER_API}/reviews/${id}/report`, body, {
         headers: { Authorization: process.env.KEY },
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        //do i want to re render without the review? ehhhh
+        alert(
+          "Your report for this review has been successfully submitted, thank you!"
+        );
+      })
       .catch((err) => console.log(err));
   };
 
@@ -43,7 +51,7 @@ const HelpfulnessAndReport = ({ review }) => {
           onClick={(e) => handleHelpful(e, review.review_id)}
         >
           {" "}
-          YES ({`${review.helpfulness}`}){" "}
+          YES ({`${helpfulness}`}){" "}
         </span>
         <span
           className="RR_report-review"
