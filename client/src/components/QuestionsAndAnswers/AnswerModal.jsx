@@ -2,29 +2,15 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
+import qaUtilities from "./qaUtilities.js"
 const axios = require("axios")
-// const url = require('url');
-// console.log('this is URL: ', URL.createObjectURL)
 
-
-// {id: 'NSBpnwS', title: 'test', url_viewer: 'https://ibb.co/NSBpnwS', url: 'https://i.ibb.co/C2Gvsx2/test.jpg', display_url: 'https://i.ibb.co/C2Gvsx2/test.jpg', …}
-// delete_url: "https://ibb.co/NSBpnwS/51f7aab787f514aa397cd77b7f4055c4"
-// display_url: "https://i.ibb.co/C2Gvsx2/test.jpg"
-// expiration: "0"
-// height: "225"
-// id: "NSBpnwS"
-// image: {filename: 'test.jpg', name: 'test', mime: 'image/jpeg', extension: 'jpg', url: 'https://i.ibb.co/C2Gvsx2/test.jpg'}
-// size: 8848
-// thumb: {filename: 'test.jpg', name: 'test', mime: 'image/jpeg', extension: 'jpg', url: 'https://i.ibb.co/NSBpnwS/test.jpg'}
-// time: "1662148195"
-// title: "test"
-// url: "https://i.ibb.co/C2Gvsx2/test.jpg"
-// url_viewer: "https://ibb.co/NSBpnwS"
-// width: "225"
 
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
-  const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
+  const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
+    reset()
+    closeModal(false)
     if (data.yourImages.length > 0) {
       let body = new FormData()
       body.set('key', process.env.IMGBB_KEY)
@@ -46,9 +32,9 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
             product_id,
             question_id,
             {
-            'body': data.yourAnswer,
-            'name': data.yourNickname,
-            'email': data.yourEmail,
+            'body': qaUtilities.escapeHTML(data.yourAnswer),
+            'name': qaUtilities.escapeHTML(data.yourNickname),
+            'email': qaUtilities.escapeHTML(data.yourEmail),
             'photos': [res.data.data.url]
             }
           ))

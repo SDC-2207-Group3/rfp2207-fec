@@ -2,14 +2,15 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
+import qaUtilities from "./qaUtilities.js"
 
 function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) {
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
     const modalData = {
-      'body': data.yourQuestion,
-      'name': data.yourNickname,
-      'email': data.yourEmail,
+      'body': qaUtilities.escapeHTML(data.yourQuestion),
+      'name': qaUtilities.escapeHTML(data.yourNickname),
+      'email': qaUtilities.escapeHTML(data.yourEmail),
       'product_id': Number(product_id)
     }
     reset()

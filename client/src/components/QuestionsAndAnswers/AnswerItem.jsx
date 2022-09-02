@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import http from "./httpReqsForQA.js";
+// import utils from "../RatingsAndReviews/utilities/utilities.js"
 // import {QuestionIDContext} from './QAEntry.jsx'
 
 
@@ -42,17 +43,18 @@ function AnswerItem({answer, question_id}) {
 
   // converting answer date stamp into Month DD, YYYY
   const options = {year: 'numeric', month: 'long', day: 'numeric' };
-  // console.log('this is answer.date: ', new Date(answer.date))
   const date = new Date(answer.date).toLocaleDateString(undefined, options);
-  // const date = new Date(answer.date)
+  // const date = utils.getFormattedDate(answer.date)
+  // console.log('this is date: ', date)
+
 
   return (
     <div className="answer-item-single-container">
       <div className="answer-item-single">
         <span className="answer-prefix">A: </span>
         <span className="answer-body">{answer.body}</span>
-        <div className="answer-image">
-          {answer.photos.length > 0 && <img src={answer.photos[0]}/>}
+        <div className="answer-body answer-image">
+          {answer.photos.length > 0 && <img className="answer-image-file" src={answer.photos[0]}/>}
         </div>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small

@@ -5,6 +5,8 @@
   /* translate: 5%; */
   padding-top: 1%;
   padding-bottom: 1%;
+  /* padding-left: 0.5%;
+  padding-right: 0.5%; */
 }
 
 /* QA Search CSS */
@@ -101,6 +103,12 @@
 .answer-prefix, .answer-body {
   transform: translateY(3.5px);
 }
+/*
+.answer-body {
+  display: flex;
+  flex-direction: row;
+  background-color: yellow;
+} */
 
 .qa-accordion-item.active .question-item-button {
   background-color: #f1f1f187;
@@ -115,10 +123,18 @@
   height: auto;
 }
 
+.answer-image-file {
+  /* margin-top: 100px; */
+  max-width: 100px;
+  height: auto;
+}
+
 .answer-image {
   display: flex;
-  margin-top: 2%;
-  margin-left: -5%;
+  margin-top: 10px;
+  /* margin-top: 2%;
+  margin-left: -5%; */
+
 }
 
 .qa-moreQuestions, .qa-newQuestionBtn {
