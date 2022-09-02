@@ -12,10 +12,20 @@ function QuestionsAndAnswers({id}) {
   // state hook for displaying question data from server get request
   const [mainQA, setQA] = useState([]);
 
+//   answers: {5539310: {…}, 5987605: {…}}
+// asker_name: "percyjackson"
+// question_body: "Do the Heir Force Ones slap?"
+// question_date: "2022-04-15T00:00:00.000Z"
+// question_helpfulness: 18
+// question_id: 593315
+// reported: false
+
   // initial get request to get all questions for a specified product id
   useEffect(() => {
     http.getQuestions(id)
-      .then((res) => {setQA(res.data.results)})
+      .then((res) => {
+        setQA(res.data.results.sort((a, b) => b.question_helpfulness - a.question_helpfulness))
+      })
       .catch((err) => {console.error(err)})
   }, [id])
 
@@ -37,7 +47,7 @@ function QuestionsAndAnswers({id}) {
   const [questionsCount, incrementQuestions] = useState(4)
 
   return (
-    <div>
+    <div className="qa-app">
       <Search mainQA={mainQA} setQA={setQA} id={id}/>
       <Header />
       <ul className="qa-accordion">

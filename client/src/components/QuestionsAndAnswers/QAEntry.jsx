@@ -7,7 +7,6 @@ import http from "./httpReqsForQA.js";
 
 
 function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
-
   // initializing state for  answer modals
   const [openAnswerModal, setOpenAnswerModal] = useState(false);
 
@@ -74,15 +73,16 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
         <div className="answer-item">
           {
-            Object.keys(question.answers).slice(0, answersCount).map((answer_id, index) =>
-              <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/>
+            Object.keys(question.answers)
+              // .sort((a, b) => b.helpfulness - a.helpfulness)
+              .slice(0, answersCount)
+              .map((answer_id, index) =>
+                <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/>
             )
           }
           {
             Object.keys(question.answers).slice(answersCount).length > 0
             &&
-            // answersCount
-            // &&
             <button className="qa-moreAnswers"
             onClick={
               () => {
