@@ -125,16 +125,17 @@
 
 .answer-image-file {
   /* margin-top: 100px; */
-  max-width: 100px;
+  max-width: 200px;
   height: auto;
 }
 
 .answer-image {
   display: flex;
-  margin-top: 10px;
-  /* margin-top: 2%;
-  margin-left: -5%; */
-
+  /* margin-top: 10px; */
+  margin-top: 1%;
+  margin-bottom: 1%;
+  /* margin-left: -5%; */
+  padding-left: 1%;
 }
 
 .qa-moreQuestions, .qa-newQuestionBtn {
