@@ -41,7 +41,6 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         Q: {question.question_body}
         <small className="q-helpful qa-push">Helpful?</small>
         <small
-          // className="q-helpful qa-mark"
           className={`q-helpful qa-mark ${questionHelpful ? "noClick" : ""}`}
           onClick={() => markQuestionAsHelpful(question.question_id, product_id)}
         >
