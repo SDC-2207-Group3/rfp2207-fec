@@ -26,7 +26,6 @@ function QuestionsAndAnswers({id}) {
   useEffect(() => {
     http.getProductName(id)
       .then((res) => {
-        console.log('here is name: ', res.data.name)
         setCurrentProduct(res.data.name)})
       .catch((err) => {console.error(err)})
   }, [id])
@@ -67,7 +66,7 @@ function QuestionsAndAnswers({id}) {
         ))}
 
       </ul>
-      {qaDummyData.slice(questionsCount).length > 0
+      {mainQA.slice(questionsCount).length > 0
         &&
         <button className="qa-moreQuestions"
           onClick={() => incrementQuestions(questionsCount + 2)}
