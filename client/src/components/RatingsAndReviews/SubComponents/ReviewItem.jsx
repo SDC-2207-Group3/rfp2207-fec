@@ -18,8 +18,10 @@ const ReviewItem = (props) => {
 
   return (
     <li className="RR_list-item">
-      <p>username: {props.review.reviewer_name}</p>
-      <span>posted: {utilities.getFormattedDate(props.review.date)}</span>
+      <div className="RR_name-date">
+        {props.review.reviewer_name} |{" "}
+        {utilities.getFormattedDate(props.review.date)}
+      </div>
       <h4>
         {props.review.summary.length <= 60
           ? props.review.summary

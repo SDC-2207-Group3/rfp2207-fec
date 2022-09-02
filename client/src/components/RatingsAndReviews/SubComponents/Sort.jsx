@@ -11,6 +11,7 @@ let Sort = ({ sortMethod, swapSort }) => {
         <p>
           Currently Sorted By{" "}
           <span className="RR_drop-down-btn">{sortMethod}</span>
+          &or;
         </p>
         <div className="RR_drop-down-content">
           <div

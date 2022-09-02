@@ -10,7 +10,7 @@ let RatingsAndReviewsMain = (props) => {
   // const [state, dispatch] = useReducer(reducer, initialState);
   const [id, setId] = useState(props.id);
   const [sortBy, setSortBy] = useState("relevant");
-  const [displayedReviews, setDisplayedReviews] = useState(10);
+  const [displayedReviews, setDisplayedReviews] = useState(3);
   const [reviews, setReviews] = useState([]);
   const [meta, setMeta] = useState({});
   const [reviewStats, setReviewStats] = useState({});
@@ -44,8 +44,6 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let fetchData = () => {
-    console.log("FETCH DATA");
-
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {

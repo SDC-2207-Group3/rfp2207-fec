@@ -2,7 +2,6 @@ import React from "react";
 import { Star } from "react-feather";
 
 const StarsContainer = ({ meta, starTotal, voteTotal }) => {
-  console.log(meta);
   return (
     <div className="RR_star-container">
       <div className="RR_stars">
