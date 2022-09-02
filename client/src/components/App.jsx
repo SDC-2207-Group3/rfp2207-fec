@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { useState, useEffect, createContext } from 'react';
 import Overview from "./Overview/Overview.jsx";
 import RelatedItems from "./RelatedItems/RelatedItems.jsx";
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
@@ -7,14 +7,17 @@ import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
 export const IdContext = createContext();
 
 const App = (props) => {
-  let id = "65635";
+  const [id, setId] = useState(65652)
+  const changeId = (newId) => {
+    setId(newId);
+  }
 
   return (
     <div id="app">
-      <IdContext.Provider value={id}>
+      <IdContext.Provider value={{id, changeId}}>
         <Overview id={id} />
         <RelatedItems id={id} />
-        <QuestionsAndAnswers id={id} />
+        {/* <QuestionsAndAnswers id={id} /> */}
         <RatingsAndReviews id={id} />
       </IdContext.Provider>
     </div>

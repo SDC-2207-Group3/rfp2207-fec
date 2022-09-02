@@ -30,7 +30,7 @@ var Comparison = (props) => {
           relatedValue = related.find(({feature}) => feature === target) ? related.find(({feature}) => feature === target).value : null;
 
           return (
-            <tr>
+            <tr key="target">
               <td>{mainValue === true ? <Check /> : mainValue}</td>
               <td>{target}</td>
               <td>{relatedValue === true ? <Check /> : relatedValue}</td>

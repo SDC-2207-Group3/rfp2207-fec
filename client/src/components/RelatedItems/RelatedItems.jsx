@@ -8,7 +8,7 @@ import * as _ from 'underscore';
 import { IdContext } from '../App.jsx'
 
 const RelatedItems = (props) => {
-  const id = useContext(IdContext);
+  const { id } = useContext(IdContext);
   const [data, setData] = useState([]);
   const [related, setRelated] = useState([]);
 

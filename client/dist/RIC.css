@@ -1,8 +1,13 @@
 /* SECTION */
 #RIC-section {
-  width: 80vw;
+  width: 60vw;
   overflow-x: hidden;
-  height: auto;
+  height: 60vw;
+  margin: 0 13%;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.5em 0em;
 }
 
 /* STARS */
@@ -39,11 +44,12 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 0.2fr 1.8fr;
+  height: 100%;
 }
 
 #RIC-related-header {
-  padding: 0.5em;
-  font-size: x-large;
+  padding: 0.2em;
+  font-size: large;
   font-family: 'Courier New', Courier, monospace;
   border: 0.1em solid pink;
   border-radius: 1em;
@@ -52,52 +58,74 @@
   text-align: center;
 }
 
-#RIC-ri-card-container {
+#RIC-ri-carousel {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: 75%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-#RIC-fade-div {
+.RIC-arrow-div {
+  width: 5%;
+}
+
+#RIC-ri-view {
+  overflow-x: hidden;
+  height: 100%;
+  width: 80%;
+  position: relative;
+  box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
+}
+
+#RIC-ri-cards {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 3;
-  background-color: rgb(91, 23, 23);
-  /* opacity: 0.6; */
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  transition: all 0.5s;
 }
 
-
+#RIC-right:hover {
+  color: white;
+}
+#RIC-left:hover {
+  color: white;
+}
 
 /* PRODUCT CARD */
 .RIC-product-card-div {
   border: 1px solid gray;
-  height: 100%;
-  width: 20%;
-  margin: 0.5em;
+  aspect-ratio: 0.5;
+  margin: 0.5%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  transition-property: left;
+}
+
+.RIC-card-icon-div {
+  background-color: rgb(247, 247, 247);
 }
 
 .RIC-product-card-img-div {
-  margin: 3% 0;
+  padding-bottom: 9%;
   height: 70%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  background-color: rgb(247, 247, 247);
 }
 
 .RIC-product-card-img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: fill;
+  object-fit: cover;
 }
-
 
 .RIC-product-card-detail {
   display: flex;
@@ -109,6 +137,8 @@
 .RIC-conditional-icon {
   display: flex;
   justify-content: flex-end;
+  margin-top: 2%;
+  margin-right: 2%;
 }
 
 #RIC-category {
@@ -133,13 +163,13 @@ p.RIC {
 
 /* MODAL */
 .RIC-comparison-modal {
-  margin: 20% 40%;
+  margin: 5% 12%;
   display: block;
   z-index: 2;
   left: 0;
   top: 0;
   width: 30%;
-  height: 40%;
+  height: 60%;
   overflow: auto;
   background-color: white;
   position: fixed;
