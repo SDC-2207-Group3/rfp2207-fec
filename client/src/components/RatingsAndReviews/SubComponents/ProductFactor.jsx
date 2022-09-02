@@ -13,12 +13,15 @@ const ProductFactor = ({ factor, factorVal }) => {
   //fit: too small, perfect, too big
 
   //assume width of this element is the same 200px as above el
-
+  let width = (Number(factorVal.value) / 5) * 100;
   return (
     <div className="RR_factor-bar-container">
       <span>{factor}</span>
-      <div className="RR_factor-bar"></div>
-      <div className="RR_factor-bar-icon"></div>
+      <div className="RR_factor-bar">
+        <div className="RR_factor-bar-icon" style={{ width: `${width}%` }}>
+          &#9660;
+        </div>
+      </div>
       <div>
         {factor === "Size" ? (
           <div className="RR_factor-phrases">
