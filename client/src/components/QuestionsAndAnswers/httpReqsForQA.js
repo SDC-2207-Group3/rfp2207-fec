@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 
-
 API = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
 
 module.exports.getQuestions = (id) => axios.get(

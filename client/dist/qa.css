@@ -115,6 +115,11 @@
   height: auto;
 }
 
+.answer-image {
+  border: yellow;
+  background-color: yellow;
+}
+
 .qa-moreQuestions, .qa-newQuestionBtn {
   padding: 20px;
   border-color: 1px solid #d8d8d8;

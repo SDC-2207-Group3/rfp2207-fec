@@ -2,47 +2,75 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
+const axios = require("axios")
 // const url = require('url');
 // console.log('this is URL: ', URL.createObjectURL)
 
-// {yourAnswer: 'I have had this for five years and wear it everyday!', yourImages: FileList, yourNickname: 'jes', yourEmail: 'jes@me.com'}
-// yourAnswer: "I have had this for five years and wear it everyday!"
-// yourEmail: "jes@me.com"
-// yourImages: FileList
-// 0: File
-// lastModified: 1661967126613
-// lastModifiedDate: Wed Aug 31 2022 10:32:06 GMT-0700 (Pacific Daylight Time) {}
-// name: "test.jpg"
+
+// {id: 'NSBpnwS', title: 'test', url_viewer: 'https://ibb.co/NSBpnwS', url: 'https://i.ibb.co/C2Gvsx2/test.jpg', display_url: 'https://i.ibb.co/C2Gvsx2/test.jpg', …}
+// delete_url: "https://ibb.co/NSBpnwS/51f7aab787f514aa397cd77b7f4055c4"
+// display_url: "https://i.ibb.co/C2Gvsx2/test.jpg"
+// expiration: "0"
+// height: "225"
+// id: "NSBpnwS"
+// image: {filename: 'test.jpg', name: 'test', mime: 'image/jpeg', extension: 'jpg', url: 'https://i.ibb.co/C2Gvsx2/test.jpg'}
 // size: 8848
-// type: "image/jpeg"
-// webkitRelativePath: ""
-// [[Prototype]]: File
-// length: 1
-// [[Prototype]]: FileList
-// yourNickname: "jes"
-// [[Prototype]]: Object
+// thumb: {filename: 'test.jpg', name: 'test', mime: 'image/jpeg', extension: 'jpg', url: 'https://i.ibb.co/NSBpnwS/test.jpg'}
+// time: "1662148195"
+// title: "test"
+// url: "https://i.ibb.co/C2Gvsx2/test.jpg"
+// url_viewer: "https://ibb.co/NSBpnwS"
+// width: "225"
 
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
-    console.log(data)
-    console.log('this is question id: ', question_id)
-    // process file
-    // let imgData = URL.createObjectURL(data.yourImages[0])
-    // console.log('this is imgData: ', imgData)
-    const modalData = {
-      'body': data.yourAnswer,
-      'name': data.yourNickname,
-      'email': data.yourEmail,
-      // 'photos': [imgData]
-      'photos': ["https://source.unsplash.com/random/200x200?sig=1"] // TODO FIX THIS SO IT CAN UPLOAD OTHER IMGS
-    }
-    http.postAnswer(product_id, question_id, modalData)
-      .then((res) => http.getQuestions(product_id))
-      .then((res) => {setQA(res.data.results)})
-      .catch((err) => {console.error(err)})
+    if (data.yourImages.length > 0) {
+      let body = new FormData()
+      body.set('key', process.env.IMGBB_KEY)
+      body.append('image', data.yourImages[0])
+      axios({
+        method: 'post',
+        url: 'https://api.imgbb.com/1/upload',
+        data: body
+      })
+        .then((res) =>
+          // const modalData = {
+          //   'body': data.yourAnswer,
+          //   'name': data.yourNickname,
+          //   'email': data.yourEmail,
+          //   'photos': [res.data.data.url]
+          // }
 
+          http.postAnswer(
+            product_id,
+            question_id,
+            {
+            'body': data.yourAnswer,
+            'name': data.yourNickname,
+            'email': data.yourEmail,
+            'photos': [res.data.data.url]
+            }
+          ))
+        .then((res) => http.getQuestions(product_id))
+        .then((res) => {
+          setQA(res.data.results)
+        })
+        .catch((err) => {console.error(err)})
+    } else {
+      const modalData = {
+        'body': data.yourAnswer,
+        'name': data.yourNickname,
+        'email': data.yourEmail,
+        'photos': [] // TODO FIX THIS SO IT CAN UPLOAD OTHER IMGS
+      }
+      http.postAnswer(product_id, question_id, modalData)
+        .then((res) => http.getQuestions(product_id))
+        .then((res) => {setQA(res.data.results)})
+        .catch((err) => {console.error(err)})
+    }
   }
+
   return (
 
     <div className="qa-modalBackground">

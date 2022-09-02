@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import http from "./httpReqsForQA.js";
 // import {QuestionIDContext} from './QAEntry.jsx'
 
+
 // "id": 5539374,
 // "body": "jackky",
 // "date": "2022-04-27T00:00:00.000Z",
@@ -41,14 +42,18 @@ function AnswerItem({answer, question_id}) {
 
   // converting answer date stamp into Month DD, YYYY
   const options = {year: 'numeric', month: 'long', day: 'numeric' };
-  const date = new Date(answer.date).toLocaleDateString('en-US', options);
+  // console.log('this is answer.date: ', new Date(answer.date))
+  const date = new Date(answer.date).toLocaleDateString(undefined, options);
+  // const date = new Date(answer.date)
 
   return (
     <div className="answer-item-single-container">
       <div className="answer-item-single">
         <span className="answer-prefix">A: </span>
         <span className="answer-body">{answer.body}</span>
-
+        <span className="answer-image">
+          {answer.photos.length > 0 && <img src={answer.photos[0]}/>}
+        </span>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
           className={`qa-ref-link qa-mark ${helpfulClicked ? "noClick" : ""}`}
