@@ -2,21 +2,23 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
+import qaUtilities from "./qaUtilities.js"
 
-function QuestionModal({product_id, closeModal, mainQA, setQA}) {
-  const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
+function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) {
+  const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
     const modalData = {
-      'body': data.yourQuestion,
-      'name': data.yourNickname,
-      'email': data.yourEmail,
+      'body': qaUtilities.escapeHTML(data.yourQuestion),
+      'name': qaUtilities.escapeHTML(data.yourNickname),
+      'email': qaUtilities.escapeHTML(data.yourEmail),
       'product_id': Number(product_id)
     }
+    reset()
+    closeModal(false)
     http.postQuestion(product_id, modalData)
       .then((res) => http.getQuestions(product_id))
       .then((res) => {setQA(res.data.results)})
       .catch((err) => {console.error(err)})
-
   }
   return (
 
@@ -30,6 +32,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
             </button>
           <div className="qa-modalTitle">
             <h1>Ask Your Question</h1>
+            <h3>About the {currentProduct}</h3>
           </div>
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
