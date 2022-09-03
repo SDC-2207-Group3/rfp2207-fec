@@ -8,12 +8,12 @@ const ImageGallery = (props) => {
 
   const displayLimit = 7;
 
-  const [photoIndex, setPhotoIndex] = useState(0);
-  const [toggleZoom, setToggleZoom] = useState(false);
+  const [offset, setOffset]             = useState({ top: 0, left: 0 });
+  const [photoIndex, setPhotoIndex]     = useState(0);
+  const [toggleZoom, setToggleZoom]     = useState(false);
+  const [zoomAmount, setZoomAmount]     = useState(250);
+  const [defaultView, setDefaultView]   = useState(true);
   const [displayIndex, setDisplayIndex] = useState(0);
-  const [defaultView, setDefaultView] = useState(true);
-  const [offset, setOffset] = useState({ top: 0, left: 0 });
-  const [zoomAmount, setZoomAmount] = useState(250);
 
   const zoomImageRef = useRef(null);
   const containerRef = useRef(null);
@@ -36,15 +36,17 @@ const ImageGallery = (props) => {
   }
 
   useEffect(() => { // Automatically scrolls thumbnail bar on L/R change
-    photoIndex - displayLimit >= displayIndex ? setDisplayIndex(photoIndex - displayLimit + 1) : null;
-    photoIndex - displayIndex === -1 ? setDisplayIndex(photoIndex) : null;
+    photoIndex - displayLimit >= displayIndex ?
+      setDisplayIndex(photoIndex - displayLimit + 1) : null;
+    photoIndex - displayIndex === -1 ?
+      setDisplayIndex(photoIndex) : null;
    }, [photoIndex])
 
-   useEffect(() => {
-    console.log(displayIndex, 'displayIndex');
-    console.log(photoIndex, 'photoIndex');
-    photoIndex - displayIndex === -1 ? setPhotoIndex (displayIndex) : null;
-    photoIndex - displayIndex === displayLimit ? setPhotoIndex(photoIndex - 1) : null;
+   useEffect(() => { //Automatically changes display image on scroll change
+    photoIndex - displayIndex === -1 ?
+      setPhotoIndex (displayIndex) : null;
+    photoIndex - displayIndex === displayLimit ?
+      setPhotoIndex(photoIndex - 1) : null;
    }, [displayIndex])
 
   function minimize () {
@@ -81,7 +83,6 @@ const ImageGallery = (props) => {
   }
 
   function handleSlider(e) {
-    console.log(e.target.value);
     setZoomAmount(e.target.value)
   }
 
@@ -118,8 +119,8 @@ const ImageGallery = (props) => {
             {photoIndex === photos.length - 1 || toggleZoom ? null : <i className="fa-solid fa-angle-right" onClick={rightPhoto}/>}
           </div>
         </div>
-        {defaultView ? null :
-          toggleZoom ? null :
+        {defaultView ?  null :
+        toggleZoom ? null :
            <input
             type="range"
             min="100" max="400"

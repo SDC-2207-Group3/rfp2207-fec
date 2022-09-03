@@ -70,7 +70,7 @@ const Overview = (props) => {
 
   useEffect(() => {
     GetProductData(props.id)
-  }, [])
+  }, [props.id])
 
   const slogan = state.productDetails.slogan ? state.productDetails.slogan : "Product Slogan Unavailable";
   const description = state.productDetails.description ? state.productDetails.description : "Product Description Unavailable"
