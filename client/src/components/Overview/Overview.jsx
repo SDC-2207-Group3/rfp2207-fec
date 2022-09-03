@@ -90,7 +90,7 @@ const Overview = (props) => {
             <p>{description}</p>
           </section>
           <aside className="overview-features">
-            <h5>Features: </h5>
+            <h4>Features: </h4>
             <ul>
               {features.map((feature, index) =>
                 <li key={index}>{feature.feature}: {feature.value}</li>

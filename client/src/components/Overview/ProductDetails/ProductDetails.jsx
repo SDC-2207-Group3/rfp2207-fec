@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ProductContext } from './../Overview.jsx';
+import axios from 'axios';
 
 import RatingStars from './RatingStars.jsx';
 
@@ -24,7 +25,6 @@ const ProductDetails = (props) => {
   const name        = statePD.name        ? statePD.name        : "Product name unavailable";
   const slogan      = statePD.slogan      ? statePD.slogan      : "Product slogan Unavailable"
   const category    = statePD.category    ? statePD.category    : "Product Category Unavailable";
-  // const features    = statePD.features    ? statePD.features    : [];
   const description = statePD.description ? statePD.description : "Product Description Unavailable";
 
   // Product Styles
@@ -34,7 +34,7 @@ const ProductDetails = (props) => {
   // Selected Style
 
   const styleName  = stateSS.name           ? stateSS.name                  : "No style"
-  const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable";
+  const stylePrice = stateSS.original_price ? `$${stateSS.original_price}` : "Price Unavailable";
 
   const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size)     : [];
   const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : [];
@@ -49,6 +49,21 @@ const ProductDetails = (props) => {
     let quantities = []
     for (let i = 0; i < quantity; i++) { quantities.push(i + 1) }
     qtyDisplay = quantities;
+  }
+
+  //Price Toggle
+
+  function togglePrice () {
+    return stateSS.sale_price ? "overview-sale" : "";
+  }
+
+  function toggleSalePrice () {
+    console.log(stateSS.sale_price);
+    return stateSS.sale_price ?  (
+    <>
+     |<span className="overview-sale-price"> ${stateSS.sale_price}</span>
+    </>
+    ) : null
   }
 
   // Rating
@@ -70,16 +85,24 @@ const ProductDetails = (props) => {
     setSize(sizeRef.current.value)
   }
 
+  // Add to Cart
+
+  function AddToCart () {
+    return axios.post();
+  }
+
   return (
     <div className="overview-productDetails">
-
+      {console.log(stateSS)}
       <RatingStars rating={productRating} />
 
       <h6>{productRating} <span>Read all reviews</span></h6>
       <p></p>
       <h3>{category}</h3>
       <h2>{name}</h2>
-      <h4>{stylePrice}</h4>
+      <h4>
+        <span className={togglePrice()}>{stylePrice} </span> {toggleSalePrice()}
+      </h4>
       <h5>
         Styles > {styleName}
       </h5>
@@ -95,13 +118,6 @@ const ProductDetails = (props) => {
           </div>
         )}
       </div>
-
-      {/* <h5>Features: </h5>
-      <ul>
-        {features.map((feature, index) =>
-          <li key={index}>{feature.feature}: {feature.value}</li>
-        )}
-      </ul> */}
 
       {sizeDisplay.length > 0 ?
         <div>
@@ -121,11 +137,11 @@ const ProductDetails = (props) => {
               {qtyDisplay.map((qty, index) => <option key={index} value={qty}>{qty}</option>)}
             </select>
           </p>
+          <div className="CartButton" onClick={AddToCart}>Add to Cart</div>
         </div> :
         <section>
           <span>OUT OF STOCK</span>
         </section>}
-        <div className="CartButton">Add to Cart</div>
     </div>
   )
 }

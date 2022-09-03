@@ -170,14 +170,14 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: 10%;
+  padding: 15%;
   width: 100%;
   aspect-ratio: 1/1;
   transition: 0.5s;
 }
 
 .photo-section:hover {
-  padding: 5%;
+  padding: 10%;
   transition: 0.5s
 }
 
@@ -239,6 +239,14 @@
 .overview-productDetails-expanded {
   opacity: 0;
   transition: all 1s ease-in-out;
+}
+
+.overview-sale {
+  text-decoration: line-through;
+}
+
+.overview-sale-price {
+  color: red;
 }
 
 .styles-container {

@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useRef, useEffect } from 'react';
+import React, { useState, useContext, createContext, useRef, useEffect, useReducer } from 'react';
 import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 
@@ -48,6 +48,11 @@ const ImageGallery = (props) => {
     photoIndex - displayIndex === displayLimit ?
       setPhotoIndex(photoIndex - 1) : null;
    }, [displayIndex])
+
+   useEffect(() => {
+    setPhotoIndex(0);
+    setDisplayIndex(0);
+   }, [props.productStyle])
 
   function minimize () {
     setDefaultView(true);
