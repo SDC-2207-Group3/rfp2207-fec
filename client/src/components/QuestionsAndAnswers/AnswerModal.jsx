@@ -2,23 +2,61 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "./httpReqsForQA.js";
+import qaUtilities from "./qaUtilities.js"
+const axios = require("axios")
+
 
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
-  const {register, handleSubmit, formState: {errors} } = useForm({criteriaMode: "all"});
+  const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
-    console.log(data)
-    const modalData = {
-      'body': data.yourAnswer,
-      'name': data.yourNickname,
-      'email': data.yourEmail,
-      'photos': ["https://source.unsplash.com/random/200x200?sig=1"] // TODO FIX THIS SO IT CAN UPLOAD OTHER IMGS
-    }
-    http.postAnswer(product_id, question_id, modalData)
-      .then((res) => http.getQuestions(product_id))
-      .then((res) => {setQA(res.data.results)})
-      .catch((err) => {console.error(err)})
+    reset()
+    closeModal(false)
+    if (data.yourImages.length > 0) {
+      let body = new FormData()
+      body.set('key', process.env.IMGBB_KEY)
+      body.append('image', data.yourImages[0])
+      axios({
+        method: 'post',
+        url: 'https://api.imgbb.com/1/upload',
+        data: body
+      })
+        .then((res) =>
+          // const modalData = {
+          //   'body': data.yourAnswer,
+          //   'name': data.yourNickname,
+          //   'email': data.yourEmail,
+          //   'photos': [res.data.data.url]
+          // }
 
+          http.postAnswer(
+            product_id,
+            question_id,
+            {
+            'body': qaUtilities.escapeHTML(data.yourAnswer),
+            'name': qaUtilities.escapeHTML(data.yourNickname),
+            'email': qaUtilities.escapeHTML(data.yourEmail),
+            'photos': [res.data.data.url]
+            }
+          ))
+        .then((res) => http.getQuestions(product_id))
+        .then((res) => {
+          setQA(res.data.results)
+        })
+        .catch((err) => {console.error(err)})
+    } else {
+      const modalData = {
+        'body': data.yourAnswer,
+        'name': data.yourNickname,
+        'email': data.yourEmail,
+        'photos': [] // TODO FIX THIS SO IT CAN UPLOAD OTHER IMGS
+      }
+      http.postAnswer(product_id, question_id, modalData)
+        .then((res) => http.getQuestions(product_id))
+        .then((res) => {setQA(res.data.results)})
+        .catch((err) => {console.error(err)})
+    }
   }
+
   return (
 
     <div className="qa-modalBackground">

@@ -10,7 +10,6 @@ const App = (props) => {
   const [id, setId] = useState(65652);
 
   const changeId = (newId) => {
-    console.log('change id click', newId);
     setId(newId);
   }
 

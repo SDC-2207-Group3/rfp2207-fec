@@ -15,9 +15,21 @@ function QuestionsAndAnswers({id}) {
   // initial get request to get all questions for a specified product id
   useEffect(() => {
     http.getQuestions(id)
-      .then((res) => {setQA(res.data.results)})
+      .then((res) => {
+        setQA(res.data.results.sort((a, b) => b.question_helpfulness - a.question_helpfulness))
+      })
       .catch((err) => {console.error(err)})
   }, [id])
+
+  // state hook for getting current product name
+  const [currentProduct, setCurrentProduct] = useState([]);
+  useEffect(() => {
+    http.getProductName(id)
+      .then((res) => {
+        setCurrentProduct(res.data.name)})
+      .catch((err) => {console.error(err)})
+  }, [id])
+
 
   // hook for toggling question modal
   const [openModal, setOpenModal] = useState(false);
@@ -37,7 +49,7 @@ function QuestionsAndAnswers({id}) {
   const [questionsCount, incrementQuestions] = useState(4)
 
   return (
-    <div>
+    <div className="qa-app">
       <Search mainQA={mainQA} setQA={setQA} id={id}/>
       <Header />
       <ul className="qa-accordion">
@@ -54,7 +66,7 @@ function QuestionsAndAnswers({id}) {
         ))}
 
       </ul>
-      {qaDummyData.slice(questionsCount).length > 0
+      {mainQA.slice(questionsCount).length > 0
         &&
         <button className="qa-moreQuestions"
           onClick={() => incrementQuestions(questionsCount + 2)}
@@ -68,7 +80,7 @@ function QuestionsAndAnswers({id}) {
         >
         Add a question
         </button>
-        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA}/>}
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA} currentProduct={currentProduct}/>}
     </div>
   )
 
