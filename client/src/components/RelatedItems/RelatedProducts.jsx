@@ -6,39 +6,57 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 
 var RelatedProducts = (props) => {
   const [mainProductDetail, setDetail] = useState({});
-  const [currDisplay, setDisplay] = useState([]);
-  const [index, setIndex] = useState([0, 4]);
-  let id = useContext(IdContext);
+  const [scrollAmount, setScroll] = useState(0)
+  const [index, setIndex] = useState(0);
+  const displayLimit = 4;
+  let { id }  = useContext(IdContext);
 
-  useEffect(() => {
-    setDisplay(props.data.slice(...index))
-  }, [props.data])
   useEffect(() => {
     http.productReq(id)
-      .then((res) => {setDetail(res.data)})
+      .then((res) => {setDetail(res.data);});
   }, [])
 
+  const calculateScroll = () => {
+    return
+  }
+
   const leftClick = () => {
-    let copy = index.slice()
-    setIndex([copy[0] + 1, copy[1] + 1])
+    setIndex(index - 1);
+    if (index  === (props.data.length - displayLimit + 1)) {
+      setScroll(scrollAmount + (7.25 * window.innerWidth / 100))
+    } else {
+      setScroll(scrollAmount + (13.5 * window.innerWidth / 100))
+    }
   }
 
   const rightClick = () => {
-    let copy = index.slice()
-    setIndex([copy[0] - 1, copy[1] - 1])
+    setIndex(index + 1);
+    if (index  === (props.data.length - displayLimit)) {
+      setScroll(scrollAmount - (7.25 * window.innerWidth / 100))
+    } else {
+      setScroll(scrollAmount - (13.5 * window.innerWidth / 100))
+    }
+  }
+
+  const scrollCSS = {
+    transform: `translateX(${scrollAmount}px)`
   }
 
   return (
     <div id="RIC-related-items">
       <div id="RIC-related-header"><p>related products here</p></div>
-      <div id="RIC-ri-card-container">
-        {index[0] === 0 ? null : <span onClick={() => leftClick()} id="RIC-left"><ChevronLeft size={30}/></span>}
-        {currDisplay.map((product) => {
-          return <ProductCard main={mainProductDetail} key={product.id} product={product} mode={'related-item'}/>
-        })}
-        {index[1] === props.data.length ? <span onClick={() => rightClick()} id="RIC-right"><ChevronRight size={30} /></span> : null}
+      <div id="RIC-ri-carousel">
+        <div className="RIC-arrow-div">{index === 0 ? null : <span onClick={() => leftClick()} ><ChevronLeft id="RIC-left" size={30}/></span>}</div>
+        <div id="RIC-ri-view">
+          <div id="RIC-ri-cards" style={scrollCSS}>
+            {props.data.map((product) => {
+            return <ProductCard main={mainProductDetail} key={product.id} product={product} mode={'related-item'}/>
+            })}
+          </div>
+        </div>
+        <div className="RIC-arrow-div">{index <= props.data.length - displayLimit ? <span onClick={() => rightClick()} ><ChevronRight id="RIC-right" size={30} /></span> : null}</div>
+
       </div>
-      <div id="RIC-fade-div"></div>
     </div>
   )
 }

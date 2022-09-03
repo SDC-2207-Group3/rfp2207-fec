@@ -4,6 +4,7 @@ import utilities from "./utilities/utilities.js";
 import Sort from "./SubComponents/Sort.jsx";
 import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
+import AddReviewForm from "./subcomponents/AddReviewForm.jsx";
 import { useState, useEffect, useReducer } from "react";
 
 let RatingsAndReviewsMain = (props) => {
@@ -15,10 +16,14 @@ let RatingsAndReviewsMain = (props) => {
   const [meta, setMeta] = useState({});
   const [reviewStats, setReviewStats] = useState({});
   const [showMoreBtn, setShowMoreBtn] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   //this could be a context hook...
   let swapSort = (sort) => {
     setSortBy(sort);
+  };
+  let toggleModal = () => {
+    showModal ? setShowModal(false) : setShowModal(true);
   };
 
   //this could be moved to utilities later ~~~~~~~~~~~~~
@@ -96,9 +101,11 @@ let RatingsAndReviewsMain = (props) => {
             reviews={reviews}
             id={props.id}
             showMoreReviews={showMoreReviews}
+            toggleModal={toggleModal}
           />
         </div>
       </div>
+      {showModal ? <AddReviewForm /> : null}
     </section>
   );
 };
@@ -114,6 +121,8 @@ export default RatingsAndReviewsMain;
   relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
 
   no way of knowing if response from seller functionality works? background still red btw
+
+  need to pull the entire reviews list for a product, that way i can filter based on review ratings.
 
   break down review item subcomponent into more componenents
 */

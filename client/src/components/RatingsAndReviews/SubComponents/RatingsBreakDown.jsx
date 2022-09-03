@@ -2,12 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import StarsContainer from "./StarsContainer.jsx";
 import SingleBreakDown from "./SingleBreakDown.jsx";
+import ProductFactor from "./ProductFactor.jsx";
 
 //props = reviewStats, meta, id
 let RatingsBreakDown = (props) => {
   // state, fn to edit state = hook (initial val)
   const [avg, setAvg] = useState(0);
   const [meta, setMeta] = useState({});
+
+  //meta.characteristics = {comfort: {id: x, value: y}, quality: {},}
 
   const starTotal = props.reviewStats.starTotal;
   const voteTotal = props.reviewStats.voteTotal;
@@ -48,6 +51,19 @@ let RatingsBreakDown = (props) => {
                   starTotal={starTotal}
                   voteTotal={voteTotal}
                   key={i}
+                />
+              );
+            })
+          : null}
+      </div>
+      <div className="RR_product-factors">
+        {Object.keys(props.meta).length > 0
+          ? Object.keys(props.meta.characteristics).map((factor, i) => {
+              return (
+                <ProductFactor
+                  key={i}
+                  factor={factor}
+                  factorVal={props.meta.characteristics[factor]}
                 />
               );
             })

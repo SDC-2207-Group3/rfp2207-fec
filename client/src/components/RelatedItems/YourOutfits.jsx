@@ -4,7 +4,7 @@ import ProductCard from './ProductCard.jsx'
 var YourOutfits = (props) => {
 
   return (
-    <div>
+    <div id="RIC-your-outfits">
       <p>your outfits here</p>
     </div>
   )

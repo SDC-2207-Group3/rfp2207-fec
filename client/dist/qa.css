@@ -1,12 +1,22 @@
 
+/* Main QA Widget */
+
+.qa-app {
+  /* translate: 5%; */
+  padding-top: 1%;
+  padding-bottom: 1%;
+  /* padding-left: 0.5%;
+  padding-right: 0.5%; */
+}
+
 /* QA Search CSS */
 
 .qa-search {
   display: flex;
-  width: 1000px;
+  width: 100%;
   height: 30px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 
@@ -21,8 +31,8 @@
 
 .qa-accordion {
   /* box-sizing: border-box; */
-  max-height: 400px;
-  max-width: 1000px;
+  max-height: 40%;
+  max-width: 100%;
   /* margin: 6rem auto 4rem; */
   padding: 0 0px;
   list-style: none;
@@ -93,6 +103,12 @@
 .answer-prefix, .answer-body {
   transform: translateY(3.5px);
 }
+/*
+.answer-body {
+  display: flex;
+  flex-direction: row;
+  background-color: yellow;
+} */
 
 .qa-accordion-item.active .question-item-button {
   background-color: #f1f1f187;
@@ -105,6 +121,21 @@
 
 .answer-wrapper.open {
   height: auto;
+}
+
+.answer-image-file {
+  /* margin-top: 100px; */
+  max-width: 200px;
+  height: auto;
+}
+
+.answer-image {
+  display: flex;
+  /* margin-top: 10px; */
+  margin-top: 1%;
+  margin-bottom: 1%;
+  /* margin-left: -5%; */
+  padding-left: 1%;
 }
 
 .qa-moreQuestions, .qa-newQuestionBtn {
@@ -176,9 +207,10 @@
 }
 
 .qa-modalContainer .qa-modalTitle {
-  display: inline-block;
+  /* display: inline-block; */
   text-align: center;
-  margin-top: 10px;
+  margin-top: 1%;
+  margin-bottom: 1%;
 
 
 }
