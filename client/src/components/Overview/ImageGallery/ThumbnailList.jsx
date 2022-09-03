@@ -3,10 +3,16 @@ import { ImageGalleryContext } from './ImageGallery.jsx';
 import { ProductContext } from './../Overview.jsx';
 
 const ThumbnailList = (props) => {
-  const [displayIndex, setDisplayIndex] = useState(0);
 
   const { state } = useContext(ProductContext);
-  const { setPhotoIndex, productName, photoIndex, defaultView } = useContext(ImageGalleryContext);
+  const {
+    photoIndex,
+    productName,
+    defaultView,
+    displayIndex,
+    setPhotoIndex,
+    setDisplayIndex
+  } = useContext(ImageGalleryContext);
 
   const displayLimit = 7
 
@@ -35,13 +41,6 @@ const ThumbnailList = (props) => {
     borderRadius: "50%",
     transition: '0.25s'
   }
-
-   useEffect(() => {
-    // console.log(photoIndex, 'photoIndex')
-    // console.log(displayIndex, 'displayIndex')
-    // console.log(photoIndex - displayLimit)
-    photoIndex - displayLimit >= displayIndex ? setDisplayIndex(photoIndex - displayLimit + 1) : null;
-   })
 
   return (
     <div className="overview-thumbnailList" style={defaultView ? { opacity: '100', transition: '1s ease 0.5s' } : { opacity: '0', transition: '0.25s' }}>
@@ -85,27 +84,3 @@ const ThumbnailList = (props) => {
 }
 
 export default ThumbnailList;
-
-// {console.log(state, 'STATE')}
-// <div className="overview-container">
-//   <div className="overview-scroll">
-//     {displayIndex === 0 ? null : <i className="fa-solid fa-angle-up" onClick={scrollUp} ></i>}
-//   </div>
-//   <div className="overview-thumbnail-gallery">
-//       <div className="overview-thumbnail-view">
-//         {props.photos.map((photo, index) => (
-//             <div key={index} className="overview-thumbnail-container" onClick={() => setPhotoIndex(GetThumbnailIndex(photo))}>
-//               <img
-
-//                 className="overview-thumbnail"
-//                 src={photo.thumbnail_url}
-//                 alt={`${props.name} thumbnail ${index}`}
-//               />
-//             </div>
-//           ))}
-//       </div>
-//   </div>
-//   <div className="overview-scroll">
-//     {displayIndex + displayLimit >= props.photos.length ? null : <i className="fa-solid fa-angle-down" onClick={scrollDown} ></i>}
-//   </div>
-// </div>

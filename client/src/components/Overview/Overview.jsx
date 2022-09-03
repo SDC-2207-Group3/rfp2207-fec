@@ -70,21 +70,33 @@ const Overview = (props) => {
 
   useEffect(() => {
     GetProductData(props.id)
-  }, [])
+  }, [props.id])
 
   const slogan = state.productDetails.slogan ? state.productDetails.slogan : "Product Slogan Unavailable";
   const description = state.productDetails.description ? state.productDetails.description : "Product Description Unavailable"
+  const features    = state.productDetails.features    ? state.productDetails.features    : []
+
 
   return (
-    <ProductContext.Provider value={{state, dispatch}}>
-      <div>
-        <div className = "overview">
+    <ProductContext.Provider value={{ state, dispatch }}>
+      <div className="overview">
+        <div className = "overview-top">
           <ImageGallery productStyle = {state.selectedStyle}/>
           <ProductDetails productDetails = {state.productDetails}/>
         </div>
-        <div>
-          <h4>{slogan}</h4>
-          <p>{description}</p>
+        <div className="overview-description">
+          <section className="overview-slogan">
+            <h4>{slogan}</h4>
+            <p>{description}</p>
+          </section>
+          <aside className="overview-features">
+            <h5>Features: </h5>
+            <ul>
+              {features.map((feature, index) =>
+                <li key={index}>{feature.feature}: {feature.value}</li>
+              )}
+            </ul>
+          </aside>
         </div>
       </div>
     </ProductContext.Provider>

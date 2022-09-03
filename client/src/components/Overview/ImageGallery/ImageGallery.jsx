@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useRef } from 'react';
+import React, { useState, useContext, createContext, useRef, useEffect } from 'react';
 import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 
@@ -6,11 +6,14 @@ export const ImageGalleryContext = createContext(null);
 
 const ImageGallery = (props) => {
 
-  const [photoIndex, setPhotoIndex] = useState(0);
-  const [toggleZoom, setToggleZoom] = useState(false);
-  const [defaultView, setDefaultView] = useState(true);
-  const [offset, setOffset] = useState({ top: 0, left: 0 });
-  const [zoomAmount, setZoomAmount] = useState(250);
+  const displayLimit = 7;
+
+  const [offset, setOffset]             = useState({ top: 0, left: 0 });
+  const [photoIndex, setPhotoIndex]     = useState(0);
+  const [toggleZoom, setToggleZoom]     = useState(false);
+  const [zoomAmount, setZoomAmount]     = useState(250);
+  const [defaultView, setDefaultView]   = useState(true);
+  const [displayIndex, setDisplayIndex] = useState(0);
 
   const zoomImageRef = useRef(null);
   const containerRef = useRef(null);
@@ -31,6 +34,20 @@ const ImageGallery = (props) => {
   function rightPhoto () {
     setPhotoIndex(photoIndex + 1)
   }
+
+  useEffect(() => { // Automatically scrolls thumbnail bar on L/R change
+    photoIndex - displayLimit >= displayIndex ?
+      setDisplayIndex(photoIndex - displayLimit + 1) : null;
+    photoIndex - displayIndex === -1 ?
+      setDisplayIndex(photoIndex) : null;
+   }, [photoIndex])
+
+   useEffect(() => { //Automatically changes display image on scroll change
+    photoIndex - displayIndex === -1 ?
+      setPhotoIndex (displayIndex) : null;
+    photoIndex - displayIndex === displayLimit ?
+      setPhotoIndex(photoIndex - 1) : null;
+   }, [displayIndex])
 
   function minimize () {
     setDefaultView(true);
@@ -66,12 +83,18 @@ const ImageGallery = (props) => {
   }
 
   function handleSlider(e) {
-    console.log(e.target.value);
     setZoomAmount(e.target.value)
   }
 
   return (
-    <ImageGalleryContext.Provider value={{photoIndex, setPhotoIndex, productName, defaultView}}>
+    <ImageGalleryContext.Provider value={{
+      photoIndex,
+      productName,
+      defaultView,
+      displayIndex,
+      setPhotoIndex,
+      setDisplayIndex
+    }}>
       <div className={"overview-imageGallery "}>
       <div className={displayImageView}>
         {defaultView ? <ThumbnailList
@@ -96,8 +119,8 @@ const ImageGallery = (props) => {
             {photoIndex === photos.length - 1 || toggleZoom ? null : <i className="fa-solid fa-angle-right" onClick={rightPhoto}/>}
           </div>
         </div>
-        {defaultView ? null :
-          toggleZoom ? null :
+        {defaultView ?  null :
+        toggleZoom ? null :
            <input
             type="range"
             min="100" max="400"
