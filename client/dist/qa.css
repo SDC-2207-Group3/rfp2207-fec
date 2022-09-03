@@ -31,7 +31,7 @@
 
 .qa-accordion {
   /* box-sizing: border-box; */
-  max-height: 40%;
+  max-height: 500px;
   max-width: 100%;
   /* margin: 6rem auto 4rem; */
   padding: 0 0px;
