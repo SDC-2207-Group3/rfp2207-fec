@@ -1,8 +1,44 @@
 import React, { useState, useContext, createContext, useRef, useEffect, useReducer } from 'react';
 import { ProductContext } from './../Overview.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
+import IconList from './IconList.jsx';
 
 export const ImageGalleryContext = createContext(null);
+
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'minimize':
+      return {...state,
+        defaultView: true,
+        toggleZoom: false,
+        setZoomAmount: 250
+      }
+    case 'reset':
+      return {...state,
+        photoIndex: 0,
+        displayIndex: 0
+      }
+    case 'leftPhoto':
+      return { ...state, photoIndex: state.photoIndex - 1 }
+    case 'rightPhoto':
+      return { ...state, photoIndex: state.photoIndex + 1 }
+    case 'scrollUp':
+      return { ...state, displayIndex: state.displayIndex - 1 }
+    case 'scrollDown':
+      return { ...state, displayIndex: state.displayIndex + 1 }
+    default:
+      return { state }
+  }
+}
+
+const initialState = {
+  offset:       { top: 0, left: 0 },
+  photoIndex:   0,
+  toggleZoom:   false,
+  zoomAmount:   250,
+  defaultView:  true,
+  displayIndex: 0
+}
 
 const ImageGallery = (props) => {
 
@@ -42,14 +78,14 @@ const ImageGallery = (props) => {
       setDisplayIndex(photoIndex) : null;
    }, [photoIndex])
 
-   useEffect(() => { //Automatically changes display image on scroll change
+  useEffect(() => { //Automatically changes display image on scroll change
     photoIndex - displayIndex === -1 ?
       setPhotoIndex (displayIndex) : null;
     photoIndex - displayIndex === displayLimit ?
       setPhotoIndex(photoIndex - 1) : null;
    }, [displayIndex])
 
-   useEffect(() => {
+  useEffect(() => {
     setPhotoIndex(0);
     setDisplayIndex(0);
    }, [props.productStyle])
@@ -66,9 +102,10 @@ const ImageGallery = (props) => {
 
   function handleMouseMove (e) {
     if (zoomImageRef.current) {
-      const zoomRef = zoomImageRef.current.getBoundingClientRect();
-      const imageRef = targetImageRef.current.getBoundingClientRect();
+      const zoomRef      = zoomImageRef.current.getBoundingClientRect();
+      const imageRef     = targetImageRef.current.getBoundingClientRect();
       const containerRef = document.getElementsByClassName('displayImage-container')[0].getBoundingClientRect()
+
       const xRatio = (zoomRef.width - containerRef.width)/imageRef.width;
       const yRatio = (zoomRef.height - containerRef.height)/imageRef.height;
 
@@ -101,10 +138,10 @@ const ImageGallery = (props) => {
       setDisplayIndex
     }}>
       <div className={"overview-imageGallery "}>
-      <div className={displayImageView}>
         {defaultView ? <ThumbnailList
           photos={photos}
         /> : null}
+      <div className={displayImageView}>
         <div className="toggleExpandedView">
 
           <div className="image-arrows">
@@ -134,6 +171,7 @@ const ImageGallery = (props) => {
             onChange={handleSlider}/>}
         {defaultView ? null :
         <button onClick={minimize} className="overview-minimize">-</button>}
+        {/* <IconList /> */}
       </div>
       </div>
     </ImageGalleryContext.Provider>

@@ -78,7 +78,7 @@ const Overview = (props) => {
 
 
   return (
-    <ProductContext.Provider value={{ state, dispatch }}>
+    <ProductContext.Provider value={{ state, dispatch, _AtelierAPI }}>
       <div className="overview">
         <div className = "overview-top">
           <ImageGallery productStyle = {state.selectedStyle}/>
