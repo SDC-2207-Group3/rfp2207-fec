@@ -9,6 +9,7 @@ const axios = require("axios")
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
+    console.log('this is data: ', data)
     reset()
     closeModal(false)
     if (data.yourImages.length > 0) {
