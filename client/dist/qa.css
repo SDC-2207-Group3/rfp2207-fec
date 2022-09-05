@@ -5,6 +5,7 @@
   /* translate: 5%; */
   padding-top: 1%;
   padding-bottom: 1%;
+  cursor: default;
   /* padding-left: 0.5%;
   padding-right: 0.5%; */
 }
@@ -195,11 +196,11 @@
   color: cornflowerblue;
 }
 
-#qa-helpful:hover {
-  color: cornflowerblue;
-}
 
-#qa-report:hover {
+.helpful-hover:hover,
+.report-hover:hover,
+.question-item-control:hover,
+.question-item-button-text:hover {
   color: cornflowerblue;
 }
 

@@ -45,13 +45,13 @@ function AnswerItem({answer, question_id}) {
         </div>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
-          className={`qa-ref-link qa-mark ${helpfulClicked ? "noClick" : ""}`}
+          className={`qa-ref-link qa-mark helpful-hover ${helpfulClicked ? "noClick" : ""}`}
           onClick={() => markAnswerAsHelpful(answer.id, question_id)}
         >
           Yes({yesCount}) |
         </small>
         <small
-          id="hover-change" className={`qa-ref-link qa-mark ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
+          className={`qa-ref-link qa-mark report-hover ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
           onClick={() => reportAnswer(answer.id)}
         >
           {`${reportClicked ? "Reported" : "Report"}`}

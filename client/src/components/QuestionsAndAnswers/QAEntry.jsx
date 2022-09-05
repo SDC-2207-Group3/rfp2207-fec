@@ -35,7 +35,6 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
   }
 
 
-
   return(
     <li key={question.question_id} className={`qa-accordion-item ${active ? "active" : ""}`}>
       <div className="question-item-button" >
@@ -44,7 +43,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         </div>
         <small className="q-helpful qa-push">Helpful?</small>
         <small
-          id="qa-helpful" className={`q-helpful qa-mark ${questionHelpful ? "noClick" : ""}`}
+          id="qa-helpful" className={`q-helpful qa-mark helpful-hover ${questionHelpful ? "noClick" : ""}`}
           onClick={() => markQuestionAsHelpful(question.question_id, product_id)}
         >
           Yes({question.question_helpfulness})
@@ -55,7 +54,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
           |
         </small>
         <small
-          id="qa-report" className={`q-helpful qa-mark ${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
+          className={`q-helpful qa-mark report-hover${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
           onClick={() => reportQuestion(question.question_id)}
         >
         {`${reportQuestionClicked ? "Reported" : "Report"}`}
@@ -80,7 +79,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         <span onClick={onToggle} className="qa-ref-link question-item-control">{active ? "-" : "+"} </span>
       </div>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
-        <div className="answer-item">
+        <div className="answer-item"> 
           {
             Object.keys(question.answers)
               .sort((a, b) => b.helpfulness - a.helpfulness)

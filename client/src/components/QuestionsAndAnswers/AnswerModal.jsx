@@ -9,11 +9,16 @@ const axios = require("axios")
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
+    console.log('this is data: ', data)
     reset()
     closeModal(false)
     if (data.yourImages.length > 0) {
       let body = new FormData()
       body.set('key', process.env.IMGBB_KEY)
+      // data.yourImages.forEach((img, index) =>
+      //   // console.log('this is img: ', img)
+      //   body.append('image', img)
+      // )
       body.append('image', data.yourImages[0])
       axios({
         method: 'post',
@@ -21,13 +26,6 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
         data: body
       })
         .then((res) =>
-          // const modalData = {
-          //   'body': data.yourAnswer,
-          //   'name': data.yourNickname,
-          //   'email': data.yourEmail,
-          //   'photos': [res.data.data.url]
-          // }
-
           http.postAnswer(
             product_id,
             question_id,
@@ -48,7 +46,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
         'body': data.yourAnswer,
         'name': data.yourNickname,
         'email': data.yourEmail,
-        'photos': [] // TODO FIX THIS SO IT CAN UPLOAD OTHER IMGS
+        'photos': []
       }
       http.postAnswer(product_id, question_id, modalData)
         .then((res) => http.getQuestions(product_id))
