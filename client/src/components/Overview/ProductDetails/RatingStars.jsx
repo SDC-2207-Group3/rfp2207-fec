@@ -11,7 +11,7 @@ const RatingStars = (props) => {
     if (index + 1 <= Math.floor(productRating)) {
       return (
         <div key={index} className="star-container">
-          <i className="fa-solid fa-star star-fill"></i>
+          <i className="fa-solid fa-star star-fill" attr={index + 1}></i>
         </div>
       );
     } else if (index + 1 - productRating < 1) {
@@ -19,15 +19,15 @@ const RatingStars = (props) => {
       const fill = { width: percentageFill };
       return (
         <div key={index} className="star-container">
-          <i className="fa-solid fa-star star-fill"></i>
-          <i className="fa-regular fa-star star-empty"></i>
+          <i className="fa-solid fa-star star-fill" attr={index + 1}></i>
+          <i className="fa-regular fa-star star-empty" attr={index + 1}></i>
           <div className="rating-slider" style={fill}></div>
         </div>
       );
     } else if (index + 1 > productRating) {
       return (
         <div key={index} className="star-container">
-          <i className="fa-regular fa-star star-empty"></i>
+          <i className="fa-regular fa-star star-empty" attr={index + 1}></i>
         </div>
       );
     }

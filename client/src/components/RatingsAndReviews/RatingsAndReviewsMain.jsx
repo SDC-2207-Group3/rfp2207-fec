@@ -141,7 +141,7 @@ let RatingsAndReviewsMain = (props) => {
           />
         </div>
       </div>
-      {showModal ? <AddReviewForm /> : null}
+      {showModal ? <AddReviewForm meta={state.meta} /> : null}
     </section>
   );
 };
