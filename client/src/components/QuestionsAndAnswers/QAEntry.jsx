@@ -44,13 +44,18 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         </div>
         <small className="q-helpful qa-push">Helpful?</small>
         <small
-          className={`q-helpful qa-mark ${questionHelpful ? "noClick" : ""}`}
+          id="qa-helpful" className={`q-helpful qa-mark ${questionHelpful ? "noClick" : ""}`}
           onClick={() => markQuestionAsHelpful(question.question_id, product_id)}
         >
-          Yes({question.question_helpfulness}) |
+          Yes({question.question_helpfulness})
         </small>
         <small
-          className={`q-helpful qa-mark ${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
+          className={`q-helpful qa-mark`}
+        >
+          |
+        </small>
+        <small
+          id="qa-report" className={`q-helpful qa-mark ${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
           onClick={() => reportQuestion(question.question_id)}
         >
         {`${reportQuestionClicked ? "Reported" : "Report"}`}

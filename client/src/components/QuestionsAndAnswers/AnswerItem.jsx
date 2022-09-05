@@ -1,20 +1,9 @@
 import React, {useState} from 'react';
 import http from "./httpReqsForQA.js";
-// import utils from "../RatingsAndReviews/utilities/utilities.js"
-// import {QuestionIDContext} from './QAEntry.jsx'
 
-
-// "id": 5539374,
-// "body": "jackky",
-// "date": "2022-04-27T00:00:00.000Z",
-// "answerer_name": "jackky",
-// "helpfulness": 0,
-// "photos": []
 
 function AnswerItem({answer, question_id}) {
-  // console.log('in answer item here is answer object: ', answer)
-  // console.log('this is type of photo: ', typeof answer.photos[0])
-  // console.log('i wanna convert to blob: ', URL.createObjectURL(new Blob([answer.photos[0].slice(5)])))
+
   // hook for tracking whether or not an answer is marked helpful
   const [helpfulClicked, setHelpfulClicked] = useState(false);
 
@@ -62,7 +51,7 @@ function AnswerItem({answer, question_id}) {
           Yes({yesCount}) |
         </small>
         <small
-          className={`qa-ref-link qa-mark hover-change ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
+          id="hover-change" className={`qa-ref-link qa-mark ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
           onClick={() => reportAnswer(answer.id)}
         >
           {`${reportClicked ? "Reported" : "Report"}`}
