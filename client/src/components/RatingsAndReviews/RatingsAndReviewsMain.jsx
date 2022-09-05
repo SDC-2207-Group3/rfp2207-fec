@@ -8,13 +8,21 @@ import AddReviewForm from "./subcomponents/AddReviewForm.jsx";
 import { useState, useEffect, useReducer } from "react";
 
 let RatingsAndReviewsMain = (props) => {
+  let initialState = {
+    id: props.id,
+    reviews: [],
+    displayedReviews: 3,
+    meta: {},
+    reviewStats: {},
+  };
   // const [state, dispatch] = useReducer(reducer, initialState);
-  const [id, setId] = useState(props.id);
+  const [state, setState] = useState(initialState);
+  // const [id, setId] = useState(props.id);
   const [sortBy, setSortBy] = useState("relevant");
-  const [displayedReviews, setDisplayedReviews] = useState(3);
-  const [reviews, setReviews] = useState([]);
-  const [meta, setMeta] = useState({});
-  const [reviewStats, setReviewStats] = useState({});
+  // const [displayedReviews, setDisplayedReviews] = useState(3);
+  // const [reviews, setReviews] = useState([]);
+  // const [meta, setMeta] = useState({});
+  // const [reviewStats, setReviewStats] = useState({});
   const [showMoreBtn, setShowMoreBtn] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
@@ -28,12 +36,13 @@ let RatingsAndReviewsMain = (props) => {
 
   //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
+    console.warn("show more of", state.id, state.displayedReviews);
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
-          product_id: `${id}`,
+          product_id: `${props.id}`,
           sort: `${sortBy}`,
-          count: `${displayedReviews + 2}`,
+          count: `${state.displayedReviews + 2}`,
         },
         headers: { Authorization: process.env.KEY },
       })
@@ -41,27 +50,35 @@ let RatingsAndReviewsMain = (props) => {
         if (res.data.count > res.data.results.length) {
           setShowMoreBtn(false);
         } else {
-          setReviews(res.data.results);
-          setDisplayedReviews(displayedReviews + 2);
+          // setReviews(res.data.results);
+          // setDisplayedReviews(displayedReviews + 2);
+          setState({
+            ...state,
+            reviews: res.data.results,
+            displayedReviews: state.displayedReviews + 2,
+          });
         }
       })
       .catch((err) => console.log(err));
   };
 
-  let fetchData = () => {
+  let fetchData = (id) => {
+    console.log("now fetching data RR");
+    let tempReviews;
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {
           product_id: `${id}`,
           sort: `${sortBy}`,
-          count: `${displayedReviews}`,
+          count: `${state.displayedReviews}`,
         },
         headers: { Authorization: process.env.KEY },
       })
       //res.data.results = arr of reviews
       .then((res) => {
         //update state
-        setReviews(res.data.results);
+        // setReviews(res.data.results);
+        tempReviews = res.data.results;
       })
       .then(() => {
         // get meta data for current product
@@ -73,18 +90,26 @@ let RatingsAndReviewsMain = (props) => {
       .then((res) => {
         let reviewStatsObj = utilities.getAvgReviewValue(res.data);
 
-        setMeta(res.data);
-        setReviewStats(reviewStatsObj);
+        // setMeta(res.data);
+        // setReviewStats(reviewStatsObj);
+        setState({
+          ...state,
+          reviews: tempReviews,
+          meta: res.data,
+          reviewStats: reviewStatsObj,
+        });
       })
       .catch((err) => console.log("failed to fetch", err));
   };
 
   //when props update, call fetchData
   useEffect(() => {
-    fetchData();
-  }, []);
+    console.log("re render RR");
+    fetchData(props.id);
+    setShowMoreBtn(true);
+  }, [props.id]);
 
-  //when sort method changes, re-render reviews
+  //when sort method changes, çre-render reviews
   useEffect(() => {
     fetchData();
   }, [sortBy]);
@@ -93,13 +118,17 @@ let RatingsAndReviewsMain = (props) => {
     <section id="section_rr">
       <h2>Ratings and Reviews</h2>
       <div id="RR_bd-sort-list-container">
-        <RatingsBreakDown reviewStats={reviewStats} meta={meta} id={id} />
+        <RatingsBreakDown
+          reviewStats={state.reviewStats}
+          meta={state.meta}
+          id={state.id}
+        />
         <div id="RR_sort-list-container">
-          <Sort sortMethod={sortBy} swapSort={swapSort} id={props.id} />
+          <Sort sortMethod={sortBy} swapSort={swapSort} id={state.id} />
           <ReviewsList
             showMoreBtn={showMoreBtn}
-            reviews={reviews}
-            id={props.id}
+            reviews={state.reviews}
+            id={state.id}
             showMoreReviews={showMoreReviews}
             toggleModal={toggleModal}
           />
@@ -123,6 +152,12 @@ export default RatingsAndReviewsMain;
   no way of knowing if response from seller functionality works? background still red btw
 
   need to pull the entire reviews list for a product, that way i can filter based on review ratings.
+
+  the star count is rendering too far from the bars, must be nearer to bars on wide displays
+
+  my component isnt re rendering when new product selected
+
+  need to update state all at once, rather than passing pieces down
 
   break down review item subcomponent into more componenents
 */
