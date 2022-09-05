@@ -5,20 +5,16 @@ import { IdContext } from '../App.jsx'
 import { ChevronLeft, ChevronRight } from 'react-feather';
 
 var RelatedProducts = (props) => {
-  const [mainProductDetail, setDetail] = useState({});
+  // const [mainProductDetail, setDetail] = useState({});
   const [scrollAmount, setScroll] = useState(0)
   const [index, setIndex] = useState(0);
   const displayLimit = 4;
   let { id }  = useContext(IdContext);
 
-  useEffect(() => {
-    http.productReq(id)
-      .then((res) => {setDetail(res.data);});
-  }, [])
-
-  const calculateScroll = () => {
-    return
-  }
+  // useEffect(() => {
+  //   http.productReq(id)
+  //     .then((res) => {setDetail(res.data);});
+  // }, [])
 
   const leftClick = () => {
     setIndex(index - 1);
@@ -50,12 +46,11 @@ var RelatedProducts = (props) => {
         <div id="RIC-ri-view">
           <div id="RIC-ri-cards" style={scrollCSS}>
             {props.data.map((product) => {
-            return <ProductCard main={mainProductDetail} key={product.id} product={product} mode={'related-item'}/>
+            return <ProductCard main={props.main} key={product.id} product={product} mode={'related-item'}/>
             })}
           </div>
         </div>
         <div className="RIC-arrow-div">{index <= props.data.length - displayLimit ? <span onClick={() => rightClick()} ><ChevronRight id="RIC-right" size={30} /></span> : null}</div>
-
       </div>
     </div>
   )

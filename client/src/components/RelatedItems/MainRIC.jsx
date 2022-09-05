@@ -5,14 +5,19 @@ import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfits from './YourOutfits.jsx'
 import Stars from './Stars.jsx';
 import * as _ from 'underscore';
-import { IdContext } from '../App.jsx'
+import { IdContext } from '../App.jsx';
+import CardCarousel from './CardCarousel.jsx'
+import outfitDetails from './YourOutfitData.js'
 
 const RelatedItems = (props) => {
   const { id } = useContext(IdContext);
   const [data, setData] = useState([]);
   const [related, setRelated] = useState([]);
+  const [mainProductDetail, setMainProductDetail] = useState({});
 
   useEffect(() => {
+    http.productReq(id)
+      .then((res) => {setMainProductDetail(res.data);});
     http.relatedReq(id)
     .then(res => setRelated(_.uniq(res.data)))
     .catch(err => console.error(err));
@@ -38,10 +43,13 @@ const RelatedItems = (props) => {
     });
   }, [related])
 
+  console.log('--related ids--', related, 'main', mainProductDetail);
+
   return (
     <section id="RIC-section">
-      <RelatedProducts data={data}/>
-      <YourOutfits data={data}/>
+      <CardCarousel data={outfitDetails}/>
+      {/* <RelatedProducts main={mainProductDetail} data={data}/> */}
+      {/* <YourOutfits main={mainProductDetail}/> */}
     </section>
   )
 }
