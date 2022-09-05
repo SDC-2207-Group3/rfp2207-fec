@@ -7,7 +7,6 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0.5em 0em;
 }
 
 /* STARS */
@@ -40,66 +39,29 @@
   opacity: 0.6;
 }
 
-/* RELATED ITEMS */
-#RIC-related-items {
+/* RELATED ITEMS & YOUR OUTFIT OVERALL CSS */
+.RIC-divs {
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 0.2fr 1.8fr;
   height: 100%;
 }
 
-#RIC-related-header {
-  padding: 0.2em;
+.RIC-header {
   font-size: large;
   font-family: 'Courier New', Courier, monospace;
-  border: 0.1em solid pink;
-  border-radius: 1em;
-  width: 35%;
-  margin: 0.5em 0;
+  /* border: 0.1em solid pink;
+  border-radius: 1em; */
+  /* width: 35%; */
   text-align: center;
-}
-
-#RIC-ri-carousel {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.RIC-arrow-div {
-  width: 5%;
-}
-
-#RIC-ri-view {
-  overflow-x: hidden;
-  height: 100%;
-  width: 80%;
-  position: relative;
-  box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
-}
-
-#RIC-ri-cards {
-  position: absolute;
-  display: flex;
-  justify-content: flex-start;
-  height: 100%;
-  transition: all 0.5s;
-}
-
-#RIC-right:hover {
-  color: lightgray
-}
-#RIC-left:hover {
-  color: lightgray
 }
 
 /* PRODUCT CARD */
 .RIC-product-card-div {
   border: 1px solid gray;
+  height: 80%;
   width: 13.5vw;
-  margin: 0.5%;
+  margin: 0.5% 1%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -109,11 +71,15 @@
 
 .RIC-card-icon-div {
   background-color: rgb(247, 247, 247);
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2%;
+  padding-top: 2%;
 }
 
 .RIC-product-card-img-div {
   padding-bottom: 9%;
-  height: 70%;
+  height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -133,13 +99,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   padding: 0 0.3em;
-}
-
-.RIC-conditional-icon {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 2%;
-  margin-right: 2%;
+  height: 50%;
 }
 
 #RIC-category {
@@ -231,7 +191,7 @@ td {
 .RIC-carousel-view {
   overflow-x: hidden;
   height: 100%;
-  width: 80%;
+  width: 100%;
   position: relative;
   box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
 }

@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import * as _ from 'underscore';
 import { Check, XCircle } from 'react-feather';
+import { RIOContext } from './MainRIO.jsx';
 
 var Comparison = (props) => {
-  const main = props.main.features;
+  const { mainProduct } = useContext(RIOContext);
+  const main = mainProduct.features;
   const related = props.product.features;
   console.log('--features--', main, related)
   let combinedFeatures = new Set();
@@ -21,7 +23,7 @@ var Comparison = (props) => {
       <table className="RIC-comparison-table">
         <tbody>
           <tr>
-            <th>{props.main.name}</th>
+            <th>{mainProduct.name}</th>
             <th></th>
             <th>{props.product.name}</th>
            </tr>

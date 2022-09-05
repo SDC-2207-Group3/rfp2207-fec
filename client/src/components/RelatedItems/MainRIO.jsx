@@ -13,38 +13,38 @@ export const RIOContext = createContext();
 const RelatedItemsAndOutfits = (props) => {
   const { id } = useContext(IdContext);
   const [state, setState] = useReducer((state, newState) => ({...state, ...newState}),
-  {main: {}, relatedItems: [], yourOutfits: []});
+  {mainProduct: {}, relatedItems: [], yourOutfits: []});
 
   useEffect(() => {
     http.productReq(id)
-      .then(res => setState({main: res.data}));
+      .then(res => setState({mainProduct: res.data}));
 
-    http.relatedReq(id)
-      .then(res => {
-       let related = _.uniq(res.data);
-       let reqArr = [];
-       related.map((id) => {
-        let promises = Promise.all([
-          http.productReq(id),
-          http.styleReq(id),
-          http.reviewReq(id)
-        ])
-        reqArr.push(promises);
-       });
-      axios.all(reqArr)
-        .then(responses => {
-          let newData = [];
-          responses.forEach((res) => {
-            newData.push(http.dataParser(res));
-          })
-          setState({relatedItems: newData});
-        });
-    })
-    .catch(err => console.error(err));
+    // http.relatedReq(id)
+    //   .then(res => {
+    //    let related = _.uniq(res.data);
+    //    let reqArr = [];
+    //    related.map((id) => {
+    //     let promises = Promise.all([
+    //       http.productReq(id),
+    //       http.styleReq(id),
+    //       http.reviewReq(id)
+    //     ])
+    //     reqArr.push(promises);
+    //    });
+    //   axios.all(reqArr)
+    //     .then(responses => {
+    //       let newData = [];
+    //       responses.forEach((res) => {
+    //         newData.push(http.dataParser(res));
+    //       })
+    //       setState({relatedItems: newData});
+    //     });
+    // })
+    // .catch(err => console.error(err));
   }, [id]);
 
   useEffect(() => {
-    setState({yourOutfits: outfitDetails})
+    setState({yourOutfits: outfitDetails, relatedItems: outfitDetails})
   }, []);
 
   console.log('--current state--', state);

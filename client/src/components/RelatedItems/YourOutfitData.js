@@ -4,7 +4,7 @@ var outfitsDetails = [
 { id: 66210,
   name: 'Freddie Suit',
   category: 'Suit',
-  features: [{feature: 'Stitching', value: '"Cross Stitch"'}, {feature: 'Non-GMO', value: null}], img: 'https://images.unsplash.com/photo-1515110371136-7e…hcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+  features: [{feature: 'Stitching', value: '"Cross Stitch"'}, {feature: 'Non-GMO', value: null}], img: "https://images.unsplash.com/photo-1515110371136-7e393289662c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
   original_price: "203.00",
   ratings: "2.7",
   sale_price: "189.00"

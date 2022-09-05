@@ -3,8 +3,8 @@ import CardCarousel from './CardCarousel.jsx';
 
 const YourOutfits = (props) => {
   return (
-    <div id="RIC-your-outfits">
-      <div id="RIC-outfits-header"><p>Your Outfits Here</p></div>
+    <div className="RIC-divs">
+      <div className="RIC-header"><p>YOUR OUTFIT</p></div>
       <CardCarousel mode={'your-outfits'}/>
     </div>
   )
