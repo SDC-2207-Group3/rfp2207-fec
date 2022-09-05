@@ -25,6 +25,13 @@ let RatingsAndReviewsMain = (props) => {
   // const [reviewStats, setReviewStats] = useState({});
   const [showMoreBtn, setShowMoreBtn] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [canRenderByRating, setCanRenderByRating] = useState({
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true,
+  });
 
   //this could be a context hook...
   let swapSort = (sort) => {

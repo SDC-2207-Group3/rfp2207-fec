@@ -10,6 +10,7 @@
   justify-content: center;
   padding: 10px;
   font-family: sans-serif;
+  color: black;
 }
 
 .RR_modal-form {
@@ -49,7 +50,11 @@
   min-height: 20vh;
   display: flex;
   flex-direction: column;
-  background: rgb(240, 240, 240);
+}
+
+#RR_break-down-container .star-container {
+  color: orange;
+  z-index: 2;
 }
 
 #RR_star-avg {
@@ -57,23 +62,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: left;
   margin: 8px;
 }
 
-.RR_star-container {
-  /* background: orange; */
+#RR_star-avg h2 {
+  padding-right: 1em;
 }
-.RR_stars {
-  /* background: rgb(206, 228, 235); */
-}
-
-.RR_star {
-}
-
-/* .RR_star-c {
-  background: yellow;
-} */
 
 .RR_star-cover {
   background: turquoise;
@@ -310,8 +305,11 @@
 }
 
 .RR_response-from-seller {
-  background: lightblue;
+  margin-left: 10%;
+  width: 80%;
+  background: rgb(240, 240, 240);
   font-style: italic;
+  padding: 2em 1em;
 }
 
 .RR_helpfulness-q {

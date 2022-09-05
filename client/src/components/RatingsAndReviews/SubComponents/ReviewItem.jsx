@@ -63,9 +63,9 @@ const ReviewItem = (props) => {
             })
           : null}
       </div>
-      <div className="RR_response-from-seller">
+      <div>
         {props.review.response !== null ? (
-          <span>{`response from seller: ${props.review.response}`}</span>
+          <div className="RR_response-from-seller">{`response from seller: ${props.review.response}`}</div>
         ) : null}
       </div>
       <HelpfulnessAndReport review={props.review} />
