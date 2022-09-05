@@ -14,9 +14,11 @@
 .qa-search {
   display: flex;
   width: 100%;
-  height: 30px;
+  height: 40px;
   margin-top: 1%;
   margin-bottom: 1%;
+  border: 2px solid black;
+  padding: 0.7rem;
 }
 
 
@@ -24,6 +26,7 @@
 
 .qa-heading {
   font-size: 23px;
+  margin-top: 20px;
   margin-bottom: 20px;
   text-transform: uppercase;
   font-family: "Segoe UI", Arial, sans-serif;
@@ -31,7 +34,7 @@
 
 .qa-accordion {
   /* box-sizing: border-box; */
-  max-height: 500px;
+  max-height: 600px;
   max-width: 100%;
   /* margin: 6rem auto 4rem; */
   padding: 0 0px;
@@ -148,6 +151,10 @@
 
 }
 
+.qa-moreQuestions {
+  margin-right: 1rem;
+}
+
 .qa-push {
   margin-left: auto;
   cursor: default;
@@ -174,6 +181,10 @@
   color: red;
 }
 
+.hover-change:hover {
+  color: red;
+}
+
 /* QuestionModal CSS */
 
 /* .qa-modalBackground {
@@ -187,7 +198,7 @@
 .qa-modalContainer {
   width: 500px;
   height: 500px;
-  border-radius: 12px;
+  /* border-radius: 12px; */
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
   display: flex;
@@ -209,7 +220,7 @@
 .qa-modalContainer .qa-modalTitle {
   /* display: inline-block; */
   text-align: center;
-  margin-top: 1%;
+  /* margin-top: 1%; */
   margin-bottom: 1%;
 
 
@@ -236,10 +247,16 @@ button.qa-modalTitleCloseBtn {
   text-align: center;
 }
 
+.modalLabel {
+  display: block;
+  padding-top: 1rem;
+}
 
 .modalInput {
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
 }
 
 .qa-modalContainer .qa-modalFooter {
@@ -250,17 +267,13 @@ button.qa-modalTitleCloseBtn {
 }
 
 button.qa-modalFooterBtn {
-  width: 150px;
-  height: 45px;
-  margin: 10px;
-  border: none;
-  background-color: cornflowerblue;
-  color: white;
-  border-radius: 8px;
-  font-size: 20px;
+  width: 25%;
+  height: 35px;
+  margin: 6%;
+  border: 1px #d8d8d8;
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 15px;
   cursor: pointer;
-}
-
-#qa-modalFooterCancelBtn {
-  background-color: crimson
+  border-radius: 6px;
 }

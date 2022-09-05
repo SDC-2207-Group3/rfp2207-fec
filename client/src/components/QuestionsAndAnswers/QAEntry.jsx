@@ -34,6 +34,8 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
       .catch((err) => {console.error(err)})
   }
 
+
+
   return(
     <li key={question.question_id} className={`qa-accordion-item ${active ? "active" : ""}`}>
       <div className="question-item-button" onClick={onToggle}>
@@ -74,7 +76,7 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         <div className="answer-item">
           {
             Object.keys(question.answers)
-              // .sort((a, b) => b.helpfulness - a.helpfulness)
+              .sort((a, b) => b.helpfulness - a.helpfulness)
               .slice(0, answersCount)
               .map((answer_id, index) =>
                 <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/>

@@ -21,12 +21,13 @@ const handleQASearch = (e, display, setDisplay, id) => {
 
 function Search({mainQA, setQA, id}) {
   return (
-    <input
-      className="qa-search"
+
+    <input className="qa-search"
       type="text"
       placeholder="Have a question? Search for answers..."
       onChange={(event) => {handleQASearch(event, mainQA, setQA, id)}}
     />
+
   )
 }
 

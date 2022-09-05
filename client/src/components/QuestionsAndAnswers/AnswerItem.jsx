@@ -44,8 +44,6 @@ function AnswerItem({answer, question_id}) {
   // converting answer date stamp into Month DD, YYYY
   const options = {year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date(answer.date).toLocaleDateString(undefined, options);
-  // const date = utils.getFormattedDate(answer.date)
-  // console.log('this is date: ', date)
 
 
   return (
@@ -64,7 +62,7 @@ function AnswerItem({answer, question_id}) {
           Yes({yesCount}) |
         </small>
         <small
-          className={`qa-ref-link qa-mark ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
+          className={`qa-ref-link qa-mark hover-change ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
           onClick={() => reportAnswer(answer.id)}
         >
           {`${reportClicked ? "Reported" : "Report"}`}

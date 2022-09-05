@@ -36,7 +36,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
           </div>
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
-              Your Question
+              Your Question*
               <input className="modalInput" type="text" placeholder="Why did you like the product or not?"
               {...register("yourQuestion",
                 {
@@ -57,7 +57,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
               </small>
             </label>
             <label className="modalLabel">
-                Your Nickname
+                Your Nickname*
               <input className="modalInput"
                 type="text"
                 placeholder="Example: jackson11!"
@@ -82,7 +82,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
               <br></br>
             </label>
             <label className="modalLabel">
-                Your Email
+                Your Email*
               <input className="modalInput"
                 type="text"
                 placeholder="Example: jack@email.com"
@@ -112,11 +112,6 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
             </label>
 
           <div className="qa-modalFooter">
-            <button className="qa-modalFooterBtn" id="qa-modalFooterCancelBtn"
-                onClick={() => closeModal(false)}
-            >
-              Cancel
-            </button>
             <button className="qa-modalFooterBtn"
             >
               Submit
