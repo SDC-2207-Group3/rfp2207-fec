@@ -38,8 +38,10 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
 
   return(
     <li key={question.question_id} className={`qa-accordion-item ${active ? "active" : ""}`}>
-      <div className="question-item-button" onClick={onToggle}>
-        Q: {question.question_body}
+      <div className="question-item-button" >
+        <div onClick={onToggle}>
+          Q: {question.question_body}
+        </div>
         <small className="q-helpful qa-push">Helpful?</small>
         <small
           className={`q-helpful qa-mark ${questionHelpful ? "noClick" : ""}`}
