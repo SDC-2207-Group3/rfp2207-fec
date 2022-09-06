@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import StarsContainer from "./StarsContainer.jsx";
+// import StarsContainer from "./StarsContainer.jsx";
+import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import SingleBreakDown from "./SingleBreakDown.jsx";
 import ProductFactor from "./ProductFactor.jsx";
 
@@ -21,25 +22,15 @@ let RatingsBreakDown = (props) => {
   }, [props]);
 
   let avgWidth = (avg / 5) * 100; // percent rating
-  //display full stars in one color
-  //display filled in stars to specified width (%) in darger color
-  //2 divs, one rendering 5 stars and one rendering over those with a width
+  let currProductRating = props.reviewStats.starTotal
+    ? (props.reviewStats.starTotal / props.reviewStats.voteTotal).toFixed(1)
+    : null;
 
   return (
     <div id="RR_break-down-container">
       <div id="RR_star-avg">
-        <h2>
-          {props.reviewStats.starTotal
-            ? (
-                props.reviewStats.starTotal / props.reviewStats.voteTotal
-              ).toFixed(1)
-            : null}{" "}
-        </h2>
-        <StarsContainer
-          meta={props.meta}
-          starTotal={starTotal}
-          voteTotal={voteTotal}
-        />
+        <h2>{currProductRating} </h2>
+        <RatingStars rating={currProductRating} />
       </div>
       <div className="RR_ratings-bd-list">
         {props.meta.ratings
@@ -74,3 +65,5 @@ let RatingsBreakDown = (props) => {
 };
 
 export default RatingsBreakDown;
+
+//stars props = rating = {rating: "3.4"}
