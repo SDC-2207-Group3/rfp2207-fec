@@ -1,11 +1,11 @@
-import React from 'react';
-import ProductCard from './ProductCard.jsx'
+import React, { useState, useEffect, useContext } from 'react';
+import CardCarousel from './CardCarousel.jsx';
 
-var YourOutfits = (props) => {
-
+const YourOutfits = (props) => {
   return (
-    <div id="RIC-your-outfits">
-      <p>your outfits here</p>
+    <div className="RIC-divs">
+      <div className="RIC-header"><p>YOUR OUTFIT</p></div>
+      <CardCarousel mode={'your-outfits'}/>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import Overview from "./Overview/Overview.jsx";
-import RelatedItems from "./RelatedItems/RelatedItems.jsx";
+import RelatedItemsAndOutfits from "./RelatedItems/MainRIO.jsx";
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
 import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
 
@@ -19,7 +19,7 @@ const App = (props) => {
     <div id="app">
       <IdContext.Provider value={{id, changeId}}>
         <Overview id={id} />
-        <RelatedItems id={id} />
+        <RelatedItemsAndOutfits id={id} />
         <QuestionsAndAnswers id={id} />
         <RatingsAndReviews id={id} />
       </IdContext.Provider>

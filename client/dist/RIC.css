@@ -7,7 +7,196 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 0.5em 0em;
+}
+
+/* RELATED ITEMS & YOUR OUTFIT OVERALL CSS */
+.RIC-divs {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-rows: 0.2fr 1.8fr;
+  height: 100%;
+}
+
+.RIC-header {
+  font-size: large;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+}
+
+#RIC-add-card {
+  display: flex;
+  align-items: center;
+}
+
+#RIC-add-card-span {
+  display: flex;
+  align-items: center;
+}
+
+#RIC-add-card-span:hover {
+  color: gray;
+}
+
+/* Shared Carousel */
+.RIC-card-carousel {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.RIC-arrow-div {
+  width: 5%;
+}
+
+.RIC-carousel-view {
+  overflow-x: hidden;
+  height: 100%;
+  width: 80%;
+  position: relative;
+  box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
+}
+
+.RIC-cards {
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  transition: all 0.5s;
+}
+
+.RIC-right:hover {
+  color: lightgray
+}
+.RIC-left:hover {
+  color: lightgray
+}
+
+/* PRODUCT CARD */
+.RIC-product-card-div {
+  border: 1px solid gray;
+  height: 80%;
+  width: 13.5vw;
+  margin: 0.5% 1%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  transition-property: left;
+}
+
+.RIC-card-icon-div {
+  background-color: rgb(247, 247, 247);
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 2%;
+  padding-top: 2%;
+}
+
+.RIC-product-card-img-div {
+  padding-bottom: 9%;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: rgb(247, 247, 247);
+}
+
+.RIC-product-card-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.RIC-product-card-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 0.3em;
+  height: 50%;
+}
+
+#RIC-category {
+  font-style: italic;
+}
+
+#RIC-name {
+  font-weight: bold;
+}
+
+p.RIC {
+  padding: 0.1em 0;
+}
+
+#RIC-sale-price {
+  color: red;
+}
+
+#RIC-original-price-sale {
+  text-decoration: line-through;
+}
+
+/* MODAL */
+.RIC-comparison-modal {
+  margin: 5% 12%;
+  display: block;
+  z-index: 2;
+  left: 25%;
+  top: 75%;
+  width: 30%;
+  height: 40%;
+  overflow: auto;
+  background-color: white;
+  position: absolute;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  border: 1px solid gray;
+  padding: 1em;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.RIC-comparison-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.RIC-comparison-table-div {
+  margin: 0 5%;
+  max-height: min-content;
+  overflow: hidden;
+}
+
+table.RIC-comparison {
+  border-collapse: collapse;
+  position: relative;
+}
+
+tbody.RIC-comparison {
+  display: block;
+  overflow: auto;
+}
+
+.RIC-modal-names {
+  position: sticky;
+  top: 0;
+  overflow-y: hidden;
+  z-index: 5;
+  background-color: rgb(242, 232, 212)
+}
+
+th.RIC-comparison {
+  text-align: center;
+  margin: 0.3em 0;
+}
+
+td.RIC-comparison {
+  text-align: center;
+  padding: 0.5em 0;
 }
 
 /* STARS */
@@ -38,177 +227,4 @@
   z-index: 1;
   background-color: rgb(254, 254, 254);
   opacity: 0.6;
-}
-
-/* RELATED ITEMS */
-#RIC-related-items {
-  display: grid;
-  grid-auto-columns: 1fr;
-  grid-template-rows: 0.2fr 1.8fr;
-  height: 100%;
-}
-
-#RIC-related-header {
-  padding: 0.2em;
-  font-size: large;
-  font-family: 'Courier New', Courier, monospace;
-  border: 0.1em solid pink;
-  border-radius: 1em;
-  width: 35%;
-  margin: 0.5em 0;
-  text-align: center;
-}
-
-#RIC-ri-carousel {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.RIC-arrow-div {
-  width: 5%;
-}
-
-#RIC-ri-view {
-  overflow-x: hidden;
-  height: 100%;
-  width: 80%;
-  position: relative;
-  box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
-}
-
-#RIC-ri-cards {
-  position: absolute;
-  display: flex;
-  justify-content: flex-start;
-  height: 100%;
-  transition: all 0.5s;
-}
-
-#RIC-right:hover {
-  color: lightgray
-}
-#RIC-left:hover {
-  color: lightgray
-}
-
-/* PRODUCT CARD */
-.RIC-product-card-div {
-  border: 1px solid gray;
-  width: 13.5vw;
-  margin: 0.5%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  transition-property: left;
-}
-
-.RIC-card-icon-div {
-  background-color: rgb(247, 247, 247);
-}
-
-.RIC-product-card-img-div {
-  padding-bottom: 9%;
-  height: 70%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: rgb(247, 247, 247);
-}
-
-.RIC-product-card-img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-}
-
-.RIC-product-card-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding: 0 0.3em;
-}
-
-.RIC-conditional-icon {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 2%;
-  margin-right: 2%;
-}
-
-#RIC-category {
-  font-style: italic;
-}
-
-#RIC-name {
-  font-weight: bold;
-}
-
-p.RIC {
-  padding: 0.1em 0;
-}
-
-#RIC-sale-price {
-  color: red;
-}
-
-#RIC-original-price-sale {
-  text-decoration: line-through;
-}
-
-/* MODAL */
-.RIC-comparison-modal {
-  margin: 5% 12%;
-  display: block;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 30%;
-  height: 60%;
-  overflow: auto;
-  background-color: white;
-  position: fixed;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-  border: 1px solid gray;
-  padding: 1em;
-  border-radius: 2px;
-  text-align: center;
-}
-
-.RIC-comparison-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.RIC-product-names {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-}
-
-table .RIC-comparison-table {
-  border-collapse: collapse;
-}
-
-tbody {
-  display: block;
-  overflow: auto;
-  height: 200px;
-  width: 100%;
-}
-
-th {
-  margin: 0.3em 0;
-}
-
-td {
-  text-align: center;
-  padding: 0.5em 0;
 }
