@@ -13,24 +13,28 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
     // reset()
     // closeModal(false)
     if (data.yourImages.length > 0) {
-      console.log('images: ', data.yourImages)
-      let body = new FormData()
-      body.set('key', process.env.IMGBB_KEY)
+      // console.log('images: ', data.yourImages)
+      var arrPromise = [];
       for (var key in data.yourImages) {
         if (key.length === 1) {
-          console.log('here is key: ', key)
           // IF condition is v hacky way to get only keys of files
+          var body = new FormData()
+          body.set('key', process.env.IMGBB_KEY)
           body.append('image', data.yourImages[key])
+          var promise = axios({
+            method: 'post',
+            url: 'https://api.imgbb.com/1/upload',
+            data: body
+          })
+          arrPromise.push(promise);
         }
       }
+      // console.log('this is arrPromise: ', arrPromise)
       // body.append('image', data.yourImages[0])
       // TODO: how to view multiple images with IMGBB?!?!
-      axios({
-        method: 'post',
-        url: 'https://api.imgbb.com/1/upload',
-        data: body
-      })
+      Promise.all(arrPromise)
         .then((res) =>
+          // res is an array
           http.postAnswer(
             product_id,
             question_id,
@@ -38,11 +42,13 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
             'body': data.yourAnswer,
             'name': data.yourNickname,
             'email': data.yourEmail,
-            'photos': [res.data.data.url]
+            'photos': res.map((e) => e.data.data.url)
             }
-          ))
+          )
+        )
         .then((res) => http.getQuestions(product_id))
         .then((res) => {
+          console.log('setting new results: ', res.data.results)
           setQA(res.data.results)
         })
         .catch((err) => {console.error(err)})
