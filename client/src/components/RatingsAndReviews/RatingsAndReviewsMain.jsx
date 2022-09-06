@@ -70,7 +70,7 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let fetchData = (id) => {
-    console.log("now fetching data RR");
+    // console.log("now fetching data RR");
     let tempReviews;
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
@@ -111,14 +111,13 @@ let RatingsAndReviewsMain = (props) => {
 
   //when props update, call fetchData
   useEffect(() => {
-    console.log("re render RR");
     fetchData(props.id);
     setShowMoreBtn(true);
   }, [props.id]);
 
   //when sort method changes, çre-render reviews
   useEffect(() => {
-    fetchData();
+    fetchData(props.id);
   }, [sortBy]);
 
   return (
@@ -156,13 +155,9 @@ export default RatingsAndReviewsMain;
 
   relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
 
-  no way of knowing if response from seller functionality works? background still red btw
-
   need to pull the entire reviews list for a product, that way i can filter based on review ratings.
-
-  the star count is rendering too far from the bars, must be nearer to bars on wide displays
-
-  my component isnt re rendering when new product selected
+  ~~~revision, i think i can just apply an additional filter to the existing list and also apply that filter
+  to incomming reviews as well {1: false, 2: false, 3: true....etc} thisll keep it additive
 
   need to update state all at once, rather than passing pieces down
 
