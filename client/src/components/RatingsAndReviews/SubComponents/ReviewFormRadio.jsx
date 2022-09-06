@@ -60,7 +60,7 @@ const ReviewFormRadio = ({ chars, char, index }) => {
         <span className="RR_radio-selection-meaning">{radioTitle}</span>
         {[0, 1, 2, 3, 4].map((charRadio, i) => {
           return (
-            <div className="RR_review-form-radio-btn">
+            <div className="RR_review-form-radio-btn" key={i}>
               <input
                 type="radio"
                 name={`${char}-form`}

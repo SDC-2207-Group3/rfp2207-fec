@@ -7,6 +7,7 @@ const AddReviewForm = ({ meta }) => {
   console.log(meta, "....");
   const [userRating, setUserRating] = useState(0);
   const [reviewChars, setReviewChars] = useState("");
+  const [userImgs, setUserImgs] = useState([]);
 
   const handleClick = (e) => {
     let userScore = e.target.getAttribute("attr");
@@ -15,6 +16,15 @@ const AddReviewForm = ({ meta }) => {
 
   const handleChange = (e) => {
     setReviewChars(e.target.value);
+  };
+
+  const handleImgUpload = (e) => {
+    console.log(e.target.files);
+    Object.values(e.target.files).map((file) => {
+      console.log(file.name);
+    });
+
+    // setUserImgs()
   };
 
   let userRatingTerms = {
@@ -96,12 +106,7 @@ const AddReviewForm = ({ meta }) => {
         {characteristics.map((char, i) => {
           return (
             <div key={`${char}`}>
-              <ReviewFormRadio
-                chars={characteristics}
-                char={char}
-                index={i}
-                key={i}
-              />
+              <ReviewFormRadio chars={characteristics} char={char} index={i} />
             </div>
           );
         })}
@@ -113,7 +118,7 @@ const AddReviewForm = ({ meta }) => {
             className="RR_user-review-summary"
             type="text"
             placeholder="Example: Best purchase ever"
-            maxlength="60"
+            maxLength="60"
           ></input>
         </form>
       </div>
@@ -126,7 +131,6 @@ const AddReviewForm = ({ meta }) => {
             cols="55"
             value={reviewChars}
             placeholder="Why did you like the product or not?"
-            maxlength="1000"
             onChange={(e) => handleChange(e)}
           ></textarea>
         </form>
@@ -135,9 +139,47 @@ const AddReviewForm = ({ meta }) => {
             <span>
               Minimum required characters left: {50 - reviewChars.length}
             </span>
-          ) : null}
+          ) : (
+            <span>Minimum reached</span>
+          )}
         </div>
       </div>
+      <div>
+        <div>
+          {userImgs.length >= 5 ? null : (
+            <input
+              type="file"
+              id="files"
+              multiple="multiple"
+              accept="image/*"
+              onChange={(e) => handleImgUpload(e)}
+            ></input>
+          )}
+        </div>
+        <div>
+          {userImgs.map((img) => {
+            return <img className="RR_form-thumbnail" src={`${img.name}`} />;
+          })}
+        </div>
+      </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Example: jackson11!"
+          maxLength="60"
+        ></input>
+        <small>
+          For privacy reasons, do not use your full name or email address
+        </small>
+      </div>
+      <div>
+        <input
+          type="email"
+          placeholder="Example: jackson11@email.com"
+          maxLength="60"
+        ></input>
+      </div>
+      <button type="submit">Submit</button>
     </div>
   );
 };

@@ -43,7 +43,7 @@ let RatingsAndReviewsMain = (props) => {
 
   //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
-    console.warn("show more of", state.id, state.displayedReviews);
+    // console.warn("show more of", state.id, state.displayedReviews);
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
         params: {

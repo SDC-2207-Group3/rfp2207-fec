@@ -7,7 +7,6 @@ import ProductFactor from "./ProductFactor.jsx";
 
 //props = reviewStats, meta, id
 let RatingsBreakDown = (props) => {
-  console.log("RR BD", props);
   // state, fn to edit state = hook (initial val)
   const [avg, setAvg] = useState(0);
   const [meta, setMeta] = useState({});
