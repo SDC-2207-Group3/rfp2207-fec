@@ -5,13 +5,13 @@ import RelatedItems from './RelatedItems.jsx';
 import YourOutfits from './YourOutfits.jsx'
 import Stars from './Stars.jsx';
 import * as _ from 'underscore';
-import { IdContext } from '../App.jsx';
+import { ProductContext } from '../App.jsx';
 import outfitDetails from './YourOutfitData.js'
 
 export const RIOContext = createContext();
 
 const RelatedItemsAndOutfits = (props) => {
-  const { id } = useContext(IdContext);
+  const { id } = useContext(ProductContext);
   const [state, setState] = useReducer((state, newState) => ({...state, ...newState}),
   {mainProduct: {}, relatedItems: [], yourOutfits: []});
 

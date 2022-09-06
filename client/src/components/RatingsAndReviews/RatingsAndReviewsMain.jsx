@@ -162,4 +162,6 @@ export default RatingsAndReviewsMain;
   need to update state all at once, rather than passing pieces down
 
   break down review item subcomponent into more componenents
+
+  //getReviewsByCount, getReviewMetaData
 */
