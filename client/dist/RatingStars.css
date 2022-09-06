@@ -22,11 +22,13 @@
 }
 
 .star-fill {
+  color: rgb(255, 213, 0);
   position: absolute;
   z-index: -2;
 }
 
 .star-empty {
+  color: rgb(255, 213, 0);
   position: absolute;
   z-index: 0;
 }

@@ -1,16 +1,33 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ProductContext } from './../Overview.jsx';
+import axios from 'axios';
 
 import RatingStars from './RatingStars.jsx';
+import SocialMediaSharing from './SocialMediaSharing.jsx';
+
+const truncatePrice = (price) => {
+  return price.slice(price.length - 3, price.length) === '.00' ? price.slice(0, price.length - 3) : price
+}
+
+const AtelierPostSkuToCart = (sku) => {
+  return axios({
+    url: _AtelierAPI + "cart",
+    method: "post",
+    headers: { "Authorization": process.env.KEY },
+    data: { "sku_id": sku }
+  })
+}
 
 const ProductDetails = (props) => {
 
   const [size, setSize] = useState("select-size");
+  const [qty, setQty] = useState("no-size");
+  const [noSize, setNoSize] = useState(false);
 
   const qtyRef = useRef(null);
   const sizeRef = useRef(null);
 
-  const { state, dispatch } = useContext(ProductContext);
+  const { state, dispatch, _AtelierAPI } = useContext(ProductContext);
 
   const statePD = state.productDetails;
   const statePS = state.productStyles;
@@ -19,13 +36,11 @@ const ProductDetails = (props) => {
 
   // Product Details
 
-// const category, description, features, name, slogan
+// const category, name, features
 
-  const name        = statePD.name        ? statePD.name        : "Product name unavailable";
-  const slogan      = statePD.slogan      ? statePD.slogan      : "Product slogan Unavailable"
-  const category    = statePD.category    ? statePD.category    : "Product Category Unavailable";
-  // const features    = statePD.features    ? statePD.features    : [];
-  const description = statePD.description ? statePD.description : "Product Description Unavailable";
+  const name     = statePD.name     ? statePD.name     : "Product name unavailable";
+  const category = statePD.category ? statePD.category : "Product Category Unavailable";
+  const features = statePD.features ? statePD.features : [];
 
   // Product Styles
 
@@ -34,12 +49,13 @@ const ProductDetails = (props) => {
   // Selected Style
 
   const styleName  = stateSS.name           ? stateSS.name                  : "No style"
-  const stylePrice = stateSS.original_price ? `$ ${stateSS.original_price}` : "Price Unavailable";
+  const stylePrice = stateSS.original_price ? `$ ${truncatePrice(stateSS.original_price)}` : "Price Unavailable";
 
   const styleSizes   = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].size)     : [];
   const styleSizeQty = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => stateSS.skus[sku].quantity) : [];
+  const styleSKUs    = stateSS.skus ? Object.keys(stateSS.skus).map((sku) => sku) : [];
 
-  let sizeDisplay = styleSizes.filter((size, index) => styleSizeQty[index] > 0)
+  const sizeOptions = styleSizes.filter((size, index) => styleSizeQty[index] > 0).map((size, index) => <option key={index} value={size}>{size}</option>)
 
   let qtyDisplay;
 
@@ -49,6 +65,24 @@ const ProductDetails = (props) => {
     let quantities = []
     for (let i = 0; i < quantity; i++) { quantities.push(i + 1) }
     qtyDisplay = quantities;
+  }
+
+  const quantityOptions = size === 'select-size' ?
+    <option default value="no-size">-</option> :
+    qtyDisplay.map((qty, index) => <option key={index} value={qty}>{qty}</option>)
+
+  //Price Toggle
+
+  function togglePrice () {
+    return stateSS.sale_price ? "cancelled" : "";
+  }
+
+  function toggleSalePrice () {
+    return stateSS.sale_price ?  (
+    <>
+     {" "}|<span className="alert"> ${stateSS.sale_price}</span>
+    </>
+    ) : null
   }
 
   // Rating
@@ -62,70 +96,121 @@ const ProductDetails = (props) => {
     return (totalReviews/totalCount).toFixed(2);
   }
 
-  const productRating = calcProductRating(statePR);
+  const productRating = isNaN(calcProductRating(statePR)) ? 0 : calcProductRating(statePR);
+  const totalReviews = Object.values(statePR).reduce((memo, count) => memo + Number(count), 0);
 
   // Size Select
+
+  function sizeAlert() {
+    return noSize ? <article className="alert notification">Please select a size</article> : null;
+  }
 
   function changeSize (e) {
     setSize(sizeRef.current.value)
   }
 
+  useEffect(() => {
+    setNoSize(false);
+  }, [size, state.selectedStyle])
+
+  useEffect(() => {
+    setSize("select-size");
+    sizeRef.current ? sizeRef.current.value = "select-size" : null;
+  }, [state.selectedStyle])
+
+  // Qty Select
+
+  function changeQty (e) {
+    setQty(qtyRef.current.value)
+  }
+
+  // Add to Cart
+
+  function AddToCart () {
+    if (size === 'select-size') { return setNoSize(true) }
+
+    const index = styleSizes.indexOf(size);
+    const sku = styleSKUs[index]
+    const quantity = qty === 'no-size' ? 1 : qty;
+
+    let skuQuantities = [];
+    for (let i = 0; i < qty; i++) { skuQuantities.push(AtelierPostSkuToCart(sku)) }
+    return axios.all(skuQuantities)
+      .catch((err) => console.log(err));
+  }
+
   return (
     <div className="overview-productDetails">
+      {totalReviews > 0 ? <section className="overview-rating-section">
+        <RatingStars rating={productRating} />
+        <h6 className="section-link"> <a className="section-link" href="#section_rr">Read all {totalReviews} reviews</a></h6>
+      </section> : null}
 
-      <RatingStars rating={productRating} />
+      <section className="overview-pd-section">
+        <h4 id="product-category">{category}</h4>
+        <h2 className="product-title">{name}</h2>
+      </section>
 
-      <h6>{productRating} <span>Read all reviews</span></h6>
-      <p></p>
-      <h3>{category}</h3>
-      <h2>{name}</h2>
-      <h4>{stylePrice}</h4>
-      <h5>
-        Styles > {styleName}
-      </h5>
-      <div className="styles-container">
-        {styles.map((style, index) =>
-          <div key={index} className="style-thumbnail">
-            <div
-              className={"style-image-container" + (style === state.selectedStyle ? " style-selected" : "")}
-              onClick={() => {dispatch({ type: 'selectStyle', selectStyle: style })}}
-            >
-              <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
+      <section className="overview-pd-section">
+        <h5>
+          Styles > {styleName}
+        </h5>
+        <div className="styles-container">
+          {styles.map((style, index) =>
+            <div key={index} className="style-thumbnail">
+              <div
+                className={"style-image-container" + (style === state.selectedStyle ? " style-selected" : "")}
+                onClick={() => {dispatch({ type: "selectStyle", selectStyle: style })}}
+              >
+                <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {features.length > 0 ?
+      <section className="overview-pd-container">
+        <h4 className="overview-h4">Features: </h4>
+        <table className="overview-features-table">
+          <tbody >
+            {features.map((feature, index) =>
+              <tr key={index}>
+                <td className="overview-features">{feature.feature}: </td>
+                <td>{feature.value}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </section> : null}
+
+      {sizeOptions.length > 0 ?
+        <section className="overview-pd-section">
+          <section>
+            {sizeAlert()}
+            <select className="overview-select overview-size-select" ref={sizeRef} onChange={changeSize}>
+              <option default value="select-size">Select Size</option>
+              {sizeOptions}
+            </select>
+            <select className="overview-select overview-qty-select" ref={qtyRef} onChange={changeQty} disabled={size === 'select-size'}>
+              {quantityOptions}
+            </select>
+          </section>
+          <div className="CartButton" onClick={AddToCart}>
+            <div>
+              <span className={togglePrice()}>{stylePrice}</span>{toggleSalePrice()}
+            </div>
+            -
+            <div>
+              Add to Cart
             </div>
           </div>
-        )}
-      </div>
-
-      {/* <h5>Features: </h5>
-      <ul>
-        {features.map((feature, index) =>
-          <li key={index}>{feature.feature}: {feature.value}</li>
-        )}
-      </ul> */}
-
-      {sizeDisplay.length > 0 ?
-        <div>
-          <p>
-            Size: {" "}
-            <select className="overview-size-select" ref={sizeRef} onChange={changeSize}>
-              <option default value="select-size">Select Size</option>
-              {sizeDisplay.map((size, index) =>
-                <option key={index} value={size}>{size}</option>
-              )}
-            </select>
-          </p>
-          <p>
-            Qty: {" "}
-            <select className="overview-qty-select" ref={qtyRef}>
-              <option default value="no-size">-</option>
-              {qtyDisplay.map((qty, index) => <option key={index} value={qty}>{qty}</option>)}
-            </select>
-          </p>
-        </div> :
-        <section>
+        </section>
+        :
+        <section className="overview-pd-section">
           <span>OUT OF STOCK</span>
         </section>}
-        <div className="CartButton">Add to Cart</div>
+        <SocialMediaSharing />
     </div>
   )
 }

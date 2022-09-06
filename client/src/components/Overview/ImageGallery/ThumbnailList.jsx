@@ -29,7 +29,7 @@ const ThumbnailList = (props) => {
   }
 
   function scrollFn () {
-    return - displayIndex * (99.9/displayLimit) + '%'
+    return - displayIndex * (100/displayLimit) + '%'
   }
 
   const thumbnailScroll = {

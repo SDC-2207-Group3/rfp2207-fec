@@ -1,20 +1,30 @@
 .overview {
   margin: 2rem;
   width: 80vw;
+  display: flex;
+  align-items: flex-start;
+  /* border: 1px solid purple; */
 }
 
-.overview-top {
-  height: 60vh;
-  width: 80vw;
-  position: relative;
-  --overview-div: 60vw;
-  /* background-color:rgb(250, 255, 212); */
-  margin: 1rem auto;
-  display: flex;
-  flex-direction: row;
+.overview-h4 {
+  margin-bottom: 1rem;
+}
+
+.overview-left {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 2rem;
+  width: 70%;
+  z-index: 1;
+  /* background-color: aqua; */
+}
+
+.overview-right {
+  width: 30%;
 }
 
 .overview-description {
+  margin-top: 1rem;
   border: 1px solid rgb(82, 82, 82);
   border-radius: 0.5rem;
   display: flex;
@@ -22,20 +32,15 @@
 }
 
 .overview-slogan {
-  width: 60%;
   padding: 2%;
 }
 
-.overview-features {
-  width: 40%;
-  padding: 2%;
-}
+/* ================================ Image Gallery CSS ================================ */
 
 .overview-imageGallery {
-  top:0;
-  left: 0;
-  height: 100%;
-  width: 70%;
+  position: relative;
+  height: 60vh;
+  width: 100%;
   z-index: 1;
 }
 
@@ -48,7 +53,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 5;
+  z-index: 0;
   border-radius: 0.5rem;
   transition:
     box-shadow 1s ease 0.5s,
@@ -138,18 +143,31 @@
   top: 50%;
 }
 
-/* Thumbnail list CSS */
+.overview-imageGallery-expanded-icons {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.overview-imageGallery-expanded-icons > input {
+  margin: 0 0.25rem;
+  background-color: aqua;
+}
+
+/* ================================ Thumbnail list CSS ================================ */
 
 .overview-thumbnailList {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 1%;
+  left: -8%;
   margin: auto;
   width: 5rem;
   height: 95%;
   max-height: 35rem;
   object-fit: contain;
+  z-index: 1;
 }
 
 .thumbnail-viewport {
@@ -229,30 +247,42 @@
   transform: translateY(22%);
 }
 
-/* Product Details CSS */
+/* ================================ Product Details CSS ================================ */
 
 .overview-productDetails {
-  width: 30%;
-  padding: 2%;
+  position: relative;
+  padding: 2% 4% ;
+  padding-bottom: 0;
+  /* border: 1px solid black; */
 }
 
-.overview-productDetails-expanded {
-  opacity: 0;
-  transition: all 1s ease-in-out;
+.overview-rating-section {
+  margin-bottom: 1.5rem;
+}
+
+.product-title {
+  font-size: 2.5rem;
+}
+
+.overview-pd-section {
+  margin: 1.5rem 0;
 }
 
 .styles-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 20rem;
+  width: 100%;
+  max-width: 16rem;
 }
 
 .style-thumbnail {
 
   padding: 2%;
-  width: 5rem;
-  height: 5rem;
+  width: 25%;
+  max-width: 4rem;
+  /* height: 4rem; */
+  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -266,7 +296,7 @@
   align-items: center;
   overflow: hidden;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid rgb(255, 255, 255);
   transition: 0.25s;
 }
 
@@ -276,24 +306,58 @@
 }
 
 .style-image {
-  max-width: 160%;
-  max-height: 160%;
+  max-width: 200%;
+  max-height: 200%;
 }
 
-.overview-size-select option{
+.overview-features-table {
+  border-collapse: collapse;
+}
+
+.overview-features {
+  width: 55%
+}
+
+.overview-features-table td {
+  padding: 0.25rem;
+  text-align: left;
+}
+
+.overview-select {
   outline: 0;
-  background-color: aqua;
+  background-color: white;
+  width: 50%;
+  height: 4rem;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.overview-size-select {
+  width: 80%;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.overview-qty-select {
+  width: 20%;
+  border-left: none;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
 }
 
 .CartButton {
-  margin: 5% 2%;
   background-color: rgb(126, 156, 183);
+  border-radius: 0.25rem;
+  width: 100%;
+  height: 4rem;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 7rem;
-  height: 2rem;
-  border-radius: 10rem;
+}
+
+.CartButton > div {
+  margin: 0 0.5rem;
 }
 
 .CartButton:hover {
@@ -303,3 +367,40 @@
 .CartButton:active {
   background-color: rgb(140, 176, 208);
 }
+
+.social-media-icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* ================================ Utilities ================================ */
+
+.section-link {
+  text-decoration: none;
+  color:rgb(134, 134, 134)
+}
+
+#product-category{
+  color:rgb(134, 134, 134);
+  font-style: italic;
+  margin: none;
+}
+
+.alert {
+  color: red;
+}
+
+.notification {
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.cancelled {
+  text-decoration: line-through;
+}
+
+.fa-brands {
+  font-size: 2.5rem;
+  color: rgb(126, 156, 183);
+}
+

@@ -1,5 +1,9 @@
 /* root is the id of the html elmnt we put our react into */
 
+html {
+  scroll-behavior: smooth;
+}
+
 html body {
   background: var(--color-primary);
   font-size: 16px;
