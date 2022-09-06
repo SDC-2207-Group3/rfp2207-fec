@@ -137,42 +137,44 @@ const ImageGallery = (props) => {
       setPhotoIndex,
       setDisplayIndex
     }}>
-      <div className={"overview-imageGallery "}>
-        {defaultView ? <ThumbnailList
-          photos={photos}
-        /> : null}
-      <div className={displayImageView}>
-        <div className="toggleExpandedView">
+      <div className="overview-imageGallery ">
+        {defaultView ?
+          <ThumbnailList
+            photos={photos}
+          />
+        : null}
+        <div className={displayImageView}>
+          <div className="toggleExpandedView">
 
-          <div className="image-arrows">
-            {photoIndex === 0 || toggleZoom? null : <i className="fa-solid fa-angle-left" onClick={leftPhoto}/>}
+            <div className="image-arrows">
+              {photoIndex === 0 || toggleZoom? null : <i className="fa-solid fa-angle-left" onClick={leftPhoto}/>}
+            </div>
+
+            <div className="displayImage-container" onClick={ExpandandZoom} ref={containerRef}>
+
+              <img className="overview-displayImage" src={displayURL} ref={targetImageRef} onMouseMove={handleMouseMove}/>
+              {defaultView ? null :
+              toggleZoom ?
+                  <img className="overview-zoom-image" src={displayURL} ref={zoomImageRef} style={{...offset, width: zoomAmount + '%'}} onMouseMove={handleMouseMove}/>
+              : null}
+            </div>
+
+            <div className="image-arrows">
+              {photoIndex === photos.length - 1 || toggleZoom ? null : <i className="fa-solid fa-angle-right" onClick={rightPhoto}/>}
+            </div>
           </div>
-
-          <div className="displayImage-container" onClick={ExpandandZoom} ref={containerRef}>
-
-            <img className="overview-displayImage" src={displayURL} ref={targetImageRef} onMouseMove={handleMouseMove}/>
-            {defaultView ? null :
-            toggleZoom ?
-                <img className="overview-zoom-image" src={displayURL} ref={zoomImageRef} style={{...offset, width: zoomAmount + '%'}} onMouseMove={handleMouseMove}/>
-            : null}
-          </div>
-
-          <div className="image-arrows">
-            {photoIndex === photos.length - 1 || toggleZoom ? null : <i className="fa-solid fa-angle-right" onClick={rightPhoto}/>}
-          </div>
+          {defaultView ?  null :
+          toggleZoom ? null :
+            <input
+              type="range"
+              min="100" max="400"
+              value={zoomAmount}
+              className="overview-zoom-slider"
+              onChange={handleSlider}/>}
+          {defaultView ? null :
+          <button onClick={minimize} className="overview-minimize">-</button>}
+          {defaultView ? null : <IconList photos={photos}/>}
         </div>
-        {defaultView ?  null :
-        toggleZoom ? null :
-           <input
-            type="range"
-            min="100" max="400"
-            value={zoomAmount}
-            className="overview-zoom-slider"
-            onChange={handleSlider}/>}
-        {defaultView ? null :
-        <button onClick={minimize} className="overview-minimize">-</button>}
-        {/* <IconList /> */}
-      </div>
       </div>
     </ImageGalleryContext.Provider>
   )

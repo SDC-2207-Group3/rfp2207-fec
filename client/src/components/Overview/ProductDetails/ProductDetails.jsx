@@ -3,9 +3,9 @@ import { ProductContext } from './../Overview.jsx';
 import axios from 'axios';
 
 import RatingStars from './RatingStars.jsx';
+import SocialMediaSharing from './SocialMediaSharing.jsx';
 
 const truncatePrice = (price) => {
-  console.log(price);
   return price.slice(price.length - 3, price.length) === '.00' ? price.slice(0, price.length - 3) : price
 }
 
@@ -36,11 +36,11 @@ const ProductDetails = (props) => {
 
   // Product Details
 
-// const category, name, slogan
+// const category, name, features
 
-  const name        = statePD.name        ? statePD.name        : "Product name unavailable";
-  const slogan      = statePD.slogan      ? statePD.slogan      : "Product slogan Unavailable"
-  const category    = statePD.category    ? statePD.category    : "Product Category Unavailable";
+  const name     = statePD.name     ? statePD.name     : "Product name unavailable";
+  const category = statePD.category ? statePD.category : "Product Category Unavailable";
+  const features = statePD.features ? statePD.features : [];
 
   // Product Styles
 
@@ -112,6 +112,11 @@ const ProductDetails = (props) => {
     setNoSize(false);
   }, [size, state.selectedStyle])
 
+  useEffect(() => {
+    setSize("select-size");
+    sizeRef.current ? sizeRef.current.value = "select-size" : null;
+  }, [state.selectedStyle])
+
   // Qty Select
 
   function changeQty (e) {
@@ -141,8 +146,8 @@ const ProductDetails = (props) => {
       </section>
 
       <section className="overview-pd-section">
-        <h4 className="product-category">{category}</h4>
-        <h2>{name}</h2>
+        <h4 id="product-category">{category}</h4>
+        <h2 className="product-title">{name}</h2>
       </section>
 
       <section className="overview-pd-section">
@@ -154,7 +159,7 @@ const ProductDetails = (props) => {
             <div key={index} className="style-thumbnail">
               <div
                 className={"style-image-container" + (style === state.selectedStyle ? " style-selected" : "")}
-                onClick={() => {dispatch({ type: 'selectStyle', selectStyle: style })}}
+                onClick={() => {dispatch({ type: "selectStyle", selectStyle: style })}}
               >
                 <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
               </div>
@@ -163,22 +168,33 @@ const ProductDetails = (props) => {
         </div>
       </section>
 
+      {features.length > 0 ?
+      <section className="overview-pd-container">
+        <h4 className="overview-h4">Features: </h4>
+        <table className="overview-features-table">
+          <tbody >
+            {features.map((feature, index) =>
+              <tr key={index}>
+                <td className="overview-features">{feature.feature}: </td>
+                <td>{feature.value}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </section> : null}
 
       {sizeOptions.length > 0 ?
-        <section className="">
-          <section className="overview-pd-section">
+        <section className="overview-pd-section">
+          <section>
             {sizeAlert()}
-            <select className="overview-select" ref={sizeRef} onChange={changeSize}>
+            <select className="overview-select overview-size-select" ref={sizeRef} onChange={changeSize}>
               <option default value="select-size">Select Size</option>
               {sizeOptions}
             </select>
-            <select className="overview-select" ref={qtyRef} onChange={changeQty} disabled={size === 'select-size'}>
+            <select className="overview-select overview-qty-select" ref={qtyRef} onChange={changeQty} disabled={size === 'select-size'}>
               {quantityOptions}
             </select>
           </section>
-          <h3>
-
-          </h3>
           <div className="CartButton" onClick={AddToCart}>
             <div>
               <span className={togglePrice()}>{stylePrice}</span>{toggleSalePrice()}
@@ -190,9 +206,10 @@ const ProductDetails = (props) => {
           </div>
         </section>
         :
-        <section>
+        <section className="overview-pd-section">
           <span>OUT OF STOCK</span>
         </section>}
+        <SocialMediaSharing />
     </div>
   )
 }

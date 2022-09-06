@@ -80,23 +80,17 @@ const Overview = (props) => {
   return (
     <ProductContext.Provider value={{ state, dispatch, _AtelierAPI }}>
       <div className="overview">
-        <div className = "overview-top">
+        <div className = "overview-left">
           <ImageGallery productStyle = {state.selectedStyle}/>
-          <ProductDetails productDetails = {state.productDetails}/>
+          <div className="overview-description">
+            <section className="overview-slogan">
+              <h4 className="overview-h4">{slogan}</h4>
+              <p>{description}</p>
+            </section>
+          </div>
         </div>
-        <div className="overview-description">
-          <section className="overview-slogan">
-            <h4>{slogan}</h4>
-            <p>{description}</p>
-          </section>
-          <aside className="overview-features">
-            <h4>Features: </h4>
-            <ul>
-              {features.map((feature, index) =>
-                <li key={index}>{feature.feature}: {feature.value}</li>
-              )}
-            </ul>
-          </aside>
+        <div className="overview-right">
+          <ProductDetails productDetails = {state.productDetails}/>
         </div>
       </div>
     </ProductContext.Provider>
