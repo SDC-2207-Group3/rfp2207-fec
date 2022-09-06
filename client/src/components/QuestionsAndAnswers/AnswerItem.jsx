@@ -41,7 +41,10 @@ function AnswerItem({answer, question_id}) {
         <span className="answer-prefix">A: </span>
         <span className="answer-body">{answer.body}</span>
         <div className="answer-body answer-image">
-          {answer.photos.length > 0 && <img className="answer-image-file" src={answer.photos[0]}/>}
+          {answer.photos.length > 0
+          &&
+          answer.photos.map((image) => <img className="answer-image-file" src={image}/> )
+          }
         </div>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
