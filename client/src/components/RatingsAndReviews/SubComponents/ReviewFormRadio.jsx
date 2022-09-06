@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 
 const ReviewFormRadio = ({ chars, char, index }) => {
   const userRatingRadioVals = {
@@ -46,17 +47,33 @@ const ReviewFormRadio = ({ chars, char, index }) => {
     ],
   };
 
+  const [radioTitle, setRadioTitle] = useState("none selected");
+  let handleTitle = (e) => {
+    console.log(e.target.value);
+    setRadioTitle(e.target.value);
+  };
+
   return (
     <div className="RR_review-form-radio">
       <span className="RR_review-form-radio-title">{char}: </span>
-      {[0, 1, 2, 3, 4].map((charRadio, i) => {
-        return (
-          <div className="RR_review-form-radio-btn">
-            <input type="radio" name={`${char}-form`} value={`${char}`}></input>
-            <label>{userRatingRadioVals[char][i]}</label>
-          </div>
-        );
-      })}
+      <div className="RR_radio-btns-title">
+        <span className="RR_radio-selection-meaning">{radioTitle}</span>
+        {[0, 1, 2, 3, 4].map((charRadio, i) => {
+          return (
+            <div className="RR_review-form-radio-btn">
+              <input
+                type="radio"
+                name={`${char}-form`}
+                value={`${userRatingRadioVals[char][i]}`}
+                onChange={(e) => handleTitle(e)}
+              ></input>
+              <label>
+                {i === 0 || i === 4 ? userRatingRadioVals[char][i] : null}
+              </label>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

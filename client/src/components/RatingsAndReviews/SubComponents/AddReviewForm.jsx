@@ -6,10 +6,15 @@ import ReviewFormRadio from "./ReviewFormRadio.jsx";
 const AddReviewForm = ({ meta }) => {
   console.log(meta, "....");
   const [userRating, setUserRating] = useState(0);
+  const [reviewChars, setReviewChars] = useState("");
 
   const handleClick = (e) => {
     let userScore = e.target.getAttribute("attr");
     setUserRating(userScore);
+  };
+
+  const handleChange = (e) => {
+    setReviewChars(e.target.value);
   };
 
   let userRatingTerms = {
@@ -87,24 +92,56 @@ const AddReviewForm = ({ meta }) => {
           <label htmlFor="no">No</label>
         </div>
       </form>
-      <form>
+      <div>
+        {characteristics.map((char, i) => {
+          return (
+            <div key={`${char}`}>
+              <ReviewFormRadio
+                chars={characteristics}
+                char={char}
+                index={i}
+                key={i}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <div className="RR_user-review-summary-container">
+        <span>Review Summary</span>
+        <form>
+          <input
+            className="RR_user-review-summary"
+            type="text"
+            placeholder="Example: Best purchase ever"
+            maxlength="60"
+          ></input>
+        </form>
+      </div>
+      <div className="RR_user-review-body-container">
+        <form>
+          <textarea
+            className="RR_user-review-body"
+            type="text"
+            rows="30"
+            cols="55"
+            value={reviewChars}
+            placeholder="Why did you like the product or not?"
+            maxlength="1000"
+            onChange={(e) => handleChange(e)}
+          ></textarea>
+        </form>
         <div>
-          {characteristics.map((char, i) => {
-            return (
-              <div key={`${char}`}>
-                <ReviewFormRadio
-                  chars={characteristics}
-                  char={char}
-                  index={i}
-                  key={i}
-                />
-              </div>
-            );
-          })}
+          {50 - reviewChars.length >= 0 ? (
+            <span>
+              Minimum required characters left: {50 - reviewChars.length}
+            </span>
+          ) : null}
         </div>
-      </form>
+      </div>
     </div>
   );
 };
 
 export default AddReviewForm;
+
+//can do max chars with input type=text not with textarea
