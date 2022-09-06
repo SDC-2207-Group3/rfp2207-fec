@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from "react";
-import http from "./httpReqsForQA.js";
+import http from "../Utilities/Atelier.jsx";
 
 
 const handleQASearch = (e, display, setDisplay, id) => {

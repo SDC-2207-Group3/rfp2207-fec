@@ -82,7 +82,9 @@
   border: 3px #d8d8d8;
   background-color: #f7f7f7;
   font-weight: bold;
+  cursor: pointer;
 }
+
 
 .answer-item {
   display: flex;
@@ -121,7 +123,7 @@
   justify-content: left;
 } */
 
-.qa-accordion-item.active .question-item-button {
+.qa-accordion-item.active {
   background-color: #f1f1f187;
 }
 
@@ -132,6 +134,7 @@
   padding-bottom: 1rem;
 
 }
+
 
 .answer-wrapper {
   height: 0;
@@ -176,7 +179,7 @@
 }
 
 .qa-ref-link {
-  padding: 5px;
+  /* padding: 5px; */
   font-weight: 500;
 }
 
@@ -185,7 +188,12 @@
 }
 
 .q-helpful {
-  padding: 0.5em;
+  padding: 0.2em;
+}
+
+small.align-small {
+  width: 4rem;
+  text-align: center;
 }
 
 .noClick {
@@ -200,7 +208,8 @@
 .helpful-hover:hover,
 .report-hover:hover,
 .question-item-control:hover,
-.question-item-button-text:hover {
+.question-item-button-text:hover,
+.qa-moreAnswers:hover {
   color: cornflowerblue;
 }
 
@@ -210,40 +219,37 @@
 
 /* QuestionModal CSS */
 
-/* .qa-modalBackground {
+.qa-modalBackground {
+  position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 192, 203, 0.236);
-  justify-content: center;
-  align-items: center;
-} */
+  top: 0;
+  left: 0;
+  /* background-color: yellow; */
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
 
 .qa-modalContainer {
-  width: 33vw;
+  width: 30vw;
   height: 70vh;
-  /* border-radius: 12px; */
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
-
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* height: 40vh; */
   z-index: 3;
-
   color: black;
   font-weight: 300;
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .qa-modalContainer .qa-modalTitle {
-  /* display: inline-block; */
   text-align: center;
-  /* margin-top: 1%; */
   margin-bottom: 1%;
 }
 

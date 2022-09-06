@@ -1,8 +1,7 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
-import http from "./httpReqsForQA.js";
-import qaUtilities from "./qaUtilities.js"
+import http from "../Utilities/Atelier.jsx";
 
 function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) {
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import http from "./httpReqsForQA.js";
+import http from "../Utilities/Atelier.jsx";
 
 
 function AnswerItem({answer, question_id}) {
@@ -44,19 +44,24 @@ function AnswerItem({answer, question_id}) {
           <div className="answer-body answer-image">
           {answer.photos.length > 0
           &&
-          answer.photos.map((image) => <img className="answer-image-file" src={image}/> )
+          answer.photos.map((image, index) => <img key={index} className="answer-image-file" src={image}/> )
           }
           </div>
         </div>
-        <small className="qa-ref-link qa-push">Helpful?</small>
+        <small className="align-small qa-ref-link qa-push">Helpful?</small>
         <small
-          className={`qa-ref-link qa-mark helpful-hover ${helpfulClicked ? "noClick" : ""}`}
+          className={`align-small qa-ref-link qa-mark helpful-hover ${helpfulClicked ? "noClick" : ""}`}
           onClick={() => markAnswerAsHelpful(answer.id, question_id)}
         >
-          Yes({yesCount}) |
+          Yes({yesCount})
         </small>
         <small
-          className={`qa-ref-link qa-mark report-hover ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
+          className={`qa-ref-link q-separator qa-mark`}
+        >
+          |
+        </small>
+        <small
+          className={`align-small qa-ref-link qa-mark report-hover ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
           onClick={() => reportAnswer(answer.id)}
         >
           {`${reportClicked ? "Reported" : "Report"}`}

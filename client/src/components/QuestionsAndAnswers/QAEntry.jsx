@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import AnswerModal from "./AnswerModal.jsx";
 import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
-import http from "./httpReqsForQA.js";
+import http from "../Utilities/Atelier.jsx";
 
 
 
@@ -41,26 +41,26 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
         <div className="question-item-button-text" onClick={onToggle}>
           Q: {question.question_body}
         </div>
-        <small className="q-helpful qa-push">Helpful?</small>
+        <small className="q-helpful qa-push align-small">Helpful?</small>
         <small
-          id="qa-helpful" className={`q-helpful qa-mark helpful-hover ${questionHelpful ? "noClick" : ""}`}
+          id="qa-helpful" className={`q-helpful qa-mark helpful-hover align-small ${questionHelpful ? "noClick" : ""}`}
           onClick={() => markQuestionAsHelpful(question.question_id, product_id)}
         >
           Yes({question.question_helpfulness})
         </small>
         <small
-          className={`q-helpful qa-mark`}
+          className={`q-separator qa-mark`}
         >
           |
         </small>
         <small
-          className={`q-helpful qa-mark report-hover${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
+          className={`q-helpful qa-mark report-hover align-small ${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
           onClick={() => reportQuestion(question.question_id)}
         >
         {`${reportQuestionClicked ? "Reported" : "Report"}`}
         </small>
         <small
-          className="q-helpful add-answer-button"
+          className="q-helpful align small add-answer-button"
           onClick={() => {setOpenAnswerModal(true)}}
         >
           Add Answer
@@ -77,9 +77,10 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
             />
         }
         <span onClick={onToggle} className="qa-ref-link question-item-control">{active ? "-" : "+"} </span>
+
       </div>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
-        <div className="answer-item"> 
+        <div className="answer-item">
           {
             Object.keys(question.answers)
               .sort((a, b) => b.helpfulness - a.helpfulness)
