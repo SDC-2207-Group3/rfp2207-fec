@@ -10,15 +10,20 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
     console.log('this is data: ', data)
-    reset()
-    closeModal(false)
+    // reset()
+    // closeModal(false)
     if (data.yourImages.length > 0) {
+      console.log('images: ', data.yourImages)
       let body = new FormData()
       body.set('key', process.env.IMGBB_KEY)
-      // data.yourImages.forEach((img, index) =>
-      //   // console.log('this is img: ', img)
+      // [data.yourImages].forEach((img, index) => {
+      //   console.log('this is img: ', img)
       //   body.append('image', img)
-      // )
+      // })
+      // for (var key in data.yourImages) {
+      //   console.log('this is key: ', key)
+      //   body.append('image', data.yourImages[key])
+      // }
       body.append('image', data.yourImages[0])
       axios({
         method: 'post',
@@ -30,9 +35,9 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
             product_id,
             question_id,
             {
-            'body': qaUtilities.escapeHTML(data.yourAnswer),
-            'name': qaUtilities.escapeHTML(data.yourNickname),
-            'email': qaUtilities.escapeHTML(data.yourEmail),
+            'body': data.yourAnswer,
+            'name': data.yourNickname,
+            'email': data.yourEmail,
             'photos': [res.data.data.url]
             }
           ))

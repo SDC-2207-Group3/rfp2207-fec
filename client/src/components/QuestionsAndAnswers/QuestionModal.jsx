@@ -8,9 +8,9 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
   const onSubmit = (data) => {
     const modalData = {
-      'body': qaUtilities.escapeHTML(data.yourQuestion),
-      'name': qaUtilities.escapeHTML(data.yourNickname),
-      'email': qaUtilities.escapeHTML(data.yourEmail),
+      'body': data.yourQuestion,
+      'name': data.yourNickname,
+      'email': data.yourEmail,
       'product_id': Number(product_id)
     }
     reset()
