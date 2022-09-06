@@ -20,10 +20,13 @@ const AddReviewForm = ({ meta }) => {
 
   const handleImgUpload = (e) => {
     console.log(e.target.files);
+    let tempURLs = [];
     Object.values(e.target.files).map((file) => {
-      console.log(file.name);
+      let imgURL = URL.createObjectURL(file);
+      tempURLs.push(imgURL);
     });
-
+    setUserImgs(tempURLs);
+    console.log(tempURLs);
     // setUserImgs()
   };
 
@@ -157,8 +160,8 @@ const AddReviewForm = ({ meta }) => {
           )}
         </div>
         <div>
-          {userImgs.map((img) => {
-            return <img className="RR_form-thumbnail" src={`${img.name}`} />;
+          {userImgs.map((img, i) => {
+            return <img className="RR_form-thumbnail" src={img} key={i} />;
           })}
         </div>
       </div>
@@ -187,3 +190,4 @@ const AddReviewForm = ({ meta }) => {
 export default AddReviewForm;
 
 //can do max chars with input type=text not with textarea
+//createObjectURL(object)

@@ -87,6 +87,13 @@
   color: rgb(80, 80, 80);
 }
 
+.RR_form-thumbnail {
+  height: 100px;
+  margin-right: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .RR_user-review-summary-container {
   width: 100%;
   display: flex;
