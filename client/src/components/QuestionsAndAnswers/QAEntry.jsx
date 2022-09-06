@@ -34,19 +34,27 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
       .catch((err) => {console.error(err)})
   }
 
+
   return(
     <li key={question.question_id} className={`qa-accordion-item ${active ? "active" : ""}`}>
-      <div className="question-item-button" onClick={onToggle}>
-        Q: {question.question_body}
+      <div className="question-item-button" >
+        <div className="question-item-button-text" onClick={onToggle}>
+          Q: {question.question_body}
+        </div>
         <small className="q-helpful qa-push">Helpful?</small>
         <small
-          className={`q-helpful qa-mark ${questionHelpful ? "noClick" : ""}`}
+          id="qa-helpful" className={`q-helpful qa-mark helpful-hover ${questionHelpful ? "noClick" : ""}`}
           onClick={() => markQuestionAsHelpful(question.question_id, product_id)}
         >
-          Yes({question.question_helpfulness}) |
+          Yes({question.question_helpfulness})
         </small>
         <small
-          className={`q-helpful qa-mark ${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
+          className={`q-helpful qa-mark`}
+        >
+          |
+        </small>
+        <small
+          className={`q-helpful qa-mark report-hover${reportQuestionClicked ? "qa-reported" : ""} ${reportQuestionClicked ? "noClick" : ""}`}
           onClick={() => reportQuestion(question.question_id)}
         >
         {`${reportQuestionClicked ? "Reported" : "Report"}`}
@@ -68,18 +76,19 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
             setQA={setQA}
             />
         }
-        <span className="qa-ref-link question-item-control">{active ? "-" : "+"} </span>
+        <span onClick={onToggle} className="qa-ref-link question-item-control">{active ? "-" : "+"} </span>
       </div>
       <div className={`answer-wrapper ${active ? "open" : ""}`}>
-        <div className="answer-item">
+        <div className="answer-item"> 
           {
             Object.keys(question.answers)
-              // .sort((a, b) => b.helpfulness - a.helpfulness)
+              .sort((a, b) => b.helpfulness - a.helpfulness)
               .slice(0, answersCount)
               .map((answer_id, index) =>
                 <AnswerItem key={index} answer={question.answers[answer_id]} question_id={question.question_id}/>
             )
           }
+
           {
             Object.keys(question.answers).slice(answersCount).length > 0
             &&
@@ -97,6 +106,8 @@ function QAEntry({product_id, question, onToggle, active, mainQA, setQA}) {
               {`${answersCount ? "Load More Answers" : "Collapse Answers"}`}
             </button>
           }
+
+
         </div>
       </div>
     </li>
