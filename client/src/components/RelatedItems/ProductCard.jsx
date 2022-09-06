@@ -18,7 +18,7 @@ var ProductCard = (props) => {
   return (
     <div className="RIC-product-card-div">
       <div className="RIC-card-icon-div">
-        {props.mode === 'related-item' ? <Star size={20} onClick={() => props.open(props.product)}/> :  <XCircle size={20} />}
+        {props.mode === 'related-item' ? <Star size={20} onClick={() => props.open(props.product)}/> :  <XCircle size={20} onClick={() => props.delete(props.product.id)} />}
       </div>
       <div onClick={() => changeId(props.product.id)} className="RIC-product-card-img-div">
         <img className="RIC-product-card-img" src={props.product.img} alt="product img"></img>

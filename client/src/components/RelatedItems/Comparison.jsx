@@ -20,7 +20,7 @@ const Comparison = (props) => {
     }
   }
 
-  console.log('comparison data', featureCollection)
+  console.log('comparison data', featureCollection);
 
   return (
     <div className="RIC-comparison-modal">

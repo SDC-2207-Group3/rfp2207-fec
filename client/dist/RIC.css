@@ -23,6 +23,20 @@
   text-align: center;
 }
 
+#RIC-add-card {
+  display: flex;
+  align-items: center;
+}
+
+#RIC-add-card-span {
+  display: flex;
+  align-items: center;
+}
+
+#RIC-add-card-span:hover {
+  color: gray;
+}
+
 /* Shared Carousel */
 .RIC-card-carousel {
   display: flex;
@@ -59,8 +73,6 @@
 .RIC-left:hover {
   color: lightgray
 }
-
-
 
 /* PRODUCT CARD */
 .RIC-product-card-div {
@@ -173,7 +185,7 @@ tbody.RIC-comparison {
   position: sticky;
   top: 0;
   overflow-y: hidden;
-  z-index: 2;
+  z-index: 5;
   background-color: rgb(242, 232, 212)
 }
 

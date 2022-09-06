@@ -12,7 +12,12 @@ const CardCarousel = (props) => {
   const [product, setProduct] = useState({});
   const displayLimit = 4;
   const { mainProduct, relatedItems, yourOutfits} = useContext(RIOContext);
-  const dataLength = props.mode === 'related-items' ? relatedItems.length : yourOutfits.length;
+  const dataLength = props.mode === 'related-items' ? relatedItems.length : yourOutfits.length+1;
+
+  useEffect(() => {
+    setScroll(0);
+    setIndex(0);
+  }, [mainProduct])
 
   const leftClick = () => {
     setIndex(index - 1);

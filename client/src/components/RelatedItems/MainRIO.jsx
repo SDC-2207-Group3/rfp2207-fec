@@ -16,42 +16,42 @@ const RelatedItemsAndOutfits = (props) => {
   {mainProduct: {}, relatedItems: [], yourOutfits: []});
 
   useEffect(() => {
+    setState({yourOutfits: outfitDetails})
+  }, []);
+
+  useEffect(() => {
     http.productReq(id)
       .then(res => setState({mainProduct: res.data}));
 
-    // http.relatedReq(id)
-    //   .then(res => {
-    //    let related = _.uniq(res.data);
-    //    let reqArr = [];
-    //    related.map((id) => {
-    //     let promises = Promise.all([
-    //       http.productReq(id),
-    //       http.styleReq(id),
-    //       http.reviewReq(id)
-    //     ])
-    //     reqArr.push(promises);
-    //    });
-    //   axios.all(reqArr)
-    //     .then(responses => {
-    //       let newData = [];
-    //       responses.forEach((res) => {
-    //         newData.push(http.dataParser(res));
-    //       })
-    //       setState({relatedItems: newData});
-    //     });
-    // })
-    // .catch(err => console.error(err));
+    http.relatedReq(id)
+      .then(res => {
+       let related = _.uniq(res.data);
+       let reqArr = [];
+       related.map((id) => {
+        let promises = Promise.all([
+          http.productReq(id),
+          http.styleReq(id),
+          http.reviewReq(id)
+        ])
+        reqArr.push(promises);
+       });
+      axios.all(reqArr)
+        .then(responses => {
+          let newData = [];
+          responses.forEach((res) => {
+            newData.push(http.dataParser(res));
+          })
+          setState({relatedItems: newData});
+        });
+    })
+    .catch(err => console.error(err));
   }, [id]);
-
-  useEffect(() => {
-    setState({yourOutfits: outfitDetails, relatedItems: outfitDetails})
-  }, []);
 
   console.log('--current state--', state);
 
   return (
     <section id="RIC-section">
-      <RIOContext.Provider value={{...state}}>
+      <RIOContext.Provider value={{...state, setState}}>
          <RelatedItems />
          <YourOutfits />
       </RIOContext.Provider>
