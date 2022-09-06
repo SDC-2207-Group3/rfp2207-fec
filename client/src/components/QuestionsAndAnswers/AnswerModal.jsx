@@ -16,15 +16,15 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
       console.log('images: ', data.yourImages)
       let body = new FormData()
       body.set('key', process.env.IMGBB_KEY)
-      // [data.yourImages].forEach((img, index) => {
-      //   console.log('this is img: ', img)
-      //   body.append('image', img)
-      // })
-      // for (var key in data.yourImages) {
-      //   console.log('this is key: ', key)
-      //   body.append('image', data.yourImages[key])
-      // }
-      body.append('image', data.yourImages[0])
+      for (var key in data.yourImages) {
+        if (key.length === 1) {
+          console.log('here is key: ', key)
+          // IF condition is v hacky way to get only keys of files
+          body.append('image', data.yourImages[key])
+        }
+      }
+      // body.append('image', data.yourImages[0])
+      // TODO: how to view multiple images with IMGBB?!?!
       axios({
         method: 'post',
         url: 'https://api.imgbb.com/1/upload',
@@ -99,6 +99,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
               Your Images
               <input className="modalInput"
                 type="file"
+                multiple
                 accept="image/png, image/jpeg"
                 {...register("yourImages")}
                 // TODO: HANDLE ERRORS FOR FILE UPLOADS
