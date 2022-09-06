@@ -3,15 +3,16 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 import { RIOContext } from './MainRIO.jsx';
 import ItemCards from './ItemCards.jsx';
 import OutfitCards from './OutfitCards.jsx';
+import Comparison from './Comparison.jsx';
 
-var CardCarousel = (props) => {
+const CardCarousel = (props) => {
   const [scrollAmount, setScroll] = useState(0)
   const [index, setIndex] = useState(0);
+  const [modal, setModal] = useState(false);
+  const [product, setProduct] = useState({});
   const displayLimit = 4;
-  const state = useContext(RIOContext);
-  const dataLength = props.mode === 'related-items' ? state.relatedItems.length : state.yourOutfits.length;
-
-  console.log(props.mode, dataLength);
+  const { mainProduct, relatedItems, yourOutfits} = useContext(RIOContext);
+  const dataLength = props.mode === 'related-items' ? relatedItems.length : yourOutfits.length;
 
   const leftClick = () => {
     setIndex(index - 1);
@@ -35,14 +36,30 @@ var CardCarousel = (props) => {
     transform: `translateX(${scrollAmount}px)`
   }
 
-  console.log('--RIO Context--', state)
+  let featureCollection = [];
+  for (let index in mainProduct.features) {
+    let featureInput = {};
+    let item = mainProduct.features[index]
+    featureInput.name = item.feature;
+    item.value ? featureInput.main = item.value : featureInput.main = true;
+    featureCollection.push(featureInput);
+  }
+
+  const openModal = (product) => {
+    setModal(true);
+    setProduct(product);
+  };
+  const closeModal = () => {
+    setModal(false);
+  };
 
   return (
     <div className="RIC-card-carousel">
+      {modal ? <Comparison key={product.id} close={closeModal} features={featureCollection} product={product}/> : null}
       <div className="RIC-arrow-div">{index === 0 ? null : <span onClick={() => leftClick()} ><ChevronLeft className="RIC-left" size={30}/></span>}</div>
       <div className="RIC-carousel-view">
         {props.mode === 'related-items' ?
-          <ItemCards style={scrollCSS} /> :
+          <ItemCards open={openModal} style={scrollCSS} /> :
           <OutfitCards style={scrollCSS}/>}
       </div>
       <div className="RIC-arrow-div">{index <= dataLength - displayLimit ? <span onClick={() => rightClick()} ><ChevronRight className="RIC-right" size={30} /></span> : null}</div>

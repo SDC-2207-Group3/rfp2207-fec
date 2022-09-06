@@ -3,16 +3,24 @@ import * as _ from 'underscore';
 import { Check, XCircle } from 'react-feather';
 import { RIOContext } from './MainRIO.jsx';
 
-var Comparison = (props) => {
+const Comparison = (props) => {
   const { mainProduct } = useContext(RIOContext);
-  const main = mainProduct.features;
-  const related = props.product.features;
-  console.log('--features--', main, related)
-  let combinedFeatures = new Set();
-  main.forEach((feature) => combinedFeatures.add(feature.feature));
-  related.forEach((feature) => combinedFeatures.add(feature.feature));
+  let featureCollection = props.features.slice();
+  let currFeatures = props.product.features;
 
-  let mainValue, relatedValue;
+  for (let i in currFeatures) {
+    let featureObj = currFeatures[i];
+    let featureFound = featureCollection.find(({ name }) => name === featureObj.feature);
+    if (featureFound) {
+      featureFound.curr = featureObj.value ? JSON.parse(featureObj.value) : true
+    } else {
+      featureCollection.push({name: featureObj.feature,
+        main: null,
+        curr: featureObj.value ? JSON.parse(featureObj.value) : true})
+    }
+  }
+
+  console.log('comparison data', featureCollection)
 
   return (
     <div className="RIC-comparison-modal">
@@ -20,27 +28,24 @@ var Comparison = (props) => {
         <p>Comparing</p>
         <span onClick={() => props.close()}><XCircle /></span>
       </div>
-      <table className="RIC-comparison-table">
-        <tbody>
-          <tr>
-            <th>{mainProduct.name}</th>
-            <th></th>
-            <th>{props.product.name}</th>
-           </tr>
-        {Array.from(combinedFeatures).map((target) => {
-          mainValue = main.find(({feature}) => feature === target) ? main.find(({feature}) => feature === target).value : null;
-          relatedValue = related.find(({feature}) => feature === target) ? related.find(({feature}) => feature === target).value : null;
-
-          return (
-            <tr key="target">
-              <td>{mainValue === true ? <Check /> : mainValue}</td>
-              <td>{target}</td>
-              <td>{relatedValue === true ? <Check /> : relatedValue}</td>
+      <div className="RIC-comparison-table-div">
+        <table className="RIC-comparison">
+          <tbody className="RIC-comparison">
+            <tr className="RIC-modal-names">
+              <th className="RIC-comparison">{mainProduct.name}</th>
+              <th className="RIC-comparison"></th>
+              <th className="RIC-comparison">{props.product.name}</th>
             </tr>
-          )
-        })}
-        </tbody>
-      </table>
+            {featureCollection.map((feature) =>
+              <tr className="RIC-comparison" key={`${mainProduct.name} vs ${props.product.name} on ${feature.name}`} className="RIC-modal-row">
+                <td className="RIC-comparison">{feature.main === true ? <Check /> : feature.main ? feature.main : null}</td>
+                <td className="RIC-comparison">{feature.name}</td>
+                <td className="RIC-comparison">{feature.curr === true ? <Check /> : feature.curr ? feature.curr : null}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

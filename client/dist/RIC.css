@@ -9,36 +9,6 @@
   grid-template-rows: 1fr 1fr;
 }
 
-/* STARS */
-.RIC-stars-container {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  background: white;
-}
-
-.RIC-star {
-  display: flex;
-  width: 1.5em;
-  margin-right: 0.5px;
-  color: rgb(34, 42, 82);
-  fill: rgb(34, 42, 82);
-}
-
-.RIC-star:last-of-type {
-  margin-right: 0;
-}
-
-.RIC-star-cover {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  background-color: rgb(254, 254, 254);
-  opacity: 0.6;
-}
-
 /* RELATED ITEMS & YOUR OUTFIT OVERALL CSS */
 .RIC-divs {
   display: grid;
@@ -50,11 +20,47 @@
 .RIC-header {
   font-size: large;
   font-family: 'Courier New', Courier, monospace;
-  /* border: 0.1em solid pink;
-  border-radius: 1em; */
-  /* width: 35%; */
   text-align: center;
 }
+
+/* Shared Carousel */
+.RIC-card-carousel {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.RIC-arrow-div {
+  width: 5%;
+}
+
+.RIC-carousel-view {
+  overflow-x: hidden;
+  height: 100%;
+  width: 80%;
+  position: relative;
+  box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
+}
+
+.RIC-cards {
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+  transition: all 0.5s;
+}
+
+.RIC-right:hover {
+  color: lightgray
+}
+.RIC-left:hover {
+  color: lightgray
+}
+
+
 
 /* PRODUCT CARD */
 .RIC-product-card-div {
@@ -127,13 +133,13 @@ p.RIC {
   margin: 5% 12%;
   display: block;
   z-index: 2;
-  left: 0;
-  top: 0;
+  left: 25%;
+  top: 75%;
   width: 30%;
-  height: 60%;
+  height: 40%;
   overflow: auto;
   background-color: white;
-  position: fixed;
+  position: absolute;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border: 1px solid gray;
@@ -147,66 +153,66 @@ p.RIC {
   justify-content: space-between;
 }
 
-.RIC-product-names {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
+.RIC-comparison-table-div {
+  margin: 0 5%;
+  max-height: min-content;
+  overflow: hidden;
 }
 
-table .RIC-comparison-table {
+table.RIC-comparison {
   border-collapse: collapse;
+  position: relative;
 }
 
-tbody {
+tbody.RIC-comparison {
   display: block;
   overflow: auto;
-  height: 200px;
-  width: 100%;
 }
 
-th {
+.RIC-modal-names {
+  position: sticky;
+  top: 0;
+  overflow-y: hidden;
+  z-index: 2;
+  background-color: rgb(242, 232, 212)
+}
+
+th.RIC-comparison {
+  text-align: center;
   margin: 0.3em 0;
 }
 
-td {
+td.RIC-comparison {
   text-align: center;
   padding: 0.5em 0;
 }
 
-/* Shared Carousel */
-
-.RIC-card-carousel {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-
-.RIC-arrow-div {
-  width: 5%;
-}
-
-.RIC-carousel-view {
-  overflow-x: hidden;
-  height: 100%;
-  width: 100%;
+/* STARS */
+.RIC-stars-container {
   position: relative;
-  box-shadow: inset -7px 0 1000 -7px rgb(255, 255, 255);
+  display: inline-flex;
+  align-items: center;
+  background: white;
 }
 
-.RIC-cards {
-  position: absolute;
+.RIC-star {
   display: flex;
-  justify-content: flex-start;
-  height: 100%;
-  transition: all 0.5s;
+  width: 1.5em;
+  margin-right: 0.5px;
+  color: rgb(34, 42, 82);
+  fill: rgb(34, 42, 82);
 }
 
-.RIC-right:hover {
-  color: lightgray
+.RIC-star:last-of-type {
+  margin-right: 0;
 }
-.RIC-left:hover {
-  color: lightgray
+
+.RIC-star-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgb(254, 254, 254);
+  opacity: 0.6;
 }
