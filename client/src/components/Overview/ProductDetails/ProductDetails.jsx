@@ -97,6 +97,7 @@ const ProductDetails = (props) => {
   }
 
   const productRating = isNaN(calcProductRating(statePR)) ? 0 : calcProductRating(statePR);
+  const totalReviews = Object.values(statePR).reduce((memo, count) => memo + Number(count), 0);
 
   // Size Select
 
@@ -140,10 +141,10 @@ const ProductDetails = (props) => {
 
   return (
     <div className="overview-productDetails">
-      <section className="overview-rating-section">
+      {totalReviews > 0 ? <section className="overview-rating-section">
         <RatingStars rating={productRating} />
-        <h6 className="section-link"> <a className="section-link" href="#section_rr">Read all reviews</a></h6>
-      </section>
+        <h6 className="section-link"> <a className="section-link" href="#section_rr">Read all {totalReviews} reviews</a></h6>
+      </section> : null}
 
       <section className="overview-pd-section">
         <h4 id="product-category">{category}</h4>

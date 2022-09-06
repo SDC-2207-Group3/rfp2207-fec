@@ -88,7 +88,7 @@ const ImageGallery = (props) => {
   useEffect(() => {
     setPhotoIndex(0);
     setDisplayIndex(0);
-   }, [props.productStyle])
+   }, [state.productDetails])
 
   function minimize () {
     setDefaultView(true);
