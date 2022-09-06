@@ -102,7 +102,7 @@
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .answer-prefix {
@@ -114,11 +114,11 @@
 .answer-prefix, .answer-body {
   transform: translateY(3.5px);
 }
-/*
-.answer-body {
+
+/* .answer-body {
   display: flex;
-  flex-direction: row;
-  background-color: yellow;
+  max-height: 1rem;
+  justify-content: left;
 } */
 
 .qa-accordion-item.active .question-item-button {
@@ -145,14 +145,14 @@
 .answer-image-file {
   /* margin-top: 100px; */
   max-width: 100px;
+  padding: 0.25rem;
 }
 
 .answer-image {
   display: flex;
-  margin-top: 5rem;
-  margin-top: 1%;
+  /* margin-top: 5rem; */
+  margin-top: 2%;
   margin-bottom: 1%;
-  /* margin-left: -5%; */
   padding-left: 1%;
 }
 

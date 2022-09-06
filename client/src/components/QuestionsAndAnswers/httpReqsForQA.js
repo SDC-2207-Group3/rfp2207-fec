@@ -49,4 +49,8 @@ module.exports.getProductName = (product_id) => axios.get(
   `${API}/products/${product_id}`,
   {headers: {'Authorization': process.env.KEY}}
 )
-
+module.exports.postToImgbb = (body) => axios({
+    method: 'post',
+    url: 'https://api.imgbb.com/1/upload',
+    data: body
+  })

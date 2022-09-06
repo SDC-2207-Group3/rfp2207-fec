@@ -21,11 +21,12 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
           var body = new FormData()
           body.set('key', process.env.IMGBB_KEY)
           body.append('image', data.yourImages[key])
-          var promise = axios({
-            method: 'post',
-            url: 'https://api.imgbb.com/1/upload',
-            data: body
-          })
+          var promise = postToImgbb;
+          // var promise = axios({
+          //   method: 'post',
+          //   url: 'https://api.imgbb.com/1/upload',
+          //   data: body
+          // })
           arrPromise.push(promise);
         }
       }

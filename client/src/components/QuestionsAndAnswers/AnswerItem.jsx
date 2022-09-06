@@ -39,12 +39,14 @@ function AnswerItem({answer, question_id}) {
     <div className="answer-item-single-container">
       <div className="answer-item-single">
         <span className="answer-prefix">A: </span>
-        <span className="answer-body">{answer.body}</span>
-        <div className="answer-body answer-image">
+        <div className="answer-body">
+          {answer.body}
+          <div className="answer-body answer-image">
           {answer.photos.length > 0
           &&
           answer.photos.map((image) => <img className="answer-image-file" src={image}/> )
           }
+          </div>
         </div>
         <small className="qa-ref-link qa-push">Helpful?</small>
         <small
