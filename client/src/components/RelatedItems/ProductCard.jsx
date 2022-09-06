@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Stars from './Stars.jsx';
 import { Star, XCircle } from 'react-feather';
 import Comparison from './Comparison.jsx'
-import { IdContext } from '../App.jsx'
+import { ProductContext } from '../App.jsx'
 
 var ProductCard = (props) => {
   const [modal, setModal] = useState(false);
@@ -13,7 +13,7 @@ var ProductCard = (props) => {
     setModal(false);
   };
 
-  const { changeId } = useContext(IdContext);
+  const { changeId } = useContext(ProductContext);
 
   return (
     <div className="RIC-product-card-div">
