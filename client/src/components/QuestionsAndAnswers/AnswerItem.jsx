@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import http from "../Utilities/Atelier.jsx";
 
 
-function AnswerItem({answer, question_id}) {
-
+function AnswerItem({answer, question_id, product_id, mainQA, setQA}) {
   // hook for tracking whether or not an answer is marked helpful
   const [helpfulClicked, setHelpfulClicked] = useState(false);
 
@@ -23,10 +22,10 @@ function AnswerItem({answer, question_id}) {
   // hook for tracking whether an answer is reported
   const [reportClicked, setReportClicked] = useState(false);
 
-  const reportAnswer = (answer_id) => {
+  const reportAnswer = (answer_id, question_id) => {
     setReportClicked(true);
     http.reportAnswer(answer_id)
-      .then((res) => {return;})
+      .then((res) => http.getAnswer(question_id))
       .catch((err) => {console.error(err)})
   }
 
@@ -62,7 +61,7 @@ function AnswerItem({answer, question_id}) {
         </small>
         <small
           className={`align-small qa-ref-link qa-mark report-hover ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
-          onClick={() => reportAnswer(answer.id)}
+          onClick={() => reportAnswer(answer.id, question_id)}
         >
           {`${reportClicked ? "Reported" : "Report"}`}
         </small>

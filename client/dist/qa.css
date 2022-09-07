@@ -125,7 +125,6 @@
   width: auto;
   cursor: pointer;
   margin: 5px;
-  z-index: 4;
   background-color: yellow;
 }
 
@@ -238,7 +237,7 @@ small.align-small {
   top: 0;
   left: 0;
   /* background-color: yellow; */
-  z-index: 2;
+  z-index: 5;
   backdrop-filter: blur(4px);
 }
 

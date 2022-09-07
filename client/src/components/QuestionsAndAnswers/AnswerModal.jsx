@@ -11,8 +11,6 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
   console.log('this is watch: ', imageFiles)
   const onSubmit = (data) => {
     // console.log('this is data: ', data)
-    // reset()
-    // closeModal(false)
     if (data.yourImages.length > 0) {
       // console.log('images: ', data.yourImages)
       var arrPromise = [];
@@ -22,18 +20,10 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
           var body = new FormData()
           body.set('key', process.env.IMGBB_KEY)
           body.append('image', data.yourImages[key])
-          var promise = postToImgbb;
-          // var promise = axios({
-          //   method: 'post',
-          //   url: 'https://api.imgbb.com/1/upload',
-          //   data: body
-          // })
+          var promise = http.postToImgbb(body);
           arrPromise.push(promise);
         }
       }
-      // console.log('this is arrPromise: ', arrPromise)
-      // body.append('image', data.yourImages[0])
-      // TODO: how to view multiple images with IMGBB?!?!
       Promise.all(arrPromise)
         .then((res) =>
           // res is an array
@@ -50,7 +40,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
         )
         .then((res) => http.getQuestions(product_id))
         .then((res) => {
-          console.log('setting new results: ', res.data.results)
+          // console.log('setting new results: ', res.data.results)
           setQA(res.data.results)
         })
         .catch((err) => {console.error(err)})
@@ -66,6 +56,8 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
         .then((res) => {setQA(res.data.results)})
         .catch((err) => {console.error(err)})
     }
+    reset()
+    closeModal(false);
   }
 
   return (
