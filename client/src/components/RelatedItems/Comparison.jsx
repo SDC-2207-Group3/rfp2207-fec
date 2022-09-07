@@ -16,7 +16,7 @@ const Comparison = (props) => {
     } else {
       featureCollection.push({name: featureObj.feature,
         main: null,
-        curr: featureObj.value ? JSON.parse(featureObj.value) : true})
+        curr: featureObj.value ? (featureObj.value) : true})
     }
   }
 

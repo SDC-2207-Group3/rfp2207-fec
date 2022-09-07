@@ -10,7 +10,7 @@ const Atelier = require('./Utilities/Atelier.jsx');
 
 export const ProductContext = createContext();
 
-const reducer = (state, newState) => ({...state, newState})
+const reducer = (state, newState) => ({...state, ...newState})
 
 const initialeState = {
   id: 65638,

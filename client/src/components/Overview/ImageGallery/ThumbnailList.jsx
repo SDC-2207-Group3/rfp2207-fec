@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageGalleryContext } from './ImageGallery.jsx';
-import { ProductContext } from './../Overview.jsx';
+// import { ProductContext } from './../Overview.jsx';
 
 const ThumbnailList = (props) => {
 
-  const { state } = useContext(ProductContext);
+  // const { state } = useContext(ProductContext);
   const {
     photoIndex,
     productName,
