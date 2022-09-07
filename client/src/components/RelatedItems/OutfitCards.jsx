@@ -8,7 +8,6 @@ const OutfitCards = (props) => {
 
   const addToOutfitList = () => {
     if (yourOutfits.find(({id}) => id === mainProduct.id)) {
-      console.log('already added')
       return;
     }
     console.log('addToOutfitList clicked');
