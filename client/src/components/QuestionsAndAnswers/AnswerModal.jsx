@@ -6,7 +6,9 @@ const axios = require("axios")
 
 
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
-  const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
+  const {register, handleSubmit, formState: {errors}, reset, watch} = useForm({criteriaMode: "all"});
+  const imageFiles = watch("yourImages")
+  console.log('this is watch: ', imageFiles)
   const onSubmit = (data) => {
     // console.log('this is data: ', data)
     // reset()
@@ -108,8 +110,14 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
                 multiple
                 accept="image/png, image/jpeg"
                 {...register("yourImages")}
-                // TODO: HANDLE ERRORS FOR FILE UPLOADS
               />
+            <div className="qa-thumbnail-list">
+              {imageFiles && Object.entries(imageFiles).map(([index, image]) => {
+                    return (
+                        <img className="qa-thumbnail" key={image.name} src={URL.createObjectURL(image)} />
+                    )
+                  })}
+            </div>
             </label>
             <label className="modalLabel">
                 Your Nickname
