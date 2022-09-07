@@ -49,7 +49,6 @@ const ReviewFormRadio = ({ chars, char, index }) => {
 
   const [radioTitle, setRadioTitle] = useState("none selected");
   let handleTitle = (e) => {
-    console.log(e.target.value);
     setRadioTitle(e.target.value);
   };
 

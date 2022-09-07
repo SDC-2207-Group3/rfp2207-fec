@@ -4,10 +4,15 @@ import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
 
 const AddReviewForm = ({ meta }) => {
-  console.log(meta, "....");
+  // console.log(meta, "//////");
   const [userRating, setUserRating] = useState(0);
-  const [reviewChars, setReviewChars] = useState("");
+  const [reviewCharacteristics, setReviewCharacteristics] = useState("");
+  const [recommend, setRecommend] = useState("");
   const [userImgs, setUserImgs] = useState([]);
+  const [summary, setSummary] = useState("");
+  const [reviewBody, setReviewBody] = useState("");
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleClick = (e) => {
     let userScore = e.target.getAttribute("attr");
@@ -15,19 +20,63 @@ const AddReviewForm = ({ meta }) => {
   };
 
   const handleChange = (e) => {
-    setReviewChars(e.target.value);
+    // e.target.id === "summary"
+    //   ? setSummary(e.target.value)
+    //   : setReviewBody(e.target.value);
+    switch (e.target.id) {
+      case "summary":
+        setSummary(e.target.value);
+        break;
+      case "body":
+        setReviewBody(e.target.value);
+        break;
+      case "userName":
+        setUserName(e.target.value);
+        break;
+      case "email":
+        setEmail(e.target.value);
+        break;
+    }
+  };
+
+  const handleRecommend = (e) => {
+    setRecommend(e.target.value);
   };
 
   const handleImgUpload = (e) => {
-    console.log(e.target.files);
     let tempURLs = [];
     Object.values(e.target.files).map((file) => {
       let imgURL = URL.createObjectURL(file);
       tempURLs.push(imgURL);
     });
-    setUserImgs(tempURLs);
-    console.log(tempURLs);
-    // setUserImgs()
+    // setUserImgs([...userImgs,...tempURLs]);
+    if (userImgs.length + tempURLs.length > 5) {
+      alert("Sorry, there is a maximum of 5 images allowed per review");
+      setUserImgs(userImgs);
+      return;
+    } else if (userImgs.length + tempURLs.length === 5) {
+      setUserImgs([...userImgs, ...tempURLs]);
+    } else {
+      setUserImgs([...userImgs, ...tempURLs]);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log(e);
+    e.preventDefault();
+    setReviewBody();
+    console.log("submit");
+    let userReview = {
+      userRating: userRating,
+      reviewCharacteristics: reviewCharacteristics,
+      recommend: recommend,
+      userImgs: userImgs,
+      summary: summary,
+      reviewBody: reviewBody,
+      userName: userName,
+      email: email,
+    };
+    console.log(userReview);
   };
 
   let userRatingTerms = {
@@ -84,7 +133,6 @@ const AddReviewForm = ({ meta }) => {
   };
 
   let characteristics = Object.keys(meta.characteristics);
-  console.log(characteristics);
 
   return (
     <div className="RR_modal-form">
@@ -98,7 +146,7 @@ const AddReviewForm = ({ meta }) => {
       </div>
       <form>
         <p>Do you recommend this product ?</p>
-        <div>
+        <div onChange={(e) => handleRecommend(e)}>
           <input type="radio" id="yes" name="recommend" value="yes"></input>
           <label htmlFor="yes">Yes</label>
           <input type="radio" id="no" name="recommend" value="no"></input>
@@ -121,6 +169,9 @@ const AddReviewForm = ({ meta }) => {
             className="RR_user-review-summary"
             type="text"
             placeholder="Example: Best purchase ever"
+            id="summary"
+            value={summary}
+            onChange={(e) => handleChange(e)}
             maxLength="60"
           ></input>
         </form>
@@ -132,24 +183,28 @@ const AddReviewForm = ({ meta }) => {
             type="text"
             rows="30"
             cols="55"
-            value={reviewChars}
+            id="body"
+            value={reviewBody}
             placeholder="Why did you like the product or not?"
             onChange={(e) => handleChange(e)}
           ></textarea>
         </form>
         <div>
-          {50 - reviewChars.length >= 0 ? (
-            <span>
-              Minimum required characters left: {50 - reviewChars.length}
-            </span>
-          ) : (
-            <span>Minimum reached</span>
-          )}
+          {reviewBody.length && reviewBody.lengh >= 0 ? (
+            50 - reviewBody.length >= 0 ? (
+              <span>
+                Minimum required characters left:{" "}
+                {reviewBody.length ? 50 - reviewBody.length : 50}
+              </span>
+            ) : (
+              <span>Minimum reached</span>
+            )
+          ) : null}
         </div>
       </div>
       <div>
         <div>
-          {userImgs.length >= 5 ? null : (
+          {userImgs.length && userImgs.length >= 5 ? null : (
             <input
               type="file"
               id="files"
@@ -160,9 +215,11 @@ const AddReviewForm = ({ meta }) => {
           )}
         </div>
         <div>
-          {userImgs.map((img, i) => {
-            return <img className="RR_form-thumbnail" src={img} key={i} />;
-          })}
+          {userImgs.length
+            ? userImgs.map((img, i) => {
+                return <img className="RR_form-thumbnail" src={img} key={i} />;
+              })
+            : null}
         </div>
       </div>
       <div>
@@ -170,6 +227,9 @@ const AddReviewForm = ({ meta }) => {
           type="text"
           placeholder="Example: jackson11!"
           maxLength="60"
+          value={userName}
+          id="userName"
+          onChange={(e) => handleChange(e)}
         ></input>
         <small>
           For privacy reasons, do not use your full name or email address
@@ -180,9 +240,14 @@ const AddReviewForm = ({ meta }) => {
           type="email"
           placeholder="Example: jackson11@email.com"
           maxLength="60"
+          value={email}
+          id="email"
+          onChange={(e) => handleChange(e)}
         ></input>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={(e) => handleSubmit(e)}>
+        Submit
+      </button>
     </div>
   );
 };
