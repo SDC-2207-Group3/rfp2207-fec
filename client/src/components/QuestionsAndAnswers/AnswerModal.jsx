@@ -167,11 +167,6 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
             </label>
 
           <div className="qa-modalFooter">
-            {/* <button className="qa-modalFooterBtn" id="qa-modalFooterCancelBtn"
-                onClick={() => closeModal(false)}
-            >
-              Cancel
-            </button> */}
             <button className="qa-modalFooterBtn"
             >
               Submit

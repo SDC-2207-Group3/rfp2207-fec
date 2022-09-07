@@ -1,7 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import Header from "./QAHeader.jsx";
-import {qaDummyData} from "./qaDummyData.js";
 import QAEntry from "./QAEntry.jsx";
 import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"

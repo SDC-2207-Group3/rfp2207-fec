@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import AnswerModal from "./AnswerModal.jsx";
-import {qaDummyData} from "./qaDummyData.js";
 import AnswerItem from "./AnswerItem.jsx";
 import http from "../Utilities/Atelier.jsx";
 
