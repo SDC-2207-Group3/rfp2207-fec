@@ -12,11 +12,11 @@ const Comparison = (props) => {
     let featureObj = currFeatures[i];
     let featureFound = featureCollection.find(({ name }) => name === featureObj.feature);
     if (featureFound) {
-      featureFound.curr = featureObj.value ? JSON.parse(featureObj.value) : true
+      featureFound.curr = featureObj.value ? (featureObj.value) : true
     } else {
       featureCollection.push({name: featureObj.feature,
         main: null,
-        curr: featureObj.value ? JSON.parse(featureObj.value) : true})
+        curr: featureObj.value ? (featureObj.value) : true})
     }
   }
 
