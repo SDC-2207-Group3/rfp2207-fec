@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const ReviewFormRadio = ({ chars, char, index, handleChange }) => {
+const ReviewFormRadio = ({ chars, charId, char, index, handleChange }) => {
   const userRatingRadioVals = {
     Size: [
       "A size too small",
@@ -64,8 +64,11 @@ const ReviewFormRadio = ({ chars, char, index, handleChange }) => {
               <input
                 type="radio"
                 name={`${char}`}
+                data-charid={`${charId}`}
+                data-charval={`${i + 1}`}
                 id="characteristics"
                 value={`${userRatingRadioVals[char][i]}`}
+                // value={i + 1}
                 onChange={(e) => handleTitle(e)}
               ></input>
               <label>

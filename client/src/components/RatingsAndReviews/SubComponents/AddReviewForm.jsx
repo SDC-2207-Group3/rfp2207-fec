@@ -1,13 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
+import ProductContext from "../../App.jsx";
+import { postNewReview } from "../../Utilities/Atelier.jsx";
+import axios from "axios";
 
-const AddReviewForm = ({ meta }) => {
-  console.log("////////", meta);
+const AddReviewForm = ({ id, meta }) => {
+  console.log(meta);
   const [userRating, setUserRating] = useState(0);
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
-  const [recommend, setRecommend] = useState("");
+  const [recommend, setRecommend] = useState(null);
   const [userImgs, setUserImgs] = useState([]);
   const [summary, setSummary] = useState("");
   const [reviewBody, setReviewBody] = useState("");
@@ -16,7 +19,7 @@ const AddReviewForm = ({ meta }) => {
 
   const handleClick = (e) => {
     let userScore = e.target.getAttribute("attr");
-    setUserRating(userScore);
+    setUserRating(Number(userScore));
   };
 
   const handleChange = (e) => {
@@ -34,15 +37,18 @@ const AddReviewForm = ({ meta }) => {
         setEmail(e.target.value);
         break;
       case "characteristics":
+        console.log(e.target.dataset.charid, e.target.dataset.charval);
         let copy = reviewCharacteristics;
-        reviewCharacteristics[e.target.name] = e.target.value;
+        reviewCharacteristics[e.target.dataset.charid] = Number(
+          e.target.dataset.charval
+        );
         setReviewCharacteristics(copy);
         break;
     }
   };
 
   const handleRecommend = (e) => {
-    setRecommend(e.target.value);
+    e.target.value === "yes" ? setRecommend(true) : setRecommend(false);
   };
 
   const handleImgUpload = (e) => {
@@ -51,7 +57,6 @@ const AddReviewForm = ({ meta }) => {
       let imgURL = URL.createObjectURL(file);
       tempURLs.push(imgURL);
     });
-    // setUserImgs([...userImgs,...tempURLs]);
     if (userImgs.length + tempURLs.length > 5) {
       alert("Sorry, there is a maximum of 5 images allowed per review");
       setUserImgs(userImgs);
@@ -64,18 +69,25 @@ const AddReviewForm = ({ meta }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log("submit");
     let userReview = {
-      userRating: userRating,
-      reviewCharacteristics: reviewCharacteristics,
-      recommend: recommend,
-      userImgs: userImgs,
+      product_id: id,
+      rating: userRating,
       summary: summary,
-      reviewBody: reviewBody,
-      userName: userName,
+      body: reviewBody,
+      recommend: recommend,
+      name: userName,
       email: email,
+      photos: [],
+      characteristics: reviewCharacteristics,
     };
-    console.log(userReview);
+
+    console.log("posting", userReview);
+    axios
+      .post(`${ATELIER_API}/reviews`, userReview, {
+        headers: { Authorization: process.env.KEY },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   let userRatingTerms = {
@@ -86,52 +98,10 @@ const AddReviewForm = ({ meta }) => {
     5: "Great",
   };
 
-  const userRatingRadioVals = {
-    Size: [
-      "A size too small",
-      "1/2 a size too small",
-      "Perfect",
-      "1/2 a size too big",
-      "A size too big",
-    ],
-    Width: [
-      "Too narrow",
-      "Slightly narrow",
-      "Perfect",
-      "Slightly wide",
-      "Too wide",
-    ],
-    Comfort: [
-      "Uncomfortable",
-      "Slightly uncomfortable",
-      "Ok",
-      "Comfortable",
-      "Perfect",
-    ],
-    Quality: [
-      "Poor",
-      "Below average",
-      "What I expected",
-      "Pretty great",
-      "Perfect",
-    ],
-    Length: [
-      "Runs short",
-      "Runs slightly short",
-      "Perfect",
-      "Runs slightly long",
-      "Runs long",
-    ],
-    Fit: [
-      "Runs tight",
-      "Runs slightly tight",
-      "Perfect",
-      "Runs slightly long",
-      "Runs long",
-    ],
-  };
-
+  console.log("////", meta.characteristics);
   let characteristics = Object.keys(meta.characteristics);
+  var charIDs = Object.values(meta.characteristics).map((char) => char.id);
+  console.log(charIDs);
 
   return (
     <div className="RR_modal-form">
@@ -158,6 +128,7 @@ const AddReviewForm = ({ meta }) => {
             <div key={`${char}`}>
               <ReviewFormRadio
                 chars={characteristics}
+                charId={charIDs[i]}
                 char={char}
                 index={i}
                 handleChange={handleChange}
@@ -257,3 +228,5 @@ export default AddReviewForm;
 
 //can do max chars with input type=text not with textarea
 //createObjectURL(object)
+
+//obj of keys {"charID":1, "charID":5}

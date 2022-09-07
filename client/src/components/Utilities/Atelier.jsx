@@ -1,6 +1,6 @@
-const axios = require('axios');
+const axios = require("axios");
 
-ATELIER_API = 'https://app-hrsei-api.herokuapp.com/api/fec2/rfp';
+ATELIER_API = "https://app-hrsei-api.herokuapp.com/api/fec2/rfp";
 
 //////////////////////////////////// RR BUCKET
 module.exports.getReviewsByCount = (id, sortBy, displayedReviews, count) =>
@@ -10,73 +10,111 @@ module.exports.getReviewsByCount = (id, sortBy, displayedReviews, count) =>
       sort: `${sortBy}`,
       count: `${displayedReviews + count}`,
     },
-    headers: { Authorization: process.env.KEY }
-  })
+    headers: { Authorization: process.env.KEY },
+  });
+
+module.exports.postNewReview = (post) => {
+  console.log("posting", post);
+  axios.post(
+    `${ATELIER_API}/reviews`,
+    {
+      params: {
+        product_id: post.id,
+        rating: post.rating,
+        summary: post.summary,
+        body: post.body,
+        recommend: post.recommend,
+        name: post.name,
+        email: post.email,
+        photos: post.photos,
+        characteristics: post.characteristics,
+      },
+    },
+    { headers: { Authorization: process.env.KEY } }
+  );
+};
 ////////////////////////////////////
 
-module.exports.getRelatedProducts = (id) => axios.get(`${ATELIER_API}/products/${id}/related`, {headers: {'Authorization': process.env.KEY}});
+module.exports.getRelatedProducts = (id) =>
+  axios.get(`${ATELIER_API}/products/${id}/related`, {
+    headers: { Authorization: process.env.KEY },
+  });
 
 /////////////////////////////////////////
 
-module.exports.getProductInfo = (id) => axios.get(`${ATELIER_API}/products/${id}`, {headers: {'Authorization': process.env.KEY}});
+module.exports.getProductInfo = (id) =>
+  axios.get(`${ATELIER_API}/products/${id}`, {
+    headers: { Authorization: process.env.KEY },
+  });
 
-module.exports.getProductStyle = (id) => axios.get(`${ATELIER_API}/products/${id}/styles`, {headers: {'Authorization': process.env.KEY}});
+module.exports.getProductStyle = (id) =>
+  axios.get(`${ATELIER_API}/products/${id}/styles`, {
+    headers: { Authorization: process.env.KEY },
+  });
 
-module.exports.postItemtoCart = (sku) => axios.post(`${ATELIER_API}/cart`, {headers: {"Authorization": process.env.KEY}});
+module.exports.postItemtoCart = (sku) =>
+  axios.post(`${ATELIER_API}/cart`, {
+    headers: { Authorization: process.env.KEY },
+  });
 
-module.exports.getReviewMetaData = (id) => axios.get(`${ATELIER_API}/reviews/meta?product_id=${id}`, {headers: {'Authorization': process.env.KEY}});
-
+module.exports.getReviewMetaData = (id) =>
+  axios.get(`${ATELIER_API}/reviews/meta?product_id=${id}`, {
+    headers: { Authorization: process.env.KEY },
+  });
 
 ////////////////////////////////////////////////////////////////////////////////
 
-module.exports.getQuestions = (id) => axios.get(
-  `${ATELIER_API}/qa/questions/?product_id=${id}&count=50`,
-  {headers: {'Authorization': process.env.KEY}}
+module.exports.getQuestions = (id) =>
+  axios.get(`${ATELIER_API}/qa/questions/?product_id=${id}&count=50`, {
+    headers: { Authorization: process.env.KEY },
+  });
+module.exports.getAnswers = (question_id) =>
+  axios.get(`${ATELIER_API}/qa/questions/${question_id}/answers`, {
+    headers: { Authorization: process.env.KEY },
+  });
+module.exports.postQuestion = (product_id, modalData) =>
+  axios.post(`${ATELIER_API}/qa/questions`, modalData, {
+    headers: { Authorization: process.env.KEY },
+  });
+module.exports.postAnswer = (product_id, question_id, modalData) =>
+  axios.post(`${ATELIER_API}/qa/questions/${question_id}/answers`, modalData, {
+    headers: { Authorization: process.env.KEY },
+  });
+module.exports.markQuestionAsHelpful = (question_id, product_id) =>
+  axios.put(
+    `${ATELIER_API}/qa/questions/${question_id}/helpful`,
+    { question_id: question_id },
+    { headers: { Authorization: process.env.KEY } }
   );
-module.exports.getAnswers = (question_id) => axios.get(
-  `${ATELIER_API}/qa/questions/${question_id}/answers`,
-  {headers: {'Authorization': process.env.KEY}}
-  )
-module.exports.postQuestion = (product_id, modalData) => axios.post(
-  `${ATELIER_API}/qa/questions`,
-  modalData,
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.postAnswer = (product_id, question_id, modalData) => axios.post(
-  `${ATELIER_API}/qa/questions/${question_id}/answers`,
-  modalData,
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.markQuestionAsHelpful = (question_id, product_id) => axios.put(
-  `${ATELIER_API}/qa/questions/${question_id}/helpful`,
-  {question_id: question_id},
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.markAnswerAsHelpful = (answer_id) => axios.put(
-  `${ATELIER_API}/qa/answers/${answer_id}/helpful`,
-  {answer_id: answer_id},
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.getAnswer = (question_id) => axios.get(
-  `${ATELIER_API}/qa/questions/${question_id}/answers`,
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.reportAnswer = (answer_id) => axios.put(
-  `${ATELIER_API}/qa/answers/${answer_id}/report`,
-  {answer_id: answer_id},
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.reportQuestion = (question_id) => axios.put(
-  `${ATELIER_API}/qa/questions/${question_id}/report`,
-  {question_id: question_id},
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.getProductName = (product_id) => axios.get(
-  `${ATELIER_API}/products/${product_id}`,
-  {headers: {'Authorization': process.env.KEY}}
-)
-module.exports.postToImgbb = (body) => axios({
-    method: 'post',
-    url: 'https://api.imgbb.com/1/upload',
-    data: body
-  })
+module.exports.markAnswerAsHelpful = (answer_id) =>
+  axios.put(
+    `${ATELIER_API}/qa/answers/${answer_id}/helpful`,
+    { answer_id: answer_id },
+    { headers: { Authorization: process.env.KEY } }
+  );
+module.exports.getAnswer = (question_id) =>
+  axios.get(`${ATELIER_API}/qa/questions/${question_id}/answers`, {
+    headers: { Authorization: process.env.KEY },
+  });
+module.exports.reportAnswer = (answer_id) =>
+  axios.put(
+    `${ATELIER_API}/qa/answers/${answer_id}/report`,
+    { answer_id: answer_id },
+    { headers: { Authorization: process.env.KEY } }
+  );
+module.exports.reportQuestion = (question_id) =>
+  axios.put(
+    `${ATELIER_API}/qa/questions/${question_id}/report`,
+    { question_id: question_id },
+    { headers: { Authorization: process.env.KEY } }
+  );
+module.exports.getProductName = (product_id) =>
+  axios.get(`${ATELIER_API}/products/${product_id}`, {
+    headers: { Authorization: process.env.KEY },
+  });
+module.exports.postToImgbb = (body) =>
+  axios({
+    method: "post",
+    url: "https://api.imgbb.com/1/upload",
+    data: body,
+  });

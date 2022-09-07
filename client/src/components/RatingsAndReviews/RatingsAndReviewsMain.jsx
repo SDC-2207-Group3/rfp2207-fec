@@ -140,7 +140,7 @@ let RatingsAndReviewsMain = (props) => {
           />
         </div>
       </div>
-      {showModal ? <AddReviewForm meta={state.meta} /> : null}
+      {showModal ? <AddReviewForm id={props.id} meta={state.meta} /> : null}
     </section>
   );
 };
