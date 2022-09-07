@@ -3,8 +3,7 @@ import ProductCard from './ProductCard.jsx';
 import { RIOContext } from './MainRIO.jsx';
 
 const ItemCards = (props) => {
-  const { relatedItems } = useContext(RIOContext);
-  const { mainProduct } = useContext(RIOContext);
+  const { relatedItems, mainProduct } = useContext(RIOContext);
   let featureCollection = [];
   for (let index in mainProduct.features) {
     let featureInput = {};
@@ -16,9 +15,10 @@ const ItemCards = (props) => {
 
   return (
     <div className="RIC-cards" style={props.style}>
-      {relatedItems.map((product) =>
+      {relatedItems.length ? relatedItems.map((product) =>
         <ProductCard key={`RI${product.id}`} open={props.open} product={product} mode={'related-item'} />
-      )}
+      )
+      : <div id="RIC-no-related-items"><p>No related products ...</p></div>}
     </div>
   )
 }

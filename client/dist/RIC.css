@@ -37,6 +37,12 @@
   color: gray;
 }
 
+#RIC-no-related-items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Shared Carousel */
 .RIC-card-carousel {
   display: flex;
@@ -78,8 +84,8 @@
 .RIC-product-card-div {
   border: 1px solid gray;
   height: 80%;
-  width: 13.5vw;
-  margin: 0.5% 1%;
+  width: 13vw;
+  margin: 0.3vw 0.3vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -124,8 +130,14 @@
   font-style: italic;
 }
 
+.RIC-name-wrapper-div {
+  width: 100%;
+  overflow: hidden;
+}
+
 #RIC-name {
   font-weight: bold;
+  white-space: nowrap;
 }
 
 p.RIC {

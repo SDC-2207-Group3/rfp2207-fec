@@ -14,7 +14,7 @@ module.exports.getReviewsByCount = (id, sortBy, displayedReviews, count) =>
   })
 ////////////////////////////////////
 
-module.exports.getRelatedProducts = (id) => axios.get(`${ATELIER_API}/products/${id}/related`, {headers: {'Authorization': process.env.KEY}});
+module.exports.getRelatedProductIds = (id) => axios.get(`${ATELIER_API}/products/${id}/related`, {headers: {'Authorization': process.env.KEY}});
 
 /////////////////////////////////////////
 

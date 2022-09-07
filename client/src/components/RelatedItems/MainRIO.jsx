@@ -1,37 +1,34 @@
 import React, { useState, useEffect, useContext, useReducer, createContext } from 'react';
 import axios from 'axios';
-import http from './HttpReqs.js';
+import Atelier from '../Utilities/Atelier.jsx';
+import Helper from '../Utilities/Helper.jsx'
 import RelatedItems from './RelatedItems.jsx';
 import YourOutfits from './YourOutfits.jsx'
-import Stars from './Stars.jsx';
 import * as _ from 'underscore';
 import { ProductContext } from '../App.jsx';
-import outfitDetails from './YourOutfitData.js'
 
 export const RIOContext = createContext();
 
 const RelatedItemsAndOutfits = (props) => {
-  const { id } = useContext(ProductContext);
+  const { id, product_style, product_rating, product_parsed_data} = useContext(ProductContext);
   const [state, setState] = useReducer((state, newState) => ({...state, ...newState}),
   {mainProduct: {}, relatedItems: [], yourOutfits: []});
 
   useEffect(() => {
-    setState({yourOutfits: outfitDetails})
+    setState({yourOutfits: []})
   }, []);
 
   useEffect(() => {
-    http.productReq(id)
-      .then(res => setState({mainProduct: res.data}));
-
-    http.relatedReq(id)
+    console.log('how many times do i sent api calls');
+    Atelier.getRelatedProductIds(id)
       .then(res => {
        let related = _.uniq(res.data);
        let reqArr = [];
        related.map((id) => {
         let promises = Promise.all([
-          http.productReq(id),
-          http.styleReq(id),
-          http.reviewReq(id)
+          Atelier.getProductInfo(id),
+          Atelier.getProductStyle(id),
+          Atelier.getReviewMetaData(id)
         ])
         reqArr.push(promises);
        });
@@ -39,7 +36,7 @@ const RelatedItemsAndOutfits = (props) => {
         .then(responses => {
           let newData = [];
           responses.forEach((res) => {
-            newData.push(http.dataParser(res));
+            newData.push(Helper.dataParser(res));
           })
           setState({relatedItems: newData});
         });
@@ -47,7 +44,11 @@ const RelatedItemsAndOutfits = (props) => {
     .catch(err => console.error(err));
   }, [id]);
 
-  console.log('--current state--', state);
+  useEffect(() => {
+    setState({mainProduct: product_parsed_data});
+  }, [product_parsed_data])
+
+  console.log('state of related items', state );
 
   return (
     <section id="RIC-section">
