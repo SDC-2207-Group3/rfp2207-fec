@@ -180,6 +180,11 @@
 
 }
 
+.qa-moreQuestions:hover,
+.qa-newQuestionBtn:hover {
+  background-color: #e8e8e8;
+}
+
 .qa-moreQuestions {
   margin-right: 1rem;
 }
