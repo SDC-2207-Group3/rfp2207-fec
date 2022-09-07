@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
 import ProductContext from "../../App.jsx";
-import { postNewReview } from "../../Utilities/Atelier.jsx";
+import { postNewReview, postToImgbb } from "../../Utilities/Atelier.jsx";
 import axios from "axios";
 
 const AddReviewForm = ({ id, meta }) => {
@@ -11,6 +11,7 @@ const AddReviewForm = ({ id, meta }) => {
   const [userRating, setUserRating] = useState(0);
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
   const [recommend, setRecommend] = useState(null);
+  const [userImgsThumb, setUserImgsThumb] = useState([]);
   const [userImgs, setUserImgs] = useState([]);
   const [summary, setSummary] = useState("");
   const [reviewBody, setReviewBody] = useState("");
@@ -52,19 +53,27 @@ const AddReviewForm = ({ id, meta }) => {
   };
 
   const handleImgUpload = (e) => {
+    //hanlde the thumbnail state and image file state
     let tempURLs = [];
+    let tempImgs = [];
+
     Object.values(e.target.files).map((file) => {
       let imgURL = URL.createObjectURL(file);
+      tempImgs.push(file);
       tempURLs.push(imgURL);
     });
-    if (userImgs.length + tempURLs.length > 5) {
+
+    if (userImgsThumb.length + tempURLs.length > 5) {
       alert("Sorry, there is a maximum of 5 images allowed per review");
+      setUserImgsThumb(userImgsThumb);
       setUserImgs(userImgs);
       return;
-    } else if (userImgs.length + tempURLs.length === 5) {
-      setUserImgs([...userImgs, ...tempURLs]);
+    } else if (userImgsThumb.length + tempURLs.length === 5) {
+      setUserImgsThumb([...userImgsThumb, ...tempURLs]);
+      setUserImgs([...userImgs, ...tempImgs]);
     } else {
-      setUserImgs([...userImgs, ...tempURLs]);
+      setUserImgsThumb([...userImgsThumb, ...tempURLs]);
+      setUserImgs([...userImgs, ...tempImgs]);
     }
   };
 
@@ -80,14 +89,41 @@ const AddReviewForm = ({ id, meta }) => {
       photos: [],
       characteristics: reviewCharacteristics,
     };
+    //post to imgbb now?
 
-    console.log("posting", userReview);
-    axios
-      .post(`${ATELIER_API}/reviews`, userReview, {
-        headers: { Authorization: process.env.KEY },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    if (userImgs.length > 0) {
+      console.log("uploading imgs");
+      let promises = [];
+
+      for (let [key, img] of Object.entries(userImgs)) {
+        console.log(key, img);
+        let body = new FormData();
+        body.set("key", process.env.IMGBB_KEY);
+        body.append("image", img);
+        let promise = postToImgbb(body);
+        promises.push(promise);
+      }
+
+      Promise.all(promises)
+        .then((res) => {
+          //take urls and apply to userReview obj
+          userReview.photos = res.map((imgReply) => imgReply.data.data.url);
+          //post user review obj
+          console.log("full review after upload: ", userReview);
+          axios.post(`${ATELIER_API}/reviews`, userReview, {
+            headers: { Authorization: process.env.KEY },
+          });
+        })
+        .catch((err) => console.log(err));
+
+      // console.log("posting", userReview);
+      // axios
+      //   .post(`${ATELIER_API}/reviews`, userReview, {
+      //     headers: { Authorization: process.env.KEY },
+      //   })
+      //   .then((res) => console.log(res))
+      //   .catch((err) => console.log(err));
+    }
   };
 
   let userRatingTerms = {
@@ -187,8 +223,8 @@ const AddReviewForm = ({ id, meta }) => {
           )}
         </div>
         <div>
-          {userImgs.length
-            ? userImgs.map((img, i) => {
+          {userImgsThumb.length
+            ? userImgsThumb.map((img, i) => {
                 return <img className="RR_form-thumbnail" src={img} key={i} />;
               })
             : null}
