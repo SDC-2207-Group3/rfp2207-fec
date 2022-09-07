@@ -62,9 +62,6 @@ const AddReviewForm = ({ meta }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log(e);
-    e.preventDefault();
-    setReviewBody();
     console.log("submit");
     let userReview = {
       userRating: userRating,
@@ -190,16 +187,13 @@ const AddReviewForm = ({ meta }) => {
           ></textarea>
         </form>
         <div>
-          {reviewBody.length && reviewBody.lengh >= 0 ? (
-            50 - reviewBody.length >= 0 ? (
-              <span>
-                Minimum required characters left:{" "}
-                {reviewBody.length ? 50 - reviewBody.length : 50}
-              </span>
-            ) : (
-              <span>Minimum reached</span>
-            )
-          ) : null}
+          {50 - reviewBody.length >= 0 ? (
+            <span>
+              Minimum required characters left: {50 - reviewBody.length}
+            </span>
+          ) : (
+            <span>Minimum reached</span>
+          )}
         </div>
       </div>
       <div>
