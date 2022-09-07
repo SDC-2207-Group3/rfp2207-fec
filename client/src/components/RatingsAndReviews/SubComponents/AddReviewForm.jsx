@@ -4,9 +4,9 @@ import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
 
 const AddReviewForm = ({ meta }) => {
-  // console.log(meta, "//////");
+  console.log("////////", meta);
   const [userRating, setUserRating] = useState(0);
-  const [reviewCharacteristics, setReviewCharacteristics] = useState("");
+  const [reviewCharacteristics, setReviewCharacteristics] = useState({});
   const [recommend, setRecommend] = useState("");
   const [userImgs, setUserImgs] = useState([]);
   const [summary, setSummary] = useState("");
@@ -20,9 +20,6 @@ const AddReviewForm = ({ meta }) => {
   };
 
   const handleChange = (e) => {
-    // e.target.id === "summary"
-    //   ? setSummary(e.target.value)
-    //   : setReviewBody(e.target.value);
     switch (e.target.id) {
       case "summary":
         setSummary(e.target.value);
@@ -35,6 +32,11 @@ const AddReviewForm = ({ meta }) => {
         break;
       case "email":
         setEmail(e.target.value);
+        break;
+      case "characteristics":
+        let copy = reviewCharacteristics;
+        reviewCharacteristics[e.target.name] = e.target.value;
+        setReviewCharacteristics(copy);
         break;
     }
   };
@@ -154,7 +156,12 @@ const AddReviewForm = ({ meta }) => {
         {characteristics.map((char, i) => {
           return (
             <div key={`${char}`}>
-              <ReviewFormRadio chars={characteristics} char={char} index={i} />
+              <ReviewFormRadio
+                chars={characteristics}
+                char={char}
+                index={i}
+                handleChange={handleChange}
+              />
             </div>
           );
         })}
