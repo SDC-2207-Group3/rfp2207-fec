@@ -26,6 +26,7 @@ module.exports.postItemtoCart = (sku) => axios.post(`${ATELIER_API}/cart`, { "sk
 
 module.exports.getReviewMetaData = (id) => axios.get(`${ATELIER_API}/reviews/meta?product_id=${id}`, {headers: {'Authorization': process.env.KEY}});
 
+module.exports.postUserClick = (element, widget) => axios.post(`${ATELIER_API}/interactions`, {"element": element, "widget": widget, "time": new Date()}, {headers: {"Authorization": process.env.KEY}})
 
 ////////////////////////////////////////////////////////////////////////////////
 

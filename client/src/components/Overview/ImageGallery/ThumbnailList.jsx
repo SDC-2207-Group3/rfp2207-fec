@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageGalleryContext } from './ImageGallery.jsx';
-// import { ProductContext } from './../Overview.jsx';
 
 const ThumbnailList = (props) => {
 

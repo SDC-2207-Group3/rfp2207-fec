@@ -1,3 +1,6 @@
+// import as theAndres from './Images/Placeholders/theAndres.png'
+// const theAndres = require("./Images/Placeholders/theAndres.png")
+
 module.exports.dataParser = (raw) => {
   let { results } = raw[1].data;
   let curr = results.find((style) => style["default?"]);

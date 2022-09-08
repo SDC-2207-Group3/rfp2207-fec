@@ -1,9 +1,12 @@
 import React, { useState, useEffect, createContext, useReducer } from 'react';
+
 import Overview from "./Overview/Overview.jsx";
 import RelatedItemsAndOutfits from "./RelatedItems/MainRIO.jsx";
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
 import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
+
 import Helper from './Utilities/Helper.jsx';
+import UserInteractions from './Utilities/UserInteractions.jsx';
 import axios from 'axios';
 
 const Atelier = require('./Utilities/Atelier.jsx');
@@ -50,12 +53,14 @@ const App = (props) => {
   console.log('state of app', state);
 
   return (
-    <div id="app">
+    <div id="app" >
       <ProductContext.Provider value={{...state, changeId}}>
-        <Overview id={state.id} />
-        <RelatedItemsAndOutfits id={state.id} />
-        <QuestionsAndAnswers id={state.id} />
-        <RatingsAndReviews id={state.id} />
+        <UserInteractions>
+          <Overview />
+          <RelatedItemsAndOutfits />
+          <QuestionsAndAnswers id={state.id} />
+          <RatingsAndReviews id={state.id} />
+        </UserInteractions>
       </ProductContext.Provider>
     </div>
   );
