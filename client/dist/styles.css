@@ -41,5 +41,5 @@ html body {
   color: var(--dark-mode-font);
   background: var(--dark-mode-background) ;
   --dark-mode-background: #3a3a3a;
-  --dark-mode-font:  white;
+  --dark-mode-font:  rgb(136, 79, 79);
 }
