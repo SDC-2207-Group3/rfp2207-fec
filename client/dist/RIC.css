@@ -3,7 +3,7 @@
   width: 60vw;
   overflow-x: hidden;
   height: 60vw;
-  margin: 0 13%;
+  margin: 0 auto;
   display: grid;
   grid-auto-columns: 1fr;
   grid-template-rows: 1fr 1fr;
