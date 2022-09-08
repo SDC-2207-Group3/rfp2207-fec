@@ -25,7 +25,7 @@ const ReviewItem = (props) => {
           {utilities.getFormattedDate(props.review.date)}
         </div>
       </div>
-      <h4>
+      <h4 className="RR_review-summary">
         {props.review.summary.length <= 60
           ? props.review.summary
           : props.review.summary.slice(0, 59) + "..."}
