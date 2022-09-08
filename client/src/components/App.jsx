@@ -3,6 +3,7 @@ import Overview from "./Overview/Overview.jsx";
 import RelatedItemsAndOutfits from "./RelatedItems/MainRIO.jsx";
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
 import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
+import ToggleSwitch from "./ToggleSwitch.jsx";
 
 import axios from 'axios';
 
@@ -10,7 +11,7 @@ const Atelier = require('./Utilities/Atelier.jsx');
 
 export const ProductContext = createContext();
 
-const reducer = (state, newState) => ({...state, newState})
+const reducer = (state, newState) => ({...state, ...newState})
 
 const initialeState = {
   id: 65638,
@@ -43,9 +44,28 @@ const App = (props) => {
 
   console.log('main app.jsx id', state.id);
 
+  // hook for toggling dark mode
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => {
+    if (!darkMode) {
+      // if dark mode is not on, change to darkMode
+      setDarkMode(true)
+    }
+    else {
+      // turn dark mode off
+      setDarkMode(false)
+    }
+  }
+
+
   return (
-    <div id="app">
+    <div id="app" className={`${darkMode ? "darkMode" : ""}`}>
       <ProductContext.Provider value={{...state, changeId}}>
+        <ToggleSwitch
+          label="Dark Mode"
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
         <Overview id={state.id} />
         <RelatedItemsAndOutfits id={state.id} />
         <QuestionsAndAnswers id={state.id} />

@@ -1,17 +1,16 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
-import http from "./httpReqsForQA.js";
-import qaUtilities from "./qaUtilities.js"
+import http from "../Utilities/Atelier.jsx";
 const axios = require("axios")
 
 
 function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
-  const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
+  const {register, handleSubmit, formState: {errors}, reset, watch} = useForm({criteriaMode: "all"});
+  const imageFiles = watch("yourImages")
+  console.log('this is watch: ', imageFiles)
   const onSubmit = (data) => {
     // console.log('this is data: ', data)
-    // reset()
-    // closeModal(false)
     if (data.yourImages.length > 0) {
       // console.log('images: ', data.yourImages)
       var arrPromise = [];
@@ -21,18 +20,10 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
           var body = new FormData()
           body.set('key', process.env.IMGBB_KEY)
           body.append('image', data.yourImages[key])
-          var promise = postToImgbb;
-          // var promise = axios({
-          //   method: 'post',
-          //   url: 'https://api.imgbb.com/1/upload',
-          //   data: body
-          // })
+          var promise = http.postToImgbb(body);
           arrPromise.push(promise);
         }
       }
-      // console.log('this is arrPromise: ', arrPromise)
-      // body.append('image', data.yourImages[0])
-      // TODO: how to view multiple images with IMGBB?!?!
       Promise.all(arrPromise)
         .then((res) =>
           // res is an array
@@ -49,7 +40,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
         )
         .then((res) => http.getQuestions(product_id))
         .then((res) => {
-          console.log('setting new results: ', res.data.results)
+          // console.log('setting new results: ', res.data.results)
           setQA(res.data.results)
         })
         .catch((err) => {console.error(err)})
@@ -65,6 +56,8 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
         .then((res) => {setQA(res.data.results)})
         .catch((err) => {console.error(err)})
     }
+    reset()
+    closeModal(false);
   }
 
   return (
@@ -109,8 +102,14 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
                 multiple
                 accept="image/png, image/jpeg"
                 {...register("yourImages")}
-                // TODO: HANDLE ERRORS FOR FILE UPLOADS
               />
+            <div className="qa-thumbnail-list">
+              {imageFiles && Object.entries(imageFiles).map(([index, image]) => {
+                    return (
+                        <img className="qa-thumbnail" key={image.name} src={URL.createObjectURL(image)} />
+                    )
+                  })}
+            </div>
             </label>
             <label className="modalLabel">
                 Your Nickname
@@ -168,11 +167,6 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
             </label>
 
           <div className="qa-modalFooter">
-            {/* <button className="qa-modalFooterBtn" id="qa-modalFooterCancelBtn"
-                onClick={() => closeModal(false)}
-            >
-              Cancel
-            </button> */}
             <button className="qa-modalFooterBtn"
             >
               Submit
