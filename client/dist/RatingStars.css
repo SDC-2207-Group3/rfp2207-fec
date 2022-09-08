@@ -17,18 +17,17 @@
   position: absolute;
   right: -0.09375rem;
   height: 1rem;
-  z-index: -1;
-  background-color: rgb(255, 255, 255);
+  z-index: 1;
 }
 
 .star-fill {
   color: rgb(255, 213, 0);
   position: absolute;
-  z-index: -2;
+  z-index: 0;
 }
 
 .star-empty {
   color: rgb(255, 213, 0);
   position: absolute;
-  z-index: 0;
+  z-index: 2;
 }
