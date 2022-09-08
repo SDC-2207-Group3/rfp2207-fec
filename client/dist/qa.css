@@ -2,12 +2,11 @@
 /* Main QA Widget */
 
 .qa-app {
-  /* translate: 5%; */
+  margin: auto;
+  width: 80%;
   padding-top: 1%;
   padding-bottom: 1%;
   cursor: default;
-  /* padding-left: 0.5%;
-  padding-right: 0.5%; */
 }
 
 /* QA Search CSS */
@@ -34,15 +33,13 @@
 }
 
 .qa-accordion {
-  /* box-sizing: border-box; */
   max-height: 600px;
   max-width: 100%;
-  /* margin: 6rem auto 4rem; */
   padding: 0 0px;
   list-style: none;
   font-family: "Segoe UI", Arial, sans-serif;
   line-height: 1.4;
-  background: #fff;
+  /* background: #fff; */
   color: #444;
   overflow-y: scroll;
   margin-bottom: 20px;
@@ -59,8 +56,7 @@
 }
 
 .question-item-button {
-  background-color: #f1f1f1;
-  /* color: #fff; */
+  /* background-color: white; */
   color: black;
   display: flex;
   flex-wrap: wrap;
@@ -73,6 +69,7 @@
 }
 
 
+
 .question-item-control {
   font-size: 20px;
 }
@@ -80,49 +77,50 @@
 
 .qa-moreAnswers {
   border: 3px #d8d8d8;
-  background-color: #f7f7f7;
+  /* background-color: white; */
   font-weight: bold;
+  cursor: pointer;
 }
+
 
 .answer-item {
   display: flex;
   flex-direction: column;
   width: 100%;
   justify-content: space-between;
-  background-color: #f7f7f7;
+  /* background-color: white; */
   padding: 20px;
 }
+
+
 
 .answer-item-single-container {
   padding: 2px;
 }
+
 
 .answer-item-single {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
-  text-align: center;
 }
 
 .answer-prefix {
   margin-right: 5px;
-  /* text-align: center; */
-
 }
 
 .answer-prefix, .answer-body {
   transform: translateY(3.5px);
 }
-/*
-.answer-body {
-  display: flex;
-  flex-direction: row;
-  background-color: yellow;
-} */
 
-.qa-accordion-item.active .question-item-button {
-  background-color: #f1f1f187;
+
+.qa-thumbnail {
+  height: 100px;
+  width: auto;
+  cursor: pointer;
+  margin: 5px;
+
 }
 
 .question-item-button-text {
@@ -132,6 +130,11 @@
   padding-bottom: 1rem;
 
 }
+
+.question-item-active {
+  /* background-color: #e8e8e8; */
+}
+
 
 .answer-wrapper {
   height: 0;
@@ -143,27 +146,35 @@
 }
 
 .answer-image-file {
-  /* margin-top: 100px; */
   max-width: 100px;
+  padding: 0.25rem;
 }
 
 .answer-image {
   display: flex;
-  margin-top: 5rem;
-  margin-top: 1%;
+  margin-top: 2%;
   margin-bottom: 1%;
-  /* margin-left: -5%; */
   padding-left: 1%;
 }
 
 .qa-moreQuestions, .qa-newQuestionBtn {
   padding: 20px;
   border-color: 1px solid #d8d8d8;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   font-size: 16px;
   color: black;
   cursor: pointer;
 
+}
+
+.qa-moreQuestions:hover,
+.qa-newQuestionBtn:hover,
+.question-item-button:hover {
+  background-color: #e8e8e8;
+}
+
+.question-item-button.active {
+  background-color: #e8e8e8;
 }
 
 .qa-moreQuestions {
@@ -176,7 +187,6 @@
 }
 
 .qa-ref-link {
-  padding: 5px;
   font-weight: 500;
 }
 
@@ -185,7 +195,12 @@
 }
 
 .q-helpful {
-  padding: 0.5em;
+  padding: 0.2em;
+}
+
+small.align-small {
+  width: 4rem;
+  text-align: center;
 }
 
 .noClick {
@@ -200,7 +215,7 @@
 .helpful-hover:hover,
 .report-hover:hover,
 .question-item-control:hover,
-.question-item-button-text:hover {
+.qa-moreAnswers:hover {
   color: cornflowerblue;
 }
 
@@ -208,52 +223,50 @@
   color: cornflowerblue;
 }
 
+
 /* QuestionModal CSS */
 
-/* .qa-modalBackground {
+.qa-modalBackground {
+  position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 192, 203, 0.236);
-  justify-content: center;
-  align-items: center;
-} */
+  top: 0;
+  left: 0;
+  z-index: 5;
+  backdrop-filter: blur(4px);
+}
 
 .qa-modalContainer {
-  width: 33vw;
+  width: 30vw;
   height: 70vh;
-  /* border-radius: 12px; */
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
   display: flex;
   flex-direction: column;
   padding: 25px;
-
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  /* height: 40vh; */
   z-index: 3;
-
   color: black;
   font-weight: 300;
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
 .qa-modalContainer .qa-modalTitle {
-  /* display: inline-block; */
   text-align: center;
-  /* margin-top: 1%; */
   margin-bottom: 1%;
 }
 
 .qa-modalTitleCloseBtn {
   display: flex;
   justify-content: flex-end;
+  background: white;
 }
 
 button.qa-modalTitleCloseBtn {
-  background-color: transparent;
+  /* background-color: transparent; */
   border: none;
   font-size: 25px;
   cursor: pointer;
@@ -292,7 +305,7 @@ button.qa-modalFooterBtn {
   height: 35px;
   margin: 6%;
   border: 1px #d8d8d8;
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
   color: black;
   font-size: 15px;
   cursor: pointer;

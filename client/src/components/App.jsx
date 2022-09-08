@@ -4,6 +4,7 @@ import Overview from "./Overview/Overview.jsx";
 import RelatedItemsAndOutfits from "./RelatedItems/MainRIO.jsx";
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviewsMain.jsx";
 import QuestionsAndAnswers from "./QuestionsAndAnswers/QuestionsAndAnswers.jsx";
+import ToggleSwitch from "./ToggleSwitch.jsx";
 
 import Helper from './Utilities/Helper.jsx';
 import UserInteractions from './Utilities/UserInteractions.jsx';
@@ -52,10 +53,29 @@ const App = (props) => {
 
   console.log('state of app', state);
 
+  // hook for toggling dark mode
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => {
+    if (!darkMode) {
+      // if dark mode is not on, change to darkMode
+      setDarkMode(true)
+    }
+    else {
+      // turn dark mode off
+      setDarkMode(false)
+    }
+  }
+
+
   return (
     <div id="app" >
       <ProductContext.Provider value={{...state, changeId}}>
         <UserInteractions>
+          <ToggleSwitch
+            label="Dark Mode"
+            darkMode={darkMode}
+            toggleDarkMode={toggleDarkMode}
+          />
           <Overview />
           <RelatedItemsAndOutfits />
           <QuestionsAndAnswers id={state.id} />
