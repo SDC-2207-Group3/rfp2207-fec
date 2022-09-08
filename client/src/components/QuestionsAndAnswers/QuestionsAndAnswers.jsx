@@ -1,11 +1,10 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import Header from "./QAHeader.jsx";
-import {qaDummyData} from "./qaDummyData.js";
 import QAEntry from "./QAEntry.jsx";
 import QuestionModal from "./QuestionModal.jsx";
 import AnswerModal from "./AnswerModal.jsx"
-import http from "./httpReqsForQA.js";
+import http from "../Utilities/Atelier.jsx";
 import Search from "./QASearch.jsx";
 
 function QuestionsAndAnswers({id}) {
@@ -18,15 +17,6 @@ function QuestionsAndAnswers({id}) {
       .then((res) => {
         setQA(res.data.results.sort((a, b) => b.question_helpfulness - a.question_helpfulness))
       })
-      .catch((err) => {console.error(err)})
-  }, [id])
-
-  // state hook for getting current product name
-  const [currentProduct, setCurrentProduct] = useState([]);
-  useEffect(() => {
-    http.getProductName(id)
-      .then((res) => {
-        setCurrentProduct(res.data.name)})
       .catch((err) => {console.error(err)})
   }, [id])
 
@@ -80,7 +70,7 @@ function QuestionsAndAnswers({id}) {
         >
         Add a question
         </button>
-        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA} currentProduct={currentProduct}/>}
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA} />}
     </div>
   )
 

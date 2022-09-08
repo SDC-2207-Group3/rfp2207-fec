@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Stars from './Stars.jsx';
 import { Star, XCircle } from 'react-feather';
-import Comparison from './Comparison.jsx'
-import { ProductContext } from '../App.jsx'
+import Comparison from './Comparison.jsx';
+import { ProductContext } from '../App.jsx';
+import RatingStars from '../Utilities/ratingStars.jsx';
 
 var ProductCard = (props) => {
   const [modal, setModal] = useState(false);
@@ -25,12 +25,12 @@ var ProductCard = (props) => {
       </div>
       <div onClick={() => changeId(props.product.id)} className="RIC-product-card-detail">
         <p className="RIC" id="RIC-category">{props.product.category}</p>
-        <p className="RIC" id="RIC-name">{props.product.name}</p>
+        <div className="RIC-name-wrapper-div"><p className="RIC" id="RIC-name">{props.product.name}</p></div>
         <p className="RIC">
           <span id={`RIC-original-price${props.product.sale_price ? '-sale' : ''}`}>$ {props.product.original_price}</span>
           <span id="RIC-sale-price">{" "} {props.product.sale_price ? '$' + props.product.sale_price : null }</span>
         </p>
-        <Stars rating={props.product.ratings}/>
+        <RatingStars rating={props.product.ratings} />
       </div>
     </div>
   )

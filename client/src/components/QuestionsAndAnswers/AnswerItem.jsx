@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import http from "./httpReqsForQA.js";
+import http from "../Utilities/Atelier.jsx";
 
 
-function AnswerItem({answer, question_id}) {
-
+function AnswerItem({answer, question_id, product_id, mainQA, setQA}) {
   // hook for tracking whether or not an answer is marked helpful
   const [helpfulClicked, setHelpfulClicked] = useState(false);
 
@@ -23,10 +22,10 @@ function AnswerItem({answer, question_id}) {
   // hook for tracking whether an answer is reported
   const [reportClicked, setReportClicked] = useState(false);
 
-  const reportAnswer = (answer_id) => {
+  const reportAnswer = (answer_id, question_id) => {
     setReportClicked(true);
     http.reportAnswer(answer_id)
-      .then((res) => {return;})
+      .then((res) => http.getAnswer(question_id))
       .catch((err) => {console.error(err)})
   }
 
@@ -39,23 +38,30 @@ function AnswerItem({answer, question_id}) {
     <div className="answer-item-single-container">
       <div className="answer-item-single">
         <span className="answer-prefix">A: </span>
-        <span className="answer-body">{answer.body}</span>
-        <div className="answer-body answer-image">
+        <div className="answer-body">
+          {answer.body}
+          <div className="answer-body answer-image">
           {answer.photos.length > 0
           &&
-          answer.photos.map((image) => <img className="answer-image-file" src={image}/> )
+          answer.photos.map((image, index) => <img key={index} className="answer-image-file" src={image}/> )
           }
+          </div>
         </div>
-        <small className="qa-ref-link qa-push">Helpful?</small>
+        <small className="align-small qa-ref-link qa-push">Helpful?</small>
         <small
-          className={`qa-ref-link qa-mark helpful-hover ${helpfulClicked ? "noClick" : ""}`}
+          className={`align-small qa-ref-link qa-mark helpful-hover ${helpfulClicked ? "noClick" : ""}`}
           onClick={() => markAnswerAsHelpful(answer.id, question_id)}
         >
-          Yes({yesCount}) |
+          Yes({yesCount})
         </small>
         <small
-          className={`qa-ref-link qa-mark report-hover ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
-          onClick={() => reportAnswer(answer.id)}
+          className={`qa-ref-link q-separator qa-mark`}
+        >
+          |
+        </small>
+        <small
+          className={`align-small qa-ref-link qa-mark report-hover ${reportClicked ? "qa-reported" : ""} ${reportClicked ? "noClick" : ""}`}
+          onClick={() => reportAnswer(answer.id, question_id)}
         >
           {`${reportClicked ? "Reported" : "Report"}`}
         </small>

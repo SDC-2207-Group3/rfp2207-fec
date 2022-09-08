@@ -1,44 +1,44 @@
 import React, { useState, useContext, createContext, useRef, useEffect, useReducer } from 'react';
-import { ProductContext } from './../Overview.jsx';
+import { ProductContext } from './../../App.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 import IconList from './IconList.jsx';
 
 export const ImageGalleryContext = createContext(null);
 
-const reducer = (state, action) => {
-  switch(action.type) {
-    case 'minimize':
-      return {...state,
-        defaultView: true,
-        toggleZoom: false,
-        setZoomAmount: 250
-      }
-    case 'reset':
-      return {...state,
-        photoIndex: 0,
-        displayIndex: 0
-      }
-    case 'leftPhoto':
-      return { ...state, photoIndex: state.photoIndex - 1 }
-    case 'rightPhoto':
-      return { ...state, photoIndex: state.photoIndex + 1 }
-    case 'scrollUp':
-      return { ...state, displayIndex: state.displayIndex - 1 }
-    case 'scrollDown':
-      return { ...state, displayIndex: state.displayIndex + 1 }
-    default:
-      return { state }
-  }
-}
+// const reducer = (state, action) => {
+//   switch(action.type) {
+//     case 'minimize':
+//       return {...state,
+//         defaultView: true,
+//         toggleZoom: false,
+//         setZoomAmount: 250
+//       }
+//     case 'reset':
+//       return {...state,
+//         photoIndex: 0,
+//         displayIndex: 0
+//       }
+//     case 'leftPhoto':
+//       return { ...state, photoIndex: state.photoIndex - 1 }
+//     case 'rightPhoto':
+//       return { ...state, photoIndex: state.photoIndex + 1 }
+//     case 'scrollUp':
+//       return { ...state, displayIndex: state.displayIndex - 1 }
+//     case 'scrollDown':
+//       return { ...state, displayIndex: state.displayIndex + 1 }
+//     default:
+//       return { state }
+//   }
+// }
 
-const initialState = {
-  offset:       { top: 0, left: 0 },
-  photoIndex:   0,
-  toggleZoom:   false,
-  zoomAmount:   250,
-  defaultView:  true,
-  displayIndex: 0
-}
+// const initialState = {
+//   offset:       { top: 0, left: 0 },
+//   photoIndex:   0,
+//   toggleZoom:   false,
+//   zoomAmount:   250,
+//   defaultView:  true,
+//   displayIndex: 0
+// }
 
 const ImageGallery = (props) => {
 
@@ -51,17 +51,16 @@ const ImageGallery = (props) => {
   const [defaultView, setDefaultView]   = useState(true);
   const [displayIndex, setDisplayIndex] = useState(0);
 
-  const zoomImageRef = useRef(null);
-  const containerRef = useRef(null);
+  const zoomImageRef   = useRef(null);
+  const containerRef   = useRef(null);
   const targetImageRef = useRef(null);
 
-  const { state } = useContext(ProductContext);
+  const { product_info } = useContext(ProductContext);
 
   const photos           = props.productStyle.photos ? props.productStyle.photos : [];
   const displayURL       = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null;
   const productName      = props.productStyle.name;
   const displayImageView = defaultView               ? "overview-defaultView" : "overview-expandedView";
-
 
   function leftPhoto () {
     setPhotoIndex(photoIndex - 1)
@@ -88,7 +87,7 @@ const ImageGallery = (props) => {
   useEffect(() => {
     setPhotoIndex(0);
     setDisplayIndex(0);
-   }, [state.productDetails])
+   }, [product_info])
 
   function minimize () {
     setDefaultView(true);
