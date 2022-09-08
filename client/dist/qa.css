@@ -133,24 +133,16 @@
 
 }
 
-/* .answer-body {
-  display: flex;
-  max-height: 1rem;
-  justify-content: left;
-} */
-
-.qa-accordion-item.active {
-  background-color: #f1f1f187;
-  /* background-color: white;
-  color: cornflowerblue; */
-}
-
 .question-item-button-text {
   display: flex;
   flex: 60%;
   padding-top: 1rem;
   padding-bottom: 1rem;
 
+}
+
+.question-item-active {
+  background-color: #e8e8e8;
 }
 
 
@@ -188,7 +180,12 @@
 }
 
 .qa-moreQuestions:hover,
-.qa-newQuestionBtn:hover {
+.qa-newQuestionBtn:hover,
+.question-item-button:hover {
+  background-color: #e8e8e8;
+}
+
+.question-item-button.active {
   background-color: #e8e8e8;
 }
 
@@ -231,7 +228,6 @@ small.align-small {
 .helpful-hover:hover,
 .report-hover:hover,
 .question-item-control:hover,
-.question-item-button-text:hover,
 .qa-moreAnswers:hover {
   color: cornflowerblue;
 }
@@ -239,6 +235,7 @@ small.align-small {
 .add-answer-button:hover {
   color: cornflowerblue;
 }
+
 
 /* QuestionModal CSS */
 
