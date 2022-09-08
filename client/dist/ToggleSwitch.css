@@ -1,5 +1,6 @@
 .dark-mode-container {
   text-align: right;
+  padding: 0.5rem;
 }
 .toggle-switch {
   position: relative;
@@ -38,7 +39,7 @@
 .inner:before {
   content: "YES";
   padding-left: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color:  #464646;
   color: #fff;
 }
 .inner:after {

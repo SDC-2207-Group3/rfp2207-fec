@@ -5,7 +5,10 @@ html {
 }
 
 html body {
-  background: var(--color-primary);
+  color: var(--light-mode-font);
+  background: var(--light-mode-background);
+  --light-mode-background: white;
+  --light-mode-font: #3a3a3a;
   font-size: 16px;
   margin: 0px;
   width: 100vw;
@@ -23,6 +26,7 @@ html body {
   display: flex;
   width: 100%;
   justify-content: center;
+
 }
 
 #app {
@@ -33,6 +37,8 @@ html body {
 /* Dark Mode boiler plate */
 
 .darkMode {
-  color: white;
-  background-color: #3a3a3a;
+  color: var(--dark-mode-font);
+  background: var(--dark-mode-background) ;
+  --dark-mode-background: #3a3a3a;
+  --dark-mode-font:  white;
 }

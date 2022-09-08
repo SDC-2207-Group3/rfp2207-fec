@@ -57,16 +57,15 @@ const App = (props) => {
     }
   }
 
+
   return (
     <div id="app" className={`${darkMode ? "darkMode" : ""}`}>
       <ProductContext.Provider value={{...state, changeId}}>
-      <React.Fragment>
         <ToggleSwitch
           label="Dark Mode"
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
         />
-      </React.Fragment>
         <Overview id={state.id} />
         <RelatedItemsAndOutfits id={state.id} />
         <QuestionsAndAnswers id={state.id} />
