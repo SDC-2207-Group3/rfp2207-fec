@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const ReviewFormRadio = ({ chars, char, index }) => {
+const ReviewFormRadio = ({ chars, charId, char, index, handleChange }) => {
   const userRatingRadioVals = {
     Size: [
       "A size too small",
@@ -49,8 +49,8 @@ const ReviewFormRadio = ({ chars, char, index }) => {
 
   const [radioTitle, setRadioTitle] = useState("none selected");
   let handleTitle = (e) => {
-    console.log(e.target.value);
     setRadioTitle(e.target.value);
+    handleChange(e);
   };
 
   return (
@@ -63,7 +63,10 @@ const ReviewFormRadio = ({ chars, char, index }) => {
             <div className="RR_review-form-radio-btn" key={i}>
               <input
                 type="radio"
-                name={`${char}-form`}
+                name={`${char}`}
+                data-charid={`${charId}`}
+                data-charval={`${i + 1}`}
+                id="characteristics"
                 value={`${userRatingRadioVals[char][i]}`}
                 onChange={(e) => handleTitle(e)}
               ></input>

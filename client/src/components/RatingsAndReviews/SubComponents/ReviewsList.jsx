@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import ReviewItem from "./ReviewItem.jsx";
 import AddReviewBtn from "./AddReviewBtn.jsx";
 
-//props boolean, arr, str, fn
 let ReviewsList = ({
   showMoreBtn,
   reviews,
+  filter,
   id,
   showMoreReviews,
   toggleModal,
@@ -15,7 +15,7 @@ let ReviewsList = ({
 
   useEffect(() => {
     setReviewsList(reviews);
-  }, [reviews]);
+  }, [reviews, filter]);
 
   return (
     <div id="RR_reviews-list">
@@ -23,7 +23,11 @@ let ReviewsList = ({
       {reviews.length ? null : <AddReviewBtn toggleModal={toggleModal} />}
       <div>
         {reviewsList.map((review, i) => {
-          return <ReviewItem key={i} review={review} />;
+          if (filter[review.rating]) {
+            return <ReviewItem key={i} review={review} />;
+          } else {
+            return null;
+          }
         })}
       </div>
       <div id="RR_review-btns-container">

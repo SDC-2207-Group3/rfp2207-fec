@@ -1,21 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { ProductContext } from './../Overview.jsx';
+import { ProductContext } from './../../App.jsx';
 import axios from 'axios';
 
 import RatingStars from './RatingStars.jsx';
 import SocialMediaSharing from './SocialMediaSharing.jsx';
 
+const Atelier = require("./../../Utilities/Atelier.jsx");
+
 const truncatePrice = (price) => {
   return price.slice(price.length - 3, price.length) === '.00' ? price.slice(0, price.length - 3) : price
-}
-
-const AtelierPostSkuToCart = (sku) => {
-  return axios({
-    url: _AtelierAPI + "cart",
-    method: "post",
-    headers: { "Authorization": process.env.KEY },
-    data: { "sku_id": sku }
-  })
 }
 
 const ProductDetails = (props) => {
@@ -27,12 +20,12 @@ const ProductDetails = (props) => {
   const qtyRef = useRef(null);
   const sizeRef = useRef(null);
 
-  const { state, dispatch, _AtelierAPI } = useContext(ProductContext);
+  const { product_info, product_style, product_rating } = useContext(ProductContext);
 
-  const statePD = state.productDetails;
-  const statePS = state.productStyles;
-  const stateSS = state.selectedStyle;
-  const statePR = state.productRating;
+  const statePD = product_info;
+  const statePS = product_style;
+  const stateSS = props.selectedStyle;
+  const statePR = product_rating.ratings ? product_rating.ratings : 0;
 
   // Product Details
 
@@ -111,12 +104,12 @@ const ProductDetails = (props) => {
 
   useEffect(() => {
     setNoSize(false);
-  }, [size, state.selectedStyle])
+  }, [size, props.selectedStyle])
 
   useEffect(() => {
     setSize("select-size");
     sizeRef.current ? sizeRef.current.value = "select-size" : null;
-  }, [state.selectedStyle])
+  }, [props.selectedStyle])
 
   // Qty Select
 
@@ -127,14 +120,17 @@ const ProductDetails = (props) => {
   // Add to Cart
 
   function AddToCart () {
-    if (size === 'select-size') { return setNoSize(true) }
+    if (size === 'select-size') {
+      setNoSize(true);
+      return;
+    }
 
     const index = styleSizes.indexOf(size);
     const sku = styleSKUs[index]
     const quantity = qty === 'no-size' ? 1 : qty;
 
     let skuQuantities = [];
-    for (let i = 0; i < qty; i++) { skuQuantities.push(AtelierPostSkuToCart(sku)) }
+    for (let i = 0; i < qty; i++) { skuQuantities.push(Atelier.postItemtoCart(sku)) }
     return axios.all(skuQuantities)
       .catch((err) => console.log(err));
   }
@@ -159,8 +155,8 @@ const ProductDetails = (props) => {
           {styles.map((style, index) =>
             <div key={index} className="style-thumbnail">
               <div
-                className={"style-image-container" + (style === state.selectedStyle ? " style-selected" : "")}
-                onClick={() => {dispatch({ type: "selectStyle", selectStyle: style })}}
+                className={"style-image-container" + (style === props.selectedStyle ? " style-selected" : "")}
+                onClick={() => {props.setStyle(style)}}
               >
                 <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
               </div>
@@ -188,7 +184,11 @@ const ProductDetails = (props) => {
         <section className="overview-pd-section">
           <section>
             {sizeAlert()}
-            <select className="overview-select overview-size-select" ref={sizeRef} onChange={changeSize}>
+            <select
+              className="overview-select overview-size-select"
+              ref={sizeRef}
+              onChange={changeSize}
+            >
               <option default value="select-size">Select Size</option>
               {sizeOptions}
             </select>

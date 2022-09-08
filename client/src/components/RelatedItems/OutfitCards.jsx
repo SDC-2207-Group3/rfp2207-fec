@@ -8,18 +8,17 @@ const OutfitCards = (props) => {
 
   const addToOutfitList = () => {
     if (yourOutfits.find(({id}) => id === mainProduct.id)) {
-      console.log('already added')
       return;
     }
-    console.log('addToOutfitList clicked');
     let tempOutfits = yourOutfits.slice();
     tempOutfits.unshift(mainProduct);
-
+    document.cookie = 'outfit=' + JSON.stringify(tempOutfits);
     setState({yourOutfits: tempOutfits});
   }
 
   const deleteFromOutfitList = (id) => {
     let tempOutfits = yourOutfits.filter(function(item) { return item.id !== id; });
+    document.cookie = 'outfit=' + JSON.stringify(tempOutfits);
     setState({yourOutfits: tempOutfits});
   }
 

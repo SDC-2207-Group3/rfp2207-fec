@@ -1,6 +1,12 @@
 import React from "react";
 
-const SingleBreakDown = ({ meta, starNum, starTotal, voteTotal }) => {
+const SingleBreakDown = ({
+  meta,
+  starNum,
+  starTotal,
+  voteTotal,
+  ratingsFilter,
+}) => {
   let currStarTotal = meta.ratings[starNum];
   let percentWidth = ((currStarTotal / voteTotal) * 100).toFixed(1);
   //extra check to make sure if no rating exists the green bar doesnt fill
@@ -8,7 +14,11 @@ const SingleBreakDown = ({ meta, starNum, starTotal, voteTotal }) => {
 
   //setting bar at 200 px, so percentWidth * 2
   return (
-    <div id="RR_ratings-bd-count" key={starNum}>
+    <div
+      id="RR_ratings-bd-count"
+      key={starNum}
+      onClick={(e) => ratingsFilter(e, starNum)}
+    >
       <span>{starNum} stars: </span>
       <div id="RR_ratings-bars-container">
         <div className="RR_ratings-bar-full">

@@ -71,7 +71,12 @@ const ReviewItem = (props) => {
           <div className="RR_response-from-seller">{`response from seller: ${props.review.response}`}</div>
         ) : null}
       </div>
-      <HelpfulnessAndReport review={props.review} />
+      <div className="RR_helpfulness-recommend-container">
+        <HelpfulnessAndReport review={props.review} />
+        {props.review.recommend ? (
+          <span>&#10003; I recommend this product</span>
+        ) : null}
+      </div>
     </li>
   );
 };
