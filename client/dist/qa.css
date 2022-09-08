@@ -59,7 +59,8 @@
 }
 
 .question-item-button {
-  background-color: #f1f1f1;
+  /* background-color: #f1f1f1; */
+  background-color: white;
   /* color: #fff; */
   color: black;
   display: flex;
@@ -71,6 +72,7 @@
   cursor: pointer;
   border: none;
 }
+
 
 
 .question-item-control {
@@ -128,7 +130,7 @@
   width: auto;
   cursor: pointer;
   margin: 5px;
-  background-color: yellow;
+
 }
 
 /* .answer-body {
@@ -139,6 +141,8 @@
 
 .qa-accordion-item.active {
   background-color: #f1f1f187;
+  /* background-color: white;
+  color: cornflowerblue; */
 }
 
 .question-item-button-text {

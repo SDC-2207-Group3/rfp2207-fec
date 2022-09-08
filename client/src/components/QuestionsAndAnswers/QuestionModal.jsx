@@ -1,7 +1,8 @@
-import React from 'react';
+import {React, useContext} from 'react';
 import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import http from "../Utilities/Atelier.jsx";
+import ProductContext from "../App.jsx"
 
 function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) {
   const {register, handleSubmit, formState: {errors}, reset} = useForm({criteriaMode: "all"});
@@ -19,8 +20,11 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
       .then((res) => {setQA(res.data.results)})
       .catch((err) => {console.error(err)})
   }
-  return (
 
+  // const {productInfo} = useContext(ProductContext)
+  // console.log('this is productInfo: ', productInfo)
+
+  return (
     <div className="qa-modalBackground">
       <div className="qa-modalContainer">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -31,6 +35,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA, currentProduct}) 
             </button>
           <div className="qa-modalTitle">
             <h1>Ask Your Question</h1>
+            {/* <h3>About the {currentProduct}</h3> */}
             <h3>About the {currentProduct}</h3>
           </div>
           <div className="qa-modalBody"></div>
