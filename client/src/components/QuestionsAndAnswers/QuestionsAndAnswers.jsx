@@ -20,15 +20,6 @@ function QuestionsAndAnswers({id}) {
       .catch((err) => {console.error(err)})
   }, [id])
 
-  // state hook for getting current product name
-  const [currentProduct, setCurrentProduct] = useState([]);
-  useEffect(() => {
-    http.getProductName(id)
-      .then((res) => {
-        setCurrentProduct(res.data.name)})
-      .catch((err) => {console.error(err)})
-  }, [id])
-
 
   // hook for toggling question modal
   const [openModal, setOpenModal] = useState(false);
@@ -79,7 +70,7 @@ function QuestionsAndAnswers({id}) {
         >
         Add a question
         </button>
-        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA} currentProduct={currentProduct}/>}
+        {openModal && <QuestionModal product_id={id} closeModal={setOpenModal} mainQA={mainQA} setQA={setQA} />}
     </div>
   )
 
