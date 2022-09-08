@@ -29,33 +29,92 @@
   background: white;
   border: 1px solid gray;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  overflow-x: hidden;
 }
+
+.RR_modal-form > * {
+  padding: 10px 0px;
+}
+
+#RR_modal-form-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.RR_form-star {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.RR_form-star > * {
+  margin-right: 10px;
+}
+/* .RR_form-star:not(:last-child) {
+  margin-right: 10px;
+  background: orange;
+} */
+
+.RR_form-recommend-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.RR_recommend-radio-btn-container {
+  margin-left: 1em;
+}
+
+.RR_recommend-radio-btn-container input {
+  margin: 0 5px;
+}
+
+.RR_form-charictaristics {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.RR_form-component {
+  margin: 10px 0;
+}
+
 .RR_modal-form .star-container {
   z-index: 5;
   color: orange;
 }
 
 #RR_review-form-title {
-  display: flex;
   width: 100%;
-  height: 2em;
-  justify-content: center;
-  align-items: center;
+}
+#RR_review-form-subtitle {
+  padding-left: 15%;
+  width: 100%;
   border-bottom: 1px solid lightgray;
 }
 
 .RR_review-form-radio {
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 5px 0px;
-  border-bottom: 1px solid lightgray;
+  /* border-bottom: 1px solid lightgray; */
 }
+
 .RR_review-form-radio-title {
   /* width: 60px; */
-  width: 10%;
+  position: absolute;
+  left: 3%;
+  /* border: 1px solid orange; */
 }
 
 .RR_radio-btns-title {
@@ -64,9 +123,10 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  width: 80%;
+  width: 100%;
   height: 60px;
   padding-top: 30px;
+  /* border: 1px solid green; */
 }
 
 .RR_radio-selection-meaning {
@@ -85,6 +145,16 @@
   text-align: center;
   font-size: 0.8em;
   color: rgb(80, 80, 80);
+  /* border: 1px solid red; */
+  margin: 0px 5px;
+}
+
+.RR_form-thumbnail {
+  height: auto;
+  max-width: 15%;
+  margin-right: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .RR_user-review-summary-container {
@@ -93,11 +163,18 @@
   flex-direction: column;
   align-items: left;
   justify-content: left;
-  margin: 1em;
+  /* margin: 1em; */
+}
+
+.RR_user-review-summary-container input[type="text"] {
+  background: rgb(240, 240, 240);
 }
 
 .RR_user-review-summary {
+  /* padding: 5px; */
+  height: 1.7em;
   width: 30vw;
+  margin-top: 5px;
 }
 
 .RR_user-review-summary input {
@@ -106,20 +183,73 @@
 }
 
 .RR_user-review-body-container {
-  width: 100%;
+  width: 80%;
   display: flex;
-  align-items: center;
-  justify-content: left;
-  margin: 1em;
+  align-items: left;
+  justify-content: center;
+  /* margin: 1em; */
   flex-direction: column;
 }
-
-.RR_user-review-body-container input {
+.RR_user-review-body-container textarea {
+  background-color: rgb(240, 240, 240);
+  font-family: sans-serif;
   width: 30vw;
+  margin-top: 5px;
+  padding: 5px;
 }
 
 .RR_user-review-body {
   height: 200px;
+}
+
+.RR_form-username {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.RR_form-username input {
+  width: 15vw;
+}
+
+.RR_form-username small {
+  color: rgb(150, 150, 150);
+}
+
+.RR_form-email {
+  display: flex;
+  flex-direction: column;
+}
+
+.RR_form-email input {
+  width: 15vw;
+}
+
+.RR_form-email small {
+  color: rgb(150, 150, 150);
+}
+
+.RR_form-submit-btn {
+  width: 8vw;
+  padding: 5px;
+  border: none;
+  margin-left: 40%;
+}
+
+.RR_form-submit-btn:hover {
+  background: rgb(200, 200, 200);
+}
+
+/* form[required]::before {
+  content: "*";
+} */
+
+.RR_required {
+  font-style: bold;
+}
+
+.RR_required::before {
+  content: "*";
 }
 
 #RR_bd-sort-list-container {
@@ -149,7 +279,7 @@
   flex-direction: row;
   align-items: top;
   justify-content: left;
-  margin: 8px;
+  margin-top: 8px;
 }
 
 #RR_star-avg h2 {
@@ -172,6 +302,10 @@
   height: auto;
   /* border: 1px solid red; */
   /* background: rgba(230, 230, 230); */
+}
+
+#RR_total-count {
+  margin-bottom: 1em;
 }
 
 #RR_ratings-bars-container {
@@ -398,6 +532,14 @@
   background: rgb(240, 240, 240);
   font-style: italic;
   padding: 2em 1em;
+}
+
+.RR_helpfulness-recommend-container {
+  color: rgb(150, 150, 150);
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .RR_helpfulness-q {

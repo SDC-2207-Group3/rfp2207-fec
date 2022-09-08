@@ -15,6 +15,15 @@ let RatingsAndReviewsMain = (props) => {
     meta: {},
     reviewStats: {},
   };
+
+  let defaultFilter = {
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true,
+  };
+
   // const [state, dispatch] = useReducer(reducer, initialState);
   const [state, setState] = useState(initialState);
   // const [id, setId] = useState(props.id);
@@ -25,18 +34,32 @@ let RatingsAndReviewsMain = (props) => {
   // const [reviewStats, setReviewStats] = useState({});
   const [showMoreBtn, setShowMoreBtn] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [canRenderByRating, setCanRenderByRating] = useState({
-    1: true,
-    2: true,
-    3: true,
-    4: true,
-    5: true,
-  });
+  const [canRenderByRating, setCanRenderByRating] = useState(defaultFilter);
 
-  //this could be a context hook...
   let swapSort = (sort) => {
+    //ive decided the api call for sort is working well enough
     setSortBy(sort);
   };
+
+  let ratingsFilter = (e, starNum) => {
+    console.log(starNum);
+    let filterCopy = canRenderByRating;
+    console.log(filterCopy);
+    filterCopy[starNum] = !filterCopy[starNum];
+    console.log(filterCopy);
+    setCanRenderByRating(filterCopy);
+  };
+
+  useEffect(() => {
+    //i cant get this to actually re render
+    //it does work after you click show more, tho
+    //i think this may be bc setstate is async?
+    //but why is it not re rendering?
+
+    //want re-render when filter changes
+    setState({ ...state, reviews: state.reviews });
+  }, [canRenderByRating]);
+
   let toggleModal = () => {
     showModal ? setShowModal(false) : setShowModal(true);
   };
@@ -70,7 +93,6 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let fetchData = (id) => {
-    // console.log("now fetching data RR");
     let tempReviews;
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
@@ -83,9 +105,12 @@ let RatingsAndReviewsMain = (props) => {
       })
       //res.data.results = arr of reviews
       .then((res) => {
-        //update state
-        // setReviews(res.data.results);
         tempReviews = res.data.results;
+        //if less then defined amount of reviews come back
+        if (tempReviews.length < state.displayedReviews) {
+          //remove button to show more reviews
+          setShowMoreBtn(false);
+        }
       })
       .then(() => {
         // get meta data for current product
@@ -97,8 +122,6 @@ let RatingsAndReviewsMain = (props) => {
       .then((res) => {
         let reviewStatsObj = utilities.getAvgReviewValue(res.data);
 
-        // setMeta(res.data);
-        // setReviewStats(reviewStatsObj);
         setState({
           ...state,
           reviews: tempReviews,
@@ -128,19 +151,30 @@ let RatingsAndReviewsMain = (props) => {
           reviewStats={state.reviewStats}
           meta={state.meta}
           id={state.id}
+          ratingsFilter={ratingsFilter}
         />
         <div id="RR_sort-list-container">
           <Sort sortMethod={sortBy} swapSort={swapSort} id={state.id} />
           <ReviewsList
             showMoreBtn={showMoreBtn}
             reviews={state.reviews}
+            filter={canRenderByRating}
             id={state.id}
             showMoreReviews={showMoreReviews}
             toggleModal={toggleModal}
           />
         </div>
       </div>
-      {showModal ? <AddReviewForm meta={state.meta} /> : null}
+      {showModal ? (
+        <div>
+          <div className="RR_modal-container" onClick={toggleModal}></div>
+          <AddReviewForm
+            id={props.id}
+            meta={state.meta}
+            toggleModal={toggleModal}
+          />
+        </div>
+      ) : null}
     </section>
   );
 };
@@ -149,17 +183,11 @@ export default RatingsAndReviewsMain;
 
 /* KNOWN BUGS / TODO
 
-  when rendering 2 or fewer reviews, do not render the show more button
-
-  some kind of discrepancy in helpfulness value, likely caused by state vs db value... values on page seem to modify when re rendered.
-
-  relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
-
   need to pull the entire reviews list for a product, that way i can filter based on review ratings.
   ~~~revision, i think i can just apply an additional filter to the existing list and also apply that filter
   to incomming reviews as well {1: false, 2: false, 3: true....etc} thisll keep it additive
 
-  need to update state all at once, rather than passing pieces down
+  characteristics form isnt using required quite as well as the other forms components.
 
   break down review item subcomponent into more componenents
 

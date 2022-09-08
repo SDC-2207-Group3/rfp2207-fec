@@ -10,11 +10,12 @@ import Helper from './Utilities/Helper.jsx';
 import UserInteractions from './Utilities/UserInteractions.jsx';
 import axios from 'axios';
 
-const Atelier = require('./Utilities/Atelier.jsx');
+const Atelier = require("./Utilities/Atelier.jsx");
 
 export const ProductContext = createContext();
 
-const reducer = (state, newState) => ({...state, ...newState})
+const reducer = (state, newState) => ({ ...state, ...newState });
+
 
 const initialeState = {
   id: 65638,
@@ -48,8 +49,8 @@ const App = (props) => {
   }, [state.id])
 
   const changeId = (newId) => {
-    setState({id: newId});
-  }
+    setState({ id: newId });
+  };
 
   console.log('state of app', state);
 

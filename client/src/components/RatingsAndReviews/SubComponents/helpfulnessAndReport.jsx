@@ -51,7 +51,7 @@ const HelpfulnessAndReport = ({ review }) => {
           onClick={(e) => handleHelpful(e, review.review_id)}
         >
           {" "}
-          YES ({`${helpfulness}`}){" "}
+          YES ({`${review.helpfulness}`}){" "}
         </span>
         <span
           className="RR_report-review"
