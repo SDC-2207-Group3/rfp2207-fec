@@ -22,10 +22,11 @@ module.exports.getProductInfo = (id) => axios.get(`${ATELIER_API}/products/${id}
 
 module.exports.getProductStyle = (id) => axios.get(`${ATELIER_API}/products/${id}/styles`, {headers: {'Authorization': process.env.KEY}});
 
-module.exports.postItemtoCart = (sku) => axios.post(`${ATELIER_API}/cart`, {headers: {"Authorization": process.env.KEY}});
+module.exports.postItemtoCart = (sku) => axios.post(`${ATELIER_API}/cart`, { "sku_id": sku }, {headers: {"Authorization": process.env.KEY}});
 
 module.exports.getReviewMetaData = (id) => axios.get(`${ATELIER_API}/reviews/meta?product_id=${id}`, {headers: {'Authorization': process.env.KEY}});
 
+module.exports.postUserClick = (element, widget) => axios.post(`${ATELIER_API}/interactions`, {"element": element, "widget": widget, "time": new Date()}, {headers: {"Authorization": process.env.KEY}})
 
 ////////////////////////////////////////////////////////////////////////////////
 
