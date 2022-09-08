@@ -169,23 +169,28 @@ p.RIC {
   border: 1px solid gray;
   padding: 1em;
   border-radius: 2px;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .RIC-comparison-header {
   display: flex;
   justify-content: space-between;
+  padding: 1% 3%;
 }
 
 .RIC-comparison-table-div {
   margin: 0 5%;
   max-height: min-content;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 table.RIC-comparison {
-  border-collapse: collapse;
+  margin: 0, auto;
   position: relative;
+  width: 100%;
+  align-self: center;
 }
 
 tbody.RIC-comparison {
@@ -196,9 +201,12 @@ tbody.RIC-comparison {
 .RIC-modal-names {
   position: sticky;
   top: 0;
-  overflow-y: hidden;
   z-index: 5;
   background-color: rgb(242, 232, 212)
+}
+
+#blank {
+  background-color: white;
 }
 
 th.RIC-comparison {
@@ -206,9 +214,20 @@ th.RIC-comparison {
   margin: 0.3em 0;
 }
 
+tr.RIC-comparison {
+  padding: 0 20%;
+}
+
 td.RIC-comparison {
-  text-align: center;
   padding: 0.5em 0;
+}
+
+.RIC-comparison .left {
+  text-align: left;
+}
+
+.RIC-comparison .right {
+  text-align: right;
 }
 
 /* STARS */
