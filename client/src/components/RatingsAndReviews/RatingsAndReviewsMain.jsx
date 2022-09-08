@@ -55,6 +55,8 @@ let RatingsAndReviewsMain = (props) => {
     //it does work after you click show more, tho
     //i think this may be bc setstate is async?
     //but why is it not re rendering?
+
+    //want re-render when filter changes
     setState({ ...state, reviews: state.reviews });
   }, [canRenderByRating]);
 
