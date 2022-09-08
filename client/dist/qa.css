@@ -3,6 +3,8 @@
 
 .qa-app {
   /* translate: 5%; */
+  margin: auto;
+  width: 80%;
   padding-top: 1%;
   padding-bottom: 1%;
   cursor: default;

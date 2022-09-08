@@ -27,4 +27,12 @@ html body {
 
 #app {
   margin: auto;
+  width: 100%
+}
+
+/* Dark Mode boiler plate */
+
+.darkMode {
+  color: white;
+  background-color: #3a3a3a;
 }
