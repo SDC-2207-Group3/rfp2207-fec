@@ -15,7 +15,7 @@ let ReviewsList = ({
 
   useEffect(() => {
     setReviewsList(reviews);
-  }, [reviews]);
+  }, [reviews, filter]);
 
   return (
     <div id="RR_reviews-list">
@@ -26,7 +26,7 @@ let ReviewsList = ({
           if (filter[review.rating]) {
             return <ReviewItem key={i} review={review} />;
           } else {
-            null;
+            return null;
           }
         })}
       </div>

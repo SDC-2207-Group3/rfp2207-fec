@@ -15,6 +15,15 @@ let RatingsAndReviewsMain = (props) => {
     meta: {},
     reviewStats: {},
   };
+
+  let defaultFilter = {
+    1: true,
+    2: true,
+    3: true,
+    4: true,
+    5: true,
+  };
+
   // const [state, dispatch] = useReducer(reducer, initialState);
   const [state, setState] = useState(initialState);
   // const [id, setId] = useState(props.id);
@@ -25,22 +34,30 @@ let RatingsAndReviewsMain = (props) => {
   // const [reviewStats, setReviewStats] = useState({});
   const [showMoreBtn, setShowMoreBtn] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [canRenderByRating, setCanRenderByRating] = useState({
-    1: true,
-    2: true,
-    3: true,
-    4: true,
-    5: true,
-  });
+  const [canRenderByRating, setCanRenderByRating] = useState(defaultFilter);
 
-  // console.log(state.reviews);
-
-  //this could be a context hook...
   let swapSort = (sort) => {
     //ive decided the api call for sort is working well enough
-    //no need to further sort
     setSortBy(sort);
   };
+
+  let ratingsFilter = (e, starNum) => {
+    console.log(starNum);
+    let filterCopy = canRenderByRating;
+    console.log(filterCopy);
+    filterCopy[starNum] = !filterCopy[starNum];
+    console.log(filterCopy);
+    setCanRenderByRating(filterCopy);
+  };
+
+  useEffect(() => {
+    //i cant get this to actually re render
+    //it does work after you click show more, tho
+    //i think this may be bc setstate is async?
+    //but why is it not re rendering?
+    setState({ ...state, reviews: state.reviews });
+  }, [canRenderByRating]);
+
   let toggleModal = () => {
     showModal ? setShowModal(false) : setShowModal(true);
   };
@@ -132,6 +149,7 @@ let RatingsAndReviewsMain = (props) => {
           reviewStats={state.reviewStats}
           meta={state.meta}
           id={state.id}
+          ratingsFilter={ratingsFilter}
         />
         <div id="RR_sort-list-container">
           <Sort sortMethod={sortBy} swapSort={swapSort} id={state.id} />
