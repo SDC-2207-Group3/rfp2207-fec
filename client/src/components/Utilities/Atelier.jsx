@@ -35,7 +35,7 @@ module.exports.postNewReview = (post) => {
 };
 ////////////////////////////////////
 
-module.exports.getRelatedProducts = (id) =>
+module.exports.getRelatedProductIds = (id) =>
   axios.get(`${ATELIER_API}/products/${id}/related`, {
     headers: { Authorization: process.env.KEY },
   });

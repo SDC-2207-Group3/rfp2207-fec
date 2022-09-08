@@ -3,7 +3,7 @@
 
 .qa-app {
   margin: auto;
-  width: 80%;
+  width: var(--app-width);
   padding-top: 1%;
   padding-bottom: 1%;
   cursor: default;

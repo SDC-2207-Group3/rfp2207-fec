@@ -1,6 +1,9 @@
 .dark-mode-container {
   text-align: right;
-  padding: 0.5rem;
+  padding: 02rem;
+  position: absolute;
+  top: 2%;
+  right: 0.05%;
 }
 .toggle-switch {
   position: relative;

@@ -1,7 +1,8 @@
 /* ~~~~~~~~~~~ RATINGS AND REVIEWS CSS ~~~~~~~~~~~~~ */
 
 #section_rr {
-  width: 80vw;
+  width: var(--app-width);
+  margin: auto;
   height: auto;
   display: flex;
   flex-direction: column;
