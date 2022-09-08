@@ -39,6 +39,7 @@ let RatingsBreakDown = (props) => {
                   starTotal={starTotal}
                   voteTotal={voteTotal}
                   key={i}
+                  // onClick={applyStarFilter}
                 />
               );
             })

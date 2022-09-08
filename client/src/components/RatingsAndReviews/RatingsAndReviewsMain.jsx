@@ -84,8 +84,12 @@ let RatingsAndReviewsMain = (props) => {
       //res.data.results = arr of reviews
       .then((res) => {
         //update state
-        // setReviews(res.data.results);
         tempReviews = res.data.results;
+        //if less then defined amount of reviews come back
+        if (tempReviews.length < state.displayedReviews) {
+          //remove button to show more reviews
+          setShowMoreBtn(false);
+        }
       })
       .then(() => {
         // get meta data for current product

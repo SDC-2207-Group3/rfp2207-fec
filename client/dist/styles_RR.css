@@ -205,12 +205,21 @@
   width: 15vw;
 }
 
+.RR_form-username small {
+  color: rgb(150, 150, 150);
+}
+
 .RR_form-email {
   display: flex;
   flex-direction: column;
 }
+
 .RR_form-email input {
   width: 15vw;
+}
+
+.RR_form-email small {
+  color: rgb(150, 150, 150);
 }
 
 .RR_form-submit-btn {
@@ -505,12 +514,6 @@
   height: 85vh;
   z-index: 3;
 }
-
-/* #RR_form-modal-background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-} */
 
 .RR_response-from-seller {
   margin-left: 10%;

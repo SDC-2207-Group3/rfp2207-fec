@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
-import ProductContext from "../../App.jsx";
+import { ProductContext } from "../../App.jsx";
 import { postNewReview, postToImgbb } from "../../Utilities/Atelier.jsx";
 import axios from "axios";
 
@@ -16,6 +16,9 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
   const [reviewBody, setReviewBody] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+
+  //CONTEXT HOOK
+  const { product_info } = useContext(ProductContext);
 
   let characteristics = Object.keys(meta.characteristics);
   var charIDs = Object.values(meta.characteristics).map((char) => char.id);
@@ -175,7 +178,9 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
 
   return (
     <form className="RR_modal-form">
-      <h3 id="RR_review-form-title">Write a Review for "PRODUCT???"</h3>
+      <h3 id="RR_review-form-title">
+        Write a Review for the {`${product_info.name}`}
+      </h3>
       <div className="RR_form-component RR_form-star">
         <span className="RR_required">Overall rating? </span>
         <div onClick={(e) => handleClick(e)}>
@@ -297,7 +302,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
           required
         ></input>
         <small>
-          For privacy reasons, do not use your full name or email address
+          For privacy reasons, do not use your full name or email address.
         </small>
       </div>
       <div className="RR_form-component RR_form-email">
@@ -311,6 +316,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
           onChange={(e) => handleChange(e)}
           required
         ></input>
+        <small>For authentication reasons only, you will not be emailed.</small>
       </div>
       <button
         className="RR_form-submit-btn"
