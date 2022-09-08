@@ -6,7 +6,7 @@ import ProductContext from "../../App.jsx";
 import { postNewReview, postToImgbb } from "../../Utilities/Atelier.jsx";
 import axios from "axios";
 
-const AddReviewForm = ({ id, meta }) => {
+const AddReviewForm = ({ id, meta, toggleModal }) => {
   console.log(meta);
   const [userRating, setUserRating] = useState(0);
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
@@ -89,17 +89,16 @@ const AddReviewForm = ({ id, meta }) => {
       photos: [],
       characteristics: reviewCharacteristics,
     };
-    //post to imgbb now?
 
     if (userImgs.length > 0) {
       console.log("uploading imgs");
       let promises = [];
 
       for (let [key, img] of Object.entries(userImgs)) {
-        console.log(key, img);
         let body = new FormData();
         body.set("key", process.env.IMGBB_KEY);
         body.append("image", img);
+        //send images to imgbb hostingg service (for url)
         let promise = postToImgbb(body);
         promises.push(promise);
       }
@@ -109,21 +108,21 @@ const AddReviewForm = ({ id, meta }) => {
           //take urls and apply to userReview obj
           userReview.photos = res.map((imgReply) => imgReply.data.data.url);
           //post user review obj
-          console.log("full review after upload: ", userReview);
           axios.post(`${ATELIER_API}/reviews`, userReview, {
             headers: { Authorization: process.env.KEY },
           });
         })
         .catch((err) => console.log(err));
-
-      // console.log("posting", userReview);
-      // axios
-      //   .post(`${ATELIER_API}/reviews`, userReview, {
-      //     headers: { Authorization: process.env.KEY },
-      //   })
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err));
+    } else {
+      axios
+        .post(`${ATELIER_API}/reviews`, userReview, {
+          headers: { Authorization: process.env.KEY },
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
+    toggleModal();
+    alert("Thank you for submitting a review");
   };
 
   let userRatingTerms = {
@@ -134,72 +133,91 @@ const AddReviewForm = ({ id, meta }) => {
     5: "Great",
   };
 
-  console.log("////", meta.characteristics);
   let characteristics = Object.keys(meta.characteristics);
   var charIDs = Object.values(meta.characteristics).map((char) => char.id);
-  console.log(charIDs);
 
   return (
-    <div className="RR_modal-form">
+    <form className="RR_modal-form">
       <h3 id="RR_review-form-title">Write a Review for "PRODUCT???"</h3>
-      <div>
-        <span>Overall Rating</span>
+      <div className="RR_form-component RR_form-star">
+        <span className="RR_required">Overall rating? </span>
         <div onClick={(e) => handleClick(e)}>
           <RatingStars rating={userRating} />
-          {userRating ? <span>{userRatingTerms[userRating]}</span> : null}
         </div>
+        <span>
+          {userRating ? <span>{userRatingTerms[userRating]}</span> : null}
+        </span>
       </div>
-      <form>
-        <p>Do you recommend this product ?</p>
-        <div onChange={(e) => handleRecommend(e)}>
-          <input type="radio" id="yes" name="recommend" value="yes"></input>
+      <div className="RR_form-component RR_form-recommend-container">
+        <span className="RR_required">Do you recommend this product?</span>
+        <div
+          className="RR_recommend-radio-btn-container"
+          onChange={(e) => handleRecommend(e)}
+        >
+          <input
+            type="radio"
+            id="yes"
+            name="recommend"
+            value="yes"
+            required
+          ></input>
           <label htmlFor="yes">Yes</label>
-          <input type="radio" id="no" name="recommend" value="no"></input>
+          <input
+            type="radio"
+            id="no"
+            name="recommend"
+            value="no"
+            required
+          ></input>
           <label htmlFor="no">No</label>
         </div>
-      </form>
-      <div>
+      </div>
+      <div className="RR_form-component">
+        <span className="RR_required">Rating details: </span>
         {characteristics.map((char, i) => {
           return (
-            <div key={`${char}`}>
+            <div
+              key={`${char}`}
+              className="RR_form-charictaristics"
+              style={{ background: `${i % 2 === 0 ? "lightgray" : "white"}` }}
+            >
               <ReviewFormRadio
                 chars={characteristics}
                 charId={charIDs[i]}
                 char={char}
                 index={i}
                 handleChange={handleChange}
+                required
               />
             </div>
           );
         })}
       </div>
-      <div className="RR_user-review-summary-container">
-        <span>Review Summary</span>
-        <form>
-          <input
-            className="RR_user-review-summary"
-            type="text"
-            placeholder="Example: Best purchase ever"
-            id="summary"
-            value={summary}
-            onChange={(e) => handleChange(e)}
-            maxLength="60"
-          ></input>
-        </form>
+      <div className="RR_user-review-summary-container RR_form-component">
+        <span>Review Summary: </span>
+        <input
+          className="RR_user-review-summary"
+          type="text"
+          placeholder="Example: Best purchase ever"
+          id="summary"
+          value={summary}
+          onChange={(e) => handleChange(e)}
+          maxLength="60"
+        ></input>
       </div>
-      <div className="RR_user-review-body-container">
-        <form>
-          <textarea
-            className="RR_user-review-body"
-            type="text"
-            rows="30"
-            cols="55"
-            id="body"
-            value={reviewBody}
-            placeholder="Why did you like the product or not?"
-            onChange={(e) => handleChange(e)}
-          ></textarea>
-        </form>
+      <div className="RR_user-review-body-container RR_form-component">
+        <span className="RR_required">Review body: </span>
+        <textarea
+          className="RR_user-review-body"
+          type="text"
+          rows="30"
+          cols="55"
+          id="body"
+          value={reviewBody}
+          placeholder="Why did you like the product or not?"
+          onChange={(e) => handleChange(e)}
+          required
+        ></textarea>
         <div>
           {50 - reviewBody.length >= 0 ? (
             <span>
@@ -230,7 +248,8 @@ const AddReviewForm = ({ id, meta }) => {
             : null}
         </div>
       </div>
-      <div>
+      <div className="RR_form-component RR_form-username">
+        <span className="RR_required">Username: </span>
         <input
           type="text"
           placeholder="Example: jackson11!"
@@ -238,12 +257,14 @@ const AddReviewForm = ({ id, meta }) => {
           value={userName}
           id="userName"
           onChange={(e) => handleChange(e)}
+          required
         ></input>
         <small>
           For privacy reasons, do not use your full name or email address
         </small>
       </div>
-      <div>
+      <div className="RR_form-component RR_form-email">
+        <span className="RR_required">Email: </span>
         <input
           type="email"
           placeholder="Example: jackson11@email.com"
@@ -251,12 +272,17 @@ const AddReviewForm = ({ id, meta }) => {
           value={email}
           id="email"
           onChange={(e) => handleChange(e)}
+          required
         ></input>
       </div>
-      <button type="submit" onClick={(e) => handleSubmit(e)}>
+      <button
+        className="RR_form-submit-btn"
+        type="submit"
+        onClick={(e) => handleSubmit(e)}
+      >
         Submit
       </button>
-    </div>
+    </form>
   );
 };
 

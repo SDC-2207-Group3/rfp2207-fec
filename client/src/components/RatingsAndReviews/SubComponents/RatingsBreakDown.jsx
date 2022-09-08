@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import StarsContainer from "./StarsContainer.jsx";
 import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
 import SingleBreakDown from "./SingleBreakDown.jsx";
 import ProductFactor from "./ProductFactor.jsx";
@@ -10,8 +9,6 @@ let RatingsBreakDown = (props) => {
   // state, fn to edit state = hook (initial val)
   const [avg, setAvg] = useState(0);
   const [meta, setMeta] = useState({});
-
-  //meta.characteristics = {comfort: {id: x, value: y}, quality: {},}
 
   const starTotal = props.reviewStats.starTotal;
   const voteTotal = props.reviewStats.voteTotal;
@@ -65,5 +62,3 @@ let RatingsBreakDown = (props) => {
 };
 
 export default RatingsBreakDown;
-
-//stars props = rating = {rating: "3.4"}
