@@ -15,11 +15,15 @@ const RelatedItemsAndOutfits = (props) => {
   {mainProduct: {}, relatedItems: [], yourOutfits: []});
 
   useEffect(() => {
-    setState({yourOutfits: []})
+    let outfitCookie = document.cookie.split('outfit=')[1];
+    if (outfitCookie) {
+      setState({yourOutfits: JSON.parse(outfitCookie)})
+    } else {
+      setState({yourOutfits: []})
+    }
   }, []);
 
   useEffect(() => {
-    console.log('how many times do i sent api calls');
     Atelier.getRelatedProductIds(id)
       .then(res => {
        let related = _.uniq(res.data);
@@ -47,8 +51,6 @@ const RelatedItemsAndOutfits = (props) => {
   useEffect(() => {
     setState({mainProduct: product_parsed_data});
   }, [product_parsed_data])
-
-  console.log('state of related items', state );
 
   return (
     <section id="RIC-section">
