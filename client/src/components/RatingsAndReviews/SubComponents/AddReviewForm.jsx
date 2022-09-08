@@ -7,7 +7,6 @@ import { postNewReview, postToImgbb } from "../../Utilities/Atelier.jsx";
 import axios from "axios";
 
 const AddReviewForm = ({ id, meta, toggleModal }) => {
-  console.log(meta);
   const [userRating, setUserRating] = useState(0);
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
   const [recommend, setRecommend] = useState(null);
@@ -17,6 +16,9 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
   const [reviewBody, setReviewBody] = useState("");
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+
+  let characteristics = Object.keys(meta.characteristics);
+  var charIDs = Object.values(meta.characteristics).map((char) => char.id);
 
   const handleClick = (e) => {
     let userScore = e.target.getAttribute("attr");
@@ -90,6 +92,34 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
       characteristics: reviewCharacteristics,
     };
 
+    if (!userReview.rating) {
+      alert("Rating is required");
+      return;
+    }
+    if (!userReview.body || userReview.body.length < 50) {
+      alert("Review body must be at least 50 characters");
+      return;
+    }
+    if (userReview.recommend === null) {
+      alert("Recommendation field is required");
+      return;
+    }
+    if (!userReview.name) {
+      alert("A username is required");
+      return;
+    }
+    if (!userReview.email) {
+      alert("An email is required");
+      return;
+    }
+    if (
+      Object.keys(userReview.characteristics).length === undefined ||
+      Object.keys(userReview.characteristics).length < characteristics.length
+    ) {
+      alert("Each characteristic field must have a response");
+      return;
+    }
+
     if (userImgs.length > 0) {
       console.log("uploading imgs");
       let promises = [];
@@ -112,17 +142,27 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
             headers: { Authorization: process.env.KEY },
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          alert("There was an Error");
+          console.log(err);
+          return;
+        });
+      toggleModal();
+      console.log("review uploaded:", userReview);
     } else {
       axios
         .post(`${ATELIER_API}/reviews`, userReview, {
           headers: { Authorization: process.env.KEY },
         })
         .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          alert("There was an Error");
+          console.log(err);
+          return;
+        });
+      toggleModal();
+      console.log("review uploaded:", userReview);
     }
-    toggleModal();
-    alert("Thank you for submitting a review");
   };
 
   let userRatingTerms = {
@@ -132,9 +172,6 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
     4: "Good",
     5: "Great",
   };
-
-  let characteristics = Object.keys(meta.characteristics);
-  var charIDs = Object.values(meta.characteristics).map((char) => char.id);
 
   return (
     <form className="RR_modal-form">

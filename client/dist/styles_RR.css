@@ -35,6 +35,10 @@
   overflow-x: hidden;
 }
 
+.RR_modal-form > * {
+  padding: 10px 0px;
+}
+
 .RR_form-star {
   width: 50%;
   display: flex;
@@ -44,8 +48,12 @@
 }
 
 .RR_form-star > * {
-  margin: 0px 10px;
+  margin-right: 10px;
 }
+/* .RR_form-star:not(:last-child) {
+  margin-right: 10px;
+  background: orange;
+} */
 
 .RR_form-recommend-container {
   display: flex;
@@ -148,7 +156,7 @@
   flex-direction: column;
   align-items: left;
   justify-content: left;
-  margin: 1em;
+  /* margin: 1em; */
 }
 
 .RR_user-review-summary-container input[type="text"] {
@@ -156,7 +164,7 @@
 }
 
 .RR_user-review-summary {
-  padding: 5px;
+  /* padding: 5px; */
   height: 1.7em;
   width: 30vw;
   margin-top: 5px;
@@ -172,7 +180,7 @@
   display: flex;
   align-items: left;
   justify-content: center;
-  margin: 1em;
+  /* margin: 1em; */
   flex-direction: column;
 }
 .RR_user-review-body-container textarea {
@@ -216,7 +224,15 @@
   background: rgb(200, 200, 200);
 }
 
-form[required]::before {
+/* form[required]::before {
+  content: "*";
+} */
+
+.RR_required {
+  font-style: bold;
+}
+
+.RR_required::before {
   content: "*";
 }
 
@@ -489,6 +505,12 @@ form[required]::before {
   height: 85vh;
   z-index: 3;
 }
+
+/* #RR_form-modal-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+} */
 
 .RR_response-from-seller {
   margin-left: 10%;

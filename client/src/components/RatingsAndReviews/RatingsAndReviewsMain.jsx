@@ -141,11 +141,14 @@ let RatingsAndReviewsMain = (props) => {
         </div>
       </div>
       {showModal ? (
-        <AddReviewForm
-          id={props.id}
-          meta={state.meta}
-          toggleModal={toggleModal}
-        />
+        <div>
+          <div className="RR_modal-container" onClick={toggleModal}></div>
+          <AddReviewForm
+            id={props.id}
+            meta={state.meta}
+            toggleModal={toggleModal}
+          />
+        </div>
       ) : null}
     </section>
   );
@@ -164,6 +167,8 @@ export default RatingsAndReviewsMain;
   need to pull the entire reviews list for a product, that way i can filter based on review ratings.
   ~~~revision, i think i can just apply an additional filter to the existing list and also apply that filter
   to incomming reviews as well {1: false, 2: false, 3: true....etc} thisll keep it additive
+
+  characteristics form isnt using required quite as well as the other forms components.
 
   break down review item subcomponent into more componenents
 
