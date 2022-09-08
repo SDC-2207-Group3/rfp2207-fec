@@ -178,9 +178,10 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
 
   return (
     <form className="RR_modal-form">
-      <h3 id="RR_review-form-title">
-        Write a Review for the {`${product_info.name}`}
-      </h3>
+      <div id="RR_modal-form-header">
+        <h2 id="RR_review-form-title">Write Your Review</h2>
+        <h4 id="RR_review-form-subtitle">For the {`${product_info.name}`}</h4>
+      </div>
       <div className="RR_form-component RR_form-star">
         <span className="RR_required">Overall rating? </span>
         <div onClick={(e) => handleClick(e)}>

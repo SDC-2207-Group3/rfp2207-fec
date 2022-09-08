@@ -29,6 +29,7 @@ let RatingsBreakDown = (props) => {
         <h2>{currProductRating} </h2>
         <RatingStars rating={currProductRating} />
       </div>
+      <small id="RR_total-count">{`From ${voteTotal} total reviews`}</small>
       <div className="RR_ratings-bd-list">
         {props.meta.ratings
           ? [5, 4, 3, 2, 1].map((starNum, i) => {

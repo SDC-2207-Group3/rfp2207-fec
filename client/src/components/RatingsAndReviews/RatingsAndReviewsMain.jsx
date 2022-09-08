@@ -33,8 +33,12 @@ let RatingsAndReviewsMain = (props) => {
     5: true,
   });
 
+  // console.log(state.reviews);
+
   //this could be a context hook...
   let swapSort = (sort) => {
+    //ive decided the api call for sort is working well enough
+    //no need to further sort
     setSortBy(sort);
   };
   let toggleModal = () => {
@@ -70,7 +74,6 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let fetchData = (id) => {
-    // console.log("now fetching data RR");
     let tempReviews;
     axios
       .get(`${utilities.ATELIER_API}/reviews`, {
@@ -83,7 +86,6 @@ let RatingsAndReviewsMain = (props) => {
       })
       //res.data.results = arr of reviews
       .then((res) => {
-        //update state
         tempReviews = res.data.results;
         //if less then defined amount of reviews come back
         if (tempReviews.length < state.displayedReviews) {
@@ -101,8 +103,6 @@ let RatingsAndReviewsMain = (props) => {
       .then((res) => {
         let reviewStatsObj = utilities.getAvgReviewValue(res.data);
 
-        // setMeta(res.data);
-        // setReviewStats(reviewStatsObj);
         setState({
           ...state,
           reviews: tempReviews,
@@ -138,6 +138,7 @@ let RatingsAndReviewsMain = (props) => {
           <ReviewsList
             showMoreBtn={showMoreBtn}
             reviews={state.reviews}
+            filter={canRenderByRating}
             id={state.id}
             showMoreReviews={showMoreReviews}
             toggleModal={toggleModal}
@@ -161,12 +162,6 @@ let RatingsAndReviewsMain = (props) => {
 export default RatingsAndReviewsMain;
 
 /* KNOWN BUGS / TODO
-
-  when rendering 2 or fewer reviews, do not render the show more button
-
-  some kind of discrepancy in helpfulness value, likely caused by state vs db value... values on page seem to modify when re rendered.
-
-  relevant & helpful may not be changing their sort, am i meant to make the logic behind these sorting conditions???
 
   need to pull the entire reviews list for a product, that way i can filter based on review ratings.
   ~~~revision, i think i can just apply an additional filter to the existing list and also apply that filter
