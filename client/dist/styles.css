@@ -6,11 +6,7 @@ html {
 }
 
 html body {
-  color: var(--light-mode-font);
-  background: var(--light-mode-background);
   --app-width: 80vw;
-  --light-mode-background: white;
-  --light-mode-font: #3a3a3a;
   font-size: 16px;
   margin: 0px;
   width: 100vw;
