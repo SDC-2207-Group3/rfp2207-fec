@@ -140,23 +140,16 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
         .then((res) => {
           //take urls and apply to userReview obj
           userReview.photos = res.map((imgReply) => imgReply.data.data.url);
-          //post user review obj
-          axios.post(`${ATELIER_API}/reviews`, userReview, {
-            headers: { Authorization: process.env.KEY },
-          });
+
+          postNewReview(userReview);
         })
         .catch((err) => {
-          alert("There was an Error");
           console.log(err);
           return;
         });
       toggleModal();
-      console.log("review uploaded:", userReview);
     } else {
-      axios
-        .post(`${ATELIER_API}/reviews`, userReview, {
-          headers: { Authorization: process.env.KEY },
-        })
+      postNewReview(userReview)
         .then((res) => console.log(res))
         .catch((err) => {
           alert("There was an Error");
@@ -164,7 +157,6 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
           return;
         });
       toggleModal();
-      console.log("review uploaded:", userReview);
     }
   };
 
@@ -331,8 +323,3 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
 };
 
 export default AddReviewForm;
-
-//can do max chars with input type=text not with textarea
-//createObjectURL(object)
-
-//obj of keys {"charID":1, "charID":5}

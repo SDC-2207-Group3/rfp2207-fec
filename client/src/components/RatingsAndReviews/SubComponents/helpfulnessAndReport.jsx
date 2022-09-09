@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import utilities from "../utilities/utilities.js";
+// import utilities from "../utilities/utilities.js";
+import { markReviewHelpful, reportReview } from "../../Utilities/Atelier.jsx";
 
 const HelpfulnessAndReport = ({ review }) => {
   const [canVote, setCanVote] = useState(true);
@@ -9,15 +10,9 @@ const HelpfulnessAndReport = ({ review }) => {
 
   //going to need to make put/post req for these...
   let handleHelpful = (e, id) => {
-    let body = { params: { review_id: id } };
-
     if (canVote) {
-      axios
-        .put(`${utilities.ATELIER_API}/reviews/${id}/helpful`, body, {
-          headers: { Authorization: process.env.KEY },
-        })
+      markReviewHelpful(id)
         .then((res) => {
-          console.log(res);
           setCanVote(false);
           setHelpfulness(helpfulness + 1);
         })
@@ -28,11 +23,7 @@ const HelpfulnessAndReport = ({ review }) => {
   };
 
   let handleReport = (e, id) => {
-    let body = { params: { review_id: id } };
-    axios
-      .put(`${utilities.ATELIER_API}/reviews/${id}/report`, body, {
-        headers: { Authorization: process.env.KEY },
-      })
+    reportReview(id)
       .then((res) => {
         //do i want to re render without the review? ehhhh
         alert(
