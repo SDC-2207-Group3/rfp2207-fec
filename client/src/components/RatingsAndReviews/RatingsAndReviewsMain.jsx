@@ -56,6 +56,8 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
+    console.log(e.target);
+    e.target.closest("#RR_ratings-bd-count").classList.toggle("selected");
     // if all are false and have filtered
     let filterCopy = { ...canRenderByRating };
     filterCopy[starNum] = !filterCopy[starNum];
