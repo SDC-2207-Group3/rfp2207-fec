@@ -18,6 +18,7 @@
   right: -0.09375rem;
   height: 1rem;
   z-index: 1;
+  /* background-color: var(--light-mode-background); */
 }
 
 .star-fill {

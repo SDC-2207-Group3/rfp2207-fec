@@ -69,8 +69,8 @@ const App = (props) => {
 
 
   return (
-    <div id="app" className={ darkMode ? "darkMode" : "" }>
-      <ProductContext.Provider value={{...state, changeId}}>
+    <div id="app" className={ darkMode ? "darkMode" : "lightMode" }>
+      <ProductContext.Provider value={{...state, changeId, darkMode}}>
         <UserInteractions>
           <ToggleSwitch
             label="Dark Mode"

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Star, XCircle } from 'react-feather';
 import Comparison from './Comparison.jsx';
 import { ProductContext } from '../App.jsx';
-import RatingStars from '../Utilities/ratingStars.jsx';
+import RatingStars from '../Utilities/RatingStars.jsx';
+import Helper from '../Utilities/Helper.jsx';
 
 var ProductCard = (props) => {
   const [modal, setModal] = useState(false);
@@ -18,10 +19,10 @@ var ProductCard = (props) => {
   return (
     <div className="RIC-product-card-div">
       <div className="RIC-card-icon-div">
-        {props.mode === 'related-item' ? <Star size={20} onClick={() => props.open(props.product)}/> :  <XCircle size={20} onClick={() => props.delete(props.product.id)} />}
+        {props.mode === 'related-item' ? <i className="fa-regular fa-star open" onClick={() => props.open(props.product)}></i> :  <XCircle size={20} onClick={() => props.delete(props.product.id)} />}
       </div>
       <div onClick={() => changeId(props.product.id)} className="RIC-product-card-img-div">
-        <img className="RIC-product-card-img" src={props.product.img} alt="product img"></img>
+        <img className="RIC-product-card-img" src={props.product.img ? props.product.img : Helper.getRandomPic()} alt="product img"></img>
       </div>
       <div onClick={() => changeId(props.product.id)} className="RIC-product-card-detail">
         <p className="RIC" id="RIC-category">{props.product.category}</p>
