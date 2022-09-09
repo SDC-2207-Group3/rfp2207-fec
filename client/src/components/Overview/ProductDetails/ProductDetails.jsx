@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { ProductContext } from './../../App.jsx';
 import axios from 'axios';
 
-import RatingStars from './RatingStars.jsx';
+import RatingStars from './../../Utilities/RatingStars.jsx';
 import SocialMediaSharing from './SocialMediaSharing.jsx';
-
-const Atelier = require("./../../Utilities/Atelier.jsx");
+import Atelier from "./../../Utilities/Atelier.jsx";
 
 const truncatePrice = (price) => {
   return price.slice(price.length - 3, price.length) === '.00' ? price.slice(0, price.length - 3) : price
