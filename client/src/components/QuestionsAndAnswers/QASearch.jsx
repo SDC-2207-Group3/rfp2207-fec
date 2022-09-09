@@ -7,7 +7,7 @@ const handleQASearch = (e, display, setDisplay, id) => {
   const searchTerm = e.target.value;
   let filtered;
   if (searchTerm.length >= 3) {
-    filtered = display.filter(q => q.question_body.toLowerCase().includes(searchTerm))
+    filtered = display.filter(q => (q.question_body.toLowerCase().includes(searchTerm.toLowerCase())))
     setDisplay(filtered);
   }
   else {
