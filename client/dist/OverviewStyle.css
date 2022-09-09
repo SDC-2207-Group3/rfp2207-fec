@@ -163,7 +163,7 @@
   transform: translateY(-50%);
   left: -8%;
   margin: auto;
-  width: 5rem;
+  max-width: 5rem;
   height: 95%;
   max-height: 35rem;
   object-fit: contain;
@@ -179,6 +179,7 @@
 }
 
 .thumbnail-list {
+  width: 100%;
   position: absolute;
   left: 0;
   transition: 0.2s;

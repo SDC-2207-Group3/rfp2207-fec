@@ -2,6 +2,7 @@ import React, { useState, useContext, createContext, useRef, useEffect, useReduc
 import { ProductContext } from './../../App.jsx';
 import ThumbnailList from './ThumbnailList.jsx';
 import IconList from './IconList.jsx';
+import Helper from './../../Utilities/Helper.jsx';
 
 export const ImageGalleryContext = createContext(null);
 
@@ -55,10 +56,10 @@ const ImageGallery = (props) => {
   const containerRef   = useRef(null);
   const targetImageRef = useRef(null);
 
-  const { product_info } = useContext(ProductContext);
+  const { product_info, placeholder } = useContext(ProductContext);
 
   const photos           = props.productStyle.photos ? props.productStyle.photos : [];
-  const displayURL       = props.productStyle.photos ? props.productStyle.photos[photoIndex].url : null;
+  const displayURL       = props.productStyle.photos ? (props.productStyle.photos[photoIndex].url ?  props.productStyle.photos[photoIndex].url : placeholder) : placeholder;
   const productName      = props.productStyle.name;
   const displayImageView = defaultView               ? "overview-defaultView" : "overview-expandedView";
 

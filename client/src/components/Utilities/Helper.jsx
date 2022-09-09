@@ -1,5 +1,3 @@
-// import as theAndres from './Images/Placeholders/theAndres.png'
-// const theAndres = require("./Images/Placeholders/theAndres.png")
 
 module.exports.dataParser = (raw) => {
   let { results } = raw[1].data;
@@ -38,11 +36,10 @@ module.exports.getAverageRating = (data) => {
   return percent;
 }
 
-const imgLinkArr = ['https://i.ibb.co/6gZKqxy/theMike.png', 'https://i.ibb.co/C54nJ87/the-Andres.png', 'https://i.ibb.co/pfC9mbw/theLeia.png']
+const imgLinkArr = ['https://i.ibb.co/6gZKqxy/theMike.png', 'https://i.ibb.co/C54nJ87/the-Andres.png', 'https://i.ibb.co/pfC9mbw/theLeia.png', "https://i.ibb.co/qNN0wyh/the-Julian.png", "https://i.ibb.co/sPH60LF/theEric.png", "https://i.ibb.co/qkYvW3T/Julian-Chi.jpg"]
 
 
 module.exports.getRandomPic = () => {
   let randomInt = Math.floor(Math.random() * imgLinkArr.length);
   return imgLinkArr[randomInt]
 }
-

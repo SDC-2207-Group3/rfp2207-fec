@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageGalleryContext } from './ImageGallery.jsx';
+import { ProductContext } from './../../App.jsx';
+import Helper from './../../Utilities/Helper.jsx';
 
 const ThumbnailList = (props) => {
 
@@ -12,6 +14,8 @@ const ThumbnailList = (props) => {
     setPhotoIndex,
     setDisplayIndex
   } = useContext(ImageGalleryContext);
+
+  const { placeholder } = useContext(ProductContext)
 
   const displayLimit = 7
 
@@ -60,7 +64,7 @@ const ThumbnailList = (props) => {
                 <div className="thumbnail-container" style={index === photoIndex ? selectedThumbnail : null}>
                   <img
                     className="overview-thumbnail"
-                    src={photo.thumbnail_url}
+                    src={photo.thumbnail_url ? photo.thumbnail_url : placeholder}
                     alt={`${props.name} thumbnail ${index}`}
                   />
                 </div>

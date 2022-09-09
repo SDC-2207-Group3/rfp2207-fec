@@ -5,7 +5,6 @@ const Atelier = require('./Atelier.jsx');
 const UserInteractions = (props) => {
 
   const recordUserClick = (element, widget) => (
-    console.log(element, widget),
     Atelier.postUserClick(element, widget)
     .catch((err) => console.log(err))
   )
