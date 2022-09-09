@@ -59,6 +59,7 @@ let RatingsAndReviewsMain = (props) => {
     // if all are false
 
     let filterCopy = { ...canRenderByRating };
+    filterCopy[starNum] = !filterCopy[starNum];
     if (
       hasFiltered &&
       !filterCopy[1] &&
