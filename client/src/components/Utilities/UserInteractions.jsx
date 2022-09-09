@@ -11,8 +11,8 @@ const UserInteractions = (props) => {
 
   return (
     <>
-      {props.children.map((child) =>
-        <div onClick={(e) =>  recordUserClick(e.target.outerHTML, child.type.name)}>
+      {props.children.map((child, index) =>
+        <div key={index} onClick={(e) =>  recordUserClick(e.target.outerHTML, child.type.name)}>
           {child}
         </div>
       )}
