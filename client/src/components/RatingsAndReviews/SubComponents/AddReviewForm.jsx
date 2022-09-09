@@ -272,7 +272,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
         </div>
       </div>
       <div>
-        <div>
+        <div className="RR_user-thumbnails-container">
           {userImgs.length && userImgs.length >= 5 ? null : (
             <input
               type="file"

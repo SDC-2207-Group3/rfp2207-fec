@@ -29,7 +29,7 @@
   margin-top: 20px;
   margin-bottom: 20px;
   text-transform: uppercase;
-  font-family: "Segoe UI", Arial, sans-serif;
+  /* font-family: "Segoe UI", Arial, sans-serif; */
 }
 
 .qa-accordion {
@@ -37,10 +37,10 @@
   max-width: 100%;
   padding: 0 0px;
   list-style: none;
-  font-family: "Segoe UI", Arial, sans-serif;
+  /* font-family: "Segoe UI", Arial, sans-serif; */
   line-height: 1.4;
   /* background: #fff; */
-  color: #444;
+  /* color: #444; */
   overflow-y: scroll;
   margin-bottom: 20px;
 }
@@ -57,7 +57,7 @@
 
 .question-item-button {
   /* background-color: white; */
-  color: black;
+  /* color: black; */
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -76,10 +76,12 @@
 
 
 .qa-moreAnswers {
-  border: 3px #d8d8d8;
-  /* background-color: white; */
+  /* border: 3px #d8d8d8; */
+  border: none;
+  background-color: transparent;
   font-weight: bold;
   cursor: pointer;
+  color: inherit;
 }
 
 
@@ -132,7 +134,8 @@
 }
 
 .question-item-active {
-  /* background-color: #e8e8e8; */
+  background-color: #e8e8e8;
+  color: black;
 }
 
 
@@ -162,7 +165,7 @@
   border-color: 1px solid #d8d8d8;
   /* background-color: #f1f1f1; */
   font-size: 16px;
-  color: black;
+  /* color: black; */
   cursor: pointer;
 
 }
@@ -171,6 +174,7 @@
 .qa-newQuestionBtn:hover,
 .question-item-button:hover {
   background-color: #e8e8e8;
+  color: black;
 }
 
 .question-item-button.active {
@@ -232,14 +236,14 @@ small.align-small {
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 4;
   backdrop-filter: blur(4px);
 }
 
 .qa-modalContainer {
   width: 30vw;
   height: 70vh;
-  background-color: inherit;
+  background-color: white;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
   display: flex;
   flex-direction: column;
@@ -248,10 +252,10 @@ small.align-small {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 6;
   color: black;
   font-weight: 300;
-  font-family: "Segoe UI", Arial, sans-serif;
+  /* font-family: "Segoe UI", Arial, sans-serif; */
 }
 
 .qa-modalContainer .qa-modalTitle {
@@ -306,7 +310,7 @@ button.qa-modalFooterBtn {
   margin: 6%;
   border: 1px #d8d8d8;
   /* background-color: #f1f1f1; */
-  color: black;
+  /* color: black; */
   font-size: 15px;
   cursor: pointer;
   border-radius: 6px;
