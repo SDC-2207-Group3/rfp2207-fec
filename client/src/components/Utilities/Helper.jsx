@@ -38,3 +38,11 @@ module.exports.getAverageRating = (data) => {
   return percent;
 }
 
+const imgLinkArr = ['https://i.ibb.co/6gZKqxy/theMike.png', 'https://i.ibb.co/C54nJ87/the-Andres.png', 'https://i.ibb.co/pfC9mbw/theLeia.png']
+
+
+module.exports.getRandomPic = () => {
+  let randomInt = Math.floor(Math.random() * imgLinkArr.length);
+  return imgLinkArr[randomInt]
+}
+

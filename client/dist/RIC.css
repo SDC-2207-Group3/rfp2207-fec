@@ -160,7 +160,6 @@ p.RIC {
   top: 75%;
   width: 30%;
   height: 40%;
-  overflow: auto;
   background-color: white;
   position: absolute;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -168,28 +167,33 @@ p.RIC {
   border: 1px solid gray;
   padding: 1em;
   border-radius: 2px;
+  overflow: auto;
 }
 
 .RIC-comparison-header {
+  height: 10%;
   display: flex;
   justify-content: space-between;
-  padding: 1% 3%;
   color: gray;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 7;
 }
 
 .RIC-comparison-table-div {
   margin: 0 auto;
   max-height: min-content;
   width: 80%;
-  overflow: hidden;
   display: flex;
   justify-content: center;
 }
 
 table.RIC-comparison {
-  margin: 2% 5%;
+  margin: 0 5%;
   position: relative;
   width: 100%;
+  height: 100%;
   align-self: center;
   border-collapse: collapse;
   color: gray;
@@ -197,16 +201,17 @@ table.RIC-comparison {
 
 tbody.RIC-comparison {
   display: block;
-  overflow: auto;
 }
 
 tr.RIC-modal-names {
   width: 100%;
   height: 100%;
   padding: 3% 0;
-  position: sticky;
   top: 0;
   z-index: 7;
+  position: sticky;
+  top: 10%;
+  background-color: white
 }
 
 th.RIC-comparison {
