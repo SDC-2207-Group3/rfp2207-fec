@@ -8,8 +8,15 @@ import axios from "axios";
 
 const AddReviewForm = ({ id, meta, toggleModal }) => {
   const [userRating, setUserRating] = useState(4);
-  const [reviewCharacteristics, setReviewCharacteristics] = useState({});
-  const [recommend, setRecommend] = useState(null);
+  // const [reviewCharacteristics, setReviewCharacteristics] = useState({});
+  const [reviewCharacteristics, setReviewCharacteristics] = useState({
+    220243: 1,
+    220244: 2,
+    220245: 3,
+    220246: 4,
+  });
+  // const [recommend, setRecommend] = useState(null);
+  const [recommend, setRecommend] = useState(true);
   const [userImgsThumb, setUserImgsThumb] = useState([]);
   const [userImgs, setUserImgs] = useState([]);
   const [summary, setSummary] = useState("this thing was GOOD");
@@ -49,6 +56,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
         reviewCharacteristics[e.target.dataset.charid] = Number(
           e.target.dataset.charval
         );
+        console.log(copy);
         setReviewCharacteristics(copy);
         break;
     }
@@ -141,6 +149,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
           //take urls and apply to userReview obj
           userReview.photos = res.map((imgReply) => imgReply.data.data.url);
 
+          console.log("posting review: ", userReview);
           postNewReview(userReview);
         })
         .catch((err) => {
@@ -195,7 +204,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
             name="recommend"
             value="yes"
             required
-            checked="checked"
+            defaultChecked="checked"
           ></input>
           <label htmlFor="yes">Yes</label>
           <input
