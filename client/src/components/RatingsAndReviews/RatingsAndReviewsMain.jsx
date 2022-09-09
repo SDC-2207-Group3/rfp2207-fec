@@ -56,8 +56,7 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
-    // if all are false
-
+    // if all are false and have filtered
     let filterCopy = { ...canRenderByRating };
     filterCopy[starNum] = !filterCopy[starNum];
     if (
@@ -68,14 +67,13 @@ let RatingsAndReviewsMain = (props) => {
       !filterCopy[4] &&
       !filterCopy[5]
     ) {
-      console.log("all false");
       setCanRenderByRating(defaultFilter);
       setHasFiltered(false);
       return;
     }
 
+    //if not all are false and have not filtered
     if (!hasFiltered) {
-      console.log("not filter");
       setHasFiltered(true);
 
       let filterCopy = { ...defaultFilterFalse };
@@ -83,13 +81,9 @@ let RatingsAndReviewsMain = (props) => {
 
       setCanRenderByRating(filterCopy);
     } else {
-      console.log("filter");
-
+      //if not all are false and have filtered
       let filterCopy = { ...canRenderByRating };
-
-      // console.log(filterCopy);
       filterCopy[starNum] = !filterCopy[starNum];
-      console.log(filterCopy);
 
       setCanRenderByRating(filterCopy);
     }
@@ -203,13 +197,10 @@ export default RatingsAndReviewsMain;
 
 /* KNOWN BUGS / TODO
 
-  need to pull the entire reviews list for a product, that way i can filter based on review ratings.
-  ~~~revision, i think i can just apply an additional filter to the existing list and also apply that filter
-  to incomming reviews as well {1: false, 2: false, 3: true....etc} thisll keep it additive
-
   characteristics form isnt using required quite as well as the other forms components.
 
   break down review item subcomponent into more componenents
 
-  //getReviewsByCount, getReviewMetaData
+  swap helper functions for those in global helper file
+  ---> delete my helper function file
 */
