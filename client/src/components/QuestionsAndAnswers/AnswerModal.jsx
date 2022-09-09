@@ -76,7 +76,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
           <div className="qa-modalBody"></div>
             <label className="modalLabel">
               Your Answer
-              <input className="modalInput" type="text"
+              <input className="modalInput" type="text" value="This product runs small."
               {...register("yourAnswer",
                 {
                     required: "Answer is required",
