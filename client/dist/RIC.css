@@ -233,3 +233,7 @@ td.RIC-comparison {
 .RIC-comparison .mid {
   text-align: center;
 }
+
+.fa-star.open {
+  color:rgb(91, 90, 90);
+}
