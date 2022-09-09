@@ -45,7 +45,7 @@ function QuestionModal({product_id, closeModal, mainQA, setQA}) {
                 className="modalInput"
                 type="text"
                 placeholder="Why did you like the product or not?"
-                value="Does this product run large or small?"
+                // value="Does this product run large or small?"
               {...register("yourQuestion",
                 {
                     required: "Question is required",
