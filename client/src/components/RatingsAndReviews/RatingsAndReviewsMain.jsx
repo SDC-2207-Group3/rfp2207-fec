@@ -29,8 +29,17 @@ let RatingsAndReviewsMain = (props) => {
     5: true,
   };
 
+  let defaultFilterFalse = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  };
+
   // const [state, dispatch] = useReducer(reducer, initialState);
   const [state, setState] = useState(initialState);
+  const [hasFiltered, setHasFiltered] = useState(false);
   // const [id, setId] = useState(props.id);
   const [sortBy, setSortBy] = useState("relevant");
   // const [displayedReviews, setDisplayedReviews] = useState(3);
@@ -47,11 +56,42 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
-    let filterCopy = {
-      ...canRenderByRating,
-      [starNum]: !canRenderByRating[starNum],
-    };
-    setCanRenderByRating(filterCopy);
+    // if all are false
+
+    let filterCopy = { ...canRenderByRating };
+    if (
+      hasFiltered &&
+      !filterCopy[1] &&
+      !filterCopy[2] &&
+      !filterCopy[3] &&
+      !filterCopy[4] &&
+      !filterCopy[5]
+    ) {
+      console.log("all false");
+      setCanRenderByRating(defaultFilter);
+      setHasFiltered(false);
+      return;
+    }
+
+    if (!hasFiltered) {
+      console.log("not filter");
+      setHasFiltered(true);
+
+      let filterCopy = { ...defaultFilterFalse };
+      filterCopy[starNum] = !filterCopy[starNum];
+
+      setCanRenderByRating(filterCopy);
+    } else {
+      console.log("filter");
+
+      let filterCopy = { ...canRenderByRating };
+
+      // console.log(filterCopy);
+      filterCopy[starNum] = !filterCopy[starNum];
+      console.log(filterCopy);
+
+      setCanRenderByRating(filterCopy);
+    }
   };
 
   useEffect(() => {
