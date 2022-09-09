@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useContext } from "react";
-import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
+import RatingStars from "../../Utilities/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
 import { ProductContext } from "../../App.jsx";
 import { postNewReview, postToImgbb } from "../../Utilities/Atelier.jsx";
