@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 const RatingStars = (props) => {
   const productRating = props.rating;
