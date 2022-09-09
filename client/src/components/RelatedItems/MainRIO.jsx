@@ -27,6 +27,7 @@ const RelatedItemsAndOutfits = (props) => {
     Atelier.getRelatedProductIds(id)
       .then(res => {
        let related = _.uniq(res.data);
+       related.filter((relatedId) => relatedId !== id);
        let reqArr = [];
        related.map((id) => {
         let promises = Promise.all([
