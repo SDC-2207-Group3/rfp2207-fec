@@ -315,6 +315,18 @@
   height: auto;
   /* border: 1px solid red; */
   /* background: rgba(230, 230, 230); */
+  transition: 200ms ease-in-out;
+  cursor: pointer;
+}
+
+#RR_ratings-bd-count:hover {
+  background: var(--button-background-hover);
+  opacity: 0.8;
+}
+
+#RR_Ratings-bd-count,
+.selected {
+  background: var(--button-background-hover);
 }
 
 #RR_total-count {

@@ -29,8 +29,17 @@ let RatingsAndReviewsMain = (props) => {
     5: true,
   };
 
+  let defaultFilterFalse = {
+    1: false,
+    2: false,
+    3: false,
+    4: false,
+    5: false,
+  };
+
   // const [state, dispatch] = useReducer(reducer, initialState);
   const [state, setState] = useState(initialState);
+  const [hasFiltered, setHasFiltered] = useState(false);
   // const [id, setId] = useState(props.id);
   const [sortBy, setSortBy] = useState("relevant");
   // const [displayedReviews, setDisplayedReviews] = useState(3);
@@ -47,11 +56,39 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
-    let filterCopy = {
-      ...canRenderByRating,
-      [starNum]: !canRenderByRating[starNum],
-    };
-    setCanRenderByRating(filterCopy);
+    console.log(e.target);
+    e.target.closest("#RR_ratings-bd-count").classList.toggle("selected");
+    // if all are false and have filtered
+    let filterCopy = { ...canRenderByRating };
+    filterCopy[starNum] = !filterCopy[starNum];
+    if (
+      hasFiltered &&
+      !filterCopy[1] &&
+      !filterCopy[2] &&
+      !filterCopy[3] &&
+      !filterCopy[4] &&
+      !filterCopy[5]
+    ) {
+      setCanRenderByRating(defaultFilter);
+      setHasFiltered(false);
+      return;
+    }
+
+    //if not all are false and have not filtered
+    if (!hasFiltered) {
+      setHasFiltered(true);
+
+      let filterCopy = { ...defaultFilterFalse };
+      filterCopy[starNum] = !filterCopy[starNum];
+
+      setCanRenderByRating(filterCopy);
+    } else {
+      //if not all are false and have filtered
+      let filterCopy = { ...canRenderByRating };
+      filterCopy[starNum] = !filterCopy[starNum];
+
+      setCanRenderByRating(filterCopy);
+    }
   };
 
   useEffect(() => {
@@ -162,13 +199,10 @@ export default RatingsAndReviewsMain;
 
 /* KNOWN BUGS / TODO
 
-  need to pull the entire reviews list for a product, that way i can filter based on review ratings.
-  ~~~revision, i think i can just apply an additional filter to the existing list and also apply that filter
-  to incomming reviews as well {1: false, 2: false, 3: true....etc} thisll keep it additive
-
   characteristics form isnt using required quite as well as the other forms components.
 
   break down review item subcomponent into more componenents
 
-  //getReviewsByCount, getReviewMetaData
+  swap helper functions for those in global helper file
+  ---> delete my helper function file
 */
