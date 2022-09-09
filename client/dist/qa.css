@@ -255,6 +255,7 @@ small.align-small {
   z-index: 6;
   color: black;
   font-weight: 300;
+  overflow: scroll;
   /* font-family: "Segoe UI", Arial, sans-serif; */
 }
 
