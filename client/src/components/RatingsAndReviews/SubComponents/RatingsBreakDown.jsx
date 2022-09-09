@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
+import RatingStars from "../../Utilities/RatingStars.jsx";
 import SingleBreakDown from "./SingleBreakDown.jsx";
 import ProductFactor from "./ProductFactor.jsx";
 

@@ -6,6 +6,11 @@ import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
 import AddReviewForm from "./subcomponents/AddReviewForm.jsx";
 import { useState, useEffect, useReducer } from "react";
+import {
+  getReviewsByCount,
+  postNewReview,
+  getReviewMetaData,
+} from "../Utilities/Atelier.jsx";
 
 let RatingsAndReviewsMain = (props) => {
   let initialState = {
@@ -42,21 +47,14 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
-    console.log(starNum);
-    let filterCopy = canRenderByRating;
-    console.log(filterCopy);
-    filterCopy[starNum] = !filterCopy[starNum];
-    console.log(filterCopy);
+    let filterCopy = {
+      ...canRenderByRating,
+      [starNum]: !canRenderByRating[starNum],
+    };
     setCanRenderByRating(filterCopy);
   };
 
   useEffect(() => {
-    //i cant get this to actually re render
-    //it does work after you click show more, tho
-    //i think this may be bc setstate is async?
-    //but why is it not re rendering?
-
-    //want re-render when filter changes
     setState({ ...state, reviews: state.reviews });
   }, [canRenderByRating]);
 
@@ -66,16 +64,7 @@ let RatingsAndReviewsMain = (props) => {
 
   //this could be moved to utilities later ~~~~~~~~~~~~~
   let showMoreReviews = () => {
-    // console.warn("show more of", state.id, state.displayedReviews);
-    axios
-      .get(`${utilities.ATELIER_API}/reviews`, {
-        params: {
-          product_id: `${props.id}`,
-          sort: `${sortBy}`,
-          count: `${state.displayedReviews + 2}`,
-        },
-        headers: { Authorization: process.env.KEY },
-      })
+    getReviewsByCount(props.id, sortBy, state.displayedReviews, 2)
       .then((res) => {
         if (res.data.count > res.data.results.length) {
           setShowMoreBtn(false);
@@ -94,15 +83,8 @@ let RatingsAndReviewsMain = (props) => {
 
   let fetchData = (id) => {
     let tempReviews;
-    axios
-      .get(`${utilities.ATELIER_API}/reviews`, {
-        params: {
-          product_id: `${id}`,
-          sort: `${sortBy}`,
-          count: `${state.displayedReviews}`,
-        },
-        headers: { Authorization: process.env.KEY },
-      })
+
+    getReviewsByCount(props.id, sortBy, state.displayedReviews, 0)
       //res.data.results = arr of reviews
       .then((res) => {
         tempReviews = res.data.results;
@@ -114,10 +96,7 @@ let RatingsAndReviewsMain = (props) => {
       })
       .then(() => {
         // get meta data for current product
-        return axios.get(`${utilities.ATELIER_API}/reviews/meta`, {
-          params: { product_id: `${id}` },
-          headers: { Authorization: process.env.KEY },
-        });
+        return getReviewMetaData(props.id);
       })
       .then((res) => {
         let reviewStatsObj = utilities.getAvgReviewValue(res.data);

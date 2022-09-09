@@ -1,21 +1,23 @@
 import React from "react";
 import { useState, useContext } from "react";
-import RatingStars from "../../Overview/ProductDetails/RatingStars.jsx";
+import RatingStars from "../../Utilities/RatingStars.jsx";
 import ReviewFormRadio from "./ReviewFormRadio.jsx";
 import { ProductContext } from "../../App.jsx";
 import { postNewReview, postToImgbb } from "../../Utilities/Atelier.jsx";
 import axios from "axios";
 
 const AddReviewForm = ({ id, meta, toggleModal }) => {
-  const [userRating, setUserRating] = useState(0);
+  const [userRating, setUserRating] = useState(4);
   const [reviewCharacteristics, setReviewCharacteristics] = useState({});
   const [recommend, setRecommend] = useState(null);
   const [userImgsThumb, setUserImgsThumb] = useState([]);
   const [userImgs, setUserImgs] = useState([]);
-  const [summary, setSummary] = useState("");
-  const [reviewBody, setReviewBody] = useState("");
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
+  const [summary, setSummary] = useState("this thing was GOOD");
+  const [reviewBody, setReviewBody] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  );
+  const [userName, setUserName] = useState("MaTtW");
+  const [email, setEmail] = useState("matt@matt.globemail");
 
   //CONTEXT HOOK
   const { product_info } = useContext(ProductContext);
@@ -43,7 +45,6 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
         setEmail(e.target.value);
         break;
       case "characteristics":
-        console.log(e.target.dataset.charid, e.target.dataset.charval);
         let copy = reviewCharacteristics;
         reviewCharacteristics[e.target.dataset.charid] = Number(
           e.target.dataset.charval
@@ -124,7 +125,6 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
     }
 
     if (userImgs.length > 0) {
-      console.log("uploading imgs");
       let promises = [];
 
       for (let [key, img] of Object.entries(userImgs)) {
@@ -140,31 +140,23 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
         .then((res) => {
           //take urls and apply to userReview obj
           userReview.photos = res.map((imgReply) => imgReply.data.data.url);
-          //post user review obj
-          axios.post(`${ATELIER_API}/reviews`, userReview, {
-            headers: { Authorization: process.env.KEY },
-          });
+
+          postNewReview(userReview);
         })
         .catch((err) => {
-          alert("There was an Error");
           console.log(err);
           return;
         });
       toggleModal();
-      console.log("review uploaded:", userReview);
     } else {
-      axios
-        .post(`${ATELIER_API}/reviews`, userReview, {
-          headers: { Authorization: process.env.KEY },
-        })
+      postNewReview(userReview)
         .then((res) => console.log(res))
         .catch((err) => {
-          alert("There was an Error");
+          alert("There was an error adding the review :(");
           console.log(err);
           return;
         });
       toggleModal();
-      console.log("review uploaded:", userReview);
     }
   };
 
@@ -203,6 +195,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
             name="recommend"
             value="yes"
             required
+            checked="checked"
           ></input>
           <label htmlFor="yes">Yes</label>
           <input
@@ -331,8 +324,3 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
 };
 
 export default AddReviewForm;
-
-//can do max chars with input type=text not with textarea
-//createObjectURL(object)
-
-//obj of keys {"charID":1, "charID":5}
