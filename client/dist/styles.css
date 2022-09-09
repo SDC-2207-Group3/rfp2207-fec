@@ -14,6 +14,7 @@ html body {
   margin: 0px;
   width: 100vw;
   overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
 /* this is just common boiler plate */
@@ -27,7 +28,6 @@ html body {
   display: flex;
   width: 100%;
   justify-content: center;
-
 }
 
 #app {
@@ -39,7 +39,8 @@ html body {
 
 .darkMode {
   color: var(--dark-mode-font);
-  background: var(--dark-mode-background) ;
-  --dark-mode-background: #3a3a3a;
-  --dark-mode-font:  rgb(136, 79, 79);
+  background: var(--dark-mode-background);
+  --dark-mode-background: rgb(58, 58, 58);
+  --dark-mode-font: white;
 }
+
