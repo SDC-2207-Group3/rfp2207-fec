@@ -37,9 +37,9 @@ const Comparison = (props) => {
               <th className="RIC-comparison">{props.product.name}</th>
             </tr>
             {featureCollection.map((feature) =>
-              <tr className="RIC-comparison" key={`${mainProduct.name} vs ${props.product.name} on ${feature.name}`} className="RIC-modal-row">
+              <tr className="RIC-modal-row" key={`${mainProduct.name} vs ${props.product.name} on ${feature.name}`}  >
                 <td className="RIC-comparison left">{feature.main === true ? <Check /> : feature.main ? feature.main : null}</td>
-                <td className="RIC-comparison">{feature.name}</td>
+                <td className="RIC-comparison mid">{feature.name}</td>
                 <td className="RIC-comparison right">{feature.curr === true ? <Check /> : feature.curr ? feature.curr : null}</td>
               </tr>
             )}
