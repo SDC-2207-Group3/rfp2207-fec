@@ -32,7 +32,8 @@ const ProductDetails = (props) => {
 
   const name     = statePD.name     ? statePD.name     : "Product name unavailable";
   const category = statePD.category ? statePD.category : "Product Category Unavailable";
-  const features = statePD.features ? statePD.features : [];
+  const features = statePD.features ? statePD.features.sort((a, b) => a.value !== null ? 1 : -1)
+  : [];
 
   // Product Styles
 
@@ -169,7 +170,9 @@ const ProductDetails = (props) => {
         <h4 className="overview-h4">Features: </h4>
         <table className="overview-features-table">
           <tbody >
-            {features.sort((a, b) => a.value === null ? 1 : -1).map((feature, index) =>{
+            {features
+            // .sort((a, b) => a.value === null ? 1 : -1)
+            .map((feature, index) => {
               return feature.value ? (
                 <tr key={index}>
                   <td className="overview-features">{feature.feature}: </td>
