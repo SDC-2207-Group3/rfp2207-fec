@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ImageGalleryContext } from './ImageGallery.jsx';
+import { ProductContext } from './../../App.jsx';
+import Helper from './../../Utilities/Helper.jsx';
 
 const ThumbnailList = (props) => {
 
@@ -13,10 +15,16 @@ const ThumbnailList = (props) => {
     setDisplayIndex
   } = useContext(ImageGalleryContext);
 
+  const { placeholder } = useContext(ProductContext)
+
   const displayLimit = 7
 
   function GetThumbnailIndex (photo) {
     return props.photos.indexOf(photo);
+  }
+
+  function filterURL (url) {
+    return url.slice(url.indexOf('http'));
   }
 
   function scrollUp () {
@@ -60,7 +68,7 @@ const ThumbnailList = (props) => {
                 <div className="thumbnail-container" style={index === photoIndex ? selectedThumbnail : null}>
                   <img
                     className="overview-thumbnail"
-                    src={photo.thumbnail_url}
+                    src={photo.thumbnail_url ? filterURL(photo.thumbnail_url) : placeholder}
                     alt={`${props.name} thumbnail ${index}`}
                   />
                 </div>

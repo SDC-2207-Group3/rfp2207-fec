@@ -18,7 +18,7 @@ const reducer = (state, newState) => ({ ...state, ...newState });
 
 
 const initialeState = {
-  id: 65638,
+  id: 65635,
   product_info: {},
   product_rating: {},
   product_style: [],
@@ -52,7 +52,11 @@ const App = (props) => {
     setState({ id: newId });
   };
 
-  console.log('state of app', state);
+  const [placeholder, setPlaceholder] = useState("https://i.ibb.co/pfC9mbw/theLeia.png")
+
+  useEffect(() => {
+    setPlaceholder(Helper.getRandomPic())
+  }, [state.id])
 
   // hook for toggling dark mode
   const [darkMode, setDarkMode] = useState(false);
@@ -67,10 +71,9 @@ const App = (props) => {
     }
   }
 
-
   return (
     <div id="app" className={ darkMode ? "darkMode" : "lightMode" }>
-      <ProductContext.Provider value={{...state, changeId, darkMode}}>
+      <ProductContext.Provider value={{...state, changeId, darkMode, placeholder}}>
         <UserInteractions>
           <ToggleSwitch
             label="Dark Mode"

@@ -14,7 +14,7 @@ var ProductCard = (props) => {
     setModal(false);
   };
 
-  const { changeId } = useContext(ProductContext);
+  const { changeId, placeholder } = useContext(ProductContext);
 
   return (
     <div className="RIC-product-card-div">
@@ -22,7 +22,7 @@ var ProductCard = (props) => {
         {props.mode === 'related-item' ? <i className="fa-regular fa-star open" onClick={() => props.open(props.product)}></i> :  <XCircle size={20} onClick={() => props.delete(props.product.id)} />}
       </div>
       <div onClick={() => changeId(props.product.id)} className="RIC-product-card-img-div">
-        <img className="RIC-product-card-img" src={props.product.img ? props.product.img : Helper.getRandomPic()} alt="product img"></img>
+        <img className="RIC-product-card-img" src={props.product.img ? props.product.img : placeholder} alt="product img"></img>
       </div>
       <div onClick={() => changeId(props.product.id)} className="RIC-product-card-detail">
         <p className="RIC" id="RIC-category">{props.product.category}</p>

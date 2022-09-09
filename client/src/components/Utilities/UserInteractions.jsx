@@ -5,15 +5,14 @@ const Atelier = require('./Atelier.jsx');
 const UserInteractions = (props) => {
 
   const recordUserClick = (element, widget) => (
-    console.log(element, widget),
     Atelier.postUserClick(element, widget)
     .catch((err) => console.log(err))
   )
 
   return (
     <>
-      {props.children.map((child) =>
-        <div onClick={(e) =>  recordUserClick(e.target.outerHTML, child.type.name)}>
+      {props.children.map((child, index) =>
+        <div key={index} onClick={(e) =>  recordUserClick(e.target.outerHTML, child.type.name)}>
           {child}
         </div>
       )}

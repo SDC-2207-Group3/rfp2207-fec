@@ -19,7 +19,7 @@ const ProductDetails = (props) => {
   const qtyRef = useRef(null);
   const sizeRef = useRef(null);
 
-  const { product_info, product_style, product_rating } = useContext(ProductContext);
+  const { product_info, product_style, product_rating, placeholder } = useContext(ProductContext);
 
   const statePD = product_info;
   const statePS = product_style;
@@ -157,7 +157,7 @@ const ProductDetails = (props) => {
                 className={"style-image-container" + (style === props.selectedStyle ? " style-selected" : "")}
                 onClick={() => {props.setStyle(style)}}
               >
-                <img className="style-image" src={style.photos[0].thumbnail_url} alt="Style Thumbnail Unavailable"/>
+                <img className="style-image" src={style.photos[0].thumbnail_url ? style.photos[0].thumbnail_url : placeholder} alt="Style Thumbnail Unavailable"/>
               </div>
             </div>
           )}
@@ -169,11 +169,18 @@ const ProductDetails = (props) => {
         <h4 className="overview-h4">Features: </h4>
         <table className="overview-features-table">
           <tbody >
-            {features.map((feature, index) =>
-              <tr key={index}>
-                <td className="overview-features">{feature.feature}: </td>
-                <td>{feature.value}</td>
-              </tr>
+            {features.sort((a, b) => a.value === null ? 1 : -1).map((feature, index) =>{
+              return feature.value ? (
+                <tr key={index}>
+                  <td className="overview-features">{feature.feature}: </td>
+                  <td>{feature.value}</td>
+                </tr>
+              ) : (
+                <tr key={index}>
+                  <td>{feature.feature}</td>
+                </tr>
+              )
+            }
             )}
           </tbody>
         </table>
@@ -207,7 +214,7 @@ const ProductDetails = (props) => {
         </section>
         :
         <section className="overview-pd-section">
-          <span>OUT OF STOCK</span>
+          <span className="alert">OUT OF STOCK</span>
         </section>}
         <SocialMediaSharing />
     </div>
