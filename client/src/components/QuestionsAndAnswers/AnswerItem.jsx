@@ -33,6 +33,18 @@ function AnswerItem({answer, question_id, product_id, mainQA, setQA}) {
   const options = {year: 'numeric', month: 'long', day: 'numeric' };
   const date = new Date(answer.date).toLocaleDateString(undefined, options);
 
+  // open image in answer item
+  // const toggleImageModal = (e, image, index) => {
+  //   console.log('this is event: ', e)
+  //   console.log('this is image: ', image)
+  //   console.log('this is index: ', index)
+  //   e.preventDefault();
+  //   let answerImgModal = document.getElementById(`answer-image-file-${index}`)
+  //   // do something with answerImgModal
+  //   console.log('this is answerImgModal: ', answerImgModal)
+  //   answerImgModal.classList.toggle("image-modal-display-none")
+  //   console.log('this is classlist: ', answerImgModal.classList)
+  // }
 
   return (
     <div className="answer-item-single-container">
@@ -43,7 +55,14 @@ function AnswerItem({answer, question_id, product_id, mainQA, setQA}) {
           <div className="answer-body answer-image">
           {answer.photos.length > 0
           &&
-          answer.photos.map((image, index) => <img key={index} className="answer-image-file" src={image}/> )
+          answer.photos.map((image, index) =>
+            <img
+              key={index}
+              className="answer-image-file"
+              // id={`answer-image-file-${index}`}
+              src={image}
+              // onClick={(e) => toggleImageModal(e, image, index)}
+            /> )
           }
           </div>
         </div>

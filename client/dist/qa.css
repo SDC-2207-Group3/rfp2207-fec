@@ -323,3 +323,28 @@ button.qa-modalFooterBtn {
   cursor: pointer;
   border-radius: 6px;
 }
+
+/* clicking images in answer popup */
+/* .image-modal-display-none {
+  display: none;
+}
+
+.image-modal-display {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 85vh;
+  z-index: 5;
+}
+
+.image-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+} */
