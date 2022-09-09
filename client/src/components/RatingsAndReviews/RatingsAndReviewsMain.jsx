@@ -47,21 +47,14 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
-    // console.log(starNum);
-    let filterCopy = canRenderByRating;
-    // console.log(filterCopy);
-    filterCopy[starNum] = !filterCopy[starNum];
-    // console.log(filterCopy);
+    let filterCopy = {
+      ...canRenderByRating,
+      [starNum]: !canRenderByRating[starNum],
+    };
     setCanRenderByRating(filterCopy);
   };
 
   useEffect(() => {
-    //i cant get this to actually re render
-    //it does work after you click show more, tho
-    //i think this may be bc setstate is async?
-    //but why is it not re rendering?
-
-    //want re-render when filter changes
     setState({ ...state, reviews: state.reviews });
   }, [canRenderByRating]);
 
