@@ -47,11 +47,11 @@ let RatingsAndReviewsMain = (props) => {
   };
 
   let ratingsFilter = (e, starNum) => {
-    console.log(starNum);
+    // console.log(starNum);
     let filterCopy = canRenderByRating;
-    console.log(filterCopy);
+    // console.log(filterCopy);
     filterCopy[starNum] = !filterCopy[starNum];
-    console.log(filterCopy);
+    // console.log(filterCopy);
     setCanRenderByRating(filterCopy);
   };
 
