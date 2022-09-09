@@ -98,7 +98,7 @@
   display: flex;
   justify-content: flex-end;
   padding-right: 2%;
-  padding-top: 2%;
+  padding-top: 4%;
 }
 
 .RIC-product-card-img-div {
@@ -156,7 +156,7 @@ p.RIC {
 .RIC-comparison-modal {
   margin: 5% 12%;
   display: block;
-  z-index: 2;
+  z-index: 4;
   left: 25%;
   top: 75%;
   width: 30%;
@@ -178,18 +178,20 @@ p.RIC {
 }
 
 .RIC-comparison-table-div {
-  margin: 0 5%;
+  margin: 0 auto;
   max-height: min-content;
+  width: 80%;
   overflow: hidden;
   display: flex;
   justify-content: center;
 }
 
 table.RIC-comparison {
-  margin: 0, auto;
+  margin: 2% 5%;
   position: relative;
   width: 100%;
   align-self: center;
+  border-collapse: collapse;
 }
 
 tbody.RIC-comparison {
@@ -197,28 +199,28 @@ tbody.RIC-comparison {
   overflow: auto;
 }
 
-.RIC-modal-names {
+tr.RIC-modal-names {
+  width: 100%;
+  height: 100%;
+  padding: 3% 0;
   position: sticky;
   top: 0;
-  z-index: 5;
-  background-color: rgb(242, 232, 212)
-}
-
-#blank {
-  background-color: white;
+  z-index: 7;
 }
 
 th.RIC-comparison {
   text-align: center;
-  margin: 0.3em 0;
+  width: 35%;
 }
 
-tr.RIC-comparison {
-  padding: 0 20%;
+tr.RIC-modal-row {
+  width: 100%;
+  height: min-content;
 }
 
 td.RIC-comparison {
-  padding: 0.5em 0;
+  padding: 3% 0;
+  width: auto;
 }
 
 .RIC-comparison .left {
@@ -229,3 +231,6 @@ td.RIC-comparison {
   text-align: right;
 }
 
+.RIC-comparison .mid {
+  text-align: center;
+}
