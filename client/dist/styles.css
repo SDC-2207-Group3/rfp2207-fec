@@ -4,12 +4,23 @@ html {
   scroll-behavior: smooth;
 }
 
-html body {
-  color: var(--light-mode-font);
-  background: var(--light-mode-background);
+:root {
   --app-width: 80vw;
   --light-mode-background: white;
   --light-mode-font: #3a3a3a;
+  --button-background: rgb(126, 156, 183);
+  --button-background-hover: rgb(144, 182, 215);
+}
+
+html body {
+  color: var(--light-mode-font);
+  background: var(--light-mode-background);
+  /* --app-width: 80vw;
+  --light-mode-background: white;
+  --light-mode-font: #3a3a3a;
+  --button-background: background-color: rgb(126, 156, 183);
+  --button-background-hover: background-color: rgb(144, 182, 215); */
+
   font-size: 16px;
   margin: 0px;
   width: 100vw;
@@ -43,4 +54,3 @@ html body {
   --dark-mode-background: rgb(58, 58, 58);
   --dark-mode-font: white;
 }
-
