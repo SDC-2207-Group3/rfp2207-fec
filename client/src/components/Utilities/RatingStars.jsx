@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
+import { ProductContext } from "./../App.jsx";
 
 const RatingStars = (props) => {
   const productRating = props.rating;
+
+  const { darkMode } = useContext(ProductContext);
 
   let ratingStars = [0, 0, 0, 0, 0];
   ratingStars = ratingStars.map((star, index) => {
@@ -15,8 +18,12 @@ const RatingStars = (props) => {
         </div>
       );
     } else if (index + 1 - productRating < 1) {
+      const fillColor = darkMode ? "#3a3a3a" : "white";
       const percentageFill = (index + 1 - productRating) * 100 + "%";
-      const fill = { width: percentageFill };
+      const fill = {
+        width: percentageFill,
+        backgroundColor: fillColor
+      };
       return (
         <div key={index} className="star-container">
           <i className="fa-solid fa-star star-fill" attr={index + 1}></i>
