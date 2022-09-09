@@ -160,6 +160,7 @@
   cursor: pointer;
   background: var(--button-background);
   transition: 200ms ease-in-out;
+  border-radius: 5px;
 }
 
 .qa-moreQuestions:hover,

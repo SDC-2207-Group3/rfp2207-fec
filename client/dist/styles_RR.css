@@ -476,6 +476,8 @@
   padding: 5px 10px;
   background-color: var(--button-background);
   transition: 200ms;
+  cursor: pointer;
+  border-radius: 5px;
 }
 .RR_review-btn:hover {
   background-color: var(--button-background-hover);
