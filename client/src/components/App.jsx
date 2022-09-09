@@ -18,7 +18,7 @@ const reducer = (state, newState) => ({ ...state, ...newState });
 
 
 const initialeState = {
-  id: 65638,
+  id: 65635,
   product_info: {},
   product_rating: {},
   product_style: [],
@@ -70,7 +70,6 @@ const App = (props) => {
       setDarkMode(false)
     }
   }
-
 
   return (
     <div id="app" className={ darkMode ? "darkMode" : "lightMode" }>

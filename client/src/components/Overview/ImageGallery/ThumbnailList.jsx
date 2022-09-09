@@ -23,6 +23,10 @@ const ThumbnailList = (props) => {
     return props.photos.indexOf(photo);
   }
 
+  function filterURL (url) {
+    return url.slice(url.indexOf('http'));
+  }
+
   function scrollUp () {
     setDisplayIndex(displayIndex - 1);
   }
@@ -64,7 +68,7 @@ const ThumbnailList = (props) => {
                 <div className="thumbnail-container" style={index === photoIndex ? selectedThumbnail : null}>
                   <img
                     className="overview-thumbnail"
-                    src={photo.thumbnail_url ? photo.thumbnail_url : placeholder}
+                    src={photo.thumbnail_url ? filterURL(photo.thumbnail_url) : placeholder}
                     alt={`${props.name} thumbnail ${index}`}
                   />
                 </div>
