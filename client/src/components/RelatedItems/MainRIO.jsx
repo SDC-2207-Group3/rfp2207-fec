@@ -24,12 +24,10 @@ const RelatedItemsAndOutfits = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('set main product')
     setState({mainProduct: product_parsed_data});
   }, [product_parsed_data])
 
   useEffect(() => {
-    console.log('api request got sent')
     Atelier.getRelatedProductIds(id)
       .then(res => {
        let related = _.uniq(res.data).filter((relatedId) => relatedId !== id)
