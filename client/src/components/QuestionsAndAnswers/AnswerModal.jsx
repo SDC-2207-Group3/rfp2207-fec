@@ -116,6 +116,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
               <input className="modalInput"
                 type="text"
                 placeholder="Example: jackson11!"
+                value="jess123"
                 {...register("yourNickname",
                   {
                     required: "Nickname is required",
@@ -139,8 +140,9 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
             <label className="modalLabel">
                 Your Email
               <input className="modalInput"
-                type="text"
+                type="email"
                 placeholder="Example: jack@email.com"
+                value="helloWorld@gmail.com"
                 {...register("yourEmail",
                   {
                     required: "Email is required",
@@ -148,10 +150,10 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
                       value: 60,
                       message: "Email is limited to 60 characters"
                     },
-                    pattern: {
-                      value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                      message: "Email needs to follow username@email.com format"
-                    }
+                    // pattern: {
+                    //   value: /^[a-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,4}$/,
+                    //   message: "Email needs to follow username@email.com format"
+                    // }
                   })
                 }
               />
