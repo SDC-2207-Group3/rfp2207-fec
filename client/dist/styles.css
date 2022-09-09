@@ -5,8 +5,13 @@ html {
   --transition-time: 0.33s;
 }
 
-html body {
+:root {
   --app-width: 80vw;
+  --button-background: rgb(126, 156, 183);
+  --button-background-hover: rgb(144, 182, 215);
+}
+
+html body {
   font-size: 16px;
   margin: 0px;
   width: 100vw;
@@ -50,3 +55,4 @@ html body {
   --light-mode-font: #3a3a3a;
   transition: var(--transition-time);
 }
+
