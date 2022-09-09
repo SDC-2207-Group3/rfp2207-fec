@@ -4,7 +4,7 @@ import utilities from "./utilities/utilities.js";
 import Sort from "./SubComponents/Sort.jsx";
 import RatingsBreakDown from "./SubComponents/RatingsBreakDown.jsx";
 import ReviewsList from "./SubComponents/ReviewsList.jsx";
-import AddReviewForm from "./subcomponents/AddReviewForm.jsx";
+import AddReviewForm from "./Subcomponents/AddReviewForm.jsx";
 import { useState, useEffect, useReducer } from "react";
 import {
   getReviewsByCount,
