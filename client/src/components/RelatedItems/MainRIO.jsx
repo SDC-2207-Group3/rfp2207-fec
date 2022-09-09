@@ -10,7 +10,7 @@ import { ProductContext } from '../App.jsx';
 export const RIOContext = createContext();
 
 const RelatedItemsAndOutfits = (props) => {
-  const { id, product_style, product_rating, product_parsed_data} = useContext(ProductContext);
+  const { id, product_style, product_rating, product_parsed_data } = useContext(ProductContext);
   const [state, setState] = useReducer((state, newState) => ({...state, ...newState}),
   {mainProduct: {}, relatedItems: [], yourOutfits: []});
 
@@ -24,10 +24,15 @@ const RelatedItemsAndOutfits = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log('set main product')
+    setState({mainProduct: product_parsed_data});
+  }, [product_parsed_data])
+
+  useEffect(() => {
+    console.log('api request got sent')
     Atelier.getRelatedProductIds(id)
       .then(res => {
-       let related = _.uniq(res.data);
-       related.filter((relatedId) => relatedId !== id);
+       let related = _.uniq(res.data).filter((relatedId) => relatedId !== id)
        let reqArr = [];
        related.map((id) => {
         let promises = Promise.all([
@@ -48,10 +53,6 @@ const RelatedItemsAndOutfits = (props) => {
     })
     .catch(err => console.error(err));
   }, [id]);
-
-  useEffect(() => {
-    setState({mainProduct: product_parsed_data});
-  }, [product_parsed_data])
 
   return (
     <section id="RIC-section">
