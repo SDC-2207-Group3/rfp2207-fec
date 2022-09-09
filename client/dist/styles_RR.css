@@ -239,7 +239,7 @@
 }
 
 .RR_form-submit-btn {
-  width: 8vw;
+  width: 5vw;
   padding: 5px;
   border: none;
   margin-left: 40%;
@@ -532,6 +532,7 @@
   width: auto;
   cursor: pointer;
   margin: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .RR_modal-container {
