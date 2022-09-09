@@ -79,7 +79,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
               <input
                 className="modalInput"
                 type="text"
-                // value="This product runs small."
+                value="This product runs small."
               {...register("yourAnswer",
                 {
                     required: "Answer is required",
@@ -119,7 +119,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
               <input className="modalInput"
                 type="text"
                 placeholder="Example: jackson11!"
-                // value="jess123"
+                value="jess123"
                 {...register("yourNickname",
                   {
                     required: "Nickname is required",
@@ -145,7 +145,7 @@ function AnswerModal({product_id, question_id, closeModal, mainQA, setQA}) {
               <input className="modalInput"
                 type="email"
                 placeholder="Example: jack@email.com"
-                // value="helloWorld@gmail.com"
+                value="helloWorld@gmail.com"
                 {...register("yourEmail",
                   {
                     required: "Email is required",
