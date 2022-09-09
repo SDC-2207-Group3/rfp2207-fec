@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Star, XCircle } from 'react-feather';
 import Comparison from './Comparison.jsx';
 import { ProductContext } from '../App.jsx';
-import RatingStars from '../Utilities/ratingStars.jsx';
+import RatingStars from '../Utilities/RatingStars.jsx';
 
 var ProductCard = (props) => {
   const [modal, setModal] = useState(false);
