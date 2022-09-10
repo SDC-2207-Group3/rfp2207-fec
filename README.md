@@ -24,6 +24,11 @@ This project simulates a contemporary e-commerce product page utilizing
 ***Related Items & Outfits***
 ![RIO-Demo](https://user-images.githubusercontent.com/106702313/189499071-b3f1ba29-4a8e-4f63-92b5-521baea4715d.gif) <br />
 
+***Questions & Answers***
+![QA-Demo](https://user-images.githubusercontent.com/106702313/189500121-703fe909-0e24-4638-8a6f-cd7d96f1c137.gif) <br />
+
+***Ratings & Reviews***
+
 
 <a name="start"></a>
 ### Getting Started
