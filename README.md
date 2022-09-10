@@ -16,9 +16,10 @@ This front end capstone project is a modernized e-commerce site that allows user
 <a name="demo"></a>
 ### Demo
 *Overview*
-![Overview-Demo](https://user-images.githubusercontent.com/106702313/189497626-7b86ab4a-e2f0-4cf5-8d55-5509ecec1cdf.gif)
+![Overview-Demo](https://user-images.githubusercontent.com/106702313/189499053-f32a7faf-c601-4565-a936-8435889b0bb1.gif) < br/>
 
-
+*Related Items & Outfits
+![RIO-Demo](https://user-images.githubusercontent.com/106702313/189499071-b3f1ba29-4a8e-4f63-92b5-521baea4715d.gif) < br/>
 
 
 <a name="start"></a>
