@@ -28,6 +28,7 @@ This project simulates an interactive e-commerce product page utilizing React an
 ![QA-Demo](https://user-images.githubusercontent.com/106702313/189500121-703fe909-0e24-4638-8a6f-cd7d96f1c137.gif) <br />
 
 ***Ratings & Reviews***
+![RR-Demo](https://user-images.githubusercontent.com/106702313/189500467-875ab081-8ea1-4330-8996-2ef07ede429a.gif) <br />
 
 
 <a name="start"></a>
@@ -59,7 +60,8 @@ This project simulates an interactive e-commerce product page utilizing React an
 
 <a name="team"></a>
 ### Team Boy Meets World
-- Overview/Product Detail: [Ivan Luk](https://github.com/theivanluk)
+- Overview/Product Detail: Ivan Luk <br />
+
 - Related Items & Outfits: [Kat Gao](https://github.com/katto030)
 - Questions & Answers: [Jessie Zhao](https://github.com/jzthacoder)
 - Ratings & Reviews:  [Matt Waelder](https://github.com/mattwaelder)
