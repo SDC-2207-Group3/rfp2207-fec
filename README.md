@@ -10,7 +10,7 @@
 
 <a name="general-info"></a>
 ### General Info 
-This front end capstone project is a modernized e-commerce site that ...
+This front end capstone project is a modernized e-commerce site that allows users to view and interact with products
 
 
 <a name="demo"></a>
