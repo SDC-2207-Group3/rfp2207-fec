@@ -60,10 +60,18 @@ This project simulates an interactive e-commerce product page utilizing React an
 
 <a name="team"></a>
 ### Team Boy Meets World
-- Overview/Product Detail: Ivan Luk <br />
+- Overview/Product Detail: Ivan Luk\
 <a href="https://www.linkedin.com/in/luki1/" target="_blank" ><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin"></a>
 <a href="https://github.com/theivanluk" target="_blank" ><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="github"></a>
 
-- Related Items & Outfits: [Kat Gao](https://github.com/katto030)
-- Questions & Answers: [Jessie Zhao](https://github.com/jzthacoder)
-- Ratings & Reviews:  [Matt Waelder](https://github.com/mattwaelder)
+- Related Items & Outfits: Kat Gao\
+<a href="https://www.linkedin.com/in/kat-gao-30a0a1204/" target="_blank" ><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin"></a>
+<a href="https://github.com/katto030" target="_blank" ><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="github"></a>
+
+- Questions & Answers: Jessie Zhao\
+<a href="https://www.linkedin.com/in/jessiezhao8/" target="_blank" ><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin"></a>
+<a href="https://github.com/jzthacoder" target="_blank" ><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="github"></a>
+
+- Ratings & Reviews: Matt Waelder\
+<a href="https://www.linkedin.com/in/mattwaelder/" target="_blank" ><img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="linkedin"></a>
+<a href="https://github.com/mattwaelder" target="_blank" ><img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="github"></a>
