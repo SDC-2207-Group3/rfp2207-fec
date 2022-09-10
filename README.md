@@ -61,8 +61,8 @@ This project simulates an interactive e-commerce product page utilizing React an
 <a name="team"></a>
 ### Team Boy Meets World
 - Overview/Product Detail: Ivan Luk <br />
-[![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/luki1/)](https://www.linkedin.com/in/luki1/)
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white&link=https://github.com/theivanluk)](https://github.com/theivanluk)
+[![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white&link=https://www.linkedin.com/in/luki1/)](https://www.linkedin.com/in/luki1/){:target="_blank" rel="noopener"}
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white&link=https://github.com/theivanluk)](https://github.com/theivanluk){:target="_blank" rel="noopener"}
 
 - Related Items & Outfits: [Kat Gao](https://github.com/katto030)
 - Questions & Answers: [Jessie Zhao](https://github.com/jzthacoder)
