@@ -15,6 +15,9 @@ This front end capstone project is a modernized e-commerce site that allows user
 
 <a name="demo"></a>
 ### Demo
+*Overview*
+![Overview-Demo](https://user-images.githubusercontent.com/106702313/189497626-7b86ab4a-e2f0-4cf5-8d55-5509ecec1cdf.gif)
+
 
 
 
