@@ -3,7 +3,7 @@
 
 ### Table of Contents
 1. [General Info](#general-info)
-2. [Demo](#demo)
+2. [Demos](#demo)
 3. [Getting Started](#start)
 4. [Tech Stack](#tech)
 5. [Team members](#team)
@@ -17,32 +17,45 @@ This project simulates an interactive e-commerce product page utilizing React an
 
 
 <a name="demo"></a>
-### Demo
-***Overview***
-![Overview-Demo](https://user-images.githubusercontent.com/106702313/189499053-f32a7faf-c601-4565-a936-8435889b0bb1.gif) <br />
+### Demos
+<details><summary>Overview</summary>
+  
+![Overview-Demo](https://user-images.githubusercontent.com/106702313/189499053-f32a7faf-c601-4565-a936-8435889b0bb1.gif)
+  
+</details>
 
-***Related Items & Outfits***
-![RIO-Demo](https://user-images.githubusercontent.com/106702313/189499071-b3f1ba29-4a8e-4f63-92b5-521baea4715d.gif) <br />
+<details><summary>Related Items & Outfits</summary>
+  
+![RIO-Demo](https://user-images.githubusercontent.com/106702313/189499071-b3f1ba29-4a8e-4f63-92b5-521baea4715d.gif)
+  
+</details>
 
-***Questions & Answers***
-![QA-Demo](https://user-images.githubusercontent.com/106702313/189500121-703fe909-0e24-4638-8a6f-cd7d96f1c137.gif) <br />
+<details><summary>Questions & Answers</summary>
+  
+![QA-Demo](https://user-images.githubusercontent.com/106702313/189500121-703fe909-0e24-4638-8a6f-cd7d96f1c137.gif)
+  
+</details>
 
-***Ratings & Reviews***
-![RR-Demo](https://user-images.githubusercontent.com/106702313/189500467-875ab081-8ea1-4330-8996-2ef07ede429a.gif) <br />
-
+<details><summary>Ratings & Reviews</summary>
+  
+![RR-Demo](https://user-images.githubusercontent.com/106702313/189500467-875ab081-8ea1-4330-8996-2ef07ede429a.gif)
+  
+</details>
 
 <a name="start"></a>
 ### Getting Started
-- git clone this repo
-- nagivate into the root directory of the repo
-- make a copy of the example.env file and rename it to .env
-- replace the placeholder text in .env file with your github token
-- run the following commands in your terminal:
-   * npm install
-   * npm run dev
-- open localhost:3000 on your browser
-
-
+Clone this repo onto your local machine 
+```
+https://github.com/FEC-Boy-Meets-World/rfp2207-fec.git
+```
+Make a copy of the `example.env` file and rename it to `.env`\
+Replace `PUT_YOUR_GITHUB_API_TOKEN_HERE` with your github token\
+Run the following scripts in your terminal
+  ```
+  npm install
+  npm run dev
+  ```
+Open `localhost:3000` on your browser
 
 <a name="tech"></a>
 ### Tech Stack
