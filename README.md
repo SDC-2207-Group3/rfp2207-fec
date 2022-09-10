@@ -20,7 +20,7 @@ This project simulates an interactive e-commerce product page utilizing React an
 ### Demos
 <details><summary>Overview</summary>
   
-![Overview-Demo](https://user-images.githubusercontent.com/106702313/189501967-d0b193b5-a3d5-4c85-ba93-e0e9fbf1c441.gif)
+![Overview-Demo](https://user-images.githubusercontent.com/106702313/189502102-b773c4ea-1d12-49bf-943f-5a679b6b6d62.gif)
 
 </details>
 
