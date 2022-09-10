@@ -18,9 +18,9 @@ This project simulates an interactive e-commerce product page utilizing React an
 
 <a name="demo"></a>
 ### Demos
-<details><summary>Overview</summary>
+<details><summary>Product Detail</summary>
   
-![Overview-Demo](https://user-images.githubusercontent.com/106702313/189499053-f32a7faf-c601-4565-a936-8435889b0bb1.gif)
+![Product-Demo](https://user-images.githubusercontent.com/106702313/189499053-f32a7faf-c601-4565-a936-8435889b0bb1.gif)
   
 </details>
 
@@ -73,7 +73,7 @@ Open `localhost:3000` on your browser
 
 <a name="team"></a>
 ### Team Boy Meets World
-Overview/Product Detail: Ivan Luk\
+Product Detail: Ivan Luk\
 [![Linkedin: LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luki1/)
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/theivanluk)
 
