@@ -43,7 +43,7 @@ This front end capstone project is a modernized e-commerce site that allows user
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white) 
 ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black)
-![Axios](https://img.shields.io/badge/axios-%5a29e4.svg?style=for-the-badge&logo=axios&logoColor=blue)
+![Axios](https://img.shields.io/badge/axios-%6933FF.svg?style=for-the-badge&logo=axios&logoColor=blue)
 ![Babel](https://img.shields.io/badge/Babel-F9DC3e?style=for-the-badge&logo=babel&logoColor=black)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) <br />
 
