@@ -12,6 +12,9 @@
 ### General Info 
 This front end capstone project is a modernized e-commerce site that allows users to view and interact with products
 
+![Draft](https://img.shields.io/badge/Draft-5a29e4.svg?style=flat&logoColor=white) <br />
+This project simulates a contemporary e-commerce product page utilizing 
+
 
 <a name="demo"></a>
 ### Demo
