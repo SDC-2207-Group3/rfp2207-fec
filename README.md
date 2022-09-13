@@ -1,5 +1,5 @@
 ![banner](https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/07/The-Boys-Homelander.jpg)
-# Fresh Threadz
+# SDC Superman
 
 ### Table of Contents
 1. [General Info](#general-info)
