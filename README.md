@@ -1,4 +1,4 @@
-![banner](https://user-images.githubusercontent.com/106702313/189493711-fb54aa6b-8eff-4026-9d43-af3b36771d9f.png)
+![banner](https://static1.cbrimages.com/wordpress/wp-content/uploads/2019/07/The-Boys-Homelander.jpg)
 # Fresh Threadz
 
 ### Table of Contents
