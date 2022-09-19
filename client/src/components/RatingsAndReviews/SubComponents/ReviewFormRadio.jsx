@@ -73,7 +73,7 @@ const ReviewFormRadio = ({ chars, charId, char, index, handleChange }) => {
                 id="characteristics"
                 value={`${userRatingRadioVals[char][i]}`}
                 onChange={(e) => handleTitle(e)}
-                defaultChecked={index === i ? "checked" : ""}
+                // defaultChecked={index === i ? "checked" : ""}
               ></input>
               <label>
                 {i === 0 || i === 4 ? userRatingRadioVals[char][i] : null}
