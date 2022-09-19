@@ -10,10 +10,7 @@ const AddReviewForm = ({ id, meta, toggleModal }) => {
   const [userRating, setUserRating] = useState(4);
   // const [reviewCharacteristics, setReviewCharacteristics] = useState({});
   const [reviewCharacteristics, setReviewCharacteristics] = useState({
-    220243: 1,
-    220244: 2,
-    220245: 3,
-    220246: 4,
+
   });
   // const [recommend, setRecommend] = useState(null);
   const [recommend, setRecommend] = useState(true);
